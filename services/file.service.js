@@ -7,7 +7,9 @@ const path = require("path"); //! Dosya
 const mkdir = require("mkdirp").sync; //! Dosya
 const mime = require("mime-types"); //! Dosya
 const sharp = require('sharp');  //! Dosya Yükleme
-const db = require('../public/DB/file.json') //! Json
+const db = require('../public/DB/file.json'); //! Json
+const { stat } = require('fs/promises');
+const { Console } = require('console');
 
 //! Yeni Klasor
 const uploadDir = path.join(__dirname, "/../public/upload");
@@ -375,7 +377,7 @@ module.exports = {
 		},
         async getFile(ctx) {
             
-			//! File 
+            //! File 
 			let file=ctx.params.file[0]
 
 			let fileName=ctx.params.file[0].filename //manzara-sozleri-2021-manzara-ile-ilgili-sozler-14079504_8148_amp.jpg
@@ -426,6 +428,8 @@ module.exports = {
 
 
 			delete ctx.params.file
+
+			
 
 			return ctx.params
 		},
@@ -512,9 +516,7 @@ module.exports = {
 		
 				} //! doc
 
-
-				//! Json
-				
+				//! Json				
 				try {
 
 
@@ -572,6 +574,8 @@ module.exports = {
 					
 					status = 0; //! Status
 				}
+				//! Json Son
+
 			}
 
 			else {
@@ -651,6 +655,267 @@ module.exports = {
 			ctx.params.data_logs = logs_add
 			
 			return ctx.params
+		},
+		async getFileCurl(ctx) {
+
+
+		try
+		  {			
+            
+			//! Gelen
+			console.log("getFile"); //! Tıklanıldığı
+			console.log(ctx.params); //! Gelen Tüm Veriler
+			console.log(ctx.params.file); //! Gelen Tüm Veriler
+			
+			//! File
+		    let fileUrlG=ctx.params.file; //! Dosya Adresi
+		    let fileNameG=path.basename(fileUrlG); //! Dosya Adı
+		    let dirUrlG=path.dirname(fileUrlG); //! Klasor Adresi
+		    let FileExtNameG=path.extname(fileUrlG); //! Dosya Uzamtısı - [.jpg]
+
+			//! Return
+			console.log('File Bilgileri');
+			console.log('FileUrl:',fileUrlG);
+			console.log('FileName:',fileNameG);
+			console.log('DirUrl:',dirUrlG);
+			console.log('FileExtName:',FileExtNameG);
+
+			//! ******************
+
+			//! ------ Dosya Ölçüleri ------------
+
+			//! Ölçü
+			const stats = fs.statSync(fileUrlG);
+			let FileSize=stats.size;
+
+			console.log('File Ölçüleri');
+			console.log('FileSize:',FileSize);				
+
+			//! ------ Dosya Ölçüleri  Son ------------
+ 
+	
+			//! Return
+			ctx.params.title="Dosya Bilgileri"
+			ctx.params.status=1;
+
+			ctx.params.fileUrl=fileUrlG;
+			ctx.params.fileName=fileNameG;
+			ctx.params.dirUrl=dirUrlG;
+			ctx.params.FileExtName=FileExtNameG;
+
+			ctx.params.FileSize=FileSize;
+		}
+		catch
+		{
+
+				//! Return
+				ctx.params.title="Dosya Bilgileri"
+				ctx.params.status=0;
+
+				ctx.params.fileUrl="";
+				ctx.params.fileName="";
+				ctx.params.dirUrl="";
+				ctx.params.FileExtName="";
+	
+				ctx.params.FileSize=0;
+			
+		}
+
+
+			
+			delete ctx.params.file;
+
+			return ctx.params
+		},
+		async uploadCurl(ctx) {
+
+
+			let APi_URL=process.env.APi_URL; //! Host
+
+			try
+			  {			
+				
+				/*
+				//! Gelen
+				console.log("getFile"); //! Tıklanıldığı
+				console.log(ctx.params); //! Gelen Tüm Veriler
+				console.log(ctx.params.file); //! Gelen Tüm Veriler
+				*/
+				
+				//! File
+				let fileUrlG=ctx.params.file; //! Dosya Adresi
+				let dirUrlG=path.dirname(fileUrlG); //! Klasor Adresi
+				let fileNameG=path.basename(fileUrlG); //! Dosya Adı				
+				let FileExtNameG=path.extname(fileUrlG); //! Dosya Uzamtısı - [.jpg]
+				let FileOnlyNameG = path.basename(fileNameG, FileExtNameG); //! Dosya Adı Sadece
+				let FileId=new Date().getTime()+FileExtNameG;  //! Yeni Dosya Id
+				let FileUploadStatus=0;
+				
+	            
+				/*
+				//! Return
+				console.log('File Bilgileri');
+				console.log('FileUrl:',fileUrlG);
+				console.log('FileName:',fileNameG);
+				console.log('DirUrl:',dirUrlG);
+				console.log('FileExtName:',FileExtNameG);
+				*/			
+	
+				//! ******************
+	
+				//! ------ Dosya Ölçüleri ------------
+	
+				//! Ölçü
+				const stats = fs.statSync(fileUrlG);
+				let FileSize=stats.size;
+	
+				//console.log('File Ölçüleri');
+				//console.log('FileSize:',FileSize);				
+	
+				//! ------ Dosya Ölçüleri  Son ------------
+	 
+				//! ------ Upload  ------------
+
+				//! Dosya Yeri	
+				let tarih_zaman_upload_ob="tarih_zaman_upload_ob";
+
+				 //istenilen uzantılar
+				let docList = ['.txt', '.pdf', '.doc', '.docx', '.css', '.sql'];
+				let imgList = ['.png', '.jpg', '.jpeg', '.gif', '.PNG', '.JPG','.JPEG'];
+				let videoList = ['.mp3', '.mp4'];
+
+	
+				//! Kayıt Yeri ve Yeni Dosya Adı		
+				let filePath="";
+				let fileUrl="";
+				let fileTypeSplit = "type";
+				
+				if (imgList.includes(FileExtNameG)){ filePath=uploadDir+"\\img\\"+FileId; fileUrl=APi_URL+"//upload//img//"+FileId; fileTypeSplit="image"; }
+				else if (videoList.includes(FileExtNameG)){ filePath=uploadDir+"\\video\\"+FileId; fileUrl=APi_URL+"//upload//video//"+FileId; fileTypeSplit="video"; }
+				else if (docList.includes(FileExtNameG)) { filePath=uploadDir+"\\doc\\"+FileId; fileUrl=APi_URL+"//upload//doc//"+FileId; type="doc"; }
+
+  
+				fs.readFile( fileUrlG, function (err, data) {
+					fs.writeFile(filePath, data, function (err) {
+						if( err ){
+						   console.log( err );
+						   }else{
+							    console.log("Yüklendi");							
+						   }				
+					
+					 });
+				});
+                 
+				//! Json
+				if(fileUrl!="") { 
+					
+					try {
+
+
+						//! Eklenecek veriler
+						const willSaveData = {
+							id: new Date().getTime(),
+							token: ctx.params.token,
+							role: ctx.params.role,					
+							userToken: ctx.params.userToken,
+							usedPage:ctx.params.usedPage,
+							FileId: FileId,
+							uploadDir:filePath,
+							fileUrl:fileUrl,
+							fileName: fileNameG,
+							fileType: fileTypeSplit,
+							fileTypeSplit: fileTypeSplit,
+							fileOnlyName: FileOnlyNameG,
+							fileExt: FileExtNameG,				
+							created_at: new Date()
+						}
+
+						//Verileri Kaydet
+						db.push(willSaveData)
+
+
+						// STEP 3: Json içine Verileri Yazıyor -> db
+						fs.writeFile('./public/DB/file.json', JSON.stringify(db), err => {
+
+							// Checking for errors
+							if (err) {
+								console.log(err)
+							}
+
+							console.log("Json writing"); // Success
+						});
+
+						FileUploadStatus = 1; //! Status
+
+						
+						//! Log Add
+						logs_add = await ctx.call('logs.add', {
+							token: ctx.params.token,
+							userToken: ctx.params.userToken,
+							name: "file_upload_successful",
+							description: "Dosya Yükleme Başarılı"
+						})
+
+						//! ------------------
+
+						//console
+						console.log('\u001b[' + 32 + 'm' + 'logs Ekleme' + '\u001b[0m')
+
+
+					} catch (error) {  
+						
+						FileUploadStatus = 0; //! Status
+					}			
+				}
+				//! Json Son
+               
+
+				//! ------ Upload  Son ------------
+
+
+				//! Return
+				ctx.params.title="Dosya Yükleme"
+				ctx.params.status=FileUploadStatus;
+	
+				ctx.params.fileUrl=fileUrlG;
+				ctx.params.dirUrl=dirUrlG;
+				ctx.params.fileName=fileNameG;			
+				ctx.params.FileExtName=FileExtNameG;
+				ctx.params.FileOnlyName=FileOnlyNameG;
+	
+				ctx.params.FileSize=FileSize;
+				ctx.params.FileType=fileTypeSplit;
+
+				ctx.params.FilePath=filePath;
+				ctx.params.FileUrl=fileUrl;
+
+				
+			}
+			catch
+			{
+	
+					//! Return
+					ctx.params.title="Dosya Yükleme"
+					ctx.params.status=0;
+	
+					ctx.params.fileUrl="";
+					ctx.params.fileName="";
+					ctx.params.dirUrl="";
+					ctx.params.FileExtName="";
+		
+					ctx.params.FileSize=0;
+					ctx.params.FileType="";
+
+					ctx.params.FilePath="";
+					ctx.params.FileUrl="";
+				
+			}
+	
+	
+				
+				delete ctx.params.file;
+	
+				return ctx.params
 		}	
 	
 	}

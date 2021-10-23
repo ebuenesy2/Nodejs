@@ -15,7 +15,6 @@ fastify.register(require('fastify-formbody')) // ! Fastify
 this.fastify = fastify; // ! Fastify
 const fastifyStatic = require('fastify-static')  // ! Fastify-static
 
-fastify.register(require('fastify-cors'), { })  // ! Fastify-cors
 
 //! File
 fastify.register(require('fastify-multipart'), {
@@ -26,7 +25,7 @@ fastify.register(require('fastify-multipart'), {
 		fields: 20,         // Max number of non-file fields
 		fileSize: 53000000,      // For multipart forms, the max file size
 		files: 10,           // Max number of file fields
-		headerPairs: 2000   // Max number of header key=>value pairs
+		headerPairs: 2000   // Max number of header key=>value pairs 
 	}
 });
 
@@ -42,8 +41,14 @@ module.exports = {
 	name: 'api',
 
 	settings: {
-		port: process.env.PORT || 3001
+		port: process.env.PORT || 3000
 	},
+	
+
+		// ! ------ Socket -------------------------------
+	
+
+	   // ! ------ Socket Son -------------------------------
 
 	created() {
 
@@ -52,14 +57,15 @@ module.exports = {
 		// ! ------ Get -------------------------------
 
 			// http://localhost:3000
-			fastify.get('/', function (req, res) {
+			fastify.get('/', function (req, res) {		
+
+				console.log('Get Yapıldı - Anasayfa [ api-service.js ] - [ moleculer ]');			
+
 				res.send({
 
-					title: 'Sabit Anasayfa  Get - api - fastify - moleculer - json - [ Port 3001 ] dev ',
+					title: 'Magaza Anasayfa  Get - api - fastify - moleculer - json',
 					zaman: dayjs().toDate()
 				});
-
-				console.log('Get Yapıldı - Anasayfa [ api-service.js ] - [ moleculer ]');	
 
 			}) // Get
 
@@ -117,14 +123,11 @@ module.exports = {
 
 			}) //! Token	
 
-
-
 		//! -------------------------   Token Çözme	Son	-----------------------------
 
 		//************************************* Web  **************************************************** */
 
 		//!-------------  Logs -----------------------------------------------------------------------------------------
-
 
 			fastify.post('/api/logs/post', async (req, res) => this.broker.call("logs.post",{...req.body})) //! POST
 
@@ -150,9 +153,12 @@ module.exports = {
 
 			fastify.get('/api/file/html',async (req,res)=> this.broker.call("file.html")) //! Html
 			fastify.post('/api/file/find_user', async (req, res) => this.broker.call("file.find_user",{...req.body})) //! Search User			
-			fastify.post('/api/file/getFile',async (req,res)=> this.broker.call("file.getFile",{...req.body})) //! Post info
+			fastify.post('/api/file/getFile',async (req,res)=> this.broker.call("file.getFile",{...req.body})) //! File Info
 			fastify.post('/api/file/upload',async (req,res)=> this.broker.call("file.upload",{...req.body})) //! Upload
 			fastify.post('/api/file/fileDelete',async (req,res)=> this.broker.call("file.fileDelete",{...req.body})) //! DELETE FİLE
+
+			fastify.post('/api/file/getFileCurl',async (req,res)=> this.broker.call("file.getFileCurl",{...req.body})) //! cURLFile info 
+			fastify.post('/api/file/uploadCurl',async (req,res)=> this.broker.call("file.uploadCurl",{...req.body})) //! cURLFile Upload 
 		
 		//!-------------  File --------------------------------------------------------------------------------------------------
 
@@ -351,14 +357,11 @@ module.exports = {
 				} catch (err) {
 					fastify.log.error(err)
 					process.exit(1)
-				}
+				}				
 			}
 
 		// ! Başlatıyor
 			start()
-
-
-
 
 		} catch (err) {
 			console.log(err);
