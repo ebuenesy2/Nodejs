@@ -41,7 +41,7 @@ module.exports = {
 	name: 'api',
 
 	settings: {
-		port: process.env.PORT || 3000
+		port: process.env.PORT || 3001
 	},
 	
 
@@ -63,7 +63,7 @@ module.exports = {
 
 				res.send({
 
-					title: 'Magaza Anasayfa  Get - api - fastify - moleculer - json',
+					title: 'Yıldırım Dev -  Anasayfa  Get - api - fastify - moleculer - json - [ Port ] [  ]',
 					zaman: dayjs().toDate()
 				});
 
