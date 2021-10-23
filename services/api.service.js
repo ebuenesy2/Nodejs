@@ -29,7 +29,7 @@ module.exports = {
 			// http://localhost:3000
 			fastify.get('/', function (req, res) {
 				res.send({
-					title: 'Get Yapıldı Anasayfa [ api-service.js ] - [ eczane ]',
+					title: 'Get Yapıldı Anasayfa [ api-service.js ] - [ eczane ] - [ Port ] - [ 3001 ]',
 					zaman: dayjs().toDate()
 				});
 
