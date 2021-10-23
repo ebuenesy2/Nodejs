@@ -7,6 +7,29 @@
  /8000 => Laravel
   ```
 
+  ## Proje Hakkında - Version [ V1 ]
+
+ ```
+ /api/products => Ürünler
+ /api/productCategory => Ürün Kategorisi
+ /api/category => Kategorisi
+ /api/orders => Sipariş
+ /api/page => Sayfalar
+ /api/pricing => Fiyat Listesi
+ /api/ssk => Sık Sorulan Sorular
+ /api/blogs => Blog
+ /api/file => Dosya
+ /api/message => Messajlar
+ /api/settings => Ayarlar
+ /api/admin => Admin
+ /api/user => Kullanıcı
+ /api/logs => Bildirim
+ /token => Token
+ /env => Env
+ /env => Env
+
+  ```
+
 
 ## Çalıştırma - Terminal
 

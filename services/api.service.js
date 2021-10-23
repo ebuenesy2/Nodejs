@@ -63,7 +63,7 @@ module.exports = {
 
 				res.send({
 
-					title: 'Yıldırım Dev -  Anasayfa  Get - api - fastify - moleculer - json - [ Port ] [  ]',
+					title: 'Yıldırım Dev -  Anasayfa  Get - api - fastify - moleculer - json - [ Port ] [ 3001 ]',
 					zaman: dayjs().toDate()
 				});
 
@@ -79,6 +79,18 @@ module.exports = {
 				console.log('Get Yapıldı - Anasayfa [ api-service.js ]');
 				console.log(process.env.APi_URL)
 			}) // Get
+
+		// http://localhost:3000
+		fastify.get('/version', function (req, res) {
+			res.send({
+				title: 'Verison',
+				version: process.env.Version
+			});
+
+			console.log('Get Yapıldı - Anasayfa [ api-service.js ]');
+			console.log(process.env.Version)
+		}) // Get
+
 
 
 		// ! ------ Post -----------------------------
