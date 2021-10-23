@@ -26,7 +26,7 @@
  /api/logs => Bildirim
  /token => Token
  /env => Env
- /env => Env
+ /version => Version
 
   ```
 
