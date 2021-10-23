@@ -1,3 +1,13 @@
+
+## Port Bilgilerim
+
+ ```
+ /3000 => React
+ /3001 => Api - Nodejs
+ /8000 => Laravel
+  ```
+
+
 ## Çalıştırma - Terminal
 
  ```
@@ -8,6 +18,11 @@
 yarn start
 ```
 
+## Çalıştırma - Heroku üzerine
+
+```
+https://api-yildirim-dev.herokuapp.com/
+```
 
 # Yayınlama - Heroku
 
@@ -39,11 +54,6 @@ heroku logs --tail
 heroku logs --tail --app app-sabit
 ```
 
-## Çalıştırma - Heroku üzerine
-
-```
-https://app-sabit.herokuapp.com/
-```
 
 ## Git Yükleme
 
