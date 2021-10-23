@@ -1,0 +1,25 @@
+[{
+	"token": "token",
+	"id": 1,
+	"userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTAzOTA4MzQ0OSwidG9rZW4iOiJ0b2tlbiBhZGQiLCJuYW1lIjoiZWJ1IGVuZXMiLCJzdXJuYW1lIjoiecSxbGTEsXLEsW0iLCJ1c2VySW1hZ2VVcmwiOm51bGwsInVzZXJuYW1lIjoiZWJ1ZW5lc3k0IiwiZW1haWwiOiJlYnVlbmVzeTRAaG90bWFpbC5jb20iLCJ0ZWwiOiJ0ZWxlZm9uIDQiLCJwYXNzd29yZCI6InBhc3N3b3JkIDQiLCJjcmVhdGVkX2F0IjoiMjAyMS0wOS0wN1QxODoyNDo0My40NDlaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDktMDdUMTg6MjQ6NDMuNDQ5WiJ9.vXQuEk4anlOhv47gu_O8LfRFDVSJQC9mM-fPUXGR08E",
+	"blogFileUrl": "blogFileUrl",
+	"blogUploadUrl": "blogUploadUrl",
+	"blogDescription": "Image Description",
+	"blogContext": "Image Context",
+	"blogCategories": "photo,ımage,text,blog",
+	"blogToken": "blogToken",
+	"created_at": "2021-06-18 16:22:38",
+	"updated_at": "2021-08-23T07:50:55.133Z"
+}, {
+	"token": "token",
+	"id": 1631089161768,
+	"userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTAzOTA4MzQ0OSwidG9rZW4iOiJ0b2tlbiBhZGQiLCJuYW1lIjoiZWJ1IGVuZXMiLCJzdXJuYW1lIjoiecSxbGTEsXLEsW0iLCJ1c2VySW1hZ2VVcmwiOm51bGwsInVzZXJuYW1lIjoiZWJ1ZW5lc3k0IiwiZW1haWwiOiJlYnVlbmVzeTRAaG90bWFpbC5jb20iLCJ0ZWwiOiJ0ZWxlZm9uIDQiLCJwYXNzd29yZCI6InBhc3N3b3JkIDQiLCJjcmVhdGVkX2F0IjoiMjAyMS0wOS0wN1QxODoyNDo0My40NDlaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDktMDdUMTg6MjQ6NDMuNDQ5WiJ9.vXQuEk4anlOhv47gu_O8LfRFDVSJQC9mM-fPUXGR08E",
+	"blogFileUrl": "blogFileUrl",
+	"blogUploadUrl": "blogUploadUrl",
+	"blogDescription": "blogImagDescription",
+	"blogContext": "blogContext",
+	"blogCategories": "blogCategories",
+	"blogToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6InRva2VuIiwiaWQiOjE2MzEwODkxNjE3NjgsInVzZXJUb2tlbiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUpwWkNJNk1UWXpNVEF6T1RBNE16UTBPU3dpZEc5clpXNGlPaUowYjJ0bGJpQmhaR1FpTENKdVlXMWxJam9pWldKMUlHVnVaWE1pTENKemRYSnVZVzFsSWpvaWVjU3hiR1RFc1hMRXNXMGlMQ0oxYzJWeVNXMWhaMlZWY213aU9tNTFiR3dzSW5WelpYSnVZVzFsSWpvaVpXSjFaVzVsYzNrMElpd2laVzFoYVd3aU9pSmxZblZsYm1WemVUUkFhRzkwYldGcGJDNWpiMjBpTENKMFpXd2lPaUowWld4bFptOXVJRFFpTENKd1lYTnpkMjl5WkNJNkluQmhjM04zYjNKa0lEUWlMQ0pqY21WaGRHVmtYMkYwSWpvaU1qQXlNUzB3T1Mwd04xUXhPRG95TkRvME15NDBORGxhSWl3aWRYQmtZWFJsWkY5aGRDSTZJakl3TWpFdE1Ea3RNRGRVTVRnNk1qUTZORE11TkRRNVdpSjkudlhRdUVrNGFubE9odjQ3Z3VfTzhMZlJGRFZTSlFDOW1NLWZQVVhHUjA4RSIsImJsb2dJbWFnZVVybCI6IkM6XFxFTkVTXFxHaXRodXBcXG1hZ2F6YWdpcmlzaWdpdGxhYlxcbm9kZWpzX01vbGVjdWxlclxccHVibGljXFx1cGxvYWRcXGltZ1xcMTYzMTA4OTE2MTc1NC5qcGVnIiwiYmxvZ0Rlc2NyaXB0aW9uIjoiYmxvZ0ltYWdEZXNjcmlwdGlvbiIsImJsb2dDb250ZXh0IjoiYmxvZ0NvbnRleHQiLCJibG9nQ2F0ZWdvcmllcyI6ImJsb2dDYXRlZ29yaWVzIn0.rZSobeK3UJik2-aOHvYaejkw_RdfHot6FFyGkAE0YfU",
+	"created_at": "2021-09-08T08:19:21.775Z",
+	"updated_at": "2021-09-08T08:19:21.775Z"
+}]

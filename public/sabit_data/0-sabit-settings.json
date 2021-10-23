@@ -1,0 +1,24 @@
+[
+	{
+		"id": "1",
+		"home1_FileUrl":"home1_FileUrl",
+		"home1_UploadUrl": "C:\\ENES\\Githup\\magazagirisigitlab\\nodejs_Moleculer\\public\\upload\\img\\1631055546933.jpeg",
+		"home1_description": "AYNI ANDA STOK VE FİYATLARINIZ GÜNCELLENSİN Home 1 guncelleme",
+		"home1_context": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+		"home2_FileUrl":"home2_FileUrl",
+		"home2_UploadUrl": "C:\\ENES\\Githup\\magazagirisigitlab\\nodejs_Moleculer\\public\\upload\\img\\1631055546933.jpeg",
+		"home2_description": "AYNI ANDA STOK VE FİYATLARINIZ GÜNCELLENSİN Home 2",
+		"home2_context": "Yazı 2\r\n Lorem Ipsum is simply dummy text of the printing and typesetting industry.\r\n                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,\r\n                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.\r\n                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\r\n                            It was popularised in the 1960s with the release of Letraset sheets containing\r\n                            Lorem Ipsum passages, and more recently with desktop publishing software\r\n                            like Aldus PageMaker including versions of Lorem Ipsum.",
+		"webName": "webName 1",
+		"tel": "0216 325 11 11",
+		"email": "info@arneca.com  1",
+		"adres": "Ksu TeknoKent\r\nKahramanmaraş/Onikişubat",
+		"googleAdres": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d404114.2716054298!2d36.594763563356324!3d37.69284650542713!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x152dc475f6f1e2ab%3A0x8a0f4d270330bd4c!2sKahramanmara%C5%9F%20Merkez%2C%20Kahramanmara%C5%9F%2C%20T%C3%BCrkiye!5e0!3m2!1str!2sus!4v1630962262673!5m2!1str!2sus",
+		"FacebookUrl": "FacebookUrl Veri 1",
+		"TwitterUrl": "TwitterUrl",
+		"İnstagramUrl": "İnstagramUrl",
+		"LinkedlnUrl": "LinkedlnUrl",
+		"updated_at": "2021-09-07T22:59:06.933Z",
+		"userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTAzOTA4MzQ0OSwidG9rZW4iOiJ0b2tlbiBhZGQiLCJuYW1lIjoiZWJ1IGVuZXMiLCJzdXJuYW1lIjoiecSxbGTEsXLEsW0iLCJ1c2VySW1hZ2VVcmwiOm51bGwsInVzZXJuYW1lIjoiZWJ1ZW5lc3k0IiwiZW1haWwiOiJlYnVlbmVzeTRAaG90bWFpbC5jb20iLCJ0ZWwiOiJ0ZWxlZm9uIDQiLCJwYXNzd29yZCI6InBhc3N3b3JkIDQiLCJjcmVhdGVkX2F0IjoiMjAyMS0wOS0wN1QxODoyNDo0My40NDlaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDktMDdUMTg6MjQ6NDMuNDQ5WiJ9.vXQuEk4anlOhv47gu_O8LfRFDVSJQC9mM-fPUXGR08E"
+	}
+]

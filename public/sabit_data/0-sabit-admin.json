@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "token": "NbB4otrKDhAKK6CyRJeSoNUDDFqE0f9cYFrn2S9h",
+        "role":"Admin",
+        "name": "name 1",
+        "surname": "surname 1",
+        "userImageUrl": "https://www.wpdurum.com/uploads/thumbs/en-guzel-kiz-profil-resimleri-indirdur.jpg",
+        "username": "username",
+        "email": "enes1@gmail.com",
+        "tel":"tel",
+        "password": "123",    
+        "userToken":"userToken",  
+        "created_at": "2021-06-18 16:22:38",
+        "updated_at": "2021-08-23T07:50:55.133Z"
+    },
+    {
+        "id": 3,
+        "token": "NbB4otrKDhAKK6CyRJeSoNUDDFqE0f9cYFrn2S9h",
+        "role":"Admin",
+        "name": "name 3",
+        "surname": "surname 3",
+        "userImageUrl": "https://www.wpdurum.com/uploads/thumbs/en-guzel-kiz-profil-resimleri-indirdur.jpg",
+        "username": "username3",
+        "email": "enes3@gmail.com",
+        "tel":"tel3",
+        "password": "123",    
+        "userToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTE4NDg0NzE2NywidG9rZW4iOiJ0b2tlbiBhZGQiLCJuYW1lIjoiZWJ1IGVuZXMgMyIsInN1cm5hbWUiOiJ5xLFsZMSxcsSxbSAzIiwidXNlckltYWdlVXJsIjpudWxsLCJ1c2VybmFtZSI6ImVidWVuZXN5MyIsImVtYWlsIjoiZW5lczNAZ21haWwuY29tIiwidGVsIjoidGVsZWZvbiAzIiwicGFzc3dvcmQiOiJwYXNzd29yZCAzIiwiY3JlYXRlZF9hdCI6IjIwMjEtMDktMDlUMTA6NTQ6MDcuMTY3WiIsInVwZGF0ZWRfYXQiOiIyMDIxLTA5LTA5VDEwOjU0OjA3LjE2N1oifQ.tLS6nWVJW4xtoTq2c59sqCjucDC1eYVWY-LvA4mnGE4",     
+        "created_at": "2021-06-18 16:22:38",
+        "updated_at": "2021-08-23T07:50:55.133Z"
+    },
+    {
+        "id": 1631039083449,
+        "token": "token add",
+        "role":"Admin",
+        "name": "ebu enes",
+        "surname": "yıldırım",
+        "userImageUrl": null,
+        "username": "ebuenesy4",
+        "email": "ebuenesy4@hotmail.com",
+        "tel": "telefon 4",
+        "password": "password 4",
+        "created_at": "2021-09-07T18:24:43.449Z",
+        "updated_at": "2021-09-07T18:24:43.449Z",
+        "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTAzOTA4MzQ0OSwidG9rZW4iOiJ0b2tlbiBhZGQiLCJuYW1lIjoiZWJ1IGVuZXMiLCJzdXJuYW1lIjoiecSxbGTEsXLEsW0iLCJ1c2VySW1hZ2VVcmwiOm51bGwsInVzZXJuYW1lIjoiZWJ1ZW5lc3k0IiwiZW1haWwiOiJlYnVlbmVzeTRAaG90bWFpbC5jb20iLCJ0ZWwiOiJ0ZWxlZm9uIDQiLCJwYXNzd29yZCI6InBhc3N3b3JkIDQiLCJjcmVhdGVkX2F0IjoiMjAyMS0wOS0wN1QxODoyNDo0My40NDlaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDktMDdUMTg6MjQ6NDMuNDQ5WiJ9.vXQuEk4anlOhv47gu_O8LfRFDVSJQC9mM-fPUXGR08E"
+    }
+]

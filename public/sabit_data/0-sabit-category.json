@@ -1,0 +1,129 @@
+[{
+	"id": 2,
+	"token": "token2",
+	"name": "n11 - Kategori - 2",
+	"site": "n11",
+	"SiteCategoryToken": "SiteCategoryToken2",
+	"created_at": "2021-09-13T10:01:54.313Z",
+	"updated_at": "2021-09-15T20:33:19.959Z"
+}, {
+	"id": 3,
+	"token": "token3",
+	"name": "n11 - Kategori - 3",
+	"site": "n11",
+	"SiteCategoryToken": "SiteCategoryToken3",
+	"created_at": "2021-09-13T10:01:54.313Z",
+	"updated_at": "2021-09-15T20:33:19.959Z"
+}, {
+	"id": 4,
+	"token": "token4",
+	"name": "n11 - Kategori - 4",
+	"site": "n11",
+	"SiteCategoryToken": "SiteCategoryToken4",
+	"created_at": "2021-09-13T10:01:54.313Z",
+	"updated_at": "2021-09-15T20:33:19.959Z"
+}, {
+	"id": 1631883065709,
+	"token": "token add",
+	"name": "trendyol - Kategori - 1",
+	"site": "trendyol",
+	"SiteCategoryToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTg4MzA2NTcwOSwibmFtZSI6Im5hbWUgYWRkIiwic2l0ZSI6InRyZW5keW9sIn0._Ciq-8LoYvV2FMukoOUyCyK8nkQ-gVQHsBRgHj50rg4",
+	"created_at": "2021-09-17T12:51:05.711Z",
+	"updated_at": "2021-09-18T01:48:18.295Z"
+}, {
+	"id": 1631898457155,
+	"token": "token add",
+	"name": "trendyol - Kategori - 2",
+	"site": "trendyol",
+	"SiteCategoryToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTg5ODQ1NzE1NSwibmFtZSI6Im5hbWUgYWRkIDEiLCJzaXRlIjoidHJlbmR5b2wifQ.QcgjgfbZWdeNmIZtzC6V-PU3AEfOxnUgQ6QXdS54IEU",
+	"created_at": "2021-09-17T17:07:37.160Z",
+	"updated_at": "2021-09-18T01:48:48.658Z"
+}, {
+	"id": 1631929366431,
+	"token": "token add",
+	"name": "hepsiburada - Kategori - 1",
+	"site": "hepsiburada",
+	"SiteCategoryToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTkyOTM2NjQzMSwibmFtZSI6Im5hbWUgYWRkIDEiLCJzaXRlIjoiaGVwc2lidXJhZGEifQ.uUZU8cz7bd1ZAE_A8VDco6O7R_5qZ5v8fi840ccymeQ",
+	"created_at": "2021-09-18T01:42:46.432Z",
+	"updated_at": "2021-09-18T01:50:31.592Z"
+}, {
+	"id": 1631929376732,
+	"token": "token add",
+	"name": "hepsiburada - Kategori - 2",
+	"site": "hepsiburada",
+	"SiteCategoryToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTkyOTM3NjczMiwibmFtZSI6Im5hbWUgYWRkIDIiLCJzaXRlIjoiaGVwc2lidXJhZGEifQ.uZZwm-WaRdMwS4EstLKSeTSCkemCTxHYKKejfobOV6I",
+	"created_at": "2021-09-18T01:42:56.734Z",
+	"updated_at": "2021-09-18T01:50:52.407Z"
+}, {
+	"id": 1631929777297,
+	"token": "token add",
+	"name": "trendyol - Kategori - 3",
+	"site": "trendyol",
+	"SiteCategoryToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTkyOTc3NzI5NywibmFtZSI6InRyZW5keW9sIC0gS2F0ZWdvcmkgLSAzIiwic2l0ZSI6InRyZW5keW9sIn0.o8hqsI5gq3l_lWJVDJDeSutUSq4hQQ2zkeOrJS6a4Ks",
+	"created_at": "2021-09-18T01:49:37.300Z",
+	"updated_at": "2021-09-18T01:49:37.300Z"
+}, {
+	"id": 1631929907718,
+	"token": "token add",
+	"name": "gittigidiyor - Kategori - 1",
+	"site": "gittigidiyor",
+	"SiteCategoryToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTkyOTkwNzcxOCwibmFtZSI6ImdpdHRpZ2lkaXlvciAtIEthdGVnb3JpIC0gMSIsInNpdGUiOiJnaXR0aWdpZGl5b3IifQ.RTHmUMYyXhDjt4OU5wxzn7X4ixEQf-R7WlptFS0SLdI",
+	"created_at": "2021-09-18T01:51:47.719Z",
+	"updated_at": "2021-09-18T01:51:47.719Z"
+}, {
+	"id": 1631929913780,
+	"token": "token add",
+	"name": "gittigidiyor - Kategori - 2",
+	"site": "gittigidiyor",
+	"SiteCategoryToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTkyOTkxMzc4MCwibmFtZSI6ImdpdHRpZ2lkaXlvciAtIEthdGVnb3JpIC0gMiIsInNpdGUiOiJnaXR0aWdpZGl5b3IifQ.bi1e_w08V7vL9MVkdSKqyAETKQo06NDInAlNLqqWk_Q",
+	"created_at": "2021-09-18T01:51:53.781Z",
+	"updated_at": "2021-09-18T01:51:53.781Z"
+}, {
+	"id": 1631929917517,
+	"token": "token add",
+	"name": "gittigidiyor - Kategori - 3",
+	"site": "gittigidiyor",
+	"SiteCategoryToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTkyOTkxNzUxNywibmFtZSI6ImdpdHRpZ2lkaXlvciAtIEthdGVnb3JpIC0gMyIsInNpdGUiOiJnaXR0aWdpZGl5b3IifQ.o-CW8Z3gmHH1CJbwgp8iDUgYitdrG47rBlqM4aWXB0k",
+	"created_at": "2021-09-18T01:51:57.518Z",
+	"updated_at": "2021-09-18T01:51:57.518Z"
+}, {
+	"id": 1631929922484,
+	"token": "token add",
+	"name": "gittigidiyor - Kategori - 4",
+	"site": "gittigidiyor",
+	"SiteCategoryToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTkyOTkyMjQ4NCwibmFtZSI6ImdpdHRpZ2lkaXlvciAtIEthdGVnb3JpIC0gNCIsInNpdGUiOiJnaXR0aWdpZGl5b3IifQ.9HpapYwI87JAFsoH3qYrTtjmEdD5vi7Hu4ri3QjbvpM",
+	"created_at": "2021-09-18T01:52:02.485Z",
+	"updated_at": "2021-09-18T01:52:02.485Z"
+}, {
+	"id": 1631929963267,
+	"token": "token add",
+	"name": "amazon - Kategori - 1",
+	"site": "amazon",
+	"SiteCategoryToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTkyOTk2MzI2NywibmFtZSI6ImFtYXpvbiAtIEthdGVnb3JpIC0gMSIsInNpdGUiOiJhbWF6b24ifQ.C68RuWl3Ou-AM0bpEVC60-nOrR3o4il7sAXMApseA_o",
+	"created_at": "2021-09-18T01:52:43.268Z",
+	"updated_at": "2021-09-18T01:52:43.268Z"
+}, {
+	"id": 1631929970388,
+	"token": "token add",
+	"name": "amazon - Kategori - 2",
+	"site": "amazon",
+	"SiteCategoryToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTkyOTk3MDM4OCwibmFtZSI6ImFtYXpvbiAtIEthdGVnb3JpIC0gMiIsInNpdGUiOiJhbWF6b24ifQ.PBj6IebvgZDv-fn9ZDl4Efr-GeoOvQBUaYhaPBUWbbY",
+	"created_at": "2021-09-18T01:52:50.389Z",
+	"updated_at": "2021-09-18T01:52:50.389Z"
+}, {
+	"id": 1631929978199,
+	"token": "token add",
+	"name": "amazon - Kategori - 3",
+	"site": "amazon",
+	"SiteCategoryToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTkyOTk3ODE5OSwibmFtZSI6ImFtYXpvbiAtIEthdGVnb3JpIC0gMyIsInNpdGUiOiJhbWF6b24ifQ.lXVyQ1AUTIdCeScrrND8d6iFxyR71jvbpsqrKcfYUBs",
+	"created_at": "2021-09-18T01:52:58.200Z",
+	"updated_at": "2021-09-18T01:52:58.200Z"
+}, {
+	"id": 1631929983833,
+	"token": "token add",
+	"name": "amazon - Kategori - 4",
+	"site": "amazon",
+	"SiteCategoryToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTkyOTk4MzgzMywibmFtZSI6ImFtYXpvbiAtIEthdGVnb3JpIC0gNCIsInNpdGUiOiJhbWF6b24ifQ.h5FiQBkoY1eSzzbfuW_xQmMP9PrmiV0bVxRxcK1lUSQ",
+	"created_at": "2021-09-18T01:53:03.833Z",
+	"updated_at": "2021-09-18T01:53:03.833Z"
+}]
