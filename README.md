@@ -40,6 +40,12 @@
 ```
 yarn start
 ```
+```
+pm2 start
+```
+```
+npm start
+```
 
 ## Çalıştırma - Heroku üzerine
 
@@ -56,7 +62,7 @@ heroku login
 ```
 git init
 
-heroku git:remote -a app-sabit
+heroku git:remote -a api-yildirim-dev
 
 git add .
 
@@ -74,7 +80,7 @@ heroku logs --tail
 ```
 
 ```
-heroku logs --tail --app app-sabit
+heroku logs --tail --app api-yildirim-dev
 ```
 
 
@@ -190,7 +196,7 @@ npm i fastify-formbody
 	name: 'api',
 
 	settings: {
-		port: process.env.PORT || 3000
+		port: process.env.PORT || 3001
 	},
 
   ```
