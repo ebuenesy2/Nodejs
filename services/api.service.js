@@ -257,68 +257,7 @@ module.exports = {
 			fastify.post('/api/pricing/update', async (req, res) => this.broker.call("pricing.update",{...req.body})) //! UPDATE
 			fastify.post('/api/pricing/delete/:id', async (req, res) => this.broker.call("pricing.delete",{id: req.params.id,...req.body})) //! DELETE
 				
-		//!---------------- pricing son ----------------------------------------------------------------------------------------------
-
-		//!------------- Category  --------------------------------------------------------------------------------------------------
-
-			fastify.get('/api/category/info',async (req,res)=> this.broker.call("category.info")) //! İnfo
-			fastify.post('/api/category/post', async (req, res) => this.broker.call("category.post",{...req.body})) //! POST
-			fastify.get('/api/category/all', async (req, res) => this.broker.call("category.all")) //! All
-			fastify.get('/api/category/:id', async (req, res) => this.broker.call("category.find",{id: req.params.id})) //!Search	
-			fastify.post('/api/category/find_site', async (req, res) => this.broker.call("category.find_site",{...req.body})) //! Search Site
-
-			fastify.post('/api/category/add', async (req, res) => this.broker.call("category.add",{...req.body})) //! CREATE		
-			fastify.post('/api/category/update', async (req, res) => this.broker.call("category.update",{...req.body})) //! UPDATE
-			fastify.post('/api/category/delete/:id', async (req, res) => this.broker.call("category.delete",{id: req.params.id,...req.body})) //! DELETE
-		
-		//!---------------- Category son ----------------------------------------------------------------------------------------------
-
-
-	    //!------------- productCategory  --------------------------------------------------------------------------------------------------
-
-		  	fastify.get('/api/productCategory/info',async (req,res)=> this.broker.call("productCategory.info")) //! İnfo
-			fastify.post('/api/productCategory/post', async (req, res) => this.broker.call("productCategory.post",{...req.body})) //! POST
-			fastify.get('/api/productCategory/all', async (req, res) => this.broker.call("productCategory.all")) //! All
-			fastify.get('/api/productCategory/:id', async (req, res) => this.broker.call("productCategory.find",{id: req.params.id})) //!Search	
-			fastify.post('/api/productCategory/find_userToken', async (req, res) => this.broker.call("productCategory.find_userToken",{...req.body})) //!  Search-Token
-	
-			fastify.post('/api/productCategory/add', async (req, res) => this.broker.call("productCategory.add",{...req.body})) //! CREATE		
-			fastify.post('/api/productCategory/update', async (req, res) => this.broker.call("productCategory.update",{...req.body})) //! UPDATE
-			fastify.post('/api/productCategory/delete/:id', async (req, res) => this.broker.call("productCategory.delete",{id: req.params.id,...req.body})) //! DELETE
-				
-		//!---------------- productCategory son ----------------------------------------------------------------------------------------------
- 
-		
-	    //!------------- products  --------------------------------------------------------------------------------------------------
-
-			fastify.get('/api/products/info',async (req,res)=> this.broker.call("products.info")) //! İnfo
-			fastify.post('/api/products/post', async (req, res) => this.broker.call("products.post",{...req.body})) //! POST
-			fastify.get('/api/products/all', async (req, res) => this.broker.call("products.all")) //! All
-			fastify.get('/api/products/:id', async (req, res) => this.broker.call("products.find",{id: req.params.id})) //!Search
-			fastify.post('/api/products/find_userToken', async (req, res) => this.broker.call("products.find_userToken",{...req.body})) //!  Search-Token
-			fastify.post('/api/products/Edit_FindUserToken/:id', async (req, res) => this.broker.call("products.Edit_FindUserToken",{id: req.params.id,...req.body})) //! Search- Finf UserToken
-	
-			fastify.post('/api/products/add', async (req, res) => this.broker.call("products.add",{...req.body})) //! CREATE		
-			fastify.post('/api/products/update', async (req, res) => this.broker.call("products.update",{...req.body})) //! UPDATE
-			fastify.post('/api/products/delete/:id', async (req, res) => this.broker.call("products.delete",{id: req.params.id,...req.body})) //! DELETE
-				
-	    //!---------------- products son ----------------------------------------------------------------------------------------------
-
-		//!------------- orders  --------------------------------------------------------------------------------------------------
-
-			fastify.get('/api/orders/info',async (req,res)=> this.broker.call("orders.info")) //! İnfo
-			fastify.post('/api/orders/post', async (req, res) => this.broker.call("orders.post",{...req.body})) //! POST
-			fastify.get('/api/orders/all', async (req, res) => this.broker.call("orders.all")) //! All
-			fastify.get('/api/orders/:id', async (req, res) => this.broker.call("orders.find",{id: req.params.id})) //!Search	
-			fastify.post('/api/orders/find_userToken', async (req, res) => this.broker.call("orders.find_userToken",{...req.body})) //!  Search-Token
-			fastify.post('/api/orders/Edit_FindUserToken/:id', async (req, res) => this.broker.call("orders.Edit_FindUserToken",{id: req.params.id,...req.body})) //! Search- Finf UserToken
-
-			fastify.post('/api/orders/add', async (req, res) => this.broker.call("orders.add",{...req.body})) //! CREATE		
-			fastify.post('/api/orders/update', async (req, res) => this.broker.call("orders.update",{...req.body})) //! UPDATE
-			fastify.post('/api/orders/delete/:id', async (req, res) => this.broker.call("orders.delete",{id: req.params.id,...req.body})) //! DELETE
-				
-		//!---------------- orders son ----------------------------------------------------------------------------------------------
-	
+		//!---------------- pricing son ----------------------------------------------------------------------------------------------	
 
 		//!------------- message  --------------------------------------------------------------------------------------------------
 
@@ -337,17 +276,6 @@ module.exports = {
 			
 		//!---------------- message son ----------------------------------------------------------------------------------------------
 		
-	    //!------------- page  --------------------------------------------------------------------------------------------------
-
-			fastify.get('/api/page/info',async (req,res)=> this.broker.call("page.info")) //! İnfo
-			fastify.post('/api/page/post', async (req, res) => this.broker.call("page.post",{...req.body})) //! POST
-			fastify.get('/api/page/all', async (req, res) => this.broker.call("page.all")) //! All
-			fastify.get('/api/page/:id', async (req, res) => this.broker.call("page.find",{id: req.params.id})) //!Search			
-			fastify.post('/api/page/update', async (req, res) => this.broker.call("page.update",{...req.body})) //! UPDATE	
-				
-		//!---------------- page son ----------------------------------------------------------------------------------------------
-
-
 
 		//************************************* Server  **************************************************** */
 		// ! Server dinliyor
