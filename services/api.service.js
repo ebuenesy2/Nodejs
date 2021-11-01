@@ -182,7 +182,7 @@ module.exports = {
 			fastify.get('/api/user/all', async (req, res) => this.broker.call("user.all")) //!All
 			fastify.get('/api/user/:id', async (req, res) => this.broker.call("user.find",{id: req.params.id})) //!Search
 
-			fastify.post('/api/user/find_user', async	 (req, res) => this.broker.call("user.find_user",{...req.body})) //!  Search-Post
+			fastify.post('/api/user/find_post', async	 (req, res) => this.broker.call("user.find_post",{...req.body})) //!  Search-Post
 			fastify.post('/api/user/find_token', async (req, res) => this.broker.call("user.find_token",{...req.body})) //!  Search-Token
 			fastify.post('/api/user/add', async (req, res) => this.broker.call("user.add",{...req.body})) //! CREATE
 			fastify.post('/api/user/update', async (req, res) => this.broker.call("user.update",{...req.body})) //! UPDATE

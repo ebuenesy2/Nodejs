@@ -43,21 +43,16 @@ module.exports = {
 
 
 			// ! Arama
-			const user = db.find(u => u.id == ctx.params.id);
-
-			let data_pricing = await ctx.call('pricing.all'); //! All pricing	
+			const user = db.find(u => u.id == ctx.params.id);				
 
 			// Kullanıcı Varsa
-			if (user) {
-
-				let user_logs = await ctx.call('logs.find_user', { email: user.email })
+			if (user) {			
 
 				//api
 				ctx.params.title = "Kullanıcı Arama"
 				ctx.params.tablo = "user.json"
 				ctx.params.status = 1
-				ctx.params.data_user = user
-				ctx.params.data_pricing = data_pricing
+				ctx.params.data_user = user			
 
 				//console
 				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ users/:userId ]' + '\u001b[0m');
@@ -70,8 +65,7 @@ module.exports = {
 				ctx.params.title = "Json Araama"
 				ctx.params.tablo = "user.json"
 				ctx.params.status = 0
-				ctx.params.data_user = "Kullanıcı Bulunmadı"
-				ctx.params.data_pricing = "Kullanıcı Bulunmadı"			   
+				ctx.params.data_user = "Kullanıcı Bulunmadı"					   
 
 				//console
 				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ users/:userId ]  Kullanıcı Bulunamadı' + '\u001b[0m');
@@ -81,7 +75,7 @@ module.exports = {
 
 			return ctx.params
 		},
-		async find_user(ctx) {
+		async find_post(ctx) {
 
 			// ! Arama
 			const user = db.find(u => u.id == ctx.params.user_id);
@@ -96,7 +90,6 @@ module.exports = {
 				ctx.params.tablo = "user.json"
 				ctx.params.status = 1
 				ctx.params.data_user = user
-
 
 				//console
 				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ users/:userId ]' + '\u001b[0m');
@@ -231,12 +224,7 @@ module.exports = {
 								username: ctx.params.username,
 								email: ctx.params.email,
 								tel: ctx.params.tel,
-								password: ctx.params.password,
-								packageId: ctx.params.packageId,
-								packageName: ctx.params.packageName,
-								packagePayment: ctx.params.packagePayment,
-								paketCreatAt: ctx.params.paketCreatAt,
-								paketFinishAt: ctx.params.paketFinishAt,							
+								password: ctx.params.password,														
 								created_at: new Date(),
 								updated_at: new Date()	
 							}
@@ -252,20 +240,15 @@ module.exports = {
 							const willSaveData = {
 								id: TokenId,
 								token: ctx.params.token,
-								role:"Shop",
+								role:"User",
 								name: ctx.params.name,
 								surname: ctx.params.surname,
 								userImageUrl: null,
 								username: ctx.params.username,
 								email: ctx.params.email,
 								tel: ctx.params.tel,
-								password: ctx.params.password,
-								packageId: ctx.params.packageId,
-								packageName: ctx.params.packageName,
-								packagePayment: ctx.params.packagePayment,
-								paketCreatAt: ctx.params.paketCreatAt,
-								paketFinishAt: ctx.params.paketFinishAt,
-								userShopToken:jwt,					
+								password: ctx.params.password,								
+								userToken:jwt,					
 								created_at: new Date(),
 								updated_at: new Date()
 							}				
@@ -296,8 +279,8 @@ module.exports = {
 							let logs_add = await ctx.call('logs.add', {
 								token: ctx.params.token,
 								userToken: jwt,
-								name: "shop_add_successful",
-								description: "Başarılı Shop Kayıt Yapıldı"
+								name: "user_add_successful",
+								description: "Başarılı Kullanıcı Kayıt Yapıldı"
 							})
 
 							ctx.params.data_logs = logs_add
@@ -316,8 +299,7 @@ module.exports = {
 					ctx.params.title = "Kullanıcı Ekleme"
 					ctx.params.tablo = "user.json"
 					ctx.params.status = 0
-					ctx.params.mesaj = "Kullanıcı Eklenemedi"
-		
+					ctx.params.mesaj = "Kullanıcı Eklenemedi"		
 
 				}
 
@@ -331,12 +313,6 @@ module.exports = {
 
 					delete ctx.params.tel
 					delete ctx.params.password
-					delete ctx.params.packageId
-					delete ctx.params.packageName
-					delete ctx.params.packagePayment
-					delete ctx.params.paketCreatAt
-					delete ctx.params.paketFinishAt
-
 
 					return ctx.params
 
@@ -344,7 +320,7 @@ module.exports = {
 		async update(ctx) {
 
 			// ! Arama
-			const user = db.find(u => u.userShopToken == ctx.params.userShopToken);
+			const user = db.find(u => u.userToken == ctx.params.userToken);
 
 			// Kullanıcı Varsa
 			if (user) {
@@ -386,9 +362,9 @@ module.exports = {
 						
 				 let logs_add = await ctx.call('logs.add', {
 					 token: ctx.params.token,
-					 userToken: ctx.params.userShopToken,					 
-					 name: "shop_update_successful",
-					 description: "Başarılı Shop Güncelleme Yapıldı"
+					 userToken: ctx.params.userToken,					 
+					 name: "user_update_successful",
+					 description: "Başarılı Kullanıcı Güncelleme Yapıldı"
 				 })
 
 				 ctx.params.logs = logs_add
@@ -445,8 +421,8 @@ module.exports = {
 				let logs_add = await ctx.call('logs.add', {
 					token: ctx.params.token,
 					userToken: ctx.params.userToken,
-					name: "shop_delete_successful",
-					description: "Silme Shop işlemi Başarılı"
+					name: "user_delete_successful",
+					description: "Silme Kullanıcı işlemi Başarılı"
 				})
 
 				delete ctx.params.userToken 
@@ -497,9 +473,9 @@ module.exports = {
 
 				let logs_add = await ctx.call('logs.add', {
 					token: ctx.params.token,
-					userToken: user[0].userShopToken,
-					name: "shop_login_successful",
-					description: "Başarılı Shop Giriş Yapıldı"
+					userToken: user[0].userToken,
+					name: "user_login_successful",
+					description: "Başarılı Kullanıcı Giriş Yapıldı"
 				})
 
 				//api
@@ -520,8 +496,7 @@ module.exports = {
 				    //api
 					ctx.params.title = "Kullanıcı Login"
 					ctx.params.tablo = "user.json"
-					ctx.params.status = 0
-					ctx.params.userId = user_email[0].id
+					ctx.params.status = 0				
 					ctx.params.data_user = user_email
 					ctx.params.mesaj = "Kullanıcı Bulunmadı"
 				
@@ -530,9 +505,9 @@ module.exports = {
 
 						let logs_add = await ctx.call('logs.add', {
 							token: ctx.params.token,
-							userToken: user_email[0].userShopToken,
-							name: "shop_login_error",
-							description: "Hatalı Shop Giriş Yapıldı"
+							userToken: user_email[0].userToken,
+							name: "user_login_error",
+							description: "Hatalı Kullanıcı Giriş Yapıldı"
 						})
 
 						ctx.params.logs = logs_add
@@ -555,18 +530,18 @@ module.exports = {
 			// ! Arama
 			//const user = db.filter(u => u.email == ctx.params.email && u.password == ctx.params.password);
 
-			const user = db.filter(u => u.id == ctx.params.user_id);		
+			const user = db.find(u => u.userToken == ctx.params.userToken);		
 
 			// Kullanıcı Varsa
-			if (user.length > 0) {
+			if (user) {
                 
 				
 				
 				let logs_add = await ctx.call('logs.add', {
-					token: "token yeni",
-					userId:ctx.params.user_id,
-					name: "loginout_successful",
-					description: "Başarılı Çıkış Yapıldı"
+					token: ctx.params.token,
+					userToken:ctx.params.userToken,
+					name: "user_loginout_successful",
+					description: "Başarılı Kullanıcı Çıkış Yapıldı"
 				})
 				
 
@@ -575,13 +550,9 @@ module.exports = {
 				ctx.params.title = "Kullanıcı LoginOut"
 				ctx.params.tablo = "user.json"
 				ctx.params.status = 1
-				ctx.params.userId = user[0].id
+				ctx.params.userId = user.id
 				ctx.params.data = user
-				ctx.params.logs = logs_add
-
-				delete ctx.params.user_id
-				delete ctx.params.email
-				delete ctx.params.password
+				ctx.params.logs = logs_add					
 
 
 				//console
@@ -594,8 +565,8 @@ module.exports = {
 
 				
 				let logs_add = await ctx.call('logs.add', {
-					token: "token yeni",
-					userId: ctx.params.user_id,
+					token: ctx.params.token,
+					userToken:ctx.params.userToken,
 					name: "loginout_error",
 					description: "Hatalı Çıkış Yapıldı"
 				})
@@ -613,6 +584,9 @@ module.exports = {
 				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ users/:userId ]  Kullanıcı Bulunamadı' + '\u001b[0m');
 
 			}
+
+			//delete
+			delete ctx.params.userToken 
 
 			return ctx.params
 		}	

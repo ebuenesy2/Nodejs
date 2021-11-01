@@ -44,7 +44,7 @@
     "moleculer-web": "^0.9.1",
     "mongoose": "^5.13.2",
     "nats": "^1.4.12",
-    "nodemon": "^2.0.9",
+    "nodemon": "^2.0.14",
     "sharp": "^0.29.2",
     "yarn": "^1.22.11"
   },
