@@ -217,18 +217,6 @@ module.exports = {
 			fastify.get('/api/admin/homeAll', async (req, res) => this.broker.call("admin.homeAll")) //!Home All
 
 		//!---------------- admin son ----------------------------------------------------------------------------------------------
-
-			
-		//!-------------  settings --------------------------------------------------------------------------------------------------
-
-			fastify.get('/api/settings/info',async (req,res)=> this.broker.call("settings.info")) //! İnfo
-			fastify.post('/api/settings/post', async (req, res) => this.broker.call("settings.post",{...req.body})) //! POST
-			fastify.get('/api/settings/all', async (req, res) => this.broker.call("settings.all")) //!All
-			fastify.get('/api/settings/:id', async (req, res) => this.broker.call("settings.find",{id: req.params.id})) //!Search			
-			fastify.post('/api/settings/update', async (req, res) => this.broker.call("settings.update",{...req.body})) //! UPDATE
-			
-	    //!---------------- settings son ----------------------------------------------------------------------------------------------
-
 		   			
 		//!------------- blogs  --------------------------------------------------------------------------------------------------
 
