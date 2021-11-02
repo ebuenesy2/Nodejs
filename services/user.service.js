@@ -217,7 +217,8 @@ module.exports = {
 							let TokenId=new Date().getTime();
 
 							let TokenInfo={				
-								id: TokenId,	
+								id: TokenId,
+								role:"User",	
 								name: ctx.params.name,
 								surname: ctx.params.surname,
 								userImageUrl: null,
@@ -349,17 +350,9 @@ module.exports = {
 					}
 
 					console.log("Json writing"); // Success
-				});
+				});		
 
-
-				//! ------------------
-
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Json Güncelleme' + '\u001b[0m')
-
-
-				 //! Logs Ekleme		
-						
+				//! ----  Logs Ekleme --------------					
 				 let logs_add = await ctx.call('logs.add', {
 					 token: ctx.params.token,
 					 userToken: ctx.params.userToken,					 
@@ -368,10 +361,10 @@ module.exports = {
 				 })
 
 				 ctx.params.logs = logs_add
+				//! ----  Logs Son --------------
 
-
-
-
+				 	//console
+				console.log('\u001b[' + 32 + 'm' + 'Json Güncelleme' + '\u001b[0m')
 			}
 
 			//! Kullanıcı Yoksa
@@ -529,22 +522,17 @@ module.exports = {
 
 			// ! Arama
 			//const user = db.filter(u => u.email == ctx.params.email && u.password == ctx.params.password);
-
 			const user = db.find(u => u.userToken == ctx.params.userToken);		
 
 			// Kullanıcı Varsa
-			if (user) {
-                
-				
-				
+			if (user) {               
+								
 				let logs_add = await ctx.call('logs.add', {
 					token: ctx.params.token,
 					userToken:ctx.params.userToken,
 					name: "user_loginout_successful",
 					description: "Başarılı Kullanıcı Çıkış Yapıldı"
-				})
-				
-
+				})		
 
 				//api
 				ctx.params.title = "Kullanıcı LoginOut"
@@ -567,8 +555,8 @@ module.exports = {
 				let logs_add = await ctx.call('logs.add', {
 					token: ctx.params.token,
 					userToken:ctx.params.userToken,
-					name: "loginout_error",
-					description: "Hatalı Çıkış Yapıldı"
+					name: "user_loginout_error",
+					description: "Hatalı Kullanıcı Çıkış Yapıldı"
 				})
 				
 

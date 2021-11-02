@@ -39,14 +39,7 @@ module.exports = {
 
 
 			// ! Arama
-			const user = db.find(u => u.id == ctx.params.id);
-
-			/*
-			let follow = await ctx.call('follow.follow', {
-				user_id: ctx.params.id
-			})
-			*/
-
+			const user = db.find(u => u.id == ctx.params.id);	
 
 			// Kullanıcı Varsa
 			if (user) {
@@ -92,8 +85,6 @@ module.exports = {
 			// ! Arama
 			const user = db.find(u => u.id == ctx.params.user_id);
 
-
-
 			// Admin Varsa
 			if (user) {
 
@@ -112,7 +103,7 @@ module.exports = {
 
 			//! Admin Yoksa
 			else {
-				//api
+			
 				//api
 				ctx.params.title = "Admin Araama"
 				ctx.params.tablo = "admin.json"
@@ -137,13 +128,11 @@ module.exports = {
 			// Admin Varsa
 			if (user) {
 
-
 				//api
 				ctx.params.title = "Admin Arama"
 				ctx.params.tablo = "admin.json"
 				ctx.params.status = 1
 				ctx.params.data_user = user
-
 
 				//console
 				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ admin/:userId ]' + '\u001b[0m');
@@ -152,7 +141,7 @@ module.exports = {
 
 			//! Admin Yoksa
 			else {
-				//api
+				
 				//api
 				ctx.params.title = "Admin Araama"
 				ctx.params.tablo = "admin.json"
@@ -245,7 +234,8 @@ module.exports = {
 								username: ctx.params.username,
 								email: ctx.params.email,
 								tel: ctx.params.tel,
-								password: ctx.params.password,										
+								password: ctx.params.password,
+								userToken:"userToken g",									
 								created_at: new Date(),
 								updated_at: new Date()
 							}
@@ -283,7 +273,7 @@ module.exports = {
 						
 							let logs_add = await ctx.call('logs.add', {
 								token: ctx.params.token,
-								userId: user_email[0].id,
+								userToken: jwt,
 								name: "admin_add_successful",
 								description: "Başarılı Kayıt Yapıldı"
 							})
@@ -331,7 +321,7 @@ module.exports = {
 		async update(ctx) {
 
 			// ! Arama
-			const user = db.find(u => u.id == ctx.params.id);
+			const user = db.find(u => u.userToken == ctx.params.userToken);
 
 			// Kullanıcı Varsa
 			if (user) {
@@ -345,14 +335,12 @@ module.exports = {
 				//! Add
 				user["updated_at"] = new Date() 
 
-				//? User Info
-				console.log(user)
+			    //console.log(user); 	//? User Info
 
 				//api
 				ctx.params.title = "Admin Guncelleme"
 				ctx.params.tablo = "admin.json"
-				ctx.params.status = 1
-                
+				ctx.params.status = 1                
 			
 				
 				// STEP 3: Json içine Verileri Yazıyor -> db
@@ -366,33 +354,25 @@ module.exports = {
 					console.log("Json writing"); // Success
 				});
 
+				//! ----  Logs Ekleme --------------					
+				let logs_add = await ctx.call('logs.add', {
+					token: ctx.params.token,
+					userToken: ctx.params.userToken,					 
+					name: "admin_update_successful",
+					description: "Başarılı Admin Güncelleme Yapıldı"
+				})
 
-				//! ------------------
+				ctx.params.logs = logs_add
+				//! ----  Logs Son --------------
 
-				//console
+					//console
 				console.log('\u001b[' + 32 + 'm' + 'Json Güncelleme' + '\u001b[0m')
-
-
-				 //! Logs Ekleme
-				 const user_email = db.filter(u => u.id == ctx.params.id);
-						
-				 let logs_add = await ctx.call('logs.add', {
-					 token: ctx.params.token,
-					 userId: user_email[0].id,
-					 name: "admin_update_successful",
-					 description: "Başarılı Güncelleme Yapıldı"
-				 })
-
-				 ctx.params.logs = logs_add
-
-
-
 
 			}
 
 			//! Kullanıcı Yoksa
 			else {
-				//api
+			
 				//api
 				ctx.params.title = "Admin Guncelleme"
 				ctx.params.tablo = "user.json"
@@ -408,10 +388,8 @@ module.exports = {
 
 		},
 		async delete(ctx) {
-
-
-
-			var index = db.findIndex(a => a.id === ctx.params.id);
+            
+			var index = db.findIndex(a => a.id == ctx.params.id);
 			if (index > -1) {
 				db.splice(index, 1);
 
@@ -434,16 +412,18 @@ module.exports = {
 				ctx.params.status = 1
 				ctx.params.mesaj = "Admin Silindi"				
 	            
-				//! Logs Ekleme		
-		
+				//! ----------- Log -----------------------------         
+	
 				let logs_add = await ctx.call('logs.add', {
-					token:"token",
-					userId: ctx.params.id,
+					token: ctx.params.token,
+					userToken: ctx.params.userToken,
 					name: "admin_delete_successful",
-					description: "Silme işlemi Başarılı"
+					description: "Silme Admin işlemi Başarılı"
 				})
+			
+				ctx.params.logs_add = logs_add	
 
-				ctx.params.logs = logs_add
+				//! ----------- Log Son-------------------------
 
 
 
@@ -451,37 +431,30 @@ module.exports = {
 
 				//api
 				ctx.params.title = "Admin Silme"
-				ctx.params.tablo = "user.json"
+				ctx.params.tablo = "admin.json"
 				ctx.params.status = 0
 				ctx.params.mesaj = "Admin Bulunmadı"
 
 				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ users/:userId ]  Admin Bulunamadı' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ admin/:userId ]  Admin Bulunamadı' + '\u001b[0m');
 			}
-
-			//console.log(sampleArray);
-
-
-
 
 			//! ------------------
 
 			//console
 			console.log('\u001b[' + 32 + 'm' + 'Json Silme' + '\u001b[0m')
 
-
-
-
+			// Delete
+			delete ctx.params.userToken 
+			delete ctx.params.token 
 
 			return ctx.params
-
 
 		},
 		async loginOnline(ctx) {
 
 			// ! Arama
 			const user_email = db.filter(u => u.email == ctx.params.email);
-
 			const user = db.filter(u => u.email == ctx.params.email && u.password == ctx.params.password);
 
 			// Giriş Başarılı ise
@@ -489,9 +462,9 @@ module.exports = {
 
 				let logs_add = await ctx.call('logs.add', {
 					token: ctx.params.token,
-					userId: user[0].id,
+					userToken: user[0].userToken,
 					name: "admin_login_successful",
-					description: "Başarılı Giriş Yapıldı"
+					description: "Başarılı Admin Giriş Yapıldı"
 				})
 
 
@@ -503,8 +476,6 @@ module.exports = {
 				ctx.params.data_user = user
 				ctx.params.data_logs = logs_add
 
-
-
 				//console
 				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ users/:userId ]' + '\u001b[0m');
 
@@ -512,10 +483,9 @@ module.exports = {
 
 			//! Admin Yoksa
 			else {
-
 				
 					//api
-					ctx.params.title = "Json Login"
+					ctx.params.title = "Admin Login"
 					ctx.params.tablo = "admin.json"
 					ctx.params.status = 0
 					ctx.params.userId = 0
@@ -523,29 +493,26 @@ module.exports = {
 					ctx.params.data_logs = "Admin Bulunmadı"
 				
 					// Giriş Başarılı ise
-			if (user_email.length > 0) {
+					if (user_email.length > 0) {
 
-					let logs_add = await ctx.call('logs.add', {
-						token: ctx.params.token,
-						userId: user_email[0].id,
-						name: "admin_login_error",
-						description: "Hatalı Giriş Yapıldı"
-					})
+						let logs_add = await ctx.call('logs.add', {
+							token: ctx.params.token,
+							userToken: user_email[0].userToken,
+							name: "admmin_login_error",
+							description: "Hatalı Admin Giriş Yapıldı"
+						})
 
-					ctx.params.logs = logs_add
-
-
-		   	}
+						ctx.params.logs = logs_add
+				    }
 
 				//console
 				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ users/:userId ]  Admin Bulunamadı' + '\u001b[0m');
 
 			}
 
-			
+			//delete
 			delete ctx.params.email
 			delete ctx.params.password
-
 
 			return ctx.params
 
@@ -554,28 +521,23 @@ module.exports = {
 
 			// ! Arama
 			//const user = db.filter(u => u.email == ctx.params.email && u.password == ctx.params.password);
-
-			const user = db.filter(u => u.id == ctx.params.user_id);		
+			const user = db.find(u => u.userToken == ctx.params.userToken);		
 
 			// Kullanıcı Varsa
-			if (user.length > 0) {
-                
-				
-				
+			if (user) {               
+								
 				let logs_add = await ctx.call('logs.add', {
-					token: "token yeni",
-					userId:ctx.params.user_id,
-					name: "loginout_successful",
-					description: "Başarılı Çıkış Yapıldı"
-				})
-				
-
+					token: ctx.params.token,
+					userToken:ctx.params.userToken,
+					name: "admin_loginout_successful",
+					description: "Başarılı Admin Çıkış Yapıldı"
+				})	
 
 				//api
 				ctx.params.title = "Admin LoginOut"
 				ctx.params.tablo = "admin.json"
 				ctx.params.status = 1
-				ctx.params.userId = user[0].id
+				ctx.params.userId = user.id
 				ctx.params.data_user = user
 				ctx.params.data_logs = logs_add
 
@@ -592,12 +554,12 @@ module.exports = {
 			//! Kullanıcı Yoksa
 			else {
 
-				
+					
 				let logs_add = await ctx.call('logs.add', {
-					token: "token yeni",
-					userId: ctx.params.user_id,
-					name: "loginout_error",
-					description: "Hatalı Çıkış Yapıldı"
+					token: ctx.params.token,
+					userToken:ctx.params.userToken,
+					name: "admin_loginout_error",
+					description: "Hatalı Admin Çıkış Yapıldı"
 				})
 				
 
@@ -615,82 +577,6 @@ module.exports = {
 			}
 
 			return ctx.params
-		},
-		async home(ctx){
-
-			const user = db.filter(u => u.id == ctx.params.adminId);		
-
-			// Kullanıcı Varsa
-			if (user.length > 0) {    
-				
-				
-			
-				let data_logs = await ctx.call('logs.find_user', {
-					userId: user[0].id
-				})
-
-
-				let data_settings = await ctx.call('settings.all')
-				
-					
-
-				//api
-				ctx.params.title = "Admin Tüm Veriler"
-				ctx.params.tablo = "admin.json"
-				ctx.params.status = 1
-				ctx.params.userId = user[0].id
-				ctx.params.data_user = user
-				ctx.params.data_logs = data_logs	
-				ctx.params.data_settings = data_settings	
-				
-				delete ctx.params.adminId
-
-
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ admin/:userId ]' + '\u001b[0m');
-
-			}
-
-			//! Kullanıcı Yoksa
-			else {
-
-			
-				//api
-				ctx.params.title = "Admin LoginOut"
-				ctx.params.tablo = "admin.json"
-				ctx.params.status = 0
-				ctx.params.userId = 0
-				ctx.params.data_user = "Admin Bulunmadı"
-				ctx.params.data_logs = "Admin Bulunmadı"
-				ctx.params.data_settings = "Admin Bulunmadı"
-				
-
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ users/:userId ]  Admin Bulunamadı' + '\u001b[0m');
-
-			}
-
-			return ctx.params
-		},
-		async homeAll(ctx){
-
-							
-				let data_settings = await ctx.call('settings.all')			
-					
-
-				//api
-				ctx.params.title = "Admin Tüm Veriler"
-				ctx.params.tablo = "admin.json"
-				ctx.params.status = 1
-				ctx.params.data_settings = data_settings					
-				
-
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ admin/:userId ]' + '\u001b[0m');
-
-		
-
-			return ctx.params
-		}
+		}	
 	}
 }

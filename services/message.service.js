@@ -74,125 +74,105 @@ module.exports = {
 
 			return ctx.params
 		},
-        async view(ctx) {
+		async view(ctx) {
+		
+			const user = db.find(u => u.id == ctx.params.id);  // ! Arama
+
+            //? Kullanıcı Varsa
+			if (user) {
+
+				//Static
+				let status_read=0;
+				let logs_add=[];
+
+				// Gelen Kutusuna Düşmüş ise
+				if(user["ToUserToken"]==ctx.params.userToken) 
+				{
+					status_read=1; // Okundu
 	
-			const user = db.find(u => u.id == ctx.params.id); //! Arama
-			const message_inbox  = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageDeleted == "0"); //! Gelen Mesaj
-			const message_unreaded = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageReaded == "0" && u.MessageDeleted == "0"); //! Okunmamış Mesajlar
-			const message_readed = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageReaded == "1" && u.MessageDeleted == "0"); //! Okunmuş Mesajlar
-            const message_sent = db.filter(u => u.FromUserToken == ctx.params.userToken); //! Gönderilmiş Mesajlar
-            const message_unreaded_sent = db.filter(u => u.FromUserToken == ctx.params.userToken && u.MessageReaded == "0"); //! Okunmamış Gönderilmiş Mesajlar
-            const message_deleted_message  = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageDeleted == "1"); //! Silinen Mesaj
+					//! ----------- Log -----------------------------              
+					logs_add = await ctx.call('logs.add', {
+						token: ctx.params.token,
+						userToken: ctx.params.userToken,
+						name: "message_read_successful",
+						description: "Mesaj Okuma Başarılı"
+					})
+	
+					delete ctx.params.userToken 
+					//! ----------- Log -----------------------------               
+					
+					//! Update - Güncelleme
+					user["MessageReaded"] = "1"
+					user["MessageReaded_at"] = new Date()
+					user["updated_at"] = new Date()
+	
+	
+					// STEP 3: Json içine Verileri Yazıyor -> db
+					fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {					
+						if (err) { console.log(err) } //! Error
+						console.log("Json Eklendi"); // Success
+					});					
+								
+								
+				}
+				else {  status_read=0; }
 
-			// Kullanıcı Varsa
-			if (user) {		
-                
-                    //! ----------- Log -----------------------------              
-                      let logs_add = await ctx.call('logs.add', {
-                        token: ctx.params.token,
-                        userToken: ctx.params.userToken,
-                        name: "message_view_successful",
-                        description: "Mesaj Görüntüleme Başarılı"
-                    })
-    
-                    //delete ctx.params.userToken 
-                    //! ----------- Log -----------------------------                 
-                   
-                    //! Güncelleme                  
-                   if(user["ToUserToken"]==ctx.params.userToken)
-                    {
-                        
-                        user["MessageReaded"] = "1"
-                        user["MessageReaded_at"] = new Date()
-                        user["updated_at"] = new Date()
-                    }
-                    delete ctx.params.userToken 
-        
-    
-    
-                    // STEP 3: Json içine Verileri Yazıyor -> db
-                    fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
-    
-                        // Checking for errors
-                        if (err) {
-                            console.log(err)
-                        }
-    
-                        console.log("Json Eklendi"); // Success
-                    });
-
-				//api
-				ctx.params.title = "Mesaj Görüntüleme"
-				ctx.params.tablo = "message.json"
-				ctx.params.status = 1
-				ctx.params.data_message = user
-                ctx.params.size_message_inbox=message_inbox.length
-                ctx.params.data_message_inbox = message_inbox
-                ctx.params.size_message_unreaded=message_unreaded.length
-                ctx.params.data_message_unreaded = message_unreaded
-                ctx.params.size_message_readed=message_readed.length
-                ctx.params.data_message_readed = message_readed
-                ctx.params.size_message_sent=message_sent.length
-                ctx.params.data_message_sent = message_sent
-                ctx.params.size_message_deleted_message=message_deleted_message.length
-                ctx.params.data_message_deleted_message = message_deleted_message
-			
-
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ message  /:userId ]' + '\u001b[0m');
+					//! Return 
+					ctx.params.title = "Mesaj Okuma"
+					ctx.params.tablo = "message.json"
+					ctx.params.status = 1
+					ctx.params.status_read = status_read
+					ctx.params.data_message = user,
+					ctx.params.data_logs = logs_add			
 			}
 
 			//! Kullanıcı Yoksa
 			else {
-				
-				//api
-				ctx.params.title = "Mesaj  Görüntüleme"
+
+			    //! Return 		
+                ctx.params.title = "Mesaj Okuma"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 0
-				ctx.params.data_message =  []
-                ctx.params.size_message_inbox= 0
-				ctx.params.data_message_inbox = []
-                ctx.params.size_message_unreaded=0
-                ctx.params.data_message_unreaded =  []
-                ctx.params.size_message_readed=0
-                ctx.params.data_message_readed =  []
-                ctx.params.data_message_sent =  []
-                ctx.params.size_message_readed=0
-                ctx.params.size_message_deleted_message=0
-                ctx.params.data_message_deleted_message = []
+				ctx.params.status_read = 0
+                ctx.params.data_message =  "Mesaj Bulunmadı"
+				ctx.params.data_logs = "Mesaj Bulunmadı"
 
-			
-				
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ users/:userId ]  Mesaj   Bulunamadı' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Post [ update ]  Mesaj Bulunamadı' + '\u001b[0m'); //! console
 
 			}
-
-
+			
+            //! Delete
+            delete ctx.params.id          
+            delete ctx.params.token          
+            delete ctx.params.userToken        
+                   
 			return ctx.params
-		},
+		},    
 		async add(ctx) {
 
 			ctx.params.title = "Mesaj Ekleme"
 			ctx.params.tablo = "message.json"
             ctx.params.status = 1            
              
+			
             //! ----------- UserInfo ----------------------------- 
+
+			let FromUserToken_Info=ctx.params.FromUserToken;             
+            let FromRole_Info=ctx.params.FromRole;   
+            let Fromuser_info;
+            if(FromRole_Info=="User") { Fromuser_info = await ctx.call('user.find_token', {"userToken":FromUserToken_Info})}
+            if(FromRole_Info=="Admin") { Fromuser_info = await ctx.call('admin.find_token', {"userToken":FromUserToken_Info})}            
+            let FromNameSurName_Info=Fromuser_info['data_user']['name']+" "+Fromuser_info['data_user']['surname'];    
+
             let ToUserToken_Info=ctx.params.ToUserToken;             
             let ToRole_Info=ctx.params.ToRole;   
             let Touser_info;
-            if(ToRole_Info=="Shop") { Touser_info = await ctx.call('user.find_token', {"userShopToken":ToUserToken_Info})}
+            if(ToRole_Info=="User") { Touser_info = await ctx.call('user.find_token', {"userToken":ToUserToken_Info})}
             if(ToRole_Info=="Admin") { Touser_info = await ctx.call('admin.find_token', {"userToken":ToUserToken_Info})}            
-            let ToNameSurName_Info=Touser_info['data_user']['name']+" "+Touser_info['data_user']['surname'];
-  
-            let FromUserToken_Info=ctx.params.FromUserToken;             
-            let FromRole_Info=ctx.params.FromRole;   
-            let Fromuser_info;
-            if(FromRole_Info=="Shop") { Fromuser_info = await ctx.call('user.find_token', {"userShopToken":FromUserToken_Info})}
-            if(FromRole_Info=="Admin") { Fromuser_info = await ctx.call('admin.find_token', {"userToken":FromUserToken_Info})}            
-            let FromNameSurName_Info=Fromuser_info['data_user']['name']+" "+Fromuser_info['data_user']['surname'];                     
-            //! ----------- UserInfo Son ----------------------------- 
-           
+            let ToNameSurName_Info=Touser_info['data_user']['name']+" "+Touser_info['data_user']['surname']; 
+                 
+            //! ----------- UserInfo Son ----------------------------- 			
+                    
 			try {
 
 				//! Token
@@ -251,7 +231,7 @@ module.exports = {
 
                 
 				// STEP 3: Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/products.json', JSON.stringify(db), err => {
+				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
 
 					// Checking for errors
 					if (err) {
@@ -301,6 +281,7 @@ module.exports = {
             delete ctx.params.MessageReaded
 
 			return ctx.params
+
 
 		},
 		async update(ctx) {
@@ -500,9 +481,10 @@ module.exports = {
 			const message_inbox  = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageDeleted == "0"); //! Gelen Mesaj
 			const message_unreaded = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageReaded == "0" && u.MessageDeleted == "0"); //! Okunmamış Mesajlar
 			const message_readed = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageReaded == "1" && u.MessageDeleted == "0"); //! Okunmuş Mesajlar
+			const message_deleted_message  = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageDeleted == "1"); //! Silinen Mesaj
+
             const message_sent = db.filter(u => u.FromUserToken == ctx.params.userToken); //! Gönderilmiş Mesajlar
-            const message_unreaded_sent = db.filter(u => u.FromUserToken == ctx.params.userToken && u.MessageReaded == "0"); //! Okunmamış Gönderilmiş Mesajlar
-            const message_deleted_message  = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageDeleted == "1"); //! Silinen Mesaj
+            const message_unreaded_sent = db.filter(u => u.FromUserToken == ctx.params.userToken && u.MessageReaded == "0"); //! Okunmamış Gönderilmiş Mesajlar            
 
             //! Return
             ctx.params.title = "Mesaj Kutusu"
@@ -514,14 +496,15 @@ module.exports = {
             ctx.params.data_message_unreaded = message_unreaded
             ctx.params.size_message_readed=message_readed.length
             ctx.params.data_message_readed = message_readed
+			ctx.params.size_message_deleted_message=message_deleted_message.length
+            ctx.params.data_message_deleted_message = message_deleted_message
+
             ctx.params.size_message_sent=message_sent.length
             ctx.params.data_message_sent = message_sent
             ctx.params.size_message_unreaded_sent=message_unreaded_sent.length
             ctx.params.data_message_unreaded_sent = message_unreaded_sent
-            ctx.params.size_message_deleted_message=message_deleted_message.length
-            ctx.params.data_message_deleted_message = message_deleted_message
-           
-            console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ message/:userId ]' + '\u001b[0m'); //! Console
+                      
+            console.log('\u001b[' + 32 + 'm' + 'Gelen Kutusu [ message/:userId ]' + '\u001b[0m'); //! Console
              
 			//! Delete
 			delete ctx.params.userToken 

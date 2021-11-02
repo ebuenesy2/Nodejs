@@ -207,30 +207,30 @@ module.exports = {
 			fastify.post('/api/admin/find_token', async (req, res) => this.broker.call("admin.find_token",{...req.body})) //!  Search-Post
 			fastify.post('/api/admin/add', async (req, res) => this.broker.call("admin.add",{...req.body})) //! CREATE
 			fastify.post('/api/admin/update', async (req, res) => this.broker.call("admin.update",{...req.body})) //! UPDATE
-			fastify.post('/api/admin/delete', async (req, res) => this.broker.call("admin.delete",{...req.body})) //! DELETE
+			fastify.post('/api/admin/delete/:id', async (req, res) => this.broker.call("admin.delete",{id: req.params.id,...req.body})) //! DELETE
 
 			
 			fastify.post('/api/admin/loginOnline', async (req, res) => this.broker.call("admin.loginOnline",{...req.body})) //! Login
 			fastify.post('/api/admin/loginOut', async (req, res) => this.broker.call("admin.loginOut",{...req.body})) //! Loginout
 
-			fastify.get('/api/admin/home/:adminId', async (req, res) => this.broker.call("admin.home",{adminId: req.params.adminId})) //!Home
-			fastify.get('/api/admin/homeAll', async (req, res) => this.broker.call("admin.homeAll")) //!Home All
-
 		//!---------------- admin son ----------------------------------------------------------------------------------------------
-		   			
-		//!------------- blogs  --------------------------------------------------------------------------------------------------
 
-			fastify.get('/api/blogs/info',async (req,res)=> this.broker.call("blogs.info")) //! İnfo
-			fastify.post('/api/blogs/post', async (req, res) => this.broker.call("blogs.post",{...req.body})) //! POST
-			fastify.get('/api/blogs/all', async (req, res) => this.broker.call("blogs.all")) //! All
-			fastify.get('/api/blogs/:id', async (req, res) => this.broker.call("blogs.find",{id: req.params.id})) //!Search	
+		//!------------- message  --------------------------------------------------------------------------------------------------
 
-			fastify.post('/api/blogs/add', async (req, res) => this.broker.call("blogs.add",{...req.body})) //! CREATE		
-			fastify.post('/api/blogs/update', async (req, res) => this.broker.call("blogs.update",{...req.body})) //! UPDATE
-			fastify.post('/api/blogs/delete', async (req, res) => this.broker.call("blogs.delete",{...req.body})) //! DELETE
-			
-	    //!---------------- blogs son ----------------------------------------------------------------------------------------------
-
+			fastify.get('/api/message/info',async (req,res)=> this.broker.call("message.info")) //! İnfo
+			fastify.post('/api/message/post', async (req, res) => this.broker.call("message.post",{...req.body})) //! POST
+			fastify.get('/api/message/all', async (req, res) => this.broker.call("message.all")) //! All
+			fastify.get('/api/message/find/:id', async (req, res) => this.broker.call("message.find",{id: req.params.id})) //!Search	
+			fastify.post('/api/message/view/:id', async (req, res) => this.broker.call("message.view",{id: req.params.id,...req.body})) //!Search - View
+					
+			fastify.post('/api/message/add', async (req, res) => this.broker.call("message.add",{...req.body})) //! CREATE		
+			fastify.post('/api/message/update', async (req, res) => this.broker.call("message.update",{...req.body})) //! UPDATE
+			fastify.post('/api/message/delete/:id', async (req, res) => this.broker.call("message.delete",{id: req.params.id,...req.body})) //! DELETE
+			fastify.post('/api/message/deleted_update/:id', async (req, res) => this.broker.call("message.deleted_update",{id: req.params.id,...req.body})) //! DELETED MESSAGE
+		
+			fastify.post('/api/message/inbox', async (req, res) => this.broker.call("message.inbox",{...req.body})) //! Inbox			
+		
+		//!---------------- message son ----------------------------------------------------------------------------------------------
 		   		   			
 		//!------------- ssk  --------------------------------------------------------------------------------------------------
 
@@ -259,23 +259,19 @@ module.exports = {
 				
 		//!---------------- pricing son ----------------------------------------------------------------------------------------------	
 
-		//!------------- message  --------------------------------------------------------------------------------------------------
+		//!------------- blogs  --------------------------------------------------------------------------------------------------
 
-			fastify.get('/api/message/info',async (req,res)=> this.broker.call("message.info")) //! İnfo
-			fastify.post('/api/message/post', async (req, res) => this.broker.call("message.post",{...req.body})) //! POST
-			fastify.get('/api/message/all', async (req, res) => this.broker.call("message.all")) //! All
-			fastify.get('/api/message/find/:id', async (req, res) => this.broker.call("message.find",{id: req.params.id})) //!Search	
-			fastify.post('/api/message/view/:id', async (req, res) => this.broker.call("message.view",{id: req.params.id,...req.body})) //!Search - View
-					
-			fastify.post('/api/message/add', async (req, res) => this.broker.call("message.add",{...req.body})) //! CREATE		
-			fastify.post('/api/message/update', async (req, res) => this.broker.call("message.update",{...req.body})) //! UPDATE
-			fastify.post('/api/message/delete/:id', async (req, res) => this.broker.call("message.delete",{id: req.params.id,...req.body})) //! DELETE
-			fastify.post('/api/message/deleted_update/:id', async (req, res) => this.broker.call("message.deleted_update",{id: req.params.id,...req.body})) //! DELETED MESSAGE
+			fastify.get('/api/blogs/info',async (req,res)=> this.broker.call("blogs.info")) //! İnfo
+			fastify.post('/api/blogs/post', async (req, res) => this.broker.call("blogs.post",{...req.body})) //! POST
+			fastify.get('/api/blogs/all', async (req, res) => this.broker.call("blogs.all")) //! All
+			fastify.get('/api/blogs/:id', async (req, res) => this.broker.call("blogs.find",{id: req.params.id})) //!Search	
+
+			fastify.post('/api/blogs/add', async (req, res) => this.broker.call("blogs.add",{...req.body})) //! CREATE		
+			fastify.post('/api/blogs/update', async (req, res) => this.broker.call("blogs.update",{...req.body})) //! UPDATE
+			fastify.post('/api/blogs/delete', async (req, res) => this.broker.call("blogs.delete",{...req.body})) //! DELETE
 		
-			fastify.post('/api/message/inbox', async (req, res) => this.broker.call("message.inbox",{...req.body})) //! Inbox			
-			
-		//!---------------- message son ----------------------------------------------------------------------------------------------
-		
+		//!---------------- blogs son ----------------------------------------------------------------------------------------------
+
 
 		//************************************* Server  **************************************************** */
 		// ! Server dinliyor
