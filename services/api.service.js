@@ -208,7 +208,6 @@ module.exports = {
 			fastify.post('/api/admin/add', async (req, res) => this.broker.call("admin.add",{...req.body})) //! CREATE
 			fastify.post('/api/admin/update', async (req, res) => this.broker.call("admin.update",{...req.body})) //! UPDATE
 			fastify.post('/api/admin/delete/:id', async (req, res) => this.broker.call("admin.delete",{id: req.params.id,...req.body})) //! DELETE
-
 			
 			fastify.post('/api/admin/loginOnline', async (req, res) => this.broker.call("admin.loginOnline",{...req.body})) //! Login
 			fastify.post('/api/admin/loginOut', async (req, res) => this.broker.call("admin.loginOut",{...req.body})) //! Loginout
@@ -244,20 +243,6 @@ module.exports = {
 			fastify.post('/api/ssk/delete/:id', async (req, res) => this.broker.call("ssk.delete",{id: req.params.id,...req.body})) //! DELETE
 			
 	    //!---------------- ssk son ----------------------------------------------------------------------------------------------
-
-
-		//!------------- pricing  --------------------------------------------------------------------------------------------------
-
-		  	fastify.get('/api/pricing/info',async (req,res)=> this.broker.call("pricing.info")) //! İnfo
-		  	fastify.post('/api/pricing/post', async (req, res) => this.broker.call("pricing.post",{...req.body})) //! POST
-			fastify.get('/api/pricing/all', async (req, res) => this.broker.call("pricing.all")) //! All
-			fastify.get('/api/pricing/:id', async (req, res) => this.broker.call("pricing.find",{id: req.params.id})) //!Search	
-
-			fastify.post('/api/pricing/add', async (req, res) => this.broker.call("pricing.add",{...req.body})) //! CREATE		
-			fastify.post('/api/pricing/update', async (req, res) => this.broker.call("pricing.update",{...req.body})) //! UPDATE
-			fastify.post('/api/pricing/delete/:id', async (req, res) => this.broker.call("pricing.delete",{id: req.params.id,...req.body})) //! DELETE
-				
-		//!---------------- pricing son ----------------------------------------------------------------------------------------------	
 
 		//!------------- blogs  --------------------------------------------------------------------------------------------------
 
