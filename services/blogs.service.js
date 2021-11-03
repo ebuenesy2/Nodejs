@@ -114,11 +114,11 @@ module.exports = {
                //! Tanım
                let blogUploadUrl="";
                let blogFileUrl="";
+			   let blogImageControlHave="0";
 
-               if(ctx.params.file_upload.status==1) {  blogUploadUrl=ctx.params.file_upload.uploadDir; blogFileUrl=ctx.params.file_upload.fileUrl; }
-               if(ctx.params.file_upload.status==0) {  blogUploadUrl=null; blogFileUrl=null; }
+               if(ctx.params.file_upload.status==1) {  blogUploadUrl=ctx.params.file_upload.uploadDir; blogFileUrl=ctx.params.file_upload.fileUrl; blogImageControlHave="1"; }
+               if(ctx.params.file_upload.status==0) {  blogUploadUrl=null; blogFileUrl=null; blogImageControlHave="0"; }
                //! End File Url Update
-
 
 			   //! Token
 			   let BlogId=new Date().getTime();
@@ -127,25 +127,25 @@ module.exports = {
 					token: ctx.params.token,
 					id: BlogId,	
 					userToken: ctx.params.userToken,
+					blogImageControl:blogImageControlHave,
 					blogFileUrl: blogFileUrl,
 					blogUploadUrl: blogUploadUrl,
 					blogDescription: ctx.params.blogDescription,
 					blogContext: ctx.params.blogContext,
 					blogCategories: ctx.params.blogCategories			
 			   }
-
 			    
 			   const secret = 'secret';
 			   const data = blogInfo;
 			   const jwt = sign(data, secret);		
-			   //! End Token					
-			
-
+			   //! End Token	
+			   
 				//! Eklenecek veriler
 				const willSaveData = {
                     token: ctx.params.token,
 					id: BlogId,				
 					userToken: ctx.params.userToken,
+					blogImageControl:blogImageControlHave,
 					blogFileUrl: blogFileUrl,
 					blogUploadUrl: blogUploadUrl,
 					blogDescription: ctx.params.blogDescription,
@@ -211,85 +211,98 @@ module.exports = {
 			const user = db.find(u => u.blogToken == ctx.params.blogToken);
 
 			// Kullanıcı Varsa
-			if (user) {             
+			if (user) { 
+				
+				//! Tanım
+				let file_upload=[];
 
 				//! Resim Var Mı
 				let blogImageControlHave=ctx.params.blogImageControlHave; 
 				if(blogImageControlHave==0) { 
 
 					console.log('\u001b[' + 31 + 'm' + 'Blog Resim Onaylanmadı' + '\u001b[0m');
-					console.log('\u001b[' + 32 + 'm' + 'Blog Image Url : '+ user.blogUploadUrl + '\u001b[0m')
+					
+					//! File Delete
+					let file_delete = await ctx.call('file.fileDelete', {
+						token: ctx.params.token,
+						userToken: ctx.params.userToken,                  
+						fileUrl: user.blogUploadUrl
+					})
+
 				}
-				if(blogImageControlHave==1) { console.log('\u001b[' + 32 + 'm' + 'Blog Resim Onay' + '\u001b[0m'); }
+				if(blogImageControlHave==1) { 
+					
+					console.log('\u001b[' + 32 + 'm' + 'Blog Resim Onay' + '\u001b[0m'); 
+
+					//! File UPLOAD
+					file_upload = await ctx.call('file.upload', {
+						token: ctx.params.token,
+						file: ctx.params.blogImageUrl_File,
+						role: "admin",
+						userToken: ctx.params.userToken,                  
+						usedPage: "Blog"
+					})
+					
+					ctx.params.file_upload = file_upload
+					//console.log('\u001b[' + 32 + 'm' + 'File Upload ' + '\u001b[0m')    
+					//console.log(file_upload)         
+					//! End File Upload
+
+					//console.log('\u001b[' + 31 + 'm' + 'user blogUploadUrl : '+ user.blogUploadUrl + '\u001b[0m')
+					//console.log('\u001b[' + 32 + 'm' + 'file_upload Image Url : '+ file_upload.uploadDir + '\u001b[0m')
+					//console.log('\u001b[' + 32 + 'm' + 'file_upload status : '+ file_upload.status + '\u001b[0m')			
+								
+					//! File Url Update
+					let blogUploadUrl="";
+					if(file_upload.status==1) { 
+
+						console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m')
+						//console.log('\u001b[' + 32 + 'm' + 'Blog Image Url : '+ user.blogUploadUrl + '\u001b[0m')
+
+						//! File Delete
+						let file_delete = await ctx.call('file.fileDelete', {
+							token: ctx.params.token,
+							userToken: ctx.params.userToken,                  
+							fileUrl: user.blogUploadUrl
+						})
+
+						//ctx.params.file_delete = file_delete  
+						//console.log('\u001b[' + 32 + 'm' + 'File Delete ' + '\u001b[0m')      
+						//console.log(file_delete)         
+						//! End File Delete
+
+						//! Update FİLE 
+						user["blogUploadUrl"] = file_upload.uploadDir;                 
+						user["blogFileUrl"] = file_upload.fileUrl;                 
+					}			
+
+					//if(ctx.params.file_upload.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m') }  
+					//if(ctx.params.file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yükleneme Hatalı' + '\u001b[0m')  }  
+					//! End File Url Update				 
 
 
-                //! File UPLOAD
-                let file_upload = await ctx.call('file.upload', {
-                    token: ctx.params.token,
-                    file: ctx.params.blogImageUrl_File,
-                    role: "admin",
-                    userToken: ctx.params.userToken,                  
-                    usedPage: "Blog"
-                })
-                 
-                ctx.params.file_upload = file_upload
-                //console.log('\u001b[' + 32 + 'm' + 'File Upload ' + '\u001b[0m')    
-                //console.log(file_upload)         
-                //! End File Upload
+					//!! Delete
+					delete ctx.params.file_upload
+					delete ctx.params.file_delete
+					delete ctx.params.blogImageUrl_File									
 
-				//console.log('\u001b[' + 31 + 'm' + 'user blogUploadUrl : '+ user.blogUploadUrl + '\u001b[0m')
-				//console.log('\u001b[' + 32 + 'm' + 'file_upload Image Url : '+ file_upload.uploadDir + '\u001b[0m')
-			    //console.log('\u001b[' + 32 + 'm' + 'file_upload status : '+ file_upload.status + '\u001b[0m')			
-							
-                //! File Url Update
-                let blogUploadUrl="";
-                if(file_upload.status==1) { 
+					//!! Update - only Text -   pass by reference
+					Object.keys(ctx.params).forEach(key => {
+					
+						if(key!="blogUploadUrl" || key!="title" || key!="tablo" || key!="status" ) { user[key] = ctx.params[key] }  //! Only Text 
+					
+					})
+					//!! End Update - only Text -   pass by reference				
+					
+					//! Update FİLE 
+					if(file_upload.status==1) {  user["blogUploadUrl"] = file_upload.uploadDir; user["blogFileUrl"] = file_upload.fileUrl; }           		
+					if(file_upload.status==0) {  user["blogUploadUrl"] = user.blogUploadUrl;  user["blogFileUrl"] = user.blogFileUrl;}         		
+			
+		    	}
 
-					console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m')
-                    //console.log('\u001b[' + 32 + 'm' + 'Blog Image Url : '+ user.blogUploadUrl + '\u001b[0m')
-
-                    //! File Delete
-                    let file_delete = await ctx.call('file.fileDelete', {
-                        token: ctx.params.token,
-                        userToken: ctx.params.userToken,                  
-                        fileUrl: user.blogUploadUrl
-                    })
-
-                    //ctx.params.file_delete = file_delete  
-                    //console.log('\u001b[' + 32 + 'm' + 'File Delete ' + '\u001b[0m')      
-                    //console.log(file_delete)         
-                    //! End File Delete
-
-                     //! Update FİLE 
-                     user["blogUploadUrl"] = file_upload.uploadDir;                 
-                     user["blogFileUrl"] = file_upload.fileUrl;                 
-                }			
-
-                //if(ctx.params.file_upload.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m') }  
-                //if(ctx.params.file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yükleneme Hatalı' + '\u001b[0m')  }  
-                //! End File Url Update				 
-
-
-                //!! Delete
-                delete ctx.params.file_upload
-                delete ctx.params.file_delete
-                delete ctx.params.blogImageUrl_File									
-
-				//!! Update - only Text -   pass by reference
-				Object.keys(ctx.params).forEach(key => {
-                 
-                    if(key!="blogUploadUrl" || key!="title" || key!="tablo" || key!="status" ) { user[key] = ctx.params[key] }  //! Only Text 
-				
-				})
-				
-
-				//! **** Update **********
+				//! -------------- Update -----------	
+				user["blogImageControl"] = blogImageControlHave
 				user["updated_at"] = new Date()  
-				
-				  //! Update FİLE 
-				  if(file_upload.status==1) {  user["blogUploadUrl"] = file_upload.uploadDir; user["blogFileUrl"] = file_upload.fileUrl; }           		
-				  if(file_upload.status==0) {  user["blogUploadUrl"] = user.blogUploadUrl;  user["blogFileUrl"] = user.blogFileUrl;}           		
-
 
 				// STEP 3: Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/blogs.json', JSON.stringify(db), err => {
@@ -302,7 +315,7 @@ module.exports = {
 
 					console.log("Blogs Güncelleme Yapıldı"); // Success
 				});
-               //!! End Update - only Text -   pass by reference
+				//! -------------- End Update -----------
 
 				
 
