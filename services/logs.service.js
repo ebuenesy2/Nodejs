@@ -1,6 +1,8 @@
 'use strict';
 const dayjs = require('dayjs'); //! Zaman
 const fs = require("fs"); //! Dosya
+const sign = require('jwt-encode'); //! Token
+const jwt_decode = require('jwt-decode'); //! Token
 const db = require('../public/DB/logs.json') //! Json
 
 
@@ -38,95 +40,157 @@ module.exports = {
 		async find(ctx) {
 
 
-			// ! Arama
-			const user = db.find(u => u.id == ctx.params.id);
+			//! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);
 
-			// Kullanıcı Varsa
-			if (user) {
+			//! Veri Varsa
+			if (dbFind) {
 
-				//api
+				//! Return Api
 				ctx.params.title = "Logs Araama"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 1
-				ctx.params.data_user = user
+				ctx.params.data_find = dbFind
 
-
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ logs/:userId ]' + '\u001b[0m');
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Json Arama [ /api/logs/:id ] Bulundu' + '\u001b[0m');
 
 			}
 
-			//! Log Yoksa
+			//! Veri Yoksa
 			else {
-				//api
-				//api
-				ctx.params.title = "logs Araama"
+			
+				//! Return Api
+				ctx.params.title = "logs Arama"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 0
-				ctx.params.data_user = "Log Bulunmadı"
+				ctx.params.data_find = "Log Bulunmadı"
 
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ logs/:userId ]  Log Bulunamadı' + '\u001b[0m');
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Json Arama [ /api/logs/:id ] Bulunamadı' + '\u001b[0m');
 
 			}
 
 
 			return ctx.params
 		},
-		async add(ctx) {
+		async find_user(ctx) {
 
-			ctx.params.title = "logs Ekleme"
-			ctx.params.tablo = "logs.json"
+			// ! Arama
+			const dbFind = db.filter(u => u.userToken == ctx.params.userToken);
 
+			//! Veri Varsa
+			if (dbFind) {
+
+				//! Return Api
+				ctx.params.title = "Logs Araama"
+				ctx.params.tablo = "logs.json"
+				ctx.params.status = 1
+				ctx.params.size=dbFind.length
+				ctx.params.data = dbFind		
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Json Kullanıcı Arama [ /api/logs/find_user ] Bulundu' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+
+				//! Return Api
+				ctx.params.title = "logs Araama"
+				ctx.params.tablo = "logs.json"
+				ctx.params.status = 0
+				ctx.params.size=0
+				ctx.params.data = "Kullanıcı Bulunmadı"
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Json Kullanıcı Arama [ /api/logs/find_user ] Bulunamadı' + '\u001b[0m');
+			}
+
+			//! Return
+			delete ctx.params.userToken
+
+			return ctx.params
+		},
+		async add(ctx) {	
+			
 			try {
 
+				//! Token
+				let TokenId=new Date().getTime();
+				let CreateDate=new Date();			
 
-
-				//! Eklenecek veriler
-				const willSaveData = {
-					id: new Date().getTime(),
-					token: ctx.params.token,
+				let TokenInfo={				
+					id: TokenId,
 					userToken: ctx.params.userToken,
+					from: ctx.params.from,
 					name: ctx.params.name,
 					description: ctx.params.description,
-					created_at: new Date()
+					created_at: CreateDate,
+					updated_at: CreateDate
+				}
+				
+				const secret = 'secret';
+				const data = TokenInfo;
+				const jwt = sign(data, secret);		
+				//! End Token			
+			
+				//! Eklenecek veriler
+				const willSaveData = {
+					id: TokenId,			
+					userToken: ctx.params.userToken,
+					from: ctx.params.from,
+					name: ctx.params.name,
+					description: ctx.params.description,
+					logToken:jwt,	
+					created_at: CreateDate,
+					updated_at: CreateDate
 				}
 
 				//Verileri Kaydet
 				db.push(willSaveData)
 
 
-				// STEP 3: Json içine Verileri Yazıyor -> db
+				// Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/logs.json', JSON.stringify(db), err => {
 
-					// Checking for errors
+					// Hata varsa
 					if (err) {
 						console.log(err)
 					}
-
-					console.log("Json writing"); // Success
+					
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi"); // Success
 				});
 
-				//! Status
+				//! Return Api
+				ctx.params.title = "logs Ekleme"
+				ctx.params.tablo = "logs.json"
 				ctx.params.status = 1
-
-
-
-				//! ------------------
-
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'logs Ekleme' + '\u001b[0m')
+				ctx.params.mesaj = "Veri Eklendi"				
+		    
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Json Ekleme [ /api/logs/add ] Eklendi' + '\u001b[0m');
 
 
 			} catch (error) {
 
-				//! Status
-				ctx.params.status = 1
+				//! Return Api
+				ctx.params.title = "logs Ekleme"
+				ctx.params.tablo = "logs.json"
+				ctx.params.status = 0
+				ctx.params.mesaj = error
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Json Ekleme [ /api/logs/add ] Eklenemedi' + '\u001b[0m');
 
 			}
 
-
-
+			//! Return
+			delete ctx.params.userToken
+			delete ctx.params.from
+			delete ctx.params.name
+			delete ctx.params.description
 
 			return ctx.params
 
@@ -134,160 +198,106 @@ module.exports = {
 		async update(ctx) {
 
 			// ! Arama
-			const user = db.find(u => u.id == ctx.params.id);
+			const dbFind = db.find(u => u.logToken == ctx.params.logToken);		
 
-			// Kullanıcı Varsa
-			if (user) {
+			//! Veri Varsa 
+			if (dbFind) {
 
-
-				//pass by reference
+				// Referans Veriler Güncelleme Yapıyor
 				Object.keys(ctx.params).forEach(key => {
-					user[key] = ctx.params[key]
+					dbFind[key] = ctx.params[key]
 				})
 
-
-				//api
-				ctx.params.title = "Logs Guncelleme"
-				ctx.params.tablo = "logs.json"
-				ctx.params.status = 1
-
-
-
-				// STEP 3: Json içine Verileri Yazıyor -> db
+				// Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/logs.json', JSON.stringify(db), err => {
 
-					// Checking for errors
+					// Hata varsa
 					if (err) {
 						console.log(err)
 					}
 
-					console.log("Json writing"); // Success
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi"); // Success
 				});
+				
+				//! Return Api
+				ctx.params.title = "Logs Guncelleme"
+				ctx.params.tablo = "logs.json"
+				ctx.params.status = 1
+				ctx.params.data = dbFind
 
-
-				//! ------------------
-
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'logs Güncelleme' + '\u001b[0m')
-
-
-
-
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Json Güncelleme [ /api/logs/update ] Güncellendi' + '\u001b[0m');
 			}
 
-			//! Log Yoksa
+			//! Veri Yoksa
 			else {
-				//api
-				//api
+			
+				//! Return Api
 				ctx.params.title = "Logs Guncelleme"
 				ctx.params.tablo = "log.json"
 				ctx.params.status = 0
 				ctx.params.data = "logs Bulunmadı"
 
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Post [ update ]  Log Bulunamadı' + '\u001b[0m');
-
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Json Güncelleme [ /api/logs/update ] Güncellenemeddi' + '\u001b[0m');
 			}
+
+			//! Return
+			delete ctx.params.logToken
+			delete ctx.params.userToken
+			delete ctx.params.from
+			delete ctx.params.name
+			delete ctx.params.description
 
 			return ctx.params
 
 		},
 		async delete(ctx) {
 
-
-
-			var index = db.findIndex(a => a.id === ctx.params.id);
+			//! Arama
+			var index = db.findIndex(a => a.logToken === ctx.params.logToken);
 			if (index > -1) {
 				db.splice(index, 1);
 
-
-				// STEP 3: Json içine Verileri Yazıyor -> db
+				// Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/logs.json', JSON.stringify(db), err => {
 
-					// Checking for errocş
+					// Hata varsa
 					if (err) {
 						console.log(err)
 					}
 
-					console.log("Json writing"); // Success
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi"); // Success
 				});
 
-
-				//api
+				//! Return Api
 				ctx.params.title = "logs Silme"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 1
 				ctx.params.mesaj = "logs Silindi"
 
-
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Json Silme [ /api/logs/delete ] Silindi' + '\u001b[0m');
 
 			} else {
 
-				//api
+				//! Return Api
 				ctx.params.title = "logs Silme"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 0
 				ctx.params.mesaj = "logs Bulunmadı"
 
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ logs/:userId ]  logs Bulunamadı' + '\u001b[0m');
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Json Silme [ /api/logs/delete ] Silinemedi' + '\u001b[0m');
 			}
 
-			//console.log(sampleArray);
+			//! Return
+			delete ctx.params.logToken
 
+    		return ctx.params
 
-
-
-			//! ------------------
-
-			//console
-			console.log('\u001b[' + 32 + 'm' + 'Json Silme' + '\u001b[0m')
-
-
-
-
-
-			return ctx.params
-
-
-		},
-		async find_user(ctx) {
-
-			// ! Arama
-			const user = db.filter(u => u.userToken == ctx.params.userToken);
-
-			// Kullanıcı Varsa
-			if (user) {
-
-				//api
-				ctx.params.title = "Logs Araama"
-				ctx.params.tablo = "logs.json"
-				ctx.params.status = 1
-				ctx.params.size=user.length
-				ctx.params.data = user				
-
-
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ logs/:userId ]' + '\u001b[0m');
-
-			}
-
-			//! Kullanıcı Yoksa
-			else {
-				//api
-				//api
-				ctx.params.title = "logs Araama"
-				ctx.params.tablo = "logs.json"
-				ctx.params.status = 0
-				ctx.params.data = "Kullanıcı Bulunmadı"
-
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ logs/:userId ]  Kullanıcı Bulunamadı' + '\u001b[0m');
-
-			}
-
-
-			return ctx.params
 		}
 
 	}
