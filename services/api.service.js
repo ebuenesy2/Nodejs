@@ -59,7 +59,7 @@ module.exports = {
 			// http://localhost:3000
 			fastify.get('/', function (req, res) {		
 
-				console.log('Get Yapıldı - Anasayfa [ api-service.js ] - [ moleculer ]');			
+				console.log('Get Yapıldı - Anasayfa [ api-service.js ] - [  ]');			
 
 				res.send({
 
@@ -72,8 +72,23 @@ module.exports = {
 			// http://localhost:3000
 			fastify.get('/env', function (req, res) {
 				res.send({
-					title: 'env',
-					env: process.env.APi_URL
+					title: 'Env Bilgileri',
+					PORT: process.env.PORT,
+					API:
+					{
+						APi_URL: process.env.APi_URL,
+						APi_URL_Dev: process.env.APi_URL_Dev,
+						APi_URL_Local: process.env.APi_URL_Local,
+						APi_Title: process.env.APi_Title
+					},	
+					Version:
+					{
+						Version: process.env.Version,
+						Release_Date: process.env.Release_Date,
+						Version_Title: process.env.Version_Title,
+						Author: process.env.Author
+					}				
+				
 				});
 
 				console.log('Get Yapıldı - Anasayfa [ api-service.js ]');
