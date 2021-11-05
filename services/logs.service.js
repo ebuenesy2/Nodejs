@@ -9,8 +9,6 @@ const db = require('../public/DB/logs.json') //! Json
 module.exports = {
 	name: "logs",
 
-
-
 	actions: {
 		async info(ctx) {
 			ctx.params.title = "logs.service"
