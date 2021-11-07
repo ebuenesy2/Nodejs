@@ -116,7 +116,7 @@ module.exports = {
 			const dbFind = db.filter(u => u.userToken == ctx.params.userToken);
 
 			//! Veri Varsa
-			if (dbFind) {
+			if (dbFind.length > 0) {
 
 				//! Return Api
 				ctx.params.title = "logs.service -> Kullanıcı Arama"

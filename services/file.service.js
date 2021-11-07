@@ -111,6 +111,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "file.service -> Tüm Veriler"
+				ctx.params.tablo = "file.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
 				ctx.params.DB = db		
@@ -176,8 +177,8 @@ module.exports = {
 			// ! Arama
 			const dbFind = db.filter(u => u.userToken == ctx.params.userToken);
 
-			// Veri Varsa
-			if (dbFind) {
+			// ! Veri Varsa
+			if (dbFind.length > 0) {
 
 				//! Return Api   
 				ctx.params.title = "file.service -> Kullanıcı Arama"
@@ -340,8 +341,7 @@ module.exports = {
 				// Referans Veriler Güncelleme Yapıyor
 				Object.keys(ctx.params).forEach(key => {
 					dbFind[key] = ctx.params[key]
-				})
-				
+				})				
 
 				// Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/file.json', JSON.stringify(db), err => {
@@ -396,12 +396,11 @@ module.exports = {
 
 			//! Return
 			delete ctx.params.fileToken
-			delete ctx.params.userToken
-			delete ctx.params.token
+			delete ctx.params.userToken			
 
 			return ctx.params
 
-		},
+		},				
 		async delete(ctx) {
 		
 			//! Arama
@@ -780,6 +779,111 @@ module.exports = {
 			return ctx.params
 			
 		},
+		async updateFile(ctx) {
+		
+			//! -----------  File UPLOAD ----------------------------- 	
+			let file_upload = await ctx.call('file.upload', {
+				file: ctx.params.file,
+				role: ctx.params.role,
+				userToken: ctx.params.userToken,                  
+				usedPage: ctx.params.usedPage
+			})
+			
+			/*
+			//ctx.params.file_upload = file_upload
+			console.log('\u001b[' + 32 + 'm' + '---------- File Upload ----------' + '\u001b[0m') 
+
+			//console.log(file_upload)      
+			//console.log('\u001b[' + 32 + 'm' + 'file_upload Image Upload Url : '+ file_upload.uploadDir + '\u001b[0m')
+			//console.log('\u001b[' + 32 + 'm' + 'file_upload status : '+ file_upload.status + '\u001b[0m')
+			if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m'); }
+			if(file_upload.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m'); }
+
+			console.log('\u001b[' + 32 + 'm' + '---------- File Upload son ----------' + '\u001b[0m')     
+			*/  
+
+			//! ----------- End File UPLOAD ----------------------------- 	
+            
+			if(file_upload.status==1) {
+
+				//! -----------  File Delete ----------------------------- 	
+				let file_delete = await ctx.call('file.fileDeleteUrl', {
+					userToken: ctx.params.userToken,
+					fileUrl: ctx.params.old_fileUrl                 
+				})
+                
+				/*
+				//ctx.params.file_delete = file_delete  
+				console.log('\u001b[' + 32 + 'm' + '---------- File Delete ----------' + '\u001b[0m')  
+
+				//console.log(file_delete) 
+				if(file_delete.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Silinemedi' + '\u001b[0m'); }
+				if(file_delete.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Silindi' + '\u001b[0m'); }
+
+				console.log('\u001b[' + 32 + 'm' + '---------- File Delete Son -------' + '\u001b[0m')    
+				*/
+
+				//! ----------- End File Delete ----------------------------- 
+
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
+					userToken: ctx.params.userToken,
+					from: "file",
+					name: "file_update_successful",
+					description: "Dosya Güncelleme Başarılı"
+				})
+				
+				/*
+				//ctx.params.logs_add = logs_add  
+				console.log('\u001b[' + 32 + 'm' + '---------- Log  ----------' + '\u001b[0m')  
+
+				//Console Yazma
+				//console.log(logs_add) 
+				if(logs_add.status==0) { console.log('\u001b[' + 31 + 'm' + 'Log Verisi Kayıt Edilmedi' + '\u001b[0m'); }
+				if(logs_add.status==1) { console.log('\u001b[' + 32 + 'm' + 'Log Verisi Kayıt Edildi' + '\u001b[0m'); }
+
+				console.log('\u001b[' + 32 + 'm' + '---------- Log Son -------' + '\u001b[0m') 
+				*/
+
+				//! ----------- Log Son ----------------------------- 
+				
+		    }
+
+			//! ----------- Return ----------------------------- 
+			if(file_upload.status==1) {
+
+				//! Return Api	
+				ctx.params.title = "file.service -> Dosya Güncelleme"
+				ctx.params.tablo = "file.json"        
+				ctx.params.status = 1	
+				ctx.params.mesaj="Dosya Güncellendi"	
+				
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Dosya Güncelleme [ /api/file/updateFile ] Güncellendi' + '\u001b[0m');
+            }
+			else if(file_upload.status==0) {
+
+				//! Return Api	
+				ctx.params.title = "file.service -> Dosya Güncelleme"
+				ctx.params.tablo = "file.json"        
+				ctx.params.status = 0	
+				ctx.params.mesaj="Dosya Güncellenmedi"	
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Dosya Güncelleme [ /api/file/updateFile ] Güncellenmedi' + '\u001b[0m');
+            }
+			//! ----------- Return Son ------------------------- 
+			
+		     
+			//! Return Delete	
+			delete ctx.params.old_fileUrl			
+			delete ctx.params.file			
+			delete ctx.params.role
+			delete ctx.params.userToken
+			delete ctx.params.usedPage			
+			
+			return ctx.params				
+		},		
 		async fileDeleteUrl(ctx) {
 
 			//! Tanım
@@ -954,9 +1058,8 @@ module.exports = {
 			return ctx.params
 
 		},
-		async uploadUrl(ctx) {			
+		async uploadUrl(ctx) {	
 				
-
 			let APi_URL=process.env.APi_URL; //! Api
 			let status=0; //! status	
 			let fileData=""; //! File
@@ -1181,7 +1284,111 @@ module.exports = {
 			
 		    return ctx.params
 
+		},
+		async updateFileUrl(ctx) {
+		
+			//! -----------  File UPLOAD ----------------------------- 	
+			let file_upload = await ctx.call('file.uploadUrl', {
+				fileUrl: ctx.params.fileUrl,
+				role: ctx.params.role,
+				userToken: ctx.params.userToken,                  
+				usedPage: ctx.params.usedPage
+			})
+			
+			/*
+			ctx.params.file_upload = file_upload
+			console.log('\u001b[' + 32 + 'm' + '---------- File Upload ----------' + '\u001b[0m') 
+
+			console.log(file_upload)      
+			console.log('\u001b[' + 32 + 'm' + 'file_upload Image Upload Url : '+ file_upload.uploadDir + '\u001b[0m')
+			console.log('\u001b[' + 32 + 'm' + 'file_upload status : '+ file_upload.status + '\u001b[0m')
+			if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m'); }
+			if(file_upload.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m'); }
+
+			console.log('\u001b[' + 32 + 'm' + '---------- File Upload son ----------' + '\u001b[0m')    
+			*/		
+			//! ----------- End File UPLOAD ----------------------------- 	
+            
+			if(file_upload.status==1) {
+
+				//! -----------  File Delete ----------------------------- 	
+				let file_delete = await ctx.call('file.fileDeleteUrl', {
+					userToken: ctx.params.userToken,
+					fileUrl: ctx.params.old_fileUrl                 
+				})
+                
+				/*
+				//ctx.params.file_delete = file_delete  
+				console.log('\u001b[' + 32 + 'm' + '---------- File Delete ----------' + '\u001b[0m')  
+
+				//console.log(file_delete) 
+				if(file_delete.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Silinemedi' + '\u001b[0m'); }
+				if(file_delete.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Silindi' + '\u001b[0m'); }
+
+				console.log('\u001b[' + 32 + 'm' + '---------- File Delete Son -------' + '\u001b[0m')    
+				*/
+
+				//! ----------- End File Delete ----------------------------- 
+
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
+					userToken: ctx.params.userToken,
+					from: "file",
+					name: "file_update_successful",
+					description: "Dosya Güncelleme Başarılı"
+				})
+				
+				/*
+				//ctx.params.logs_add = logs_add  
+				console.log('\u001b[' + 32 + 'm' + '---------- Log  ----------' + '\u001b[0m')  
+
+				//Console Yazma
+				//console.log(logs_add) 
+				if(logs_add.status==0) { console.log('\u001b[' + 31 + 'm' + 'Log Verisi Kayıt Edilmedi' + '\u001b[0m'); }
+				if(logs_add.status==1) { console.log('\u001b[' + 32 + 'm' + 'Log Verisi Kayıt Edildi' + '\u001b[0m'); }
+
+				console.log('\u001b[' + 32 + 'm' + '---------- Log Son -------' + '\u001b[0m') 
+				*/
+
+				//! ----------- Log Son ----------------------------- 
+				
+		    }
+
+			//! ----------- Return ----------------------------- 
+			if(file_upload.status==1) {
+
+				//! Return Api	
+				ctx.params.title = "file.service -> Dosya Güncelleme"
+				ctx.params.tablo = "file.json"        
+				ctx.params.status = 1	
+				ctx.params.mesaj="Dosya Güncellendi"	
+				
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Dosya Güncelleme [ /api/file/updateFile ] Güncellendi' + '\u001b[0m');
+            }
+			else if(file_upload.status==0) {
+
+				//! Return Api	
+				ctx.params.title = "file.service -> Dosya Güncelleme"
+				ctx.params.tablo = "file.json"        
+				ctx.params.status = 0	
+				ctx.params.mesaj="Dosya Güncellenmedi"	
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Dosya Güncelleme [ /api/file/updateFile ] Güncellenmedi' + '\u001b[0m');
+            }
+			//! ----------- Return Son ------------------------- 
+			
+		     
+			//! Return Delete	
+			delete ctx.params.old_fileUrl			
+			delete ctx.params.fileUrl		
+			delete ctx.params.file			
+			delete ctx.params.role
+			delete ctx.params.userToken
+			delete ctx.params.usedPage			
+			
+			return ctx.params				
 		}	
-	
 	}
 }

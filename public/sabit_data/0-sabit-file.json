@@ -2,7 +2,7 @@
     {
         "id":1,    
         "role":"Admin",
-        "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTAzOTA4MzQ0OSwidG9rZW4iOiJ0b2tlbiBhZGQiLCJuYW1lIjoiZWJ1IGVuZXMiLCJzdXJuYW1lIjoiecSxbGTEsXLEsW0iLCJ1c2VySW1hZ2VVcmwiOm51bGwsInVzZXJuYW1lIjoiZWJ1ZW5lc3k0IiwiZW1haWwiOiJlYnVlbmVzeTRAaG90bWFpbC5jb20iLCJ0ZWwiOiJ0ZWxlZm9uIDQiLCJwYXNzd29yZCI6InBhc3N3b3JkIDQiLCJjcmVhdGVkX2F0IjoiMjAyMS0wOS0wN1QxODoyNDo0My40NDlaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDktMDdUMTg6MjQ6NDMuNDQ5WiJ9.vXQuEk4anlOhv47gu_O8LfRFDVSJQC9mM-fPUXGR08E",
+        "userToken": "userToken",
         "usedPage":"usedPage",
         "FileId":"FileId",
         "uploadDir":"uploadDir",
@@ -19,8 +19,8 @@
     {
         "id":2,      
         "role":"Admin",
-        "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTAzOTA4MzQ0OSwidG9rZW4iOiJ0b2tlbiBhZGQiLCJuYW1lIjoiZWJ1IGVuZXMiLCJzdXJuYW1lIjoiecSxbGTEsXLEsW0iLCJ1c2VySW1hZ2VVcmwiOm51bGwsInVzZXJuYW1lIjoiZWJ1ZW5lc3k0IiwiZW1haWwiOiJlYnVlbmVzeTRAaG90bWFpbC5jb20iLCJ0ZWwiOiJ0ZWxlZm9uIDQiLCJwYXNzd29yZCI6InBhc3N3b3JkIDQiLCJjcmVhdGVkX2F0IjoiMjAyMS0wOS0wN1QxODoyNDo0My40NDlaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDktMDdUMTg6MjQ6NDMuNDQ5WiJ9.vXQuEk4anlOhv47gu_O8LfRFDVSJQC9mM-fPUXGR08E",
-        "usedPage":"usedPage",      
+        "userToken": "userToken",
+        "usedPage":"usedPage",     
         "FileId":"FileId",
         "uploadDir":"uploadDir",
         "fileUrl":"FileUrl",
