@@ -11,6 +11,8 @@ module.exports = {
 
 	actions: {
 		async info(ctx) {
+
+			//! Return Api
 			ctx.params.title = "logs.service"
 			ctx.params.time = dayjs().toDate()
 			ctx.params.APi_URL = process.env.APi_URL
@@ -19,21 +21,55 @@ module.exports = {
 		},
 		async post(ctx) {
 
+			//! Return Api
 			ctx.params.createdAt = dayjs().toDate();
 			delete ctx.params.createdAt;
 
 			return ctx.params
 		},
+		async html(ctx) {
+		
+            ctx.meta.$responseType = "text/html";
+            return Buffer.from(`
+                    <html>
+                    <body>
+                        <h1>Hello API ebu enes!</h1>
+                        <p>Hello API ebu enes!</p>
+                    </body>
+                    </html>
+            `);
+			
+		},
 		async all(ctx) {
 
-			//JSON        
+			try {
 
-			ctx.params.title = "Logs -> Tüm Veriler"
-			ctx.params.time = dayjs().toDate()
-			ctx.params.size=db.length
-			ctx.params.DB = db
+				//! Return Api   
+				ctx.params.title = "logs.service -> Tüm Veriler"
+				ctx.params.status = 1
+				ctx.params.size=db.length
+				ctx.params.DB = db		
 
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Log Tüm Veriler Okundu [ /api/logs/all ] ' + '\u001b[0m');
+
+			} catch (error) {
+
+				//! Return Api   
+				ctx.params.title = "logs.service -> Tüm Veriler"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.DB = error
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Log Tüm Veriler Okunamadı [ /api/logs/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+			
+			}
+
+			//! Return
 			return ctx.params
+
 		},
 		async find(ctx) {
 
@@ -45,13 +81,13 @@ module.exports = {
 			if (dbFind) {
 
 				//! Return Api
-				ctx.params.title = "Logs Araama"
+				ctx.params.title = "logs.service -> Veri Arama"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 1
-				ctx.params.data_find = dbFind
+				ctx.params.DB = dbFind
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Json Arama [ /api/logs/:id ] Bulundu' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + 'Log Arama [ /api/logs/:id ] Bulundu' + '\u001b[0m');
 
 			}
 
@@ -59,16 +95,18 @@ module.exports = {
 			else {
 			
 				//! Return Api
-				ctx.params.title = "logs Arama"
+				ctx.params.title = "logs.service -> Veri Arama"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 0
-				ctx.params.data_find = "Log Bulunmadı"
+				ctx.params.DB = "Log Bulunmadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Json Arama [ /api/logs/:id ] Bulunamadı' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Log Arama [ /api/logs/:id ] Bulunamadı' + '\u001b[0m');
 
 			}
 
+			//! Return
+			delete ctx.params.id
 
 			return ctx.params
 		},
@@ -81,28 +119,28 @@ module.exports = {
 			if (dbFind) {
 
 				//! Return Api
-				ctx.params.title = "Logs Araama"
+				ctx.params.title = "logs.service -> Kullanıcı Arama"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=dbFind.length
-				ctx.params.data = dbFind		
+				ctx.params.DB = dbFind		
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Json Kullanıcı Arama [ /api/logs/find_user ] Bulundu' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + 'Log Kullanıcı Arama [ /api/logs/find_user ] Bulundu' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
 			else {
 
 				//! Return Api
-				ctx.params.title = "logs Araama"
+				ctx.params.title = "logs.service -> Kullanıcı Arama"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 0
 				ctx.params.size=0
-				ctx.params.data = "Kullanıcı Bulunmadı"
+				ctx.params.DB = "Kullanıcı Bulunmadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Json Kullanıcı Arama [ /api/logs/find_user ] Bulunamadı' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Log Kullanıcı Arama [ /api/logs/find_user ] Bulunamadı' + '\u001b[0m');
 			}
 
 			//! Return
@@ -158,29 +196,29 @@ module.exports = {
 					}
 					
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi"); // Success
+					console.log("Json Veri Kayıt Edildi -> Log"); // Success
 				});
 
 				//! Return Api
-				ctx.params.title = "logs Ekleme"
+				ctx.params.title = "logs.service -> Veri Ekleme"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 1
 				ctx.params.mesaj = "Veri Eklendi"				
 		    
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Json Ekleme [ /api/logs/add ] Eklendi' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + 'Log Ekleme [ /api/logs/add ] Eklendi' + '\u001b[0m');
 
 
 			} catch (error) {
 
 				//! Return Api
-				ctx.params.title = "logs Ekleme"
+				ctx.params.title = "logs.service -> Veri Ekleme"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 0
 				ctx.params.mesaj = error
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Json Ekleme [ /api/logs/add ] Eklenemedi' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Log Ekleme [ /api/logs/add ] Eklenemedi' + '\u001b[0m');
 
 			}
 
@@ -215,30 +253,30 @@ module.exports = {
 					}
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi"); // Success
+					console.log("Json Veri Kayıt Edildi -> Log"); // Success
 				});
 				
 				//! Return Api
-				ctx.params.title = "Logs Guncelleme"
+				ctx.params.title = "logs.service -> Veri Güncelleme"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 1
-				ctx.params.data = dbFind
+				ctx.params.DB = dbFind
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Json Güncelleme [ /api/logs/update ] Güncellendi' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + 'Log Güncelleme [ /api/logs/update ] Güncellendi' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
 			else {
 			
 				//! Return Api
-				ctx.params.title = "Logs Guncelleme"
+				ctx.params.title = "logs.service -> Veri Güncelleme"
 				ctx.params.tablo = "log.json"
 				ctx.params.status = 0
-				ctx.params.data = "logs Bulunmadı"
+				ctx.params.DB = "logs Bulunamadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Json Güncelleme [ /api/logs/update ] Güncellenemeddi' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Log Güncelleme [ /api/logs/update ] Güncellenemeddi' + '\u001b[0m');
 			}
 
 			//! Return
@@ -267,35 +305,34 @@ module.exports = {
 					}
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi"); // Success
+					console.log("Json Veri Kayıt Edildi -> Log"); // Success
 				});
 
 				//! Return Api
-				ctx.params.title = "logs Silme"
+				ctx.params.title = "logs.service -> Veri Silme"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 1
 				ctx.params.mesaj = "logs Silindi"
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Json Silme [ /api/logs/delete ] Silindi' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + 'Log Silme [ /api/logs/delete ] Silindi' + '\u001b[0m');
 
 			} else {
 
 				//! Return Api
-				ctx.params.title = "logs Silme"
+				ctx.params.title = "logs.service -> Veri Silme"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 0
 				ctx.params.mesaj = "logs Bulunmadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Json Silme [ /api/logs/delete ] Silinemedi' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Log Silme [ /api/logs/delete ] Silinemedi' + '\u001b[0m');
 			}
 
 			//! Return
 			delete ctx.params.logToken
 
     		return ctx.params
-
 		}
 
 	}

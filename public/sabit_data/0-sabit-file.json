@@ -1,7 +1,6 @@
 [
     {
-        "id":1,
-        "token":"token",
+        "id":1,    
         "role":"Admin",
         "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTAzOTA4MzQ0OSwidG9rZW4iOiJ0b2tlbiBhZGQiLCJuYW1lIjoiZWJ1IGVuZXMiLCJzdXJuYW1lIjoiecSxbGTEsXLEsW0iLCJ1c2VySW1hZ2VVcmwiOm51bGwsInVzZXJuYW1lIjoiZWJ1ZW5lc3k0IiwiZW1haWwiOiJlYnVlbmVzeTRAaG90bWFpbC5jb20iLCJ0ZWwiOiJ0ZWxlZm9uIDQiLCJwYXNzd29yZCI6InBhc3N3b3JkIDQiLCJjcmVhdGVkX2F0IjoiMjAyMS0wOS0wN1QxODoyNDo0My40NDlaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDktMDdUMTg6MjQ6NDMuNDQ5WiJ9.vXQuEk4anlOhv47gu_O8LfRFDVSJQC9mM-fPUXGR08E",
         "usedPage":"usedPage",
@@ -13,11 +12,12 @@
         "fileTypeSplit": "image",
         "fileOnlyName": "fileOnlyName",
         "fileExt": "fileExt",
-        "created_at": "2021-08-12T23:49:13.962Z"
+        "fileToken":"fileToken",
+        "created_at": "2021-08-12T23:49:13.962Z",
+        "updated_at": "2021-08-12T23:49:13.962Z"
     },
     {
-        "id":2,
-        "token":"token",
+        "id":2,      
         "role":"Admin",
         "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTAzOTA4MzQ0OSwidG9rZW4iOiJ0b2tlbiBhZGQiLCJuYW1lIjoiZWJ1IGVuZXMiLCJzdXJuYW1lIjoiecSxbGTEsXLEsW0iLCJ1c2VySW1hZ2VVcmwiOm51bGwsInVzZXJuYW1lIjoiZWJ1ZW5lc3k0IiwiZW1haWwiOiJlYnVlbmVzeTRAaG90bWFpbC5jb20iLCJ0ZWwiOiJ0ZWxlZm9uIDQiLCJwYXNzd29yZCI6InBhc3N3b3JkIDQiLCJjcmVhdGVkX2F0IjoiMjAyMS0wOS0wN1QxODoyNDo0My40NDlaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDktMDdUMTg6MjQ6NDMuNDQ5WiJ9.vXQuEk4anlOhv47gu_O8LfRFDVSJQC9mM-fPUXGR08E",
         "usedPage":"usedPage",      
@@ -29,6 +29,8 @@
         "fileTypeSplit": "image",
         "fileOnlyName": "fileOnlyName",
         "fileExt": "fileExt",
-        "created_at": "2021-08-12T23:49:13.962Z"
+        "fileToken":"fileToken2",
+        "created_at": "2021-08-12T23:49:13.962Z",
+        "updated_at": "2021-08-12T23:49:13.962Z"
      }
 ]

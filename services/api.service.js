@@ -159,33 +159,32 @@ module.exports = {
 			fastify.post('/api/logs/post', async (req, res) => this.broker.call("logs.post",{...req.body})) //! POST
 
 			fastify.get('/api/logs/info',async (req,res)=> this.broker.call("logs.info")) //! İnfo
-			fastify.get('/api/logs/all', async (req, res) => this.broker.call("logs.all")) //!All
+			fastify.get('/api/logs/all', async (req, res) => this.broker.call("logs.all")) //! All
 			fastify.get('/api/logs/:id', async (req, res) => this.broker.call("logs.find",{id: req.params.id})) //!Search
+			fastify.post('/api/logs/find_user', async (req, res) => this.broker.call("logs.find_user",{...req.body})) //! Search User	
+
 			fastify.post('/api/logs/add', async (req, res) => this.broker.call("logs.add",{...req.body})) //! CREATE
 			fastify.post('/api/logs/update', async (req, res) => this.broker.call("logs.update",{...req.body})) //! UPDATE
-			fastify.post('/api/logs/delete', async (req, res) => this.broker.call("logs.delete",{...req.body})) //! DELETE	
-
-			fastify.post('/api/logs/find_user', async (req, res) => this.broker.call("logs.find_user",{...req.body})) //! find_user
+			fastify.post('/api/logs/delete', async (req, res) => this.broker.call("logs.delete",{...req.body})) //! DELETE				
 
 		//!---------------- Logs son --------------------------------------------------------------------------------------------
 			
 		//!-------------  File --------------------------------------------------------------------------------------------------
 
 			fastify.get('/api/file/info',async (req,res)=> this.broker.call("file.info")) //! İnfo
-			fastify.get('/api/file/all', async (req, res) => this.broker.call("file.all")) //!All
-			fastify.get('/api/file/:id', async (req, res) => this.broker.call("file.find",{id: req.params.id})) //!Search
+			fastify.get('/api/file/all', async (req, res) => this.broker.call("file.all")) //! All
+			fastify.get('/api/file/html',async (req,res)=> this.broker.call("file.html")) //! Html
+			fastify.get('/api/file/:id', async (req, res) => this.broker.call("file.find",{id: req.params.id})) //! Search
+			fastify.post('/api/file/find_user', async (req, res) => this.broker.call("file.find_user",{...req.body})) //! Search User	
 			fastify.post('/api/file/add', async (req, res) => this.broker.call("file.add",{...req.body})) //! CREATE
 			fastify.post('/api/file/update', async (req, res) => this.broker.call("file.update",{...req.body})) //! UPDATE
-			fastify.post('/api/file/delete', async (req, res) => this.broker.call("file.delete",{...req.body})) //! DELETE
-
-			fastify.get('/api/file/html',async (req,res)=> this.broker.call("file.html")) //! Html
-			fastify.post('/api/file/find_user', async (req, res) => this.broker.call("file.find_user",{...req.body})) //! Search User			
+			fastify.post('/api/file/delete', async (req, res) => this.broker.call("file.delete",{...req.body})) //! DELETE			
+					
 			fastify.post('/api/file/getFile',async (req,res)=> this.broker.call("file.getFile",{...req.body})) //! File Info
 			fastify.post('/api/file/upload',async (req,res)=> this.broker.call("file.upload",{...req.body})) //! Upload
-			fastify.post('/api/file/fileDelete',async (req,res)=> this.broker.call("file.fileDelete",{...req.body})) //! DELETE FİLE
-
-			fastify.post('/api/file/getFileCurl',async (req,res)=> this.broker.call("file.getFileCurl",{...req.body})) //! cURLFile info 
-			fastify.post('/api/file/uploadCurl',async (req,res)=> this.broker.call("file.uploadCurl",{...req.body})) //! cURLFile Upload 
+			fastify.post('/api/file/fileDeleteUrl',async (req,res)=> this.broker.call("file.fileDeleteUrl",{...req.body})) //! URLFile DELETE
+			fastify.post('/api/file/getFileUrl',async (req,res)=> this.broker.call("file.getFileUrl",{...req.body})) //! URLFile Info 
+			fastify.post('/api/file/uploadUrl',async (req,res)=> this.broker.call("file.uploadUrl",{...req.body})) //! URLFile Upload 
 		
 		//!-------------  File --------------------------------------------------------------------------------------------------
 
@@ -194,8 +193,8 @@ module.exports = {
 
     		fastify.get('/api/user/info',async (req,res)=> this.broker.call("user.info")) //! İnfo
 			fastify.post('/api/user/post', async (req, res) => this.broker.call("user.post",{...req.body})) //! POST
-			fastify.get('/api/user/all', async (req, res) => this.broker.call("user.all")) //!All
-			fastify.get('/api/user/:id', async (req, res) => this.broker.call("user.find",{id: req.params.id})) //!Search
+			fastify.get('/api/user/all', async (req, res) => this.broker.call("user.all")) //! All
+			fastify.get('/api/user/:id', async (req, res) => this.broker.call("user.find",{id: req.params.id})) //! Search
 
 			fastify.post('/api/user/find_post', async	 (req, res) => this.broker.call("user.find_post",{...req.body})) //!  Search-Post
 			fastify.post('/api/user/find_token', async (req, res) => this.broker.call("user.find_token",{...req.body})) //!  Search-Token
