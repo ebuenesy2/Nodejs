@@ -1,1 +1,35 @@
-[{"id":1,"userToken":"userToken","from":"user guncelleme","fromToken":"fromToken guncelleme","name":"login_successful","description":"Başarılı Giriş Yapıldı","logToken":"logToken","created_at":"2021-09-05T04:23:07.780Z","updated_at":"2021-09-05T04:23:07.780Z"},{"id":2,"userToken":"userToken","from":"user","fromToken":"fromToken","name":"user_delete_successful","description":"Silme işlemi Başarılı","logToken":"logToken2","created_at":"2021-09-05T04:23:07.780Z","updated_at":"2021-09-05T04:23:07.780Z"},{"id":3,"userToken":"userToken","from":"user","fromToken":"fromToken","name":"user_update_successful","description":"Başarılı Güncelleme Yapıldı","logToken":"logToken3","created_at":"2021-09-05T04:23:07.780Z","updated_at":"2021-09-05T04:23:07.780Z"},{"id":1636317098860,"userToken":"userToken","from":"user","fromToken":"fromToken","name":"login_successful","description":"Başarılı Giriş Yapıldı","logToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzNjMxNzA5ODg2MCwidXNlclRva2VuIjoidXNlclRva2VuIiwiZnJvbSI6InVzZXIiLCJmcm9tVG9rZW4iOiJmcm9tVG9rZW4iLCJuYW1lIjoibG9naW5fc3VjY2Vzc2Z1bCIsImRlc2NyaXB0aW9uIjoiQmHFn2FyxLFsxLEgR2lyacWfIFlhcMSxbGTEsSIsImNyZWF0ZWRfYXQiOiIyMDIxLTExLTA3VDIwOjMxOjM4Ljg2MFoiLCJ1cGRhdGVkX2F0IjoiMjAyMS0xMS0wN1QyMDozMTozOC44NjBaIn0.wHoaQd5sF7M8vM7479ciiXLv0OzgmPC-6_LBwisw0cs","created_at":"2021-11-07T20:31:38.860Z","updated_at":"2021-11-07T20:31:38.860Z"}]
+[
+    {
+        "id": 1,       
+        "userToken": "userToken",
+        "from":"user",
+        "fromToken":"fromToken",
+        "name": "user_add_successful",
+        "description": "Başarılı Kayıt Yapıldı",
+        "logToken":"logToken",
+        "created_at": "2021-09-05T04:23:07.780Z",
+        "updated_at": "2021-09-05T04:23:07.780Z"
+    },
+    {
+        "id": 2,      
+        "userToken": "userToken",
+        "from":"user",
+        "fromToken":"fromToken",
+        "name": "user_delete_successful",
+        "description": "Silme işlemi Başarılı",
+        "logToken":"logToken2",
+        "created_at": "2021-09-05T04:23:07.780Z",
+        "updated_at": "2021-09-05T04:23:07.780Z"
+    },
+    {
+        "id": 3,      
+        "userToken": "userToken",
+        "from":"user",
+        "fromToken":"fromToken",
+        "name": "user_update_successful",
+        "description": "Başarılı Güncelleme Yapıldı",
+        "logToken":"logToken3",
+        "created_at": "2021-09-05T04:23:07.780Z",
+        "updated_at": "2021-09-05T04:23:07.780Z"
+    }
+]
