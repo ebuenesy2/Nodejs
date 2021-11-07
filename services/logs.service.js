@@ -148,6 +148,44 @@ module.exports = {
 
 			return ctx.params
 		},
+		async find_fromToken(ctx) {
+
+			// ! Arama
+			const dbFind = db.filter(u => u.fromToken == ctx.params.fromToken);
+
+			//! Veri Varsa
+			if (dbFind.length > 0) {
+
+				//! Return Api
+				ctx.params.title = "logs.service -> FromToken Arama"
+				ctx.params.tablo = "logs.json"
+				ctx.params.status = 1
+				ctx.params.size=dbFind.length
+				ctx.params.DB = dbFind		
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Log FromToken Arama [ /api/logs/find_fromToken ] Bulundu' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+
+				//! Return Api
+				ctx.params.title = "logs.service -> FromToken Arama"
+				ctx.params.tablo = "logs.json"
+				ctx.params.status = 0
+				ctx.params.size=0
+				ctx.params.DB = "FromToken Bulunmadı"
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Log FromToken Arama [ /api/logs/find_fromToken ] Bulunamadı' + '\u001b[0m');
+			}
+
+			//! Return
+			delete ctx.params.userToken
+
+			return ctx.params
+		},
 		async add(ctx) {	
 			
 			try {
@@ -160,6 +198,7 @@ module.exports = {
 					id: TokenId,
 					userToken: ctx.params.userToken,
 					from: ctx.params.from,
+					fromToken: ctx.params.fromToken,
 					name: ctx.params.name,
 					description: ctx.params.description,
 					created_at: CreateDate,
@@ -176,6 +215,7 @@ module.exports = {
 					id: TokenId,			
 					userToken: ctx.params.userToken,
 					from: ctx.params.from,
+					fromToken: ctx.params.fromToken,
 					name: ctx.params.name,
 					description: ctx.params.description,
 					logToken:jwt,	
@@ -225,6 +265,7 @@ module.exports = {
 			//! Return
 			delete ctx.params.userToken
 			delete ctx.params.from
+			delete ctx.params.fromToken
 			delete ctx.params.name
 			delete ctx.params.description
 
@@ -283,6 +324,7 @@ module.exports = {
 			delete ctx.params.logToken
 			delete ctx.params.userToken
 			delete ctx.params.from
+			delete ctx.params.fromToken
 			delete ctx.params.name
 			delete ctx.params.description
 
