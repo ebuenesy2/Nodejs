@@ -1,7 +1,6 @@
 [
     {
-        "id": 1,
-        "token": "NbB4otrKDhAKK6CyRJeSoNUDDFqE0f9cYFrn2S9h",
+        "id": 1,        
         "role":"User",
         "name": "name 1",
         "surname": "surname 1",
@@ -18,8 +17,7 @@
         "updated_at": "2021-08-23T07:50:55.133Z"
     },
     {
-        "id": 3,
-        "token": "NbB4otrKDhAKK6CyRJeSoNUDDFqE0f9cYFrn2S9h",
+        "id": 3,     
         "role":"User",
         "name": "name 3",
         "surname": "surname 3",
@@ -36,8 +34,7 @@
         "updated_at": "2021-08-23T07:50:55.133Z"
     },
     {
-        "id": 1631039083449,
-        "token": "token add",
+        "id": 1631039083449,       
         "role":"User",
         "name": "ebu enes",
         "surname": "yıldırım",

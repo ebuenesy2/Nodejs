@@ -156,10 +156,11 @@ module.exports = {
 
 		//!-------------  Logs -----------------------------------------------------------------------------------------
 
+		    fastify.get('/api/logs/info',async (req,res)=> this.broker.call("logs.info")) //! İnfo			
 			fastify.post('/api/logs/post', async (req, res) => this.broker.call("logs.post",{...req.body})) //! POST
-
-			fastify.get('/api/logs/info',async (req,res)=> this.broker.call("logs.info")) //! İnfo
+			fastify.get('/api/logs/html',async (req,res)=> this.broker.call("logs.html")) //! Html
 			fastify.get('/api/logs/all', async (req, res) => this.broker.call("logs.all")) //! All
+
 			fastify.get('/api/logs/:id', async (req, res) => this.broker.call("logs.find",{id: req.params.id})) //!Search
 			fastify.post('/api/logs/find_user', async (req, res) => this.broker.call("logs.find_user",{...req.body})) //! Search User	
 			fastify.post('/api/logs/find_fromToken', async (req, res) => this.broker.call("logs.find_fromToken",{...req.body})) //! Search User	
@@ -173,9 +174,13 @@ module.exports = {
 		//!-------------  File --------------------------------------------------------------------------------------------------
 
 			fastify.get('/api/file/info',async (req,res)=> this.broker.call("file.info")) //! İnfo
-			fastify.get('/api/file/all', async (req, res) => this.broker.call("file.all")) //! All
+			fastify.post('/api/file/post', async (req, res) => this.broker.call("file.post",{...req.body})) //! POST
 			fastify.get('/api/file/html',async (req,res)=> this.broker.call("file.html")) //! Html
+			fastify.get('/api/file/all', async (req, res) => this.broker.call("file.all")) //! All
+
 			fastify.get('/api/file/:id', async (req, res) => this.broker.call("file.find",{id: req.params.id})) //! Search
+			fastify.post('/api/file/find_post', async	 (req, res) => this.broker.call("file.find_post",{...req.body})) //!  Search-Post
+			fastify.post('/api/file/find_token', async (req, res) => this.broker.call("file.find_token",{...req.body})) //!  Search-Token
 			fastify.post('/api/file/find_user', async (req, res) => this.broker.call("file.find_user",{...req.body})) //! Search User	
 			fastify.post('/api/file/add', async (req, res) => this.broker.call("file.add",{...req.body})) //! CREATE
 			fastify.post('/api/file/update', async (req, res) => this.broker.call("file.update",{...req.body})) //! UPDATE
@@ -196,9 +201,10 @@ module.exports = {
 
     		fastify.get('/api/user/info',async (req,res)=> this.broker.call("user.info")) //! İnfo
 			fastify.post('/api/user/post', async (req, res) => this.broker.call("user.post",{...req.body})) //! POST
+			fastify.get('/api/user/html',async (req,res)=> this.broker.call("user.html")) //! Html
 			fastify.get('/api/user/all', async (req, res) => this.broker.call("user.all")) //! All
+			
 			fastify.get('/api/user/:id', async (req, res) => this.broker.call("user.find",{id: req.params.id})) //! Search
-
 			fastify.post('/api/user/find_post', async	 (req, res) => this.broker.call("user.find_post",{...req.body})) //!  Search-Post
 			fastify.post('/api/user/find_token', async (req, res) => this.broker.call("user.find_token",{...req.body})) //!  Search-Token
 			fastify.post('/api/user/add', async (req, res) => this.broker.call("user.add",{...req.body})) //! CREATE

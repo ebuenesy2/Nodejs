@@ -46,6 +46,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "logs.service -> Tüm Veriler"
+				ctx.params.tablo = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
 				ctx.params.DB = db		
@@ -57,6 +58,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "logs.service -> Tüm Veriler"
+				ctx.params.tablo = "logs.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
 				ctx.params.DB = error
@@ -283,7 +285,9 @@ module.exports = {
 				// Referans Veriler Güncelleme Yapıyor
 				Object.keys(ctx.params).forEach(key => {
 					dbFind[key] = ctx.params[key]
-				})
+				})				
+				dbFind["updated_at"] = new Date()
+				// End  Referans Veriler Güncelleme Yapıyor
 
 				// Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/logs.json', JSON.stringify(db), err => {
@@ -296,6 +300,7 @@ module.exports = {
 					//Console Yazma
 					console.log("Json Veri Kayıt Edildi -> Log"); // Success
 				});
+				// End Json içine Verileri Yazıyor -> db
 				
 				//! Return Api
 				ctx.params.title = "logs.service -> Veri Güncelleme"
@@ -347,7 +352,7 @@ module.exports = {
 					}
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi -> Log"); // Success
+					console.log("Json Veri Kayıt Silindi -> Log"); // Success
 				});
 
 				//! Return Api

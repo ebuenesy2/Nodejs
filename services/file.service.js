@@ -123,6 +123,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "file.service -> Tüm Veriler"
+				ctx.params.tablo = "file.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
 				ctx.params.DB = error
@@ -169,6 +170,78 @@ module.exports = {
 
 			//! Return
 			delete ctx.params.id
+
+			return ctx.params
+		},
+		async find_post(ctx) {
+
+			//! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);
+
+			//! Veri Varsa
+			if (dbFind) {
+
+				//! Return Api   
+				ctx.params.title = "file.service -> Veri Arama"
+				ctx.params.tablo = "file.json"
+				ctx.params.status = 1
+				ctx.params.DB = dbFind
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'File Veri Arama [ /api/file/find_post ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "file.service -> Veri Arama"
+				ctx.params.tablo = "file.json"
+				ctx.params.status = 0
+				ctx.params.DB = "Dosya Bulunamadı"
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'File Veri Bulunamadı [ /api/file/find_post ] ' + '\u001b[0m');		
+			}
+
+			//! Return
+			delete ctx.params.id
+
+			return ctx.params
+		},
+		async find_token(ctx) {
+
+			//! Arama
+			const dbFind = db.find(u => u.fileToken == ctx.params.fileToken);	
+
+			//! Veri Varsa
+			if (dbFind) {
+
+				//! Return Api   
+				ctx.params.title = "file.service -> Veri Arama"
+				ctx.params.tablo = "file.json"
+				ctx.params.status = 1
+				ctx.params.DB = dbFind
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'File Veri Arama [ /api/file/find_token ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "file.service -> Veri Arama"
+				ctx.params.tablo = "file.json"
+				ctx.params.status = 0
+				ctx.params.DB = "Veri Bulunamadı"
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'File Veri Bulunamadı [ /api/file/find_token ] ' + '\u001b[0m');		
+			}
+
+			//! Return
+			delete ctx.params.fileToken
 
 			return ctx.params
 		},
@@ -339,7 +412,9 @@ module.exports = {
 				// Referans Veriler Güncelleme Yapıyor
 				Object.keys(ctx.params).forEach(key => {
 					dbFind[key] = ctx.params[key]
-				})				
+				})		
+				dbFind["updated_at"] = new Date()
+				// End  Referans Veriler Güncelleme Yapıyor		
 
 				// Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/file.json', JSON.stringify(db), err => {
@@ -352,6 +427,7 @@ module.exports = {
 					//Console Yazma
 					console.log("Json Veri Kayıt Edildi -> File"); // Success
 				});
+				// End Json içine Verileri Yazıyor -> db
 			
 
 				//! ----------- Log ----------------------------- 	
@@ -412,7 +488,7 @@ module.exports = {
 					}
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi -> Log"); // Success
+					console.log("Json Veri Kayıt Silindi -> File"); // Success
 				});
 
 				

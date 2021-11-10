@@ -1,1 +1,53 @@
-[{"id":1,"token":"token","role":"User","name":"name güncelleme","surname":"surname 1","userImageUrl":"http://localhost:3001///upload//img//1636056651634.jpg","userImageUploadUrl":"C:\\ENES\\Githup\\Nodejs\\public\\upload\\img\\1636056651634.jpg","coverImageUrl":"http://localhost:3001///upload//img//1636056651669.jpg","coverImageUploadUrl":"C:\\ENES\\Githup\\Nodejs\\public\\upload\\img\\1636056651669.jpg","username":"username","email":"enes1@gmail.com","tel":"tel","password":"123","userToken":"userToken","created_at":"2021-06-18 16:22:38","updated_at":"2021-11-04T20:10:51.687Z"},{"id":3,"token":"NbB4otrKDhAKK6CyRJeSoNUDDFqE0f9cYFrn2S9h","role":"User","name":"name 3","surname":"surname 3","userImageUrl":"https://www.wpdurum.com/uploads/thumbs/en-guzel-kiz-profil-resimleri-indirdur.jpg","userImageUploadUrl":"userImageUploadUrl","coverImageUrl":null,"coverImageUploadUrl":"coverImageUploadUrl","username":"username3","email":"enes3@gmail.com","tel":"tel3","password":"123","userToken":"userToken2","created_at":"2021-06-18 16:22:38","updated_at":"2021-08-23T07:50:55.133Z"},{"id":1631039083449,"token":"token add","role":"User","name":"ebu enes","surname":"yıldırım","userImageUrl":null,"userImageUploadUrl":"userImageUploadUrl","coverImageUrl":null,"coverImageUploadUrl":"coverImageUploadUrl","username":"ebuenesy4","email":"ebuenesy4@hotmail.com","tel":"telefon 4","password":"password 4","userToken":"userToken2","created_at":"2021-09-07T18:24:43.449Z","updated_at":"2021-09-07T18:24:43.449Z"}]
+[
+    {
+        "id": 1,        
+        "role":"User",
+        "name": "name 1",
+        "surname": "surname 1",
+        "userImageUrl": "https://www.wpdurum.com/uploads/thumbs/en-guzel-kiz-profil-resimleri-indirdur.jpg",
+        "userImageUploadUrl": "userImageUploadUrl",
+        "coverImageUrl": null,
+        "coverImageUploadUrl": "coverImageUploadUrl",
+        "username": "username",
+        "email": "enes1@gmail.com",
+        "tel":"tel",
+        "password": "123",    
+        "userToken":"userToken",  
+        "created_at": "2021-06-18 16:22:38",
+        "updated_at": "2021-08-23T07:50:55.133Z"
+    },
+    {
+        "id": 3,     
+        "role":"User",
+        "name": "name 3",
+        "surname": "surname 3",
+        "userImageUrl": "https://www.wpdurum.com/uploads/thumbs/en-guzel-kiz-profil-resimleri-indirdur.jpg",
+        "userImageUploadUrl": "userImageUploadUrl",
+        "coverImageUrl": null,
+        "coverImageUploadUrl": "coverImageUploadUrl",
+        "username": "username3",
+        "email": "enes3@gmail.com",
+        "tel":"tel3",
+        "password": "123",    
+        "userToken":"userToken2",  
+        "created_at": "2021-06-18 16:22:38",
+        "updated_at": "2021-08-23T07:50:55.133Z"
+    },
+    {
+        "id": 1631039083449,       
+        "role":"User",
+        "name": "ebu enes",
+        "surname": "yıldırım",
+        "userImageUrl": null,
+        "userImageUploadUrl": "userImageUploadUrl",
+        "coverImageUrl": null,
+        "coverImageUploadUrl": "coverImageUploadUrl",
+        "username": "ebuenesy4",
+        "email": "ebuenesy4@hotmail.com",
+        "tel": "telefon 4",
+        "password": "password 4",
+        "userToken":"userToken2",  
+        "created_at": "2021-09-07T18:24:43.449Z",
+        "updated_at": "2021-09-07T18:24:43.449Z"      
+    }
+]
