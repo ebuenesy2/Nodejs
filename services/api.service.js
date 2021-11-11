@@ -2,18 +2,20 @@
 const dayjs = require('dayjs'); // ! Zaman
 const dotenv = require('dotenv'); // ! env
 dotenv.config(); // ! env
-const sign = require('jwt-encode'); //! Token
-const jwt_decode = require('jwt-decode'); //! Token
+const sign = require('jwt-encode'); //! Token - Encode
+const jwt_decode = require('jwt-decode'); //! Token - Decode
 const fs = require("fs"); //! Dosya
 const path = require("path"); //! Dosya
-const mkdir = require("mkdirp").sync; //! Dosya
-const mime = require("mime-types"); //! Dosya
+const mkdir = require("mkdirp").sync; //! Dosya-Klasor
+const mime = require("mime-types"); //! Dosya-Bilgileri
 const sharp = require('sharp');  //! Dosya Yükleme
-const fastifyPlugin = require('fastify-plugin'); // ! Fastify
+const fastifyPlugin = require('fastify-plugin'); // ! Fastify-plugin
 const fastify = require('fastify')({logger: false}); // ! Fastify
-fastify.register(require('fastify-formbody')) // ! Fastify
+fastify.register(require('fastify-formbody')) // ! Fastify-formbody
 this.fastify = fastify; // ! Fastify
 const fastifyStatic = require('fastify-static')  // ! Fastify-static
+fastify.register(require('fastify-cors'), { })  // ! Fastify-cors
+
 
 
 //! File
