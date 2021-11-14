@@ -1,7 +1,6 @@
 [
     {
-        "id": 1,
-        "token": "NbB4otrKDhAKK6CyRJeSoNUDDFqE0f9cYFrn2S9h",
+        "id": 1,        
         "role":"Admin",
         "name": "name 1",
         "surname": "surname 1",
@@ -13,13 +12,15 @@
         "email": "enes1@gmail.com",
         "tel":"tel",
         "password": "123",    
-        "userToken":"userToken",  
+        "userToken":"userToken", 
+        "OnlineStatus":0,
+        "OnlineLastLogin_At":"2021-06-18 16:22:38",
+        "OnlineLastLoginout_At":"2021-06-18 16:22:38",
         "created_at": "2021-06-18 16:22:38",
         "updated_at": "2021-08-23T07:50:55.133Z"
     },
     {
-        "id": 3,
-        "token": "NbB4otrKDhAKK6CyRJeSoNUDDFqE0f9cYFrn2S9h",
+        "id": 3,     
         "role":"Admin",
         "name": "name 3",
         "surname": "surname 3",
@@ -31,8 +32,31 @@
         "email": "enes3@gmail.com",
         "tel":"tel3",
         "password": "123",    
-        "userToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTE4NDg0NzE2NywidG9rZW4iOiJ0b2tlbiBhZGQiLCJuYW1lIjoiZWJ1IGVuZXMgMyIsInN1cm5hbWUiOiJ5xLFsZMSxcsSxbSAzIiwidXNlckltYWdlVXJsIjpudWxsLCJ1c2VybmFtZSI6ImVidWVuZXN5MyIsImVtYWlsIjoiZW5lczNAZ21haWwuY29tIiwidGVsIjoidGVsZWZvbiAzIiwicGFzc3dvcmQiOiJwYXNzd29yZCAzIiwiY3JlYXRlZF9hdCI6IjIwMjEtMDktMDlUMTA6NTQ6MDcuMTY3WiIsInVwZGF0ZWRfYXQiOiIyMDIxLTA5LTA5VDEwOjU0OjA3LjE2N1oifQ.tLS6nWVJW4xtoTq2c59sqCjucDC1eYVWY-LvA4mnGE4",     
+        "userToken":"userToken2", 
+        "OnlineStatus":0,
+        "OnlineLastLogin_At":"2021-06-18 16:22:38",
+        "OnlineLastLoginout_At":"2021-06-18 16:22:38",
         "created_at": "2021-06-18 16:22:38",
         "updated_at": "2021-08-23T07:50:55.133Z"
+    },
+    {
+        "id": 1631039083449,       
+        "role":"Admin",
+        "name": "ebu enes",
+        "surname": "yıldırım",
+        "userImageUrl": null,
+        "userImageUploadUrl": "userImageUploadUrl",
+        "coverImageUrl": null,
+        "coverImageUploadUrl": "coverImageUploadUrl",
+        "username": "ebuenesy4",
+        "email": "ebuenesy4@hotmail.com",
+        "tel": "telefon 4",
+        "password": "password 4",
+        "userToken":"userToken3",  
+        "OnlineStatus":0,
+        "OnlineLastLogin_At":"2021-06-18 16:22:38",
+        "OnlineLastLoginout_At":"2021-06-18 16:22:38",
+        "created_at": "2021-09-07T18:24:43.449Z",
+        "updated_at": "2021-09-07T18:24:43.449Z"      
     }
 ]

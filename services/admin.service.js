@@ -11,222 +11,267 @@ module.exports = {
 
 	actions: {
 		async info(ctx) {
+		
+			//! Return Api
 			ctx.params.title = "admin.service"
 			ctx.params.time = dayjs().toDate()
-			ctx.params.APi_URL = process.env.APi_URL
+			ctx.params.APi_URL=process.env.APi_URL
 
 			return ctx.params
+
 		},
 		async post(ctx) {
 
+			//! Return Api
 			ctx.params.createdAt = dayjs().toDate();
 			delete ctx.params.createdAt;
 
 			return ctx.params
 		},
+		async html(ctx) {
+		
+            ctx.meta.$responseType = "text/html";
+            return Buffer.from(`
+                    <html>
+                    <body>
+                        <h1>Hello API ebu enes!</h1>
+                        <img src="/api/file.image" />
+                    </body>
+                    </html>
+            `);
+			
+		},
 		async all(ctx) {
 
-			//JSON        
+			try {
 
-			ctx.params.title = "Admin Tüm Veriler"
-			ctx.params.time = dayjs().toDate()
-			ctx.params.size=db.length
-			ctx.params.DB = db
+				//! Return Api   
+				ctx.params.title = "admin.service -> Tüm Veriler"
+				ctx.params.tablo = "admin.json"
+				ctx.params.status = 1
+				ctx.params.size=db.length
+				ctx.params.DB = db		
 
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Admin Tüm Veriler Okundu [ /api/admin/all ] ' + '\u001b[0m');
+
+			} catch (error) {
+
+				//! Return Api   
+				ctx.params.title = "admin.service -> Tüm Veriler"
+				ctx.params.tablo = "admin.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.DB = error
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Admin Tüm Veriler Okunamadı [ /api/admin/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+			
+			}
+
+			//! Return
 			return ctx.params
 		},
 		async find(ctx) {
 
+			//! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);
 
-			// ! Arama
-			const user = db.find(u => u.id == ctx.params.id);	
+			//! Veri Varsa
+			if (dbFind) {
 
-			// Kullanıcı Varsa
-			if (user) {
-
-				let user_logs = await ctx.call('logs.find_user', {
-					email: user.email
-				})
-
-
-				//api
-				ctx.params.title = "Admin Arama"
+				//! Return Api   
+				ctx.params.title = "admin.service -> Veri Arama"
 				ctx.params.tablo = "admin.json"
 				ctx.params.status = 1
-				ctx.params.data_user = user
-				//ctx.params.data_user_logs = user_logs
+				ctx.params.DB = dbFind
 
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ admin/:userId ]' + '\u001b[0m');
-
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Admin Veri Arama [ /admin/user/find ] ' + '\u001b[0m');
 			}
 
-			//! Kullanıcı Yoksa
+			//! Veri Yoksa
 			else {
-				//api
-				//api
-				ctx.params.title = "Admin Araama"
+				
+				//! Return Api   
+				ctx.params.title = "admin.service -> Veri Arama"
 				ctx.params.tablo = "admin.json"
 				ctx.params.status = 0
-				ctx.params.data_user = "Admin Bulunmadı"
-				ctx.params.data_user_logs = ""
-			
+				ctx.params.DB = "Veri Bulunamadı"
 
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ admin/:userId ]  Admin Bulunamadı' + '\u001b[0m');
-
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Admin Veri Bulunamadı [ /api/admin/find ] ' + '\u001b[0m');		
 			}
 
+			//! Return
+			delete ctx.params.id
 
 			return ctx.params
 		},
-		async find_user(ctx) {
+		async find_post(ctx) {
 
-			// ! Arama
-			const user = db.find(u => u.id == ctx.params.user_id);
+			//! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);
 
-			// Admin Varsa
-			if (user) {
+			//! Veri Varsa
+			if (dbFind) {
 
-
-				//api
-				ctx.params.title = "Admin Arama"
+				//! Return Api   
+				ctx.params.title = "admin.service -> Veri Arama"
 				ctx.params.tablo = "admin.json"
 				ctx.params.status = 1
-				ctx.params.data_user = user
+				ctx.params.DB = dbFind
 
-
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ admin/:userId ]' + '\u001b[0m');
-
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Admin Veri Arama [ /api/admin/find_post ] ' + '\u001b[0m');
 			}
 
-			//! Admin Yoksa
+			//! Veri Yoksa
 			else {
-			
-				//api
-				ctx.params.title = "Admin Araama"
+				
+				//! Return Api   
+				ctx.params.title = "admin.service -> Veri Arama"
 				ctx.params.tablo = "admin.json"
 				ctx.params.status = 0
-				ctx.params.data_user = "Admin Bulunmadı"
+				ctx.params.DB = "Veri Bulunamadı"
 
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ admin/:userId ]  Admin Bulunamadı' + '\u001b[0m');
-
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Admin Veri Bulunamadı [ /api/admin/find_post ] ' + '\u001b[0m');		
 			}
 
+			//! Return
+			delete ctx.params.id
 
 			return ctx.params
 		},
 		async find_token(ctx) {
 
-			// ! Arama
-			const user = db.find(u => u.userToken == ctx.params.userToken);
+			//! Arama
+			const dbFind = db.find(u => u.userToken == ctx.params.userToken);	
 
+			//! Veri Varsa
+			if (dbFind) {
 
-
-			// Admin Varsa
-			if (user) {
-
-				//api
-				ctx.params.title = "Admin Arama"
-				ctx.params.tablo = "admin.json"
+				//! Return Api   
+				ctx.params.title = "user.service -> Veri Arama"
+				ctx.params.tablo = "user.json"
 				ctx.params.status = 1
-				ctx.params.data_user = user
+				ctx.params.DB = dbFind
 
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ admin/:userId ]' + '\u001b[0m');
-
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Kullanıcı Veri Arama [ /api/user/find_token ] ' + '\u001b[0m');
 			}
 
-			//! Admin Yoksa
+			//! Veri Yoksa
 			else {
 				
-				//api
-				ctx.params.title = "Admin Araama"
-				ctx.params.tablo = "admin.json"
+				//! Return Api   
+				ctx.params.title = "user.service -> Veri Arama"
+				ctx.params.tablo = "user.json"
 				ctx.params.status = 0
-				ctx.params.data_user = "Admin Bulunmadı"
+				ctx.params.DB = "Veri Bulunamadı"
 
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ admin/:userId ]  Admin Bulunamadı' + '\u001b[0m');
-
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Kullanıcı Veri Bulunamadı [ /api/user/find_token ] ' + '\u001b[0m');		
 			}
 
+			//! Return
+			delete ctx.params.userToken
 
 			return ctx.params
 		},
 		async add(ctx) {
-
 	
 			try {
 
-				    //! Is there error
+				    //! Sabit
 				    let error_check=0;    
+				    let status=0;    
+				    let mesaj="";    
 
 					// ! Find
 					const user_email = db.find(u => u.email == ctx.params.email);
 					const user_username = db.find(u => u.username == ctx.params.username);
 					const user_tel = db.find(u => u.tel == ctx.params.tel);
 
-					//! Api
-					ctx.params.title = "Admin Ekleme"
-					ctx.params.tablo = "admin.json"
-					ctx.params.status = 1
-					ctx.params.mesaj = "Admin Eklendi"
-
 					//! email check
 					if(user_email) {
 						error_check=1
-						ctx.params.status = 0
-						ctx.params.mesaj = "Bu Email Kayıtlıdır."			
+						status = 0
+						mesaj = "Bu Email Kayıtlıdır."			
 					}
 
 					//! email check
 					if(ctx.params.email==""||ctx.params.email==null) {
 						error_check=1
-						ctx.params.status = 0
-						ctx.params.mesaj = "Email Boş Geçiremez."						
+						status = 0
+						mesaj = "Email Boş Geçiremez."						
 					}
 
 					//! username check
 					if(user_username) {
 						error_check=1
-						ctx.params.status = 0
-						ctx.params.mesaj = "Bu Kullanıcı Adı [ username ] Kayıtlıdır."			
+						status = 0
+						mesaj = "Bu Kullanıcı Adı [ username ] Kayıtlıdır."			
 					}
 
 					//! username check
 					if(ctx.params.username==""||ctx.params.username==null) {
 						error_check=1
-						ctx.params.status = 0
-						ctx.params.mesaj = "Kullanıcı Adı [ username ] Boş Geçiremez."						
+						status = 0
+						mesaj = "Kullanıcı Adı [ username ] Boş Geçiremez."						
 					}
 
 					
 					//! tel check
 					if(user_tel) {
 						error_check=1
-						ctx.params.status = 0
-						ctx.params.mesaj = "Bu Telefon Numarası [ tel ] Kayıtlıdır."			
+						status = 0
+						mesaj = "Bu Telefon Numarası [ tel ] Kayıtlıdır."			
 					}
 
 					//! username check
-					if(ctx.params.tel==""||ctx.params.username==null) {
+					if(ctx.params.tel==""||ctx.params.tel==null) {
 						error_check=1
-						ctx.params.status = 0
-						ctx.params.mesaj = "Bu Telefon Numarası [ tel ] Kayıtlıdır."					
+						status = 0
+						mesaj = "Bu Telefon Numarası [ tel ] Kayıtlıdır."					
 					}
                     
 					
 					if(error_check==0) {
 
-						    
-					
+							//! Ortak
+							let TokenId=new Date().getTime();
+							let DateNow=new Date();
+
+							let TokenInfo={				
+								id: TokenId,
+								role:"Admin",	
+								name: ctx.params.name,
+								surname: ctx.params.surname,
+								userImageUrl: null,
+								userImageUploadUrl: null,
+								coverImageUrl: null,
+								coverImageUploadUrl: null,
+								username: ctx.params.username,
+								email: ctx.params.email,
+								tel: ctx.params.tel,
+								password: ctx.params.password,														
+								created_at: DateNow,
+								updated_at: DateNow
+							}
+
+							
+							const secret = 'secret';
+							const data = TokenInfo;
+							const jwt = sign(data, secret);		
+							//! End Token				
+				
+						
 							//! Eklenecek veriler
 							const willSaveData = {
-								id: new Date().getTime(),
-								token: ctx.params.token,
+								id: TokenId,							
 								role:"Admin",
 								name: ctx.params.name,
 								surname: ctx.params.surname,
@@ -237,97 +282,90 @@ module.exports = {
 								username: ctx.params.username,
 								email: ctx.params.email,
 								tel: ctx.params.tel,
-								password: ctx.params.password,
-								userToken:"userToken g",									
-								created_at: new Date(),
-								updated_at: new Date()
-							}
+								password: ctx.params.password,								
+								userToken:jwt,
+								OnlineStatus:0,												
+								OnlineLastLogin_At:null,												
+								OnlineLastLoginout_At:null,												
+								created_at: DateNow,
+								updated_at: DateNow
+							}				
 
-                            //!Token
-							const secret = 'secret';
-							const data = willSaveData;
-							const jwt = sign(data, secret);							
-							willSaveData["userToken"]=jwt;  //! Get Token
+							//Verileri Kaydet
+							db.push(willSaveData)
 
-							//! Verileri Kaydet
-							db.push(willSaveData)						
-
-
-							// STEP 3: Json içine Verileri Yazıyor -> db
+							//Json içine Verileri Yazıyor -> db
 							fs.writeFile('./public/DB/admin.json', JSON.stringify(db), err => {
 
-								// Checking for errors
+								// Hata varsa
 								if (err) {
 									console.log(err)
-								}
+								}							
 
-								console.log("Json writing"); // Success                               
-
+								//Console Yazma
+								console.log("Json Veri Kayıt Edildi -> Admin "); // Success									
+								
 							});
-
-							//! Status							
-							ctx.params.title = "Admin Ekleme"
-							ctx.params.tablo = "admin.json"	
-							ctx.params.status = 1
-
- 
-                          //! Logs Ekleme
-						  const user_email = db.filter(u => u.email == ctx.params.email);
-						
-							let logs_add = await ctx.call('logs.add', {
-								token: ctx.params.token,
+							
+							//! ----------- Log ----------------------------- 	
+							let logs_add = await ctx.call('logs.add', {					
 								userToken: jwt,
+								from: "admin",
+								fromToken: jwt,
 								name: "admin_add_successful",
-								description: "Başarılı Kayıt Yapıldı"
-							})
+								description: "Başarılı Admin Kayıt Yapıldı"
+							})			
+							//! ----------- Log Son ----------------------------- 
 
-							ctx.params.logs = logs_add
+							//! Return Api   
+							status = 1	
+							mesaj="Admin Eklendi"	
+					}
 
-					}									    
-				
+					//! Return Api   
+					ctx.params.title = "admin.service -> Veri Ekleme"
+					ctx.params.tablo = "admin.json"
+					ctx.params.status = status
+					ctx.params.mesaj = mesaj	
 
-					//! Delete [ ctx.params ]
-					delete ctx.params.name
-					delete ctx.params.surname
-					delete ctx.params.email
-					delete ctx.params.username
-
-					delete ctx.params.tel
-					delete ctx.params.password
-
-
-					//! ------------------
-
-					//console
-					console.log('\u001b[' + 32 + 'm' + 'User Ekleme' + '\u001b[0m')
-
-				
-
-
+					//Console Yazma
+					if(status==1) { console.log('\u001b[' + 32 + 'm' + 'Admin Veri Eklendi [ /api/admin/add ] ' + '\u001b[0m'); }
+					if(status==0) { console.log('\u001b[' + 31 + 'm' + 'Admin Veri Eklenemedi [ /api/admin/add ] ' + '\u001b[0m'); }
+										
+													    
 				} catch (error) {
 
-					//! Api
-					ctx.params.title = "Kullanıcı Ekleme"
-					ctx.params.tablo = "user.json"
+                    //! Return Api   
+					ctx.params.title = "admin.service -> Veri Ekleme"
+					ctx.params.tablo = "admin.json"			
 					ctx.params.status = 0
-					ctx.params.mesaj = "Kullanıcı Eklenemedi"
-		
+					ctx.params.mesaj = "Admin Eklenemedi"			
+
+					//Console Yazma
+					console.log('\u001b[' + 31 + 'm' + 'Admin Veri Eklenemedi [ /api/admin/add ] ' + '\u001b[0m');
 
 				}
 
 
+				//! Return Delete				
+				delete ctx.params.name
+				delete ctx.params.surname
+				delete ctx.params.email
+				delete ctx.params.username
 
+				delete ctx.params.tel
+				delete ctx.params.password
 
-			return ctx.params
+				return ctx.params
 
 		},
 		async update(ctx) {
 
 			// ! Arama
-			const user = db.find(u => u.userToken == ctx.params.userToken);
+			const dbFind = db.find(u => u.userToken == ctx.params.userToken);
 
 			// Kullanıcı Varsa
-			if (user) {
+			if (dbFind) {
 
 				//! Tanım
 				let file_upload=[]; 			
@@ -338,57 +376,29 @@ module.exports = {
 				
 					console.log('\u001b[' + 32 + 'm' + 'Profil Resim Yükleme Onaylandı' + '\u001b[0m');
 
-					//! File UPLOAD
+					//! -----------  File UPLOAD ----------------------------- 	
 					file_upload = await ctx.call('file.upload', {
-						token: ctx.params.token,
 						file: ctx.params.profil_ImageUrl_File,
-						role: "admin",
+						role: ctx.params.role,
 						userToken: ctx.params.userToken,                  
 						usedPage: "admin"
 					})
-					
-					//ctx.params.file_upload = file_upload
-					console.log('\u001b[' + 32 + 'm' + '---------- Profil File Upload ----------' + '\u001b[0m') 
-
-					//console.log(file_upload)      
-					console.log('\u001b[' + 32 + 'm' + 'file_upload Image Upload Url : '+ file_upload.uploadDir + '\u001b[0m')
-					console.log('\u001b[' + 32 + 'm' + 'file_upload status : '+ file_upload.status + '\u001b[0m')
-					if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m'); }
-					if(file_upload.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m'); }
-
-					console.log('\u001b[' + 32 + 'm' + '---------- Profil File Upload son ----------' + '\u001b[0m')       
-					//! End File Upload
-					
-					//console.log('\u001b[' + 31 + 'm' + 'user userImageUploadUrl : '+ user.userImageUploadUrl + '\u001b[0m')
-
+					//! ----------- End File UPLOAD ----------------------------- 	
+									
 					if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m'); }
 					if(file_upload.status==1) { 
 
-						//console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m')
-						
-						//! File Delete
-						let file_delete = await ctx.call('file.fileDelete', {
-							token: ctx.params.token,
-							userToken: ctx.params.userToken,                  
-							fileUrl: user.userImageUploadUrl
-						})
+						//! -----------  File Delete ----------------------------- 	
+						let file_delete = await ctx.call('file.fileDeleteUrl', {
+							userToken: ctx.params.userToken,
+							fileUrl: dbFind.userImageUploadUrl               
+						})                
+						//! ----------- End File Delete ----------------------------- 
 
-						//ctx.params.file_delete = file_delete  
-						console.log('\u001b[' + 32 + 'm' + '---------- Profil File Delete ----------' + '\u001b[0m')  
-
-						//console.log(file_delete) 
-						if(file_delete.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Silinemedi' + '\u001b[0m'); }
-						if(file_delete.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Silindi' + '\u001b[0m'); }
-
-						console.log('\u001b[' + 32 + 'm' + '---------- Profil File Delete Son -------' + '\u001b[0m')    
-						//! End File Delete
-
-						//! Update FİLE 
-						user["userImageUploadUrl"] = file_upload.uploadDir;                 
-						user["userImageUrl"] = file_upload.fileUrl;			
-						
+						//! Güncelleme
+						dbFind["userImageUploadUrl"] = file_upload.DB["uploadDir"];                 
+						dbFind["userImageUrl"] = file_upload.DB["fileUrl"];	
 					}
-
 				}
 
 				console.log(); //! Boşluk Ekleniliyor
@@ -399,57 +409,29 @@ module.exports = {
 				
 					console.log('\u001b[' + 32 + 'm' + 'Cover Resim Yükleme Onaylandı' + '\u001b[0m');
 
-					//! File UPLOAD
+					//! -----------  File UPLOAD ----------------------------- 	
 					file_upload = await ctx.call('file.upload', {
-						token: ctx.params.token,
 						file: ctx.params.cover_ImageUrl_File,
-						role: "admin",
+						role: ctx.params.role,
 						userToken: ctx.params.userToken,                  
 						usedPage: "admin"
 					})
-					
-					//ctx.params.file_upload = file_upload
-					console.log('\u001b[' + 32 + 'm' + '---------- Cover File Upload ----------' + '\u001b[0m') 
-
-					//console.log(file_upload)      
-					console.log('\u001b[' + 32 + 'm' + 'file_upload Image Upload Url : '+ file_upload.uploadDir + '\u001b[0m')
-					console.log('\u001b[' + 32 + 'm' + 'file_upload status : '+ file_upload.status + '\u001b[0m')
-					if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m'); }
-					if(file_upload.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m'); }
-
-					console.log('\u001b[' + 32 + 'm' + '---------- Cover File Upload son ----------' + '\u001b[0m')       
-					//! End File Upload
-					
-					//console.log('\u001b[' + 31 + 'm' + 'user CoverImageUploadUrl : '+ user.coverImageUploadUrl + '\u001b[0m')
-
+					//! ----------- End File UPLOAD ----------------------------- 	
+									
 					if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m'); }
 					if(file_upload.status==1) { 
 
-						//console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m')
-						
-						//! File Delete
-						let file_delete = await ctx.call('file.fileDelete', {
-							token: ctx.params.token,
-							userToken: ctx.params.userToken,                  
-							fileUrl: user.coverImageUploadUrl
-						})
+						//! -----------  File Delete ----------------------------- 	
+						let file_delete = await ctx.call('file.fileDeleteUrl', {
+							userToken: ctx.params.userToken,
+							fileUrl: dbFind.coverImageUploadUrl               
+						})                
+						//! ----------- End File Delete ----------------------------- 
 
-						//ctx.params.file_delete = file_delete  
-						console.log('\u001b[' + 32 + 'm' + '---------- Cover File Delete ----------' + '\u001b[0m')  
-
-						//console.log(file_delete) 
-						if(file_delete.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Silinemedi' + '\u001b[0m'); }
-						if(file_delete.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Silindi' + '\u001b[0m'); }
-
-						console.log('\u001b[' + 32 + 'm' + '---------- Cover File Delete Son -------' + '\u001b[0m')    
-						//! End File Delete
-
-						//! Update FİLE 
-						user["coverImageUploadUrl"] = file_upload.uploadDir;                 
-						user["coverImageUrl"] = file_upload.fileUrl;			
-						
-					}
-
+						//! Güncelleme
+						dbFind["coverImageUploadUrl"] = file_upload.DB["uploadDir"];                 
+						dbFind["coverImageUrl"] = file_upload.DB["fileUrl"];		
+					}	
 				}
 
 				console.log(); //! Boşluk Ekleniliyor
@@ -460,266 +442,454 @@ module.exports = {
 				delete ctx.params.cover_ImageUrl_File
 				delete ctx.params.cover_ImageUrl_File_Check
 
-				//!! Update - only Text -   pass by reference
-				Object.keys(ctx.params).forEach(key => {
-					
-					if(key!="profil_ImageUrl_File" || key!="cover_ImageUrl_File"  ) { user[key] = ctx.params[key] }  //! Only Text 
-				
+				// Referans Veriler Güncelleme Yapıyor
+				Object.keys(ctx.params).forEach(key => {					
+					if(key!="profil_ImageUrl_File" || key!="cover_ImageUrl_File"  ) { dbFind[key] = ctx.params[key] }  //! Only Text 				
 				})
-				//!! End Update - only Text -   pass by reference		
+				dbFind["updated_at"] = new Date()
+				// End  Referans Veriler Güncelleme Yapıyor
 				
-				user["updated_at"] = new Date()
-
-				//api
-				ctx.params.title = "Admin Guncelleme"
-				ctx.params.tablo = "admin.json"
-				ctx.params.status = 1        
-
-				// STEP 3: Json içine Verileri Yazıyor -> db
+		        // Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/admin.json', JSON.stringify(db), err => {
 
-					// Checking for errors
+					// Hata varsa
 					if (err) {
 						console.log(err)
 					}
 
-					console.log("Json writing"); // Success
-				});		
-			
-				//! ----  Logs Ekleme --------------					
-					let logs_add = await ctx.call('logs.add', {
-						token: ctx.params.token,
-						userToken: ctx.params.userToken,					 
-						name: "admin_update_successful",
-						description: "Başarılı Admin Güncelleme Yapıldı"
-					})
-
-					ctx.params.logs = logs_add
-				//! ----  Logs Son --------------
-
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi -> Admin"); // Success
+				});	
+				// End Json içine Verileri Yazıyor -> db
 				
+	
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
+					userToken: ctx.params.userToken,
+					from: "admin",
+					fromToken: ctx.params.userToken,
+					name: "admin_update_successful",
+					description: "Başarılı Admin Güncelleme Yapıldı"
+				})			
+				//! ----------- Log Son -----------------------------  
 
-						//console
-				console.log('\u001b[' + 32 + 'm' + 'Json Güncelleme' + '\u001b[0m')				         
+				//! Return Api   
+				ctx.params.title = "admin.service -> Veri Guncelleme"
+				ctx.params.tablo = "admin.json"			
+				ctx.params.status = 1
+				ctx.params.mesaj = "Admin Kayıt Güncellendi"	
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Admin Kayıt Güncellendi [ /api/admin/update ] ' + '\u001b[0m');			         
 
 			}
 
-			
 			//! Kullanıcı Yoksa
 			else {
-			
-				//api
-				ctx.params.title = "Admin Guncelleme"
-				ctx.params.tablo = "user.json"
-				ctx.params.status = 0
-				ctx.params.data = "Admin Bulunmadı"
 
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Post [ update ]  Admin Bulunamadı' + '\u001b[0m');
+				//! Return Api   
+				ctx.params.title = "admin.service -> Veri Guncelleme"
+				ctx.params.tablo = "admin.json"			
+				ctx.params.status = 0
+				ctx.params.mesaj = "Admin Guncellenemedi"			
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Admin Kayıt Guncellenemedi [ /api/admin/update ] ' + '\u001b[0m');
 
 			}
 
-			//! Return
-			delete ctx.params.token
+			//! Return Delete			
             delete ctx.params.userToken
+			delete ctx.params.role
 			delete ctx.params.profil_ImageUrl_File
             delete ctx.params.profil_ImageUrl_File_Check
 			delete ctx.params.cover_ImageUrl_File
             delete ctx.params.cover_ImageUrl_File_Check
-
+							
 			delete ctx.params.name
-
-			return ctx.params
-
-		},
-		async delete(ctx) {
-            
-			var index = db.findIndex(a => a.id == ctx.params.id);
-			if (index > -1) {
-				db.splice(index, 1);
-
-
-				// STEP 3: Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/admin.json', JSON.stringify(db), err => {
-
-					// Checking for errocş
-					if (err) {
-						console.log(err)
-					}
-
-					console.log("Json writing"); // Success
-				});
-
-
-				//api
-				ctx.params.title = "Admin Silme"
-				ctx.params.tablo = "admin.json"
-				ctx.params.status = 1
-				ctx.params.mesaj = "Admin Silindi"				
-	            
-				//! ----------- Log -----------------------------         
-	
-				let logs_add = await ctx.call('logs.add', {
-					token: ctx.params.token,
-					userToken: ctx.params.userToken,
-					name: "admin_delete_successful",
-					description: "Silme Admin işlemi Başarılı"
-				})
-			
-				ctx.params.logs_add = logs_add	
-
-				//! ----------- Log Son-------------------------
-
-
-
-			} else {
-
-				//api
-				ctx.params.title = "Admin Silme"
-				ctx.params.tablo = "admin.json"
-				ctx.params.status = 0
-				ctx.params.mesaj = "Admin Bulunmadı"
-
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ admin/:userId ]  Admin Bulunamadı' + '\u001b[0m');
-			}
-
-			//! ------------------
-
-			//console
-			console.log('\u001b[' + 32 + 'm' + 'Json Silme' + '\u001b[0m')
-
-			// Delete
-			delete ctx.params.userToken 
-			delete ctx.params.token 
-
-			return ctx.params
-
-		},
-		async loginOnline(ctx) {
-
-			// ! Arama
-			const user_email = db.filter(u => u.email == ctx.params.email);
-			const user = db.filter(u => u.email == ctx.params.email && u.password == ctx.params.password);
-
-			// Giriş Başarılı ise
-			if (user.length > 0) {
-
-				let logs_add = await ctx.call('logs.add', {
-					token: ctx.params.token,
-					userToken: user[0].userToken,
-					name: "admin_login_successful",
-					description: "Başarılı Admin Giriş Yapıldı"
-				})
-
-
-				//api
-				ctx.params.title = "Admin Login"
-				ctx.params.tablo = "admin.json"
-				ctx.params.status = 1
-				ctx.params.userId = user[0].id
-				ctx.params.data_user = user
-				ctx.params.data_logs = logs_add
-
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ users/:userId ]' + '\u001b[0m');
-
-			}
-
-			//! Admin Yoksa
-			else {
-				
-					//api
-					ctx.params.title = "Admin Login"
-					ctx.params.tablo = "admin.json"
-					ctx.params.status = 0
-					ctx.params.userId = 0
-					ctx.params.data_user = "Admin Bulunmadı"
-					ctx.params.data_logs = "Admin Bulunmadı"
-				
-					// Giriş Başarılı ise
-					if (user_email.length > 0) {
-
-						let logs_add = await ctx.call('logs.add', {
-							token: ctx.params.token,
-							userToken: user_email[0].userToken,
-							name: "admmin_login_error",
-							description: "Hatalı Admin Giriş Yapıldı"
-						})
-
-						ctx.params.logs = logs_add
-				    }
-
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ users/:userId ]  Admin Bulunamadı' + '\u001b[0m');
-
-			}
-
-			//delete
+			delete ctx.params.surname
 			delete ctx.params.email
+			delete ctx.params.username
+			delete ctx.params.tel
 			delete ctx.params.password
 
 			return ctx.params
 
 		},
-		async loginOut(ctx){
-
+		async updateUrl(ctx){
+		
 			// ! Arama
-			//const user = db.filter(u => u.email == ctx.params.email && u.password == ctx.params.password);
-			const user = db.find(u => u.userToken == ctx.params.userToken);		
+			const dbFind = db.find(u => u.userToken == ctx.params.userToken);		
 
-			// Kullanıcı Varsa
-			if (user) {               
-								
-				let logs_add = await ctx.call('logs.add', {
-					token: ctx.params.token,
-					userToken:ctx.params.userToken,
-					name: "admin_loginout_successful",
-					description: "Başarılı Admin Çıkış Yapıldı"
-				})	
+			//! Veri Varsa 
+			if (dbFind) {
 
-				//api
-				ctx.params.title = "Admin LoginOut"
+	            //! Tanım
+				let file_upload=[]; 			
+				
+				//! Resim Yükleme Onay - Profil
+				if(ctx.params.profil_ImageUrl_File_Check=="0") { 	console.log('\u001b[' + 31 + 'm' + 'Profil Resim Yükleme Onaylanmadı' + '\u001b[0m'); }
+				if(ctx.params.profil_ImageUrl_File_Check=="1") { 	
+				
+					console.log('\u001b[' + 32 + 'm' + 'Profil Resim Yükleme Onaylandı' + '\u001b[0m');
+
+					//! -----------  File UPLOAD ----------------------------- 	
+					file_upload = await ctx.call('file.uploadUrl', {
+						fileUrl: ctx.params.profil_ImageUrl_File,
+						role: ctx.params.role,
+						userToken: ctx.params.userToken,                  
+						usedPage: "admin"
+					})
+					//! ----------- End File UPLOAD ----------------------------- 	
+									
+					if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m'); }
+					if(file_upload.status==1) { 
+
+						console.log("Dosya Yüklendi");
+
+						//! -----------  File Delete ----------------------------- 	
+						let file_delete = await ctx.call('file.fileDeleteUrl', {
+							userToken: ctx.params.userToken,
+							fileUrl: dbFind.userImageUploadUrl               
+						})                
+						//! ----------- End File Delete ----------------------------- 
+
+						//! Güncelleme
+						dbFind["userImageUploadUrl"] = file_upload.DB["uploadDir"];                 
+						dbFind["userImageUrl"] = file_upload.DB["fileUrl"];	
+					}
+				}
+
+				console.log(); //! Boşluk Ekleniliyor
+
+				//! Resim Yükleme Onay - Cover
+				if(ctx.params.cover_ImageUrl_File_Check=="0") { 	console.log('\u001b[' + 31 + 'm' + 'Cover Resim Yükleme Onaylanmadı' + '\u001b[0m'); }
+				if(ctx.params.cover_ImageUrl_File_Check=="1") { 	
+				
+					console.log('\u001b[' + 32 + 'm' + 'Cover Resim Yükleme Onaylandı' + '\u001b[0m');
+
+					//! -----------  File UPLOAD ----------------------------- 	
+					file_upload = await ctx.call('file.uploadUrl', {
+						fileUrl: ctx.params.cover_ImageUrl_File,
+						role: ctx.params.role,
+						userToken: ctx.params.userToken,                  
+						usedPage: "admin"
+					})
+					//! ----------- End File UPLOAD ----------------------------- 	
+									
+					if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m'); }
+					if(file_upload.status==1) { 
+
+						//! -----------  File Delete ----------------------------- 	
+						let file_delete = await ctx.call('file.fileDeleteUrl', {
+							userToken: ctx.params.userToken,
+							fileUrl: dbFind.coverImageUploadUrl               
+						})                
+						//! ----------- End File Delete ----------------------------- 
+
+						//! Güncelleme
+						dbFind["coverImageUploadUrl"] = file_upload.DB["uploadDir"];                 
+						dbFind["coverImageUrl"] = file_upload.DB["fileUrl"];											
+					}	
+				}
+
+				console.log(); //! Boşluk Ekleniliyor
+
+				//! Delete
+				delete ctx.params.profil_ImageUrl_File
+				delete ctx.params.profil_ImageUrl_File_Check
+				delete ctx.params.cover_ImageUrl_File
+				delete ctx.params.cover_ImageUrl_File_Check
+
+				// Referans Veriler Güncelleme Yapıyor
+				Object.keys(ctx.params).forEach(key => {					
+					if(key!="profil_ImageUrl_File" || key!="cover_ImageUrl_File"  ) { dbFind[key] = ctx.params[key] }  //! Only Text 				
+				})
+				dbFind["updated_at"] = new Date()
+				// End  Referans Veriler Güncelleme Yapıyor
+				
+				// Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/admin.json', JSON.stringify(db), err => {
+
+					// Hata varsa
+					if (err) {
+						console.log(err)
+					}
+
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi -> Admin"); // Success
+				});	
+				// End Json içine Verileri Yazıyor -> db
+				
+	
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
+					userToken: ctx.params.userToken,
+					from: "admin",
+					fromToken: ctx.params.userToken,
+					name: "user_update_successful",
+					description: "Başarılı Admin Güncelleme Yapıldı"
+				})			
+				//! ----------- Log Son -----------------------------  
+
+				//! Return Api   
+				ctx.params.title = "admin.service -> Veri Guncelleme"
+				ctx.params.tablo = "admin.json"			
+				ctx.params.status = 1
+				ctx.params.mesaj = "Admin Kayıt Güncellendi"	
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Admin Kayıt Güncellendi [ /api/admin/updateUrl ] ' + '\u001b[0m');		
+
+			}
+
+			//! Veri Yoksa 
+			else {
+
+				//! Return Api   
+				ctx.params.title = "admin.service -> Veri Guncelleme"
+				ctx.params.tablo = "admin.json"			
+				ctx.params.status = 0
+				ctx.params.mesaj = "Admin Guncellenemedi"			
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Admin Kayıt Guncellenemedi [ /api/admin/updateUrl ] ' + '\u001b[0m');
+
+			}
+
+			
+			//! Return Delete			
+            delete ctx.params.userToken
+			delete ctx.params.role
+			delete ctx.params.profil_ImageUrl_File
+            delete ctx.params.profil_ImageUrl_File_Check
+			delete ctx.params.cover_ImageUrl_File
+            delete ctx.params.cover_ImageUrl_File_Check
+							
+			delete ctx.params.name
+			delete ctx.params.surname
+			delete ctx.params.email
+			delete ctx.params.username
+			delete ctx.params.tel
+			delete ctx.params.OnlineStatus
+			delete ctx.params.OnlineLastLogin_At
+			delete ctx.params.OnlineLastLoginout_At
+			
+
+			return ctx.params		
+		},	
+		async delete(ctx) {
+
+			//! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);
+			var index = db.findIndex(a => a.id == ctx.params.id);
+			if (index > -1) {
+				db.splice(index, 1);
+
+				// Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/admin.json', JSON.stringify(db), err => {
+
+					// Hata varsa
+					if (err) {
+						console.log(err)
+					}
+
+					//Console Yazma
+					console.log("Json Veri Kayıt Silindi -> Admin"); // Success
+				});
+
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
+					userToken: ctx.params.userToken,
+					from: "admin",
+					fromToken: dbFind.userToken,
+					name: "admin_delete_successful",
+					description: "Silme Admin işlemi Başarılı"
+				})
+				//! ----------- Log Son ----------------------------- 
+
+				//! Return Api
+				ctx.params.title = "admin.service -> Veri Silme"
 				ctx.params.tablo = "admin.json"
 				ctx.params.status = 1
-				ctx.params.userId = user.id
-				ctx.params.data_user = user
-				ctx.params.data_logs = logs_add
+				ctx.params.mesaj = "Admin Silindi"
 
-				delete ctx.params.user_id
-				delete ctx.params.email
-				delete ctx.params.password
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Admin Silme [ /api/admin/delete ] Silindi' + '\u001b[0m');	
+	        	
+			} else {
+				
+				//! Return Api
+				ctx.params.title = "admin.service -> Veri Silme"
+				ctx.params.tablo = "admin.json"
+				ctx.params.status = 0
+				ctx.params.mesaj = "Admin Silinemedi"
 
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Admin Silme [ /api/admin/delete ] Silinemedi' + '\u001b[0m');	
+			}
 
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ admin/:userId ]' + '\u001b[0m');
+			//! Return Delete			
+            delete ctx.params.id
+			delete ctx.params.userToken
 
+			return ctx.params	
+		},
+		async loginOnline(ctx) {
+
+			// ! Arama
+			const user_email = db.filter(u => u.email == ctx.params.email);
+			const dbFind = db.filter(u => u.email == ctx.params.email && u.password == ctx.params.password);
+              
+			// Giriş Başarılı ise
+			if (dbFind.length > 0) {
+				
+				//! -----------  Admin UPDATE ----------------------------- 	
+				let user_updateUrl = await ctx.call('admin.updateUrl', {
+					userToken:dbFind[0].userToken,
+					role: dbFind[0].role,					               
+					OnlineStatus: 1,                  
+					OnlineLastLogin_At: new Date()					        
+				})		
+				//! ----------- End Admin UPDATE -----------------------------
+				
+
+			    //! Admin Güncelleme Yapıldı
+				if(user_updateUrl.status=="0") { 	console.log('\u001b[' + 31 + 'm' + 'Admin Güncelleme Yapılmadı' + '\u001b[0m'); }
+				if(user_updateUrl.status=="1") { 	
+				
+					console.log('\u001b[' + 32 + 'm' + 'Admin Güncelleme Yapıldı' + '\u001b[0m');
+
+					//! ----------- Log ----------------------------- 	
+					let logs_add = await ctx.call('logs.add', {					
+						userToken:dbFind[0].userToken,
+						from: "admin",
+						fromToken:dbFind[0].userToken,						
+						name: "admin_login_successful",
+						description: "Başarılı Admin Giriş Yapıldı"
+					})
+					//! ----------- Log Son -----------------------------
+
+				}       				
+
+				//! Return Api
+				ctx.params.title = "Admin Login"
+				ctx.params.tablo = "admin.json"
+				ctx.params.status = 1
+				ctx.params.mesaj = "Başarılı Giriş  Oldu"
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Admin Login [ /api/admin/loginOnline ] Başarılı' + '\u001b[0m');	
 			}
 
 			//! Kullanıcı Yoksa
 			else {
+				 
+				let mesaj="Hatalı Giriş Oldu";
 
+				if (user_email.length <= 0)  {	console.log('\u001b[' + 31 + 'm' + 'Email Yok' + '\u001b[0m');  mesaj="Hatalı Giriş Oldu -> Email Yok"; }
+				if (user_email.length > 0) { 	
 					
-				let logs_add = await ctx.call('logs.add', {
-					token: ctx.params.token,
-					userToken:ctx.params.userToken,
-					name: "admin_loginout_error",
-					description: "Hatalı Admin Çıkış Yapıldı"
-				})
-				
+					console.log('\u001b[' + 32 + 'm' + 'Email Var' + '\u001b[0m'); mesaj="Hatalı Giriş Oldu -> Email Var";
 
-				//api
-				ctx.params.title = "Admin LoginOut"
+					//! ----------- Log ----------------------------- 	
+					let logs_add = await ctx.call('logs.add', {					
+						userToken:user_email[0].userToken,
+						from: "admin",
+						fromToken:user_email[0].userToken,						
+						name: "admin_login_error",
+						description: "Hatalı  Admin Giriş Yapıldı"
+					})
+					//! ----------- Log Son -----------------------------
+
+
+				 }
+								
+			
+				//! Return Api
+				ctx.params.title = "Admin Login"
 				ctx.params.tablo = "admin.json"
 				ctx.params.status = 0
-				ctx.params.userId = 0
-				ctx.params.data_user = "Admin Bulunmadı"
-				ctx.params.data_logs = logs_add
+				ctx.params.mesaj = mesaj
 
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ users/:userId ]  Admin Bulunamadı' + '\u001b[0m');
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Admin Login [ /api/admin/loginOnline ] Başarısız ' + '\u001b[0m');		
+
+			}					
+           
+			
+			//! Delete
+			delete ctx.params.email
+			delete ctx.params.password
+
+			return ctx.params
+		},
+		async loginOut(ctx){	
+
+			// ! Arama
+			//const user = db.filter(u => u.email == ctx.params.email && u.password == ctx.params.password);
+			const dbFind = db.find(u => u.userToken == ctx.params.userToken);		
+
+            // Veri Varsa
+			if (dbFind) {
+				
+                 	
+				//! -----------  Admin UPDATE ----------------------------- 	
+				let user_updateUrl = await ctx.call('admin.updateUrl', {
+					userToken:dbFind.userToken,
+					role: dbFind.role,					               
+					OnlineStatus: 0,                  
+					OnlineLastLoginout_At: new Date()					        
+				})		
+				//! ----------- End Admin UPDATE -----------------------------
+				
+
+			    //! Admin Güncelleme Yapıldı
+				if(user_updateUrl.status=="0") { 	console.log('\u001b[' + 31 + 'm' + 'Admin Güncelleme Yapılmadı' + '\u001b[0m'); }
+				if(user_updateUrl.status=="1") { 	
+				
+					console.log('\u001b[' + 32 + 'm' + 'Admin Güncelleme Yapıldı' + '\u001b[0m');
+
+					//! ----------- Log ----------------------------- 	
+					let logs_add = await ctx.call('logs.add', {					
+						userToken:dbFind.userToken,
+						from: "admin",
+						fromToken:dbFind.userToken,						
+						name: "admin_loginout_successful",
+						description: "Başarılı Admin Çıkış Yapıldı"
+					})
+					//! ----------- Log Son -----------------------------
+
+				}     		
+				
+
+				//! Return Api
+				ctx.params.title = "Admin Loginout"
+				ctx.params.tablo = "admin.json"
+				ctx.params.status = 1
+				ctx.params.mesaj = "Başarılı Çıkış Oldu"
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Admin Loginout [ /api/admin/loginOut ] Başarılı' + '\u001b[0m');	
+			}
+
+			//! Veri Yoksa
+			else {
+								
+			
+				//! Return Api
+				ctx.params.title = "Admin Loginout"
+				ctx.params.tablo = "admin.json"
+				ctx.params.status = 0
+				ctx.params.mesaj = "Çıkış Başarısız"
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Admin Loginout [ /api/admin/loginOut ] Başarısız ' + '\u001b[0m');		
 
 			}
+
+			//delete
+			delete ctx.params.userToken 
 
 			return ctx.params
 		}	

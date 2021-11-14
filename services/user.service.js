@@ -285,8 +285,8 @@ module.exports = {
 								password: ctx.params.password,								
 								userToken:jwt,
 								OnlineStatus:0,												
-								OnlineLastLogin_At:DateNow,												
-								OnlineLastLoginout_At:DateNow,												
+								OnlineLastLogin_At:null,												
+								OnlineLastLoginout_At:null,												
 								created_at: DateNow,
 								updated_at: DateNow
 							}				
