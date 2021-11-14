@@ -211,6 +211,7 @@ module.exports = {
 			fastify.post('/api/user/find_token', async (req, res) => this.broker.call("user.find_token",{...req.body})) //!  Search-Token
 			fastify.post('/api/user/add', async (req, res) => this.broker.call("user.add",{...req.body})) //! CREATE
 			fastify.post('/api/user/update', async (req, res) => this.broker.call("user.update",{...req.body})) //! UPDATE
+			fastify.post('/api/user/updateUrl', async (req, res) => this.broker.call("user.updateUrl",{...req.body})) //! UPDATE - URL
 			fastify.post('/api/user/delete/:id', async (req, res) => this.broker.call("user.delete",{id: req.params.id,...req.body})) //! DELETE
 			
 			fastify.post('/api/user/loginOnline', async (req, res) => this.broker.call("user.loginOnline",{...req.body})) //! Login
