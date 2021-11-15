@@ -11,149 +11,178 @@ module.exports = {
 
 	actions: {
 		async info(ctx) {
+			
+			//! Return Api
 			ctx.params.title = "message.service"
 			ctx.params.time = dayjs().toDate()
-			ctx.params.APi_URL = process.env.APi_URL
+			ctx.params.APi_URL=process.env.APi_URL
 
 			return ctx.params
 		},
 		async post(ctx) {
 
+			//! Return Api
 			ctx.params.createdAt = dayjs().toDate();
 			delete ctx.params.createdAt;
 
 			return ctx.params
+
+		},
+		async html(ctx) {
+		
+            ctx.meta.$responseType = "text/html";
+            return Buffer.from(`
+                    <html>
+                    <body>
+                        <h1>Hello API ebu enes!</h1>
+                        <img src="/api/file.image" />
+                    </body>
+                    </html>
+            `);
+			
 		},
 		async all(ctx) {
 
-			//JSON        
+			try {
 
-			ctx.params.title = "Mesaj -> Tüm Veriler"
-            ctx.params.tablo = "message.json"
-            ctx.params.status = 1
-			ctx.params.size=db.length
-			ctx.params.DB = db
-            
+				//! Return Api   
+				ctx.params.title = "message.service -> Tüm Veriler"
+				ctx.params.tablo = "message.json"
+				ctx.params.status = 1
+				ctx.params.size=db.length
+				ctx.params.DB = db		
 
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Mesaj Tüm Veriler Okundu [ /api/message/all ] ' + '\u001b[0m');
+
+			} catch (error) {
+
+				//! Return Api   
+				ctx.params.title = "message.service -> Tüm Veriler"
+				ctx.params.tablo = "message.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.DB = error
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Mesaj Tüm Veriler Okunamadı [ /api/message/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+			
+			}
+
+			//! Return
 			return ctx.params
 		},
 		async find(ctx) {
 
 			// ! Arama
-			const user = db.find(u => u.id == ctx.params.id);
+			const dbFind = db.find(u => u.id == ctx.params.id);
 
-			// Kullanıcı Varsa
-			if (user) {	               
+				//! Veri Varsa
+			if (dbFind) {	               
                 
-				//api
+				//! Return Api   
 				ctx.params.title = "Mesaj Arama"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 1
-				ctx.params.data_message = user
+				ctx.params.data_message = dbFind
 			
 
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ message  /:userId ]' + '\u001b[0m');
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Mesaj Veri Arama [ /api/message/find ] ' + '\u001b[0m');
 			}
 
-			//! Kullanıcı Yoksa
+			//! Veri Yoksa
 			else {
 				
-				//api
+				//! Return Api   
 				ctx.params.title = "Mesaj  Araama"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 0
 				ctx.params.data_message = "Mesaj  Bulunmadı"
 			
 				
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ users/:userId ]  Mesaj   Bulunamadı' + '\u001b[0m');
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Mesaj Veri Bulunamadı [ /api/message/find ] ' + '\u001b[0m');	
 
 			}
 
+
+			return ctx.params
+		},	
+		async find_post(ctx) {
+
+			//! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);
+
+			//! Veri Varsa
+			if (dbFind) {
+
+				//! Return Api   
+				ctx.params.title = "message.service -> Veri Arama"
+				ctx.params.tablo = "message.json"
+				ctx.params.status = 1
+				ctx.params.DB = dbFind
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Mesaj Veri Arama [ /api/message/find_post ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "message.service -> Veri Arama"
+				ctx.params.tablo = "message.json"
+				ctx.params.status = 0
+				ctx.params.DB = "Mesaj Bulunamadı"
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Mesaj Veri Bulunamadı [ /api/message/find_post ] ' + '\u001b[0m');		
+			}
+
+			//! Return
+			delete ctx.params.id
 
 			return ctx.params
 		},
-		async view(ctx) {
-		
-			const user = db.find(u => u.id == ctx.params.id);  // ! Arama
+		async find_token(ctx) {
 
-            //? Kullanıcı Varsa
-			if (user) {
+			//! Arama
+			const dbFind = db.find(u => u.MessageToken == ctx.params.MessageToken);	
 
-				//Static
-				let status_read=0;
-				let logs_add=[];
+			//! Veri Varsa
+			if (dbFind) {
 
-				// Gelen Kutusuna Düşmüş ise
-				if(user["ToUserToken"]==ctx.params.userToken) 
-				{
-					status_read=1; // Okundu
-	
-					//! ----------- Log -----------------------------              
-					logs_add = await ctx.call('logs.add', {
-						token: ctx.params.token,
-						userToken: ctx.params.userToken,
-						name: "message_read_successful",
-						description: "Mesaj Okuma Başarılı"
-					})
-	
-					delete ctx.params.userToken 
-					//! ----------- Log -----------------------------               
-					
-					//! Update - Güncelleme
-					user["MessageReaded"] = "1"
-					user["MessageReaded_at"] = new Date()
-					user["updated_at"] = new Date()
-	
-	
-					// STEP 3: Json içine Verileri Yazıyor -> db
-					fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {					
-						if (err) { console.log(err) } //! Error
-						console.log("Json Eklendi"); // Success
-					});					
-								
-								
-				}
-				else {  status_read=0; }
+				//! Return Api   
+				ctx.params.title = "message.service -> Veri Arama"
+				ctx.params.tablo = "message.json"
+				ctx.params.status = 1
+				ctx.params.DB = dbFind
 
-					//! Return 
-					ctx.params.title = "Mesaj Okuma"
-					ctx.params.tablo = "message.json"
-					ctx.params.status = 1
-					ctx.params.status_read = status_read
-					ctx.params.data_message = user,
-					ctx.params.data_logs = logs_add			
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Mesaj Veri Arama [ /api/message/find_token ] ' + '\u001b[0m');
 			}
 
-			//! Kullanıcı Yoksa
+			//! Veri Yoksa
 			else {
-
-			    //! Return 		
-                ctx.params.title = "Mesaj Okuma"
+				
+				//! Return Api   
+				ctx.params.title = "message.service -> Veri Arama"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 0
-				ctx.params.status_read = 0
-                ctx.params.data_message =  "Mesaj Bulunmadı"
-				ctx.params.data_logs = "Mesaj Bulunmadı"
+				ctx.params.DB = "Mesaj Bulunamadı"
 
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Post [ update ]  Mesaj Bulunamadı' + '\u001b[0m'); //! console
-
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Mesaj Veri Bulunamadı [ /api/message/find_token ] ' + '\u001b[0m');		
 			}
-			
-            //! Delete
-            delete ctx.params.id          
-            delete ctx.params.token          
-            delete ctx.params.userToken        
-                   
-			return ctx.params
-		},    
-		async add(ctx) {
 
-			ctx.params.title = "Mesaj Ekleme"
-			ctx.params.tablo = "message.json"
-            ctx.params.status = 1            
-             
+			//! Return
+			delete ctx.params.userToken
+
+			return ctx.params
+		},   
+		async add(ctx) {
 			
             //! ----------- UserInfo ----------------------------- 
 
@@ -162,39 +191,40 @@ module.exports = {
             let Fromuser_info;
             if(FromRole_Info=="User") { Fromuser_info = await ctx.call('user.find_token', {"userToken":FromUserToken_Info})}
             if(FromRole_Info=="Admin") { Fromuser_info = await ctx.call('admin.find_token', {"userToken":FromUserToken_Info})}            
-            let FromNameSurName_Info=Fromuser_info['data_user']['name']+" "+Fromuser_info['data_user']['surname'];    
+            let FromNameSurName_Info=Fromuser_info['DB']['name']+" "+Fromuser_info['DB']['surname']; 
 
             let ToUserToken_Info=ctx.params.ToUserToken;             
             let ToRole_Info=ctx.params.ToRole;   
             let Touser_info;
             if(ToRole_Info=="User") { Touser_info = await ctx.call('user.find_token', {"userToken":ToUserToken_Info})}
             if(ToRole_Info=="Admin") { Touser_info = await ctx.call('admin.find_token', {"userToken":ToUserToken_Info})}            
-            let ToNameSurName_Info=Touser_info['data_user']['name']+" "+Touser_info['data_user']['surname']; 
+            let ToNameSurName_Info=Touser_info['DB']['name']+" "+Touser_info['DB']['surname']; 
                  
             //! ----------- UserInfo Son ----------------------------- 			
                     
 			try {
 
-				//! Token
+				//! Ortak
 				let TokenId=new Date().getTime();
+				let DateNow=new Date();
 
 				let TokenInfo={				
 					id: TokenId,	
 					FromRole: ctx.params.FromRole,
 					FromUserToken: ctx.params.FromUserToken,				
-                    FromUserName: Fromuser_info['data_user']['username'],
+                    FromUserName: Fromuser_info['DB']['username'],
 					FromNameSurName: FromNameSurName_Info,
 					ToRole: ctx.params.ToRole,
 					ToUserToken: ctx.params.ToUserToken,
-					ToUserName: Touser_info['data_user']['username'],
+					ToUserName: Touser_info['DB']['username'],
 					ToNameSurName: ToNameSurName_Info,
 					Subject: ctx.params.Subject,
 					Message: ctx.params.Message,				
 					MessageReaded: ctx.params.MessageReaded,		
-					MessageReaded_at: new Date(),		
+					MessageReaded_at: DateNow,		
 					MessageFileControl: ctx.params.MessageFileControl,	
 					MessageDeleted: ctx.params.MessageDeleted,	
-					MessageDeleted_at: new Date()		
+					MessageDeleted_at: DateNow		
 				}
 				
 				const secret = 'secret';
@@ -204,23 +234,22 @@ module.exports = {
 	
 				//! Eklenecek veriler
 				const willSaveData = {
-					id:TokenId,				
-					token: ctx.params.token,
+					id:TokenId,		
 					FromRole: ctx.params.FromRole,
 					FromUserToken: ctx.params.FromUserToken,
-                    FromUserName: Fromuser_info['data_user']['username'],
+                    FromUserName: Fromuser_info['DB']['username'],
 					FromNameSurName: FromNameSurName_Info,
 					ToRole: ctx.params.ToRole,
 					ToUserToken: ctx.params.ToUserToken,
-					ToUserName: Touser_info['data_user']['username'],
+					ToUserName: Touser_info['DB']['username'],
 					ToNameSurName: ToNameSurName_Info,
 					Subject: ctx.params.Subject,
 					Message: ctx.params.Message,				
 					MessageReaded: ctx.params.MessageReaded,                   
-                    MessageReaded_at: new Date(),			
+                    MessageReaded_at: null,			
                     MessageFileControl: ctx.params.MessageFileControl,
                     MessageDeleted: ctx.params.MessageDeleted,	
-					MessageDeleted_at: new Date(),
+					MessageDeleted_at: null,
 					MessageToken:jwt,				
 					created_at: new Date(),
 					updated_at: new Date()
@@ -230,39 +259,50 @@ module.exports = {
 				db.push(willSaveData)
 
                 
-				// STEP 3: Json içine Verileri Yazıyor -> db
+				//Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
 
-					// Checking for errors
+					// Hata varsa
 					if (err) {
 						console.log(err)
-					}
+					}							
 
-					console.log("Json Eklendi -> message"); // Success
-				});
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi -> Mesaj "); // Success
+				});				
 
-				//! Status
-				ctx.params.status = 1				
 
-				//! ----------- Log ----------------------------- 
-				const user_email = db.filter(u => u.id == ctx.params.id);
-					
-				let logs_add = await ctx.call('logs.add', {
-					token: ctx.params.token,
-					userToken: ctx.params.userToken,
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
+					userToken: ctx.params.FromUserToken,
+					from: "mesaj",
+					fromToken: jwt,
 					name: "message_add_successful",
 					description: "Mesaj Yazma Başarılı"
-				})
-
-				ctx.params.data_logs = logs_add
+				})			
 				//! ----------- Log Son ----------------------------- 
+
+
+				//! Return Api   
+				ctx.params.title = "message.service -> Veri Ekleme"
+				ctx.params.tablo = "message.json"
+				ctx.params.status = 1
+				ctx.params.mesaj = "Mesaj Eklendi"	
+				
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Mesaj Veri Eklendi [ /api/message/add ] ' + '\u001b[0m');	
 				
 
 			} catch (error) {
 
-				//! Status
+				//! Return Api   
+				ctx.params.title = "message.service -> Veri Ekleme"
+				ctx.params.tablo = "message.json"
 				ctx.params.status = 0
-				ctx.params.data_logs = "error"
+				ctx.params.mesaj = "Mesaj Eklenemedi"	
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Mesaj Veri Eklenemedi [ /api/message/add ] ' + '\u001b[0m');	
 
 			}   
 
@@ -279,6 +319,8 @@ module.exports = {
             delete ctx.params.Subject 
             delete ctx.params.Message 
             delete ctx.params.MessageReaded
+            delete ctx.params.MessageFileControl
+            delete ctx.params.MessageDeleted
 
 			return ctx.params
 
@@ -286,55 +328,66 @@ module.exports = {
 		},
 		async update(ctx) {
 			
-			const user = db.find(u => u.MessageToken == ctx.params.MessageToken); // ! Arama
+			// ! Arama
+			const dbFind = db.find(u => u.MessageToken == ctx.params.MessageToken); 
 
-			//? Kullanıcı Varsa
-			if (user) {
+			//! Veri Varsa 
+			if (dbFind) {
 
-                //! ----------- Log -----------------------------              
-                let logs_add = await ctx.call('logs.add', {
-                    token: ctx.params.token,
-                    userToken: ctx.params.userToken,
-                    name: "message_update_successful",
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
+					userToken: ctx.params.userToken,
+					from: "mesaj",
+					fromToken: ctx.params.MessageToken,
+					name: "message_update_successful",
                     description: "Mesaj Güncelleme Başarılı"
-                })
-                delete ctx.params.userToken 
-				//! ----------- Log ----------------------------- 
-
-              
-				//pass by reference
+				})	
+				delete ctx.params.userToken 		
+				//! ----------- Log Son -----------------------------  
+            
+				// Referans Veriler Güncelleme Yapıyor
 				Object.keys(ctx.params).forEach(key => {
-					user[key] = ctx.params[key]
+					dbFind[key] = ctx.params[key]
 				})				
-				user["updated_at"] = new Date()
+				dbFind["updated_at"] = new Date()
+				// End  Referans Veriler Güncelleme Yapıyor
 
-				// STEP 3: Json içine Verileri Yazıyor -> db
+				// Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {					
-					if (err) { console.log(err) } //! Error
-					console.log("Json Eklendi"); // Success
-				});
+				
+					// Hata varsa
+					if (err) {
+						console.log(err)
+					}
+
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi -> Mesaj"); // Success
+				});	
+				// End Json içine Verileri Yazıyor -> db				
 
 
-                //! Return 
-                ctx.params.title = "Mesaj Guncelleme"
+                //! Return Api   
+				ctx.params.title = "message.service -> Veri Güncelleme"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 1
-                ctx.params.data_message = user,
-				ctx.params.data_logs = logs_add
+				ctx.params.mesaj = "Mesaj Güncellendi"	
+				
+				//Console Yazma	
+			    console.log('\u001b[' + 32 + 'm' + 'Mesaj Veri Güncellendi [ /api/message/update ] ' + '\u001b[0m');
 
 			}
 
-			//! Kullanıcı Yoksa
+			//! Veri Yoksa 
 			else {
-				//api		
-				ctx.params.title = "Mesaj Guncelleme"
-				ctx.params.tablo = "message.json"
-				ctx.params.status = 0
-                ctx.params.data_message =  "Mesaj Bulunmadı"
-				ctx.params.data_logs = "Mesaj Bulunmadı"
 
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Post [ update ]  Mesaj Bulunamadı' + '\u001b[0m');
+				//! Return Api   
+				ctx.params.title = "message.service -> Veri Güncelleme"
+				ctx.params.tablo = "message.json"
+				ctx.params.status = 1
+				ctx.params.mesaj = "Mesaj Güncellenemedi"	
+				
+				//Console Yazma	
+				console.log('\u001b[' + 31 + 'm' + 'Mesaj Veri Güncellenemedi [ /api/message/update ] ' + '\u001b[0m');
 
 			}
 			
@@ -351,130 +404,230 @@ module.exports = {
             delete ctx.params.Message 
             delete ctx.params.MessageReaded         
 
-			return ctx.params
+			return ctx.params	  
 
 		},
 		async delete(ctx) {
          
+			//! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);
 			var index = db.findIndex(a => a.id == ctx.params.id);            
 			if (index > -1) {
 				db.splice(index, 1);
 
-				// STEP 3: Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {				
-					if (err) { console.log(err) } //! Error
-					console.log("Json Eklendi"); // Success
-				});
+			   // Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {					
+				
+					// Hata varsa
+					if (err) {
+						console.log(err)
+					}
 
-
-				//api
-				ctx.params.title = "Mesaj Silme"
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi -> Mesaj"); // Success
+				});	
+				// End Json içine Verileri Yazıyor -> db	
+				
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
+					userToken: ctx.params.userToken,
+					from: "mesaj",
+					fromToken: dbFind.MessageToken,
+					name: "message_delete_successful",
+                    description: "Mesaj Silme Başarılı"
+				})	
+				delete ctx.params.userToken 		
+				//! ----------- Log Son -----------------------------  
+				
+                //! Return Api   
+				ctx.params.title = "message.service -> Veri Silme"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Mesaj Silindi"		
-	            		
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Json Güncelleme' + '\u001b[0m')
-
-                 //! ----------- Log -----------------------------         
-                       
-                let logs_add = await ctx.call('logs.add', {
-                    token: ctx.params.token,
-                    userToken: ctx.params.userToken,
-                    name: "message_delete_successful",
-                    description: "Mesaj Silme Başarılı"
-                })
-
-                delete ctx.params.userToken 
-
-                //! ----------- Log Son-------------------------
+				ctx.params.mesaj = "Mesaj Silindi"	
+				
+				//Console Yazma	
+			    console.log('\u001b[' + 32 + 'm' + 'Mesaj Veri Silindi [ /api/message/update ] ' + '\u001b[0m');
+               
 
 			} else {
 
-				//api
-				ctx.params.title = "Mesaj Silme"
+				//! Return Api   
+				ctx.params.title = "message.service -> Veri Silme"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Mesaj Bulunmadı"
+				ctx.params.mesaj = "Mesaj Silinemedi"	
+				
+				//Console Yazma	
+				console.log('\u001b[' + 31 + 'm' + 'Mesaj Veri Silinemedi [ /api/message/update ] ' + '\u001b[0m');
 
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ message/:userId ]  Mesaj  Bulunamadı' + '\u001b[0m');
 			}
+			
+			
+			//! Return Delete			
+			delete ctx.params.id
+			delete ctx.params.userToken
 
-			//console.log(sampleArray);
-
-			//! ------------------
-
-			//console
-			console.log('\u001b[' + 32 + 'm' + 'Json Silme' + '\u001b[0m')
-
-             delete ctx.params.id
-             delete ctx.params.token
-             delete ctx.params.userToken
-
-
-			return ctx.params
-
+			return ctx.params	
 
 		},
         async deleted_update(ctx) {
 		
-			const user = db.find(u => u.id == ctx.params.id);  // ! Arama
+			//! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);			
 
-            //? Kullanıcı Varsa
-			if (user) {
+			//! Veri Varsa 
+			if (dbFind) {     
+							
+			//! Güncelleme
+			dbFind["MessageDeleted"] = "1"
+			dbFind["MessageDeleted_at"] = new Date()
+			dbFind["updated_at"] = new Date()
 
-                //! ----------- Log -----------------------------              
-                let logs_add = await ctx.call('logs.add', {
-                    token: ctx.params.token,
-                    userToken: ctx.params.userToken,
-                    name: "message_update_successful",
-                    description: "Mesaj Güncelleme Başarılı"
-                })
+			// Json içine Verileri Yazıyor -> db
+			fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
 
-                delete ctx.params.userToken 
-				//! ----------- Log -----------------------------               
+				// Hata varsa
+				if (err) {
+					console.log(err)
+				}
+
+				//Console Yazma
+				console.log("Json Veri Kayıt Edildi -> Mesaj"); // Success
+			});
+			// End Json içine Verileri Yazıyor -> db
+
+
+			//! ----------- Log ----------------------------- 	
+			let logs_add = await ctx.call('logs.add', {					
+				userToken: ctx.params.userToken,
+				from: "mesaj",
+				fromToken: dbFind.MessageToken,
+				name: "message_deleted_update_successful",
+				description: "Mesaj Silme Kutusu Başarılı"
+			})			
+			//! ----------- Log Son -----------------------------  
+
+
+			//! Return Api	
+			ctx.params.title = "message.service -> Silinen Mesajlar"
+			ctx.params.tablo = "message.json"        
+			ctx.params.status = 1			
+			ctx.params.mesaj="Mesaj Silinen Kutusuna Gönderildi"
+
+			//Console Yazma	
+			console.log('\u001b[' + 32 + 'm' + 'Mesaj Silinen Kutusuna Gönderildi [ /api/message/deleted_update ] ' + '\u001b[0m');
+
+		}
+
+	    //! Veri Yoksa
+		else {
+
+			//! Return Api	
+			ctx.params.title = "message.service -> Silinen Mesajlar"
+			ctx.params.tablo = "message.json"        
+			ctx.params.status = 0					
+			ctx.params.mesaj="Mesaj Silinen Kutusuna Gönderilmedi"
+
+			//Console Yazma	
+			console.log('\u001b[' + 31 + 'm' + 'Mesaj Silinen Kutusuna Gönderilmedi [ /api/message/deleted_update ] ' + '\u001b[0m');
+
+		}
+		
+		//! Delete
+		delete ctx.params.id          
+		delete ctx.params.userToken        
 				
-				//! Update - Güncelleme
-				user["MessageDeleted"] = "1"
-				user["MessageDeleted_at"] = new Date()
-				user["updated_at"] = new Date()
+		return ctx.params
 
+      
+		},
+		async view(ctx) {
+		
+		//! Arama
+		const dbFind = db.find(u => u.id == ctx.params.id);			
 
-				// STEP 3: Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {					
-					if (err) { console.log(err) } //! Error
-					console.log("Json Eklendi"); // Success
+		//! Veri Varsa 
+		if (dbFind) {     
+
+			// Gelen Kutusuna Düşmüş ise
+			if(dbFind["ToUserToken"]==ctx.params.userToken) 
+			{			
+								
+				//! Güncelleme
+				dbFind["MessageReaded"] = "1"
+				dbFind["MessageReaded_at"] = new Date()
+				dbFind["updated_at"] = new Date()
+
+				// Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
+
+					// Hata varsa
+					if (err) {
+						console.log(err)
+					}
+
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi -> Mesaj"); // Success
 				});
+				// End Json içine Verileri Yazıyor -> db
 
-                //! Return 
-                ctx.params.title = "Mesaj Silinen Kutusuna Gönder"
-				ctx.params.tablo = "message.json"
-				ctx.params.status = 1
-                ctx.params.data_message = user,
-				ctx.params.data_logs = logs_add
+
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
+					userToken: ctx.params.userToken,
+					from: "mesaj",
+					fromToken: dbFind.MessageToken,
+					name: "message_read_successful",
+					description: "Mesaj Görüntüleme Başarılı"
+				})			
+				//! ----------- Log Son -----------------------------  
+
+
+				//! Return Api	
+				ctx.params.title = "message.service -> Mesaj Görüntüleme"
+				ctx.params.tablo = "message.json"        
+				ctx.params.status = 1			
+				ctx.params.mesaj="Mesaj Görüntülendi"
+
+				//Console Yazma	
+				console.log('\u001b[' + 32 + 'm' + 'Mesaj Görüntülendi [ /api/message/view ] ' + '\u001b[0m');
+			}
+			else
+			{
+				//! Return Api	
+				ctx.params.title = "message.service -> Mesaj Görüntüleme"
+				ctx.params.tablo = "message.json"        
+				ctx.params.status = 0			
+				ctx.params.mesaj="Mesaj Görüntülenmedi"
+
+				//Console Yazma	
+				console.log('\u001b[' + 32 + 'm' + 'Mesaj Görüntülenmedi [ /api/message/view ] ' + '\u001b[0m');
 
 			}
 
-			//! Kullanıcı Yoksa
-			else {
+		}
 
-			    //! Return 		
-                ctx.params.title = "Mesaj Silinen Kutusuna Gönder"
-				ctx.params.tablo = "message.json"
-				ctx.params.status = 0
-                ctx.params.data_message =  "Mesaj Bulunmadı"
-				ctx.params.data_logs = "Mesaj Bulunmadı"
+	    //! Veri Yoksa
+		else {
 
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Post [ update ]  Mesaj Bulunamadı' + '\u001b[0m'); //! console
+			//! Return Api	
+			ctx.params.title = "message.service -> Mesaj Görüntüleme"
+			ctx.params.tablo = "message.json"        
+			ctx.params.status = 0			
+			ctx.params.mesaj="Mesaj Görüntülenmedi"
 
-			}
-			
-            //! Delete
-            delete ctx.params.token          
-            delete ctx.params.userToken        
-                   
-			return ctx.params
+			//Console Yazma	
+			console.log('\u001b[' + 32 + 'm' + 'Mesaj Görüntülenmedi [ /api/message/view ] ' + '\u001b[0m');
+
+		}
+		
+		//! Delete
+		delete ctx.params.id          
+		delete ctx.params.userToken        
+				
+		return ctx.params
+
+      
 		},
         async inbox(ctx) {
 

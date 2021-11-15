@@ -231,7 +231,7 @@ module.exports = {
 			fastify.get('/api/admin/:id', async (req, res) => this.broker.call("admin.find",{id: req.params.id})) //! Search
 
 			fastify.post('/api/admin/find_post', async (req, res) => this.broker.call("admin.find_post",{...req.body})) //!  Search-Post
-			fastify.post('/api/admin/find_token', async (req, res) => this.broker.call("admin.find_token",{...req.body})) //!  Search-Post
+			fastify.post('/api/admin/find_token', async (req, res) => this.broker.call("admin.find_token",{...req.body})) //!  Search-Token
 			fastify.post('/api/admin/add', async (req, res) => this.broker.call("admin.add",{...req.body})) //! CREATE
 			fastify.post('/api/admin/update', async (req, res) => this.broker.call("admin.update",{...req.body})) //! UPDATE
 			fastify.post('/api/admin/updateUrl', async (req, res) => this.broker.call("admin.updateUrl",{...req.body})) //! UPDATE - URL
@@ -246,15 +246,18 @@ module.exports = {
 
 			fastify.get('/api/message/info',async (req,res)=> this.broker.call("message.info")) //! İnfo
 			fastify.post('/api/message/post', async (req, res) => this.broker.call("message.post",{...req.body})) //! POST
+			fastify.get('/api/message/html',async (req,res)=> this.broker.call("message.html")) //! Html
 			fastify.get('/api/message/all', async (req, res) => this.broker.call("message.all")) //! All
 			fastify.get('/api/message/find/:id', async (req, res) => this.broker.call("message.find",{id: req.params.id})) //!Search	
-			fastify.post('/api/message/view/:id', async (req, res) => this.broker.call("message.view",{id: req.params.id,...req.body})) //!Search - View
-					
+			
+			fastify.post('/api/message/find_post', async (req, res) => this.broker.call("message.find_post",{...req.body})) //!  Search-Post
+			fastify.post('/api/message/find_token', async (req, res) => this.broker.call("message.find_token",{...req.body})) //!  Search-Token		
 			fastify.post('/api/message/add', async (req, res) => this.broker.call("message.add",{...req.body})) //! CREATE		
 			fastify.post('/api/message/update', async (req, res) => this.broker.call("message.update",{...req.body})) //! UPDATE
 			fastify.post('/api/message/delete/:id', async (req, res) => this.broker.call("message.delete",{id: req.params.id,...req.body})) //! DELETE
 			fastify.post('/api/message/deleted_update/:id', async (req, res) => this.broker.call("message.deleted_update",{id: req.params.id,...req.body})) //! DELETED MESSAGE
-		
+		    
+			fastify.post('/api/message/view/:id', async (req, res) => this.broker.call("message.view",{id: req.params.id,...req.body})) //!Search - View
 			fastify.post('/api/message/inbox', async (req, res) => this.broker.call("message.inbox",{...req.body})) //! Inbox			
 		
 		//!---------------- message son ----------------------------------------------------------------------------------------------

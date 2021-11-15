@@ -517,7 +517,6 @@ module.exports = {
 
 		},
 		async updateUrl(ctx){
-
 		
 			// ! Arama
 			const dbFind = db.find(u => u.userToken == ctx.params.userToken);		
