@@ -6,6 +6,27 @@
  Version_Title => First
   ```
 
+ ## Eklenen Özellikler
+
+ ```
+  * Birinci Sürüm
+  ```
+  
+## Tüm Özellikler
+
+ ```
+  * Logs - Bildirim 
+  * Dosya Yükleme
+  * Dosya Yükleme Url Üzerinden
+  * Kullanıcı Bilgileri
+  * Kullanıcı Login
+  * Admin Bilgileri
+  * Admin Login
+  * Mesaj Alma ve Gönderme
+  * SSk - Sık Sorulan Sorular
+  * Blog Yazma
+  
+  ```
 
  ## URL - Adresler - Genel
 
