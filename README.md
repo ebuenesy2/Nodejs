@@ -9,7 +9,7 @@
  ## Eklenen Özellikler
 
  ```
-  * Birinci Sürüm
+  * Birinci Sürüm [ V1.0.0 ]
   ```
   
 ## Tüm Özellikler
