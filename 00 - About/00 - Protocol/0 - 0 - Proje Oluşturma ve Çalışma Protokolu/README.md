@@ -1,6 +1,6 @@
 # 0 - 0 - Proje Oluşturma ve Çalışma Protokolu
 
-## Port Bilgilerim
+## Port Bilgileri
 
  ```
  /3000 => React
