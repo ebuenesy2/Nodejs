@@ -1347,7 +1347,8 @@ module.exports = {
 				//! Return Api	
 				ctx.params.title = "file.service -> Dosya Güncelleme"
 				ctx.params.tablo = "file.json"        
-				ctx.params.status = 1	
+				ctx.params.status = 1
+				ctx.params.DB=file_upload.DB	
 				ctx.params.mesaj="Dosya Güncellendi"	
 				
 				//Console Yazma
@@ -1358,7 +1359,8 @@ module.exports = {
 				//! Return Api	
 				ctx.params.title = "file.service -> Dosya Güncelleme"
 				ctx.params.tablo = "file.json"        
-				ctx.params.status = 0	
+				ctx.params.status = 0
+				ctx.params.DB="Dosya Güncellenmedi"		
 				ctx.params.mesaj="Dosya Güncellenmedi"	
 				
 				//Console Yazma

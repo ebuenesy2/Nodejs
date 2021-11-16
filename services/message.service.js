@@ -449,7 +449,7 @@ module.exports = {
 				ctx.params.mesaj = "Mesaj Silindi"	
 				
 				//Console Yazma	
-			    console.log('\u001b[' + 32 + 'm' + 'Mesaj Veri Silindi [ /api/message/update ] ' + '\u001b[0m');
+			    console.log('\u001b[' + 32 + 'm' + 'Mesaj Veri Silindi [ /api/message/delete ] ' + '\u001b[0m');
                
 
 			} else {
@@ -461,7 +461,7 @@ module.exports = {
 				ctx.params.mesaj = "Mesaj Silinemedi"	
 				
 				//Console Yazma	
-				console.log('\u001b[' + 31 + 'm' + 'Mesaj Veri Silinemedi [ /api/message/update ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Mesaj Veri Silinemedi [ /api/message/delete ] ' + '\u001b[0m');
 
 			}
 			
