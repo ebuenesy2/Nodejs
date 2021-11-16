@@ -1,13 +1,13 @@
-
-## Port Bilgilerim
+ ## Proje Hakkında
 
  ```
- /3000 => React
- /3001 => Api - Nodejs
- /8000 => Laravel
+ Version => V1.0.0
+ Release_Date => 20 Kasım 2021
+ Version_Title => First
   ```
 
-  ## Proje Hakkında - Version [ V1 ]
+
+ ## URL
 
  ```
  /env => Env
@@ -22,7 +22,14 @@
  /api/blogs => Blog
 
   ```
+  
+## Port Bilgilerim
 
+ ```
+ /3000 => React
+ /3001 => Api - Nodejs
+ /8000 => Laravel
+  ```
 
 ## Çalıştırma - Terminal
 
@@ -48,5 +55,4 @@ https://api-yildirim-dev.herokuapp.com/
 
 
 # Contact
-Copyright (c) 2021 - Kasım  By Ebu Enes Yıldırım
-
+Copyright (c) 2021 - Kasım  By Ebu Enes Yıldırım [ yildirimdev ]
