@@ -84,7 +84,7 @@
 
   ```
   
-## Port Bilgilerim
+## Port Bilgileri
 
  ```
  /3000 => React
