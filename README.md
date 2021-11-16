@@ -48,5 +48,5 @@ https://api-yildirim-dev.herokuapp.com/
 
 
 # Contact
-Copyright (c) 2021 - Temmuz  By Ebu Enes Yıldırım
+Copyright (c) 2021 - Kasım  By Ebu Enes Yıldırım
 
