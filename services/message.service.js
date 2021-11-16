@@ -82,10 +82,10 @@ module.exports = {
 			if (dbFind) {	               
                 
 				//! Return Api   
-				ctx.params.title = "Mesaj Arama"
+				ctx.params.title = "message.service -> Veri Arama"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 1
-				ctx.params.data_message = dbFind
+				ctx.params.DB = dbFind
 			
 
 				//Console Yazma
@@ -96,10 +96,10 @@ module.exports = {
 			else {
 				
 				//! Return Api   
-				ctx.params.title = "Mesaj  Araama"
+				ctx.params.title = "message.service -> Veri Arama"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 0
-				ctx.params.data_message = "Mesaj  Bulunmadı"
+				ctx.params.DB = "Mesaj  Bulunmadı"
 			
 				
 				//Console Yazma
@@ -107,6 +107,8 @@ module.exports = {
 
 			}
 
+			//! Return
+			delete ctx.params.id
 
 			return ctx.params
 		},	
@@ -269,7 +271,8 @@ module.exports = {
 
 					//Console Yazma
 					console.log("Json Veri Kayıt Edildi -> Mesaj "); // Success
-				});				
+				});	
+				//End Json içine Verileri Yazıyor -> db			
 
 
 				//! ----------- Log ----------------------------- 	
@@ -363,8 +366,8 @@ module.exports = {
 					//Console Yazma
 					console.log("Json Veri Kayıt Edildi -> Mesaj"); // Success
 				});	
-				// End Json içine Verileri Yazıyor -> db				
-
+				// End Json içine Verileri Yazıyor -> db		
+						
 
                 //! Return Api   
 				ctx.params.title = "message.service -> Veri Güncelleme"

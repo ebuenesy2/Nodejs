@@ -266,9 +266,12 @@ module.exports = {
 
 			fastify.get('/api/ssk/info',async (req,res)=> this.broker.call("ssk.info")) //! İnfo
 			fastify.post('/api/ssk/post', async (req, res) => this.broker.call("ssk.post",{...req.body})) //! POST
+			fastify.get('/api/ssk/html',async (req,res)=> this.broker.call("ssk.html")) //! Html
 			fastify.get('/api/ssk/all', async (req, res) => this.broker.call("ssk.all")) //! All
-			fastify.get('/api/ssk/:id', async (req, res) => this.broker.call("ssk.find",{id: req.params.id})) //!Search	
+			fastify.get('/api/ssk/:id', async (req, res) => this.broker.call("ssk.find",{id: req.params.id})) //! Search	
 
+			fastify.post('/api/ssk/find_post', async (req, res) => this.broker.call("ssk.find_post",{...req.body})) //!  Search-Post
+			fastify.post('/api/ssk/find_token', async (req, res) => this.broker.call("ssk.find_token",{...req.body})) //!  Search-Token	
 			fastify.post('/api/ssk/add', async (req, res) => this.broker.call("ssk.add",{...req.body})) //! CREATE		
 			fastify.post('/api/ssk/update', async (req, res) => this.broker.call("ssk.update",{...req.body})) //! UPDATE
 			fastify.post('/api/ssk/delete/:id', async (req, res) => this.broker.call("ssk.delete",{id: req.params.id,...req.body})) //! DELETE
@@ -279,12 +282,17 @@ module.exports = {
 
 			fastify.get('/api/blogs/info',async (req,res)=> this.broker.call("blogs.info")) //! İnfo
 			fastify.post('/api/blogs/post', async (req, res) => this.broker.call("blogs.post",{...req.body})) //! POST
+			fastify.get('/api/blogs/html', async (req, res) => this.broker.call("blogs.html")) //! Html
 			fastify.get('/api/blogs/all', async (req, res) => this.broker.call("blogs.all")) //! All
-			fastify.get('/api/blogs/:id', async (req, res) => this.broker.call("blogs.find",{id: req.params.id})) //!Search	
+			fastify.get('/api/blogs/:id', async (req, res) => this.broker.call("blogs.find",{id: req.params.id})) //! Search	
 
+			fastify.post('/api/blogs/find_post', async (req, res) => this.broker.call("blogs.find_post",{...req.body})) //!  Search-Post
+			fastify.post('/api/blogs/find_token', async (req, res) => this.broker.call("blogs.find_token",{...req.body})) //!  Search-Token	
 			fastify.post('/api/blogs/add', async (req, res) => this.broker.call("blogs.add",{...req.body})) //! CREATE		
+			fastify.post('/api/blogs/addUrl', async (req, res) => this.broker.call("blogs.addUrl",{...req.body})) //! CREATE - URL		
 			fastify.post('/api/blogs/update', async (req, res) => this.broker.call("blogs.update",{...req.body})) //! UPDATE
-			fastify.post('/api/blogs/delete', async (req, res) => this.broker.call("blogs.delete",{...req.body})) //! DELETE
+			fastify.post('/api/blogs/updateUrl', async (req, res) => this.broker.call("blogs.updateUrl",{...req.body})) //! UPDATE - URL
+			fastify.post('/api/blogs/delete/:id', async (req, res) => this.broker.call("blogs.delete",{id: req.params.id,...req.body})) //! DELETE
 		
 		//!---------------- blogs son ----------------------------------------------------------------------------------------------
 

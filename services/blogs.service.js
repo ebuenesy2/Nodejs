@@ -13,139 +13,246 @@ module.exports = {
 
 	actions: {
 		async info(ctx) {
+			
+			//! Return Api
 			ctx.params.title = "blogs.service"
 			ctx.params.time = dayjs().toDate()
-			ctx.params.APi_URL = process.env.APi_URL
+			ctx.params.APi_URL=process.env.APi_URL
 
 			return ctx.params
 		},
 		async post(ctx) {
 
+			//! Return Api
 			ctx.params.createdAt = dayjs().toDate();
 			delete ctx.params.createdAt;
 
 			return ctx.params
+
+		},
+		async html(ctx) {
+		
+            ctx.meta.$responseType = "text/html";
+            return Buffer.from(`
+                    <html>
+                    <body>
+                        <h1>Hello API ebu enes!</h1>
+                        <img src="/api/file.image" />
+                    </body>
+                    </html>
+            `);
+			
 		},
 		async all(ctx) {
 
-			//JSON        
+			try {
 
-			ctx.params.title = "blogs Tüm Veriler"
-			ctx.params.time = dayjs().toDate()
-			ctx.params.size=db.length
-			ctx.params.DB = db
+				//! Return Api   
+				ctx.params.title = "blogs.service -> Tüm Veriler"
+				ctx.params.tablo = "blogs.json"
+				ctx.params.status = 1
+				ctx.params.size=db.length
+				ctx.params.DB = db		
 
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Blogs Tüm Veriler Okundu [ /api/blogs/all ] ' + '\u001b[0m');
+
+			} catch (error) {
+
+				//! Return Api   
+				ctx.params.title = "blogs.service -> Tüm Veriler"
+				ctx.params.tablo = "blogs.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.DB = error
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Blogs Tüm Veriler Okunamadı [ /api/blogs/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+			
+			}
+
+			//! Return
 			return ctx.params
 		},
 		async find(ctx) {
 
-
 			// ! Arama
-			const user = db.find(u => u.id == ctx.params.id);
+			const dbFind = db.find(u => u.id == ctx.params.id);
 
-			/*
-			let follow = await ctx.call('follow.follow', {
-				user_id: ctx.params.id
-			})
-			*/
-
-
-			// Kullanıcı Varsa
-			if (user) {
-
-				let user_logs = await ctx.call('logs.find_user', {
-					email: user.email
-				})
-
-
-				//api
-				ctx.params.title = "Blogs Arama"
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "blogs.service -> Veri Arama"
 				ctx.params.tablo = "blogs.json"
 				ctx.params.status = 1
-				ctx.params.data_blog = user
-				//ctx.params.data_user_logs = user_logs
+				ctx.params.DB = dbFind
+			
 
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ admin/:userId ]' + '\u001b[0m');
-
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Blogs Veri Arama [ /api/blogs/find ] ' + '\u001b[0m');
 			}
 
-			//! Kullanıcı Yoksa
+			//! Veri Yoksa
 			else {
-				//api
-				//api
-				ctx.params.title = "Blogs Araama"
+				
+				//! Return Api   
+				ctx.params.title = "blogs.service -> Veri Arama"
 				ctx.params.tablo = "blogs.json"
 				ctx.params.status = 0
-				ctx.params.data_blog = "Blogs Bulunmadı"
-				//ctx.params.data_user_logs = ""
+				ctx.params.DB = "Blogs  Bulunmadı"
+			
 				
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ admin/:userId ]  Blogs Bulunamadı' + '\u001b[0m');
-
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Blogs Veri Bulunamadı [ /api/blogs/find ] ' + '\u001b[0m');	
 			}
 
+			//! Return
+			delete ctx.params.id
 
 			return ctx.params
 		},
-        async add(ctx) {		
+		async find_post(ctx) {
+
+			// ! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);
+
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "blogs.service -> Veri Arama"
+				ctx.params.tablo = "blogs.json"
+				ctx.params.status = 1
+				ctx.params.DB = dbFind
+			
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Blogs Veri Arama [ /api/blogs/find_post ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "blogs.service -> Veri Arama"
+				ctx.params.tablo = "blogs.json"
+				ctx.params.status = 0
+				ctx.params.DB = "Blogs  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Blogs Veri Bulunamadı [ /api/blogs/find_post ] ' + '\u001b[0m');	
+			}
+
+			//! Return
+			delete ctx.params.id
+
+			return ctx.params
+		},	
+		async find_token(ctx) {
+
+			// ! Arama
+			const dbFind = db.find(u => u.blogToken == ctx.params.blogToken);
+
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "blogs.service -> Veri Arama"
+				ctx.params.tablo = "blogs.json"
+				ctx.params.status = 1
+				ctx.params.DB = dbFind
+			
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Blogs Veri Arama [ /api/blogs/find_token ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "blogs.service -> Veri Arama"
+				ctx.params.tablo = "blogs.json"
+				ctx.params.status = 0
+				ctx.params.DB = "Blogs  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Blogs Veri Bulunamadı [ /api/blogs/find_token ] ' + '\u001b[0m');	
+			}
+
+			//! Return
+			delete ctx.params.blogToken
+
+			return ctx.params
+		},	 
+		async add(ctx) {           
+
 			try {
 
-                //! Return
-                ctx.params.title = "Blogs Json Ekleme"
-                ctx.params.tablo = "blogs.json"           
-                ctx.params.status = 1
-        
+				//! Sabit
+				let blogFileUrl=null;
+				let blogUploadUrl=null;
+	
+				//! Resim Yükleme Onay - BlogImage
+				if(ctx.params.blogImageControl=="0") { 	console.log('\u001b[' + 31 + 'm' + 'Blog Resim Yükleme Onaylanmadı' + '\u001b[0m'); }
+				if(ctx.params.blogImageControl=="1") {
+					console.log('\u001b[' + 32 + 'm' + 'Blog Resim Yükleme Onaylandı' + '\u001b[0m');  
+	
+					//! -----------  File UPLOAD ----------------------------- 	
+					let file_upload = await ctx.call('file.upload', {
+						file: ctx.params.blogFile,
+						role: ctx.params.role,
+						userToken: ctx.params.userToken,                  
+						usedPage: "blog"
+					})     
+					//! ----------- End File UPLOAD ----------------------------- 
+					
+					// Dosya Yükleme Kontrol
+					if(file_upload.status==0) { 
+						console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m');
+						blogFileUrl=null;
+						blogUploadUrl=null;
+						}
+					if(file_upload.status==1) { 
+						console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m'); 
+						blogFileUrl=file_upload.DB["fileUrl"];
+						blogUploadUrl=file_upload.DB["uploadDir"];
+					}
+					// END Dosya Yükleme Kontrol		
+				}
+	
+				//Console Yazma
+				//console.log('\u001b[' + 32 + 'm' + 'BlogFileUrl : '+ blogFileUrl + '\u001b[0m')
+				//Console.log('\u001b[' + 32 + 'm' + 'BlogUploadUrl : '+ blogUploadUrl + '\u001b[0m')
 
-                //! File UPLOAD
-                let file_upload = await ctx.call('file.upload', {
-                    token: ctx.params.token,
-                    file: ctx.params.blogImageUrl,
-                    role: "admin",
-                    userToken: ctx.params.userToken,                  
-                    usedPage: "Blog"
-                })
+				//! Token
+				let BlogId=new Date().getTime();
 
-                ctx.params.file_upload = file_upload    
-                //console.log(file_upload)         
-                delete ctx.params.blogImageUrl //! delete 
-                //! End File Upload
-
-               //! Tanım
-               let blogUploadUrl="";
-               let blogFileUrl="";
-			   let blogImageControlHave="0";
-
-               if(ctx.params.file_upload.status==1) {  blogUploadUrl=ctx.params.file_upload.uploadDir; blogFileUrl=ctx.params.file_upload.fileUrl; blogImageControlHave="1"; }
-               if(ctx.params.file_upload.status==0) {  blogUploadUrl=null; blogFileUrl=null; blogImageControlHave="0"; }
-               //! End File Url Update
-
-			   //! Token
-			   let BlogId=new Date().getTime();
-
-			   let blogInfo={
-					token: ctx.params.token,
+				let blogInfo={				
 					id: BlogId,	
 					userToken: ctx.params.userToken,
-					blogImageControl:blogImageControlHave,
+					blogImageControl:ctx.params.blogImageControl,
 					blogFileUrl: blogFileUrl,
 					blogUploadUrl: blogUploadUrl,
 					blogDescription: ctx.params.blogDescription,
 					blogContext: ctx.params.blogContext,
 					blogCategories: ctx.params.blogCategories			
-			   }
-			    
-			   const secret = 'secret';
-			   const data = blogInfo;
-			   const jwt = sign(data, secret);		
-			   //! End Token	
-			   
+				}
+				
+				const secret = 'secret';
+				const data = blogInfo;
+				const jwt = sign(data, secret);		
+				//! End Token	
+				
 				//! Eklenecek veriler
-				const willSaveData = {
-                    token: ctx.params.token,
+				const willSaveData = {				
 					id: BlogId,				
 					userToken: ctx.params.userToken,
-					blogImageControl:blogImageControlHave,
+					blogImageControl:ctx.params.blogImageControl,
 					blogFileUrl: blogFileUrl,
 					blogUploadUrl: blogUploadUrl,
 					blogDescription: ctx.params.blogDescription,
@@ -153,311 +260,414 @@ module.exports = {
 					blogCategories: ctx.params.blogCategories,
 					blogToken:jwt,			
 					created_at: new Date(),
-                    updated_at: new Date()
+					updated_at: new Date()
 				}
 
 				//Verileri Kaydet
 				db.push(willSaveData)
 
-				// STEP 3: Json içine Verileri Yazıyor -> db
+				//Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/blogs.json', JSON.stringify(db), err => {
 
-					// Checking for errors
+					// Hata varsa
 					if (err) {
 						console.log(err)
-					}
+					}							
 
-					console.log("Json writing"); // Success
-				});
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi -> BLOG "); // Success
+				});	
+				//End Json içine Verileri Yazıyor -> db
 
-                //! Logs Add                    
-                let logs_add = await ctx.call('logs.add', {
-                    token: ctx.params.token,
-                    userToken: ctx.params.userToken,
-                    name: "blogs_add_successful",
-                    description: "Blog Ekleme Yapıldı"
-                })
+				
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
+					userToken: ctx.params.userToken,
+					from: "blogs",
+					fromToken: jwt,
+					name: "blogs_add_successful",
+					description: "Blog Ekleme Başarılı"
+				})			
+				//! ----------- Log Son -----------------------------  
 
-                ctx.params.data_logs = logs_add
-                //! End Logs Add
 
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Blog Yazıldı' + '\u001b[0m')     			
-    
+				//! Return Api	
+				ctx.params.title = "blogs.service -> Veri Ekleme"
+				ctx.params.tablo = "blogs.json"        
+				ctx.params.status = 1			
+				ctx.params.mesaj="Veri Eklendi"
+
+				//Console Yazma	
+				console.log('\u001b[' + 32 + 'm' + 'Blog Veri Eklendi [ /api/blogs/addUrl ] ' + '\u001b[0m');
+		
+
 
 			} catch (error) {
 
-				//! Status
-				ctx.params.status = 0
-
-			}
-          
-           
-			//! Return - Delete
-			delete ctx.params.token
-			delete ctx.params.userToken
-			delete ctx.params.blogDescription
-			delete ctx.params.blogContext
-			delete ctx.params.blogCategories
-
-			delete ctx.params.blogImageUrl //! delete 
-           
-			return ctx.params
-
-		},	
-		async update(ctx) {
-
-			// ! Arama
-			const user = db.find(u => u.blogToken == ctx.params.blogToken);
-
-			// Kullanıcı Varsa
-			if (user) { 
 				
-				//! Tanım
-				let file_upload=[];
-
-				//! Resim Var Mı
-				let blogImageControlHave=ctx.params.blogImageControlHave; 
-				if(blogImageControlHave==0) { 
-
-					console.log('\u001b[' + 31 + 'm' + 'Blog Resim Onaylanmadı' + '\u001b[0m');
-					
-					//! File Delete
-					let file_delete = await ctx.call('file.fileDelete', {
-						token: ctx.params.token,
-						userToken: ctx.params.userToken,                  
-						fileUrl: user.blogUploadUrl
-					})
-
-				}
-				if(blogImageControlHave==1) { 
-					
-					console.log('\u001b[' + 32 + 'm' + 'Blog Resim Onay' + '\u001b[0m'); 
-
-					//! File UPLOAD
-					file_upload = await ctx.call('file.upload', {
-						token: ctx.params.token,
-						file: ctx.params.blogImageUrl_File,
-						role: "admin",
-						userToken: ctx.params.userToken,                  
-						usedPage: "Blog"
-					})
-					
-					ctx.params.file_upload = file_upload
-					//console.log('\u001b[' + 32 + 'm' + 'File Upload ' + '\u001b[0m')    
-					//console.log(file_upload)         
-					//! End File Upload
-
-					//console.log('\u001b[' + 31 + 'm' + 'user blogUploadUrl : '+ user.blogUploadUrl + '\u001b[0m')
-					//console.log('\u001b[' + 32 + 'm' + 'file_upload Image Url : '+ file_upload.uploadDir + '\u001b[0m')
-					//console.log('\u001b[' + 32 + 'm' + 'file_upload status : '+ file_upload.status + '\u001b[0m')			
-								
-					//! File Url Update
-					let blogUploadUrl="";
-					if(file_upload.status==1) { 
-
-						console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m')
-						//console.log('\u001b[' + 32 + 'm' + 'Blog Image Url : '+ user.blogUploadUrl + '\u001b[0m')
-
-						//! File Delete
-						let file_delete = await ctx.call('file.fileDelete', {
-							token: ctx.params.token,
-							userToken: ctx.params.userToken,                  
-							fileUrl: user.blogUploadUrl
-						})
-
-						//ctx.params.file_delete = file_delete  
-						//console.log('\u001b[' + 32 + 'm' + 'File Delete ' + '\u001b[0m')      
-						//console.log(file_delete)         
-						//! End File Delete
-
-						//! Update FİLE 
-						user["blogUploadUrl"] = file_upload.uploadDir;                 
-						user["blogFileUrl"] = file_upload.fileUrl;                 
-					}			
-
-					//if(ctx.params.file_upload.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m') }  
-					//if(ctx.params.file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yükleneme Hatalı' + '\u001b[0m')  }  
-					//! End File Url Update				 
-
-
-					//!! Delete
-					delete ctx.params.file_upload
-					delete ctx.params.file_delete
-					delete ctx.params.blogImageUrl_File									
-
-					//!! Update - only Text -   pass by reference
-					Object.keys(ctx.params).forEach(key => {
-					
-						if(key!="blogUploadUrl" || key!="title" || key!="tablo" || key!="status" ) { user[key] = ctx.params[key] }  //! Only Text 
-					
-					})
-					//!! End Update - only Text -   pass by reference				
-					
-					//! Update FİLE 
-					if(file_upload.status==1) {  user["blogUploadUrl"] = file_upload.uploadDir; user["blogFileUrl"] = file_upload.fileUrl; }           		
-					if(file_upload.status==0) {  user["blogUploadUrl"] = user.blogUploadUrl;  user["blogFileUrl"] = user.blogFileUrl;}         		
-			
-		    	}
-
-				//! -------------- Update -----------	
-				user["blogImageControl"] = blogImageControlHave
-				user["updated_at"] = new Date()  
-
-				// STEP 3: Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/blogs.json', JSON.stringify(db), err => {
-
-					// Checking for errors
-					if (err) {
-						console.log('\u001b[' + 31 + 'm' + 'Dosya Yükleneme Hatalı' + '\u001b[0m')
-						console.log(err)
-					}
-
-					console.log("Blogs Güncelleme Yapıldı"); // Success
-				});
-				//! -------------- End Update -----------
-
-				
-
-				//! -------------- Logs Ekleme	  -----------					
-				 let logs_add = await ctx.call('logs.add', {
-					 token: ctx.params.token,
-					 userToken: ctx.params.userToken,				
-					 name: "blogs_update_successful",
-					 description: "Blog Güncelleme Yapıldı"
-				 })
-				 //! -------------- Logs Ekleme	 Son  -----------		
-
-				 //console
-				console.log('\u001b[' + 32 + 'm' + 'Json Güncelleme' + '\u001b[0m')		
-				                 
-                 //! Return Api				
-				ctx.params.title = "Blogs Guncelleme"
-				ctx.params.tablo = "blogs.json"
-				ctx.params.status = 1				
-				ctx.params.data_blogs = user
-				ctx.params.file_upload = file_upload
-				ctx.params.data_logs = logs_add
-
-			}
-
-			//! Kullanıcı Yoksa
-			else {
-
-				//api			
-				ctx.params.title = "Blogs Guncelleme"
-				ctx.params.tablo = "blogs.json"
+				//! Return Api	
+				ctx.params.title = "blogs.service -> Veri Ekleme"
+				ctx.params.tablo = "blogs.json"        
 				ctx.params.status = 0			
-			    ctx.params.file_upload = "Blogs Bulunmadı"
-				ctx.params.data_blogs =  "Blogs Bulunmadı"
-				ctx.params.data_logs = "Blogs Bulunmadı"
+				ctx.params.mesaj="Veri Eklenemedi"
 
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Post [ update ]  Blogs Bulunamadı' + '\u001b[0m');		
-			}
-               
+				//Console Yazma	
+				console.log('\u001b[' + 31 + 'm' + 'Blog Veri Eklenemedi [ /api/blogs/addUrl ] ' + '\u001b[0m');
+
+			}  
 			
-			//! Retun Delete
-			delete ctx.params.token
-            delete ctx.params.userToken
-            delete ctx.params.userId
-            delete ctx.params.blogImageUrl
-            delete ctx.params.blogDescription
-            delete ctx.params.blogContext
-            delete ctx.params.blogCategories	
 
-			delete  ctx.params.file_upload
-            delete ctx.params.blogToken
-            delete ctx.params.blogImageUrl_File
-            delete ctx.params.blogImageControlHave
-					
+			//! Return	          
+            delete ctx.params.role 
+            delete ctx.params.userToken 
+            delete ctx.params.blogImageControl            
+            delete ctx.params.blogFile            
+            delete ctx.params.blogDescription 
+            delete ctx.params.blogContext 
+            delete ctx.params.blogCategories 
 
 			return ctx.params
 
 		},
-        async delete(ctx) {
-		
-			const user = db.find(u => u.blogToken == ctx.params.blogToken); 	// ! find
-			var index = db.findIndex(a => a.blogToken === ctx.params.blogToken); 	// ! findIndex
-			if (index > -1) {
-				db.splice(index, 1);
+		async addUrl(ctx) {
+
+			try {
+
+						
+				//! Sabit
+				let blogFileUrl=null;
+				let blogUploadUrl=null;
+
+				//! Resim Yükleme Onay - BlogImage
+				if(ctx.params.blogImageControl=="0") { 	console.log('\u001b[' + 31 + 'm' + 'Blog Resim Yükleme Onaylanmadı' + '\u001b[0m'); }
+				if(ctx.params.blogImageControl=="1") {
+						console.log('\u001b[' + 32 + 'm' + 'Blog Resim Yükleme Onaylandı' + '\u001b[0m');  
+
+						//! -----------  File UPLOAD ----------------------------- 	
+						let file_upload = await ctx.call('file.uploadUrl', {
+							fileUrl: ctx.params.blogFileUrl,
+							role: ctx.params.role,
+							userToken: ctx.params.userToken,                  
+							usedPage: "blog"
+						})	
+						//! ----------- End File UPLOAD ----------------------------- 
+						
+						// Dosya Yükleme Kontrol
+						if(file_upload.status==0) { 
+							console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m');
+							blogFileUrl=null;
+							blogUploadUrl=null;
+						}
+						if(file_upload.status==1) { 
+							console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m'); 
+							blogFileUrl=file_upload.DB["fileUrl"];
+							blogUploadUrl=file_upload.DB["uploadDir"];
+						}
+						// END Dosya Yükleme Kontrol		
+					}
+
+				//Console Yazma
+				//console.log('\u001b[' + 32 + 'm' + 'BlogFileUrl : '+ blogFileUrl + '\u001b[0m')
+				//console.log('\u001b[' + 32 + 'm' + 'BlogUploadUrl : '+ blogUploadUrl + '\u001b[0m')
 
 
-                 //! Delete Json
-				// STEP 3: Json içine Verileri Yazıyor -> db
+				//! Token
+				let BlogId=new Date().getTime();
+
+				let blogInfo={				
+					id: BlogId,	
+					userToken: ctx.params.userToken,
+					blogImageControl:ctx.params.blogImageControl,
+					blogFileUrl: blogFileUrl,
+					blogUploadUrl: blogUploadUrl,
+					blogDescription: ctx.params.blogDescription,
+					blogContext: ctx.params.blogContext,
+					blogCategories: ctx.params.blogCategories			
+				}
+				
+				const secret = 'secret';
+				const data = blogInfo;
+				const jwt = sign(data, secret);		
+				//! End Token	
+				
+				//! Eklenecek veriler
+				const willSaveData = {				
+					id: BlogId,				
+					userToken: ctx.params.userToken,
+					blogImageControl:ctx.params.blogImageControl,
+					blogFileUrl: blogFileUrl,
+					blogUploadUrl: blogUploadUrl,
+					blogDescription: ctx.params.blogDescription,
+					blogContext: ctx.params.blogContext,
+					blogCategories: ctx.params.blogCategories,
+					blogToken:jwt,			
+					created_at: new Date(),
+					updated_at: new Date()
+				}
+
+				//Verileri Kaydet
+				db.push(willSaveData)
+
+				//Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/blogs.json', JSON.stringify(db), err => {
 
-					// Checking for errocş
+					// Hata varsa
+					if (err) {
+						console.log(err)
+					}							
+
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi -> BLOG "); // Success
+				});	
+				//End Json içine Verileri Yazıyor -> db
+
+				
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
+					userToken: ctx.params.userToken,
+					from: "blogs",
+					fromToken: jwt,
+					name: "blogs_add_successful",
+					description: "Blog Ekleme Başarılı"
+				})			
+				//! ----------- Log Son -----------------------------  
+
+
+				//! Return Api	
+				ctx.params.title = "blogs.service -> Veri Ekleme"
+				ctx.params.tablo = "blogs.json"        
+				ctx.params.status = 1			
+				ctx.params.mesaj="Veri Eklendi"
+
+				//Console Yazma	
+				console.log('\u001b[' + 32 + 'm' + 'Blog Veri Eklendi [ /api/blogs/addUrl ] ' + '\u001b[0m');
+		
+
+
+			} catch (error) {
+				
+				//! Return Api	
+				ctx.params.title = "blogs.service -> Veri Ekleme"
+				ctx.params.tablo = "blogs.json"        
+				ctx.params.status = 0			
+				ctx.params.mesaj="Veri Eklenemedi"
+
+				//Console Yazma	
+				console.log('\u001b[' + 31 + 'm' + 'Blog Veri Eklenemedi [ /api/blogs/addUrl ] ' + '\u001b[0m');
+
+			}  
+
+
+			//! Return	          
+            delete ctx.params.userToken 
+            delete ctx.params.role 
+            delete ctx.params.blogImageControl 
+            delete ctx.params.blogFileUrl 
+            delete ctx.params.blogDescription 
+            delete ctx.params.blogContext 
+            delete ctx.params.blogCategories 
+
+			return ctx.params
+
+		},
+		async update(ctx) {
+			
+			// ! Arama
+			const dbFind = db.find(u => u.blogToken == ctx.params.blogToken); 
+
+			//! Veri Varsa 
+			if (dbFind) {
+
+					
+				//! Sabit
+				let blogFileUrl=null;
+				let blogUploadUrl=null;
+
+				//! Resim Yükleme Onay - BlogImage
+				if(ctx.params.blogImageControl=="0") { 	console.log('\u001b[' + 31 + 'm' + 'Blog Resim Yükleme Onaylanmadı' + '\u001b[0m'); }
+				if(ctx.params.blogImageControl=="1") {
+						console.log('\u001b[' + 32 + 'm' + 'Blog Resim Yükleme Onaylandı' + '\u001b[0m');  
+
+						
+						//! -----------  File UPLOAD ----------------------------- 	
+						let file_upload = await ctx.call('file.updateFile', {
+							old_fileUrl:dbFind.blogUploadUrl,
+							file: ctx.params.blogFile,
+							role: ctx.params.role,
+							userToken: ctx.params.userToken,                  
+							usedPage: "blog"
+						})
+						//! ----------- End File UPLOAD ----------------------------- 
+
+						// Dosya Yükleme Kontrol
+						if(file_upload.status==0) { 
+							console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m');
+							blogFileUrl=null;
+							blogUploadUrl=null;
+						}
+						if(file_upload.status==1) { 
+							console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m'); 
+							blogFileUrl=file_upload.DB["fileUrl"];
+							blogUploadUrl=file_upload.DB["uploadDir"];
+
+							dbFind["blogFileUrl"] = blogFileUrl
+							dbFind["blogUploadUrl"] = blogUploadUrl
+						}
+				}
+
+				//Console Yazma
+				//console.log('\u001b[' + 32 + 'm' + 'BlogFileUrl : '+ blogFileUrl + '\u001b[0m')
+				//console.log('\u001b[' + 32 + 'm' + 'BlogUploadUrl : '+ blogUploadUrl + '\u001b[0m')
+
+
+				//! Delete
+				delete ctx.params.role
+				delete ctx.params.blogFile 
+							
+				// Referans Veriler Güncelleme Yapıyor
+				Object.keys(ctx.params).forEach(key => {					
+					if(key!="blogFile" || key!="role"  ) { dbFind[key] = ctx.params[key] }  //! Only Text 				
+				})
+				dbFind["updated_at"] = new Date()
+				// End  Referans Veriler Güncelleme Yapıyor
+				
+				// Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/blogs.json', JSON.stringify(db), err => {
+
+					// Hata varsa
 					if (err) {
 						console.log(err)
 					}
 
-					console.log("Json writing"); // Success
-				});
-                //! End Delete Json
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi -> Blog"); // Success
+				});	
+				// End Json içine Verileri Yazıyor -> db
+						
+						
 
-                
-                
-                //! File Delete
-                //console.log('\u001b[' + 32 + 'm' + 'Blog Image Url : '+ user.blogImageUrl + '\u001b[0m')
-                if(user.blogImageUrl==null) {  console.log('\u001b[' + 31 + 'm' + 'Blog Image Url : Yok'+ '\u001b[0m') }
-                else { 
-                    
-                    console.log('\u001b[' + 32 + 'm' + 'Blog Image Url : Var'+ '\u001b[0m')
-                    console.log('\u001b[' + 32 + 'm' + 'Blog Image Url : '+ user.blogImageUrl + '\u001b[0m')
-
-                    
-                    //! File Delete
-                    let file_delete = await ctx.call('file.fileDelete', {
-                        token: ctx.params.token,
-                        userToken: ctx.params.userToken,                  
-                        fileUrl: user.blogImageUrl
-                    })
-
-                    //ctx.params.file_delete = file_delete  
-                    console.log('\u001b[' + 32 + 'm' + 'File Delete ' + '\u001b[0m')      
-                    console.log(file_delete)         
-                    //! End File Delete                    
-                }       	
-
-				//! -------------- Logs Ekleme	  -----------					
-				let logs_add = await ctx.call('logs.add', {
-					token: ctx.params.token,
-					userId: ctx.params.userId,
-					name: "blog_delete_successful",
-					description: "Blog Silme Başarılı"
-				})
-				//! -------------- Logs Ekleme	 Son  -----------		
-                
-				//! Return Api
-				ctx.params.title = "Blogs Silme"
+				//! Return Api   
+				ctx.params.title = "blogs.service -> Veri Güncelleme"
 				ctx.params.tablo = "blogs.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Blogs Silindi"
-				ctx.params.data_blogs=user
-				ctx.params.data_logs= logs_add
+				ctx.params.mesaj = "Blog Güncellendi"	
+				
+				//Console Yazma	
+				console.log('\u001b[' + 32 + 'm' + 'Blog Veri Güncellendi [ /api/blogs/update ] ' + '\u001b[0m');
+
+			}
+
+			//! Veri Yoksa 
+			else {
+
+				//! Return Api   
+				ctx.params.title = "blogs.service -> Veri Güncelleme"
+				ctx.params.tablo = "blogs.json"
+				ctx.params.status = 0
+				ctx.params.mesaj = "Blog Güncellenemedi"	
+				
+				//Console Yazma	
+				console.log('\u001b[' + 32 + 'm' + 'Blog Veri Güncellenemedi [ /api/blogs/update ] ' + '\u001b[0m');
+
+			}	
+			
+
+           	//! Return	          
+			delete ctx.params.blogToken 
+			delete ctx.params.role 
+			delete ctx.params.userToken 
+			delete ctx.params.blogImageControl            
+			delete ctx.params.blogFile            
+			delete ctx.params.blogDescription 
+			delete ctx.params.blogContext 
+			delete ctx.params.blogCategories       
+
+			return ctx.params	  
+
+		},
+		async updateUrl(ctx) {
+			
+			// ! Arama
+			const dbFind = db.find(u => u.blogToken == ctx.params.blogToken); 
+
+			console.log(dbFind);
+		
+
+           	//! Return	          
+			delete ctx.params.blogToken 
+			delete ctx.params.role 
+			delete ctx.params.userToken 
+			delete ctx.params.blogImageControl            
+			delete ctx.params.blogFileUrl            
+			delete ctx.params.blogDescription 
+			delete ctx.params.blogContext 
+			delete ctx.params.blogCategories       
+
+			return ctx.params	  
+
+		},
+		async delete(ctx) {
+         
+			//! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);
+			var index = db.findIndex(a => a.id == ctx.params.id);            
+			if (index > -1) {
+				db.splice(index, 1);
+
+			   // Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {					
+				
+					// Hata varsa
+					if (err) {
+						console.log(err)
+					}
+
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi -> Mesaj"); // Success
+				});	
+				// End Json içine Verileri Yazıyor -> db	
+				
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
+					userToken: ctx.params.userToken,
+					from: "mesaj",
+					fromToken: dbFind.MessageToken,
+					name: "message_delete_successful",
+                    description: "Mesaj Silme Başarılı"
+				})	
+				delete ctx.params.userToken 		
+				//! ----------- Log Son -----------------------------  
+				
+                //! Return Api   
+				ctx.params.title = "message.service -> Veri Silme"
+				ctx.params.tablo = "message.json"
+				ctx.params.status = 1
+				ctx.params.mesaj = "Mesaj Silindi"	
+				
+				//Console Yazma	
+			    console.log('\u001b[' + 32 + 'm' + 'Mesaj Veri Silindi [ /api/message/update ] ' + '\u001b[0m');
+               
 
 			} else {
 
-				//api
-				ctx.params.title = "Blogs Silme"
-				ctx.params.tablo = "blogs.json"
+				//! Return Api   
+				ctx.params.title = "message.service -> Veri Silme"
+				ctx.params.tablo = "message.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Blogs Bulunmadı"
-				ctx.params.data_blogs = "Blogs Bulunmadı"
-				ctx.params.data_logs=  "Blogs Bulunmadı"
+				ctx.params.mesaj = "Mesaj Silinemedi"	
+				
+				//Console Yazma	
+				console.log('\u001b[' + 31 + 'm' + 'Mesaj Veri Silinemedi [ /api/message/update ] ' + '\u001b[0m');
 
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ file/:id ]  Blogs Bulunamadı' + '\u001b[0m');
 			}
+			
+			
+			//! Return Delete			
+			delete ctx.params.id
+			delete ctx.params.userToken
 
+			return ctx.params	
 
-			//! ------------------
-			//console
-			console.log('\u001b[' + 32 + 'm' + 'Blog Silme' + '\u001b[0m')
-
-			return ctx.params
-
-		}	
+		}
 	}
 }

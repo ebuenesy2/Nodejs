@@ -811,11 +811,11 @@ module.exports = {
 				ctx.params.tablo = "file.json"        
 				ctx.params.status = status				
 				ctx.params.DB=fileData
-				ctx.params.mesaj="Dosya Yüklendi"
+				ctx.params.mesaj="Dosya Yüklenemedi"
 				
 				//Console Yazma
 				if(status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Yükleme [ /api/file/upload ] Yüklendi' + '\u001b[0m'); }
-				if(status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yükleme [ /api/file/upload ] Yüklenemeddi' + '\u001b[0m'); }
+				if(status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yükleme [ /api/file/upload ] Yüklenemedi' + '\u001b[0m'); }
 				
 			} catch (error) {	
 					

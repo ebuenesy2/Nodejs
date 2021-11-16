@@ -1,7 +1,6 @@
 [
     {
-        "id":1,
-        "token":"token",
+        "id":1,    
         "soru":"soru 1",
         "cevap":"cevap 1",
         "sskToken":"sskToken1",
@@ -9,8 +8,7 @@
         "updated_at": "2021-08-23T07:50:55.133Z"
     },
     {
-        "id":2,
-        "token":"token",
+        "id":2,      
         "soru":"soru 2",
         "cevap":"cevap 2",
         "sskToken":"sskToken2",

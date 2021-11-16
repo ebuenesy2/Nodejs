@@ -6,13 +6,13 @@ const jwt_decode = require('jwt-decode'); //! Token
 const db = require('../public/DB/ssk.json'); //! Json
 
 
-
-
 module.exports = {
 	name: "ssk",
 
 	actions: {
 		async info(ctx) {
+
+			//! Return Api
 			ctx.params.title = "ssk.service"
 			ctx.params.time = dayjs().toDate()
 			ctx.params.APi_URL = process.env.APi_URL
@@ -21,80 +21,175 @@ module.exports = {
 		},
 		async post(ctx) {
 
+			//! Return Api
 			ctx.params.createdAt = dayjs().toDate();
 			delete ctx.params.createdAt;
 
 			return ctx.params
 		},
+		async html(ctx) {
+		
+            ctx.meta.$responseType = "text/html";
+            return Buffer.from(`
+                    <html>
+                    <body>
+                        <h1>Hello API ebu enes!</h1>
+                        <img src="/api/file.image" />
+                    </body>
+                    </html>
+            `);
+			
+		},
 		async all(ctx) {
 
-			//JSON        
+			try {
 
-			ctx.params.title = "SSK Tüm Veriler"
-            ctx.params.tablo = "ssk.json"
-            ctx.params.status = 1
-			ctx.params.size=db.length
-			ctx.params.DB = db
-            
+				//! Return Api   
+				ctx.params.title = "ssk.service -> Tüm Veriler"
+				ctx.params.tablo = "ssk.json"
+				ctx.params.status = 1
+				ctx.params.size=db.length
+				ctx.params.DB = db		
 
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'SSK Tüm Veriler Okundu [ /api/ssk/all ] ' + '\u001b[0m');
+
+			} catch (error) {
+
+				//! Return Api   
+				ctx.params.title = "ssk.service -> Tüm Veriler"
+				ctx.params.tablo = "ssk.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.DB = error
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'SSK Tüm Veriler Okunamadı [ /api/ssk/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+			
+			}
+
+			//! Return
 			return ctx.params
 		},
 		async find(ctx) {
 
-
 			// ! Arama
-			const user = db.find(u => u.id == ctx.params.id);
+			const dbFind = db.find(u => u.id == ctx.params.id);
 
-			/*
-			let follow = await ctx.call('follow.follow', {
-				user_id: ctx.params.id
-			})
-			*/
-
-
-			// Kullanıcı Varsa
-			if (user) {
-
-
-				//api
-				ctx.params.title = "SSK Arama"
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "ssk.service -> Veri Arama"
 				ctx.params.tablo = "ssk.json"
 				ctx.params.status = 1
-				ctx.params.data_user = user
-				//ctx.params.data_user_logs = user_logs
+				ctx.params.DB = dbFind
+			
 
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Anasayfa Get [ users/:userId ]' + '\u001b[0m');
-
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'SSK Veri Arama [ /api/ssk/find ] ' + '\u001b[0m');
 			}
 
-			//! Kullanıcı Yoksa
+			//! Veri Yoksa
 			else {
-			    
-				//api
-				ctx.params.title = "Json Araama"
+				
+				//! Return Api   
+				ctx.params.title = "ssk.service -> Veri Arama"
 				ctx.params.tablo = "ssk.json"
 				ctx.params.status = 0
-				ctx.params.data_user = "SSK Bulunmadı"
-				ctx.params.data_user_logs = ""
-				ctx.params.data_follow = ""
-				ctx.params.data_follower = ""
-				ctx.params.data_posts_profile = ""
-				ctx.params.data_posts_home = ""
-
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ users/:userId ]  Kullanıcı Bulunamadı' + '\u001b[0m');
+				ctx.params.DB = "SSK  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'SSK Veri Bulunamadı [ /api/ssk/find ] ' + '\u001b[0m');	
 
 			}
 
+            //! Return
+			delete ctx.params.id
+
+			return ctx.params
+		},
+		async find_post(ctx) {
+
+			// ! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);
+
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "ssk.service -> Veri Arama"
+				ctx.params.tablo = "ssk.json"
+				ctx.params.status = 1
+				ctx.params.DB = dbFind
+			
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'SSK Veri Arama [ /api/ssk/find_post ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "ssk.service -> Veri Arama"
+				ctx.params.tablo = "ssk.json"
+				ctx.params.status = 0
+				ctx.params.DB = "SSK  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'SSK Veri Bulunamadı [ /api/ssk/find_post ] ' + '\u001b[0m');	
+
+			}
+
+            //! Return
+			delete ctx.params.id
+
+			return ctx.params
+		},
+		async find_token(ctx) {
+
+			// ! Arama
+			const dbFind = db.find(u => u.sskToken == ctx.params.sskToken);	
+
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "ssk.service -> Veri Arama"
+				ctx.params.tablo = "ssk.json"
+				ctx.params.status = 1
+				ctx.params.DB = dbFind
+			
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'SSK Veri Arama [ /api/ssk/find_token ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "ssk.service -> Veri Arama"
+				ctx.params.tablo = "ssk.json"
+				ctx.params.status = 0
+				ctx.params.DB = "SSK  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'SSK Veri Bulunamadı [ /api/ssk/find_token ] ' + '\u001b[0m');	
+
+			}
+
+            //! Return
+			delete ctx.params.sskToken
 
 			return ctx.params
 		},
 		async add(ctx) {
-
-			ctx.params.title = "SSK Ekleme"
-			ctx.params.tablo = "ssk.json"
-            ctx.params.status = 1	
            
 			try {
 
@@ -129,45 +224,57 @@ module.exports = {
 				//Verileri Kaydet
 				db.push(willSaveData)
 
-
-				// STEP 3: Json içine Verileri Yazıyor -> db
+				//Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/ssk.json', JSON.stringify(db), err => {
 
-					// Checking for errors
+					// Hata varsa
 					if (err) {
 						console.log(err)
-					}
+					}							
 
-					console.log("Json Eklendi -> SSK"); // Success
-				});
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi -> SSK "); // Success
+				});	
+				//End Json içine Verileri Yazıyor -> db
 
-				//! Status
-				ctx.params.status = 1				
-
-				//! ----------- Log ----------------------------- 
-				const user_email = db.filter(u => u.id == ctx.params.id);
-					
-				let logs_add = await ctx.call('logs.add', {
-					token: ctx.params.token,
+				
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
 					userToken: ctx.params.userToken,
+					from: "ssk",
+					fromToken: jwt,
 					name: "faq_add_successful",
 					description: "SSK Ekleme Başarılı"
-				})
+				})			
+				//! ----------- Log Son -----------------------------  
 
-				ctx.params.logs = logs_add
-				//! ----------- Log Son ----------------------------- 
+
+				//! Return Api	
+				ctx.params.title = "ssk.service -> Veri Ekleme"
+				ctx.params.tablo = "ssk.json"        
+				ctx.params.status = 1			
+				ctx.params.mesaj="Veri Eklendi"
+
+				//Console Yazma	
+				console.log('\u001b[' + 32 + 'm' + 'Veri Eklendi [ /api/ssk/add ] ' + '\u001b[0m');
+		
 
 
 			} catch (error) {
 
-				//! Status
-				ctx.params.status = 0
-				ctx.params.logs = "error"
+				
+				//! Return Api	
+				ctx.params.title = "ssk.service -> Veri Ekleme"
+				ctx.params.tablo = "ssk.json"        
+				ctx.params.status = 0			
+				ctx.params.mesaj="Veri Eklenemedi"
 
-			}   
+				//Console Yazma	
+				console.log('\u001b[' + 32 + 'm' + 'Veri Eklenemedi [ /api/ssk/add ] ' + '\u001b[0m');
 
+			}  
 
-
+			//! Return	
             delete ctx.params.token 
             delete ctx.params.userToken 
             delete ctx.params.soru 
@@ -179,65 +286,65 @@ module.exports = {
 		async update(ctx) {
 
 			// ! Arama
-			const user = db.find(u => u.sskToken == ctx.params.sskToken);
+			const dbFind = db.find(u => u.sskToken == ctx.params.sskToken);
 
-			//? Kullanıcı Varsa
-			if (user) {
-
-
-                //! ----------- Log -----------------------------              
-                let logs_add = await ctx.call('logs.add', {
-                    token: ctx.params.token,
-                    userToken: ctx.params.userToken,
-                    name: "faq_update_successful",
-                    description: "SSK Güncelleme Başarılı"
-                })
-
-                delete ctx.params.userToken 
-				//! ----------- Log ----------------------------- 
-
+			//! Veri Varsa 
+			if (dbFind) {
               
-				//pass by reference
-				Object.keys(ctx.params).forEach(key => {
-					user[key] = ctx.params[key]
+				// Referans Veriler Güncelleme Yapıyor
+				Object.keys(ctx.params).forEach(key => {					
+					if(key!="userToken"  ) { dbFind[key] = ctx.params[key] }  //! Only Text 				
 				})
+				dbFind["updated_at"] = new Date()
+				// End  Referans Veriler Güncelleme Yapıyor
+
+				// Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/ssk.json', JSON.stringify(db), err => {					
 				
-				user["updated_at"] = new Date()
-	
-
-
-				// STEP 3: Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/ssk.json', JSON.stringify(db), err => {
-
-					// Checking for errors
+					// Hata varsa
 					if (err) {
 						console.log(err)
 					}
 
-					console.log("Json Eklendi"); // Success
-				});
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi -> SSK"); // Success
+				});	
+				// End Json içine Verileri Yazıyor -> db	
+	
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
+					userToken: ctx.params.userToken,
+					from: "ssk",
+					fromToken: ctx.params.sskToken,
+					name: "faq_update_successful",
+					description: "SSK Güncelleme Başarılı"
+				})			
+				//! ----------- Log Son -----------------------------  
+				
+              
+                //! Return Api	
+				ctx.params.title = "ssk.service -> Veri Güncelleme"
+				ctx.params.tablo = "ssk.json"        
+				ctx.params.status = 1			
+				ctx.params.mesaj="Veri Güncellendi"
 
-
-                //! Return 
-                ctx.params.title = "SSK Guncelleme"
-				ctx.params.tablo = "ssk.json"
-				ctx.params.status = 1
-                ctx.params.data_ssk = user,
-				ctx.params.data_logs = logs_add
+				//Console Yazma	
+				console.log('\u001b[' + 32 + 'm' + 'Veri Güncelleme [ /api/ssk/update ] ' + '\u001b[0m');
 
 			}
 
-			//! Kullanıcı Yoksa
+			//! Veri Yoksa 
 			else {
-				//api		
-				ctx.params.title = "SSK Guncelleme"
-				ctx.params.tablo = "ssk.json"
-				ctx.params.status = 0
-                ctx.params.data_ssk =  "SSK Bulunmadı"
-				ctx.params.data_logs = "SSK Bulunmadı"
+				
+				
+               //! Return Api	
+			   ctx.params.title = "ssk.service -> Veri Güncelleme"
+			   ctx.params.tablo = "ssk.json"        
+			   ctx.params.status = 0			
+			   ctx.params.mesaj="Veri Güncellendi"
 
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Post [ update ]  SSK Bulunamadı' + '\u001b[0m');
+			   //Console Yazma	
+			   console.log('\u001b[' + 32 + 'm' + 'Veri Güncelleme [ /api/ssk/update ] ' + '\u001b[0m');
 
 			}
 			
@@ -251,74 +358,67 @@ module.exports = {
 
 		},
 		async delete(ctx) {
-
-			var index = db.findIndex(a => a.id == ctx.params.id);
-            
+         
+			//! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);
+			var index = db.findIndex(a => a.id == ctx.params.id);            
 			if (index > -1) {
 				db.splice(index, 1);
 
-
-				// STEP 3: Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/ssk.json', JSON.stringify(db), err => {
-
-					// Checking for errocş
+			   // Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {					
+				
+					// Hata varsa
 					if (err) {
 						console.log(err)
 					}
 
-					console.log("Json writing"); // Success
-				});
-
-
-				//api
-				ctx.params.title = "SSK Silme"
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi -> SSK"); // Success
+				});	
+				// End Json içine Verileri Yazıyor -> db	
+				
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
+					userToken: ctx.params.userToken,
+					from: "ssk",
+					fromToken: dbFind.sskToken,
+					name: "faq_delete_successful",
+                    description: "SSK Silme Başarılı"
+				})	
+				delete ctx.params.userToken 		
+				//! ----------- Log Son -----------------------------  
+				
+                //! Return Api   
+				ctx.params.title = "ssk.service -> Veri Silme"
 				ctx.params.tablo = "ssk.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "SSK Silindi"		
-	            		
-				//console
-				console.log('\u001b[' + 32 + 'm' + 'Json Güncelleme' + '\u001b[0m')
-
-                 //! ----------- Log -----------------------------         
-                       
-                let logs_add = await ctx.call('logs.add', {
-                    token: ctx.params.token,
-                    userToken: ctx.params.userToken,
-                    name: "faq_delete_successful",
-                    description: "SSK Silme Başarılı"
-                })
-
-                delete ctx.params.userToken 
-
-                //! ----------- Log Son-------------------------
+				ctx.params.mesaj = "Veri Silindi"	
+				
+				//Console Yazma	
+			    console.log('\u001b[' + 32 + 'm' + 'SSK Veri Silindi [ /api/ssk/delete/:id ] ' + '\u001b[0m');
+               
 
 			} else {
 
-				//api
-				ctx.params.title = "SSK Silme"
+				//! Return Api   
+				ctx.params.title = "ssk.service -> Veri Silme"
 				ctx.params.tablo = "ssk.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "SSK Bulunmadı"
+				ctx.params.mesaj = "Veri Silinemedi"	
+				
+				//Console Yazma	
+				console.log('\u001b[' + 31 + 'm' + 'SSK Veri Silinemedi [ /api/message/update ] ' + '\u001b[0m');
 
-				//console
-				console.log('\u001b[' + 31 + 'm' + 'Anasayfa Get [ users/:userId ]  SSK Bulunamadı' + '\u001b[0m');
 			}
+			
+			
+			//! Return Delete			
+			delete ctx.params.id
+			delete ctx.params.userToken
 
-			//console.log(sampleArray);
+			return ctx.params	
 
-			//! ------------------
-
-			//console
-			console.log('\u001b[' + 32 + 'm' + 'Json Silme' + '\u001b[0m')
-
-             delete ctx.params.id
-             delete ctx.params.token
-             delete ctx.params.userToken
-
-
-			return ctx.params
-
-
-		}	
+		},
 	}
 }
