@@ -1,3 +1,4 @@
+# 0 - 0 - Proje Oluşturma ve Çalışma Protokolu
 
 ## Port Bilgilerim
 
@@ -5,29 +6,6 @@
  /3000 => React
  /3001 => Api - Nodejs
  /8000 => Laravel
-  ```
-
-  ## Proje Hakkında - Version [ V1 ]
-
- ```
- /api/products => Ürünler
- /api/productCategory => Ürün Kategorisi
- /api/category => Kategorisi
- /api/orders => Sipariş
- /api/page => Sayfalar
- /api/pricing => Fiyat Listesi
- /api/ssk => Sık Sorulan Sorular
- /api/blogs => Blog
- /api/file => Dosya
- /api/message => Messajlar
- /api/settings => Ayarlar
- /api/admin => Admin
- /api/user => Kullanıcı
- /api/logs => Bildirim
- /token => Token
- /env => Env
- /version => Version
-
   ```
 
 
@@ -321,5 +299,5 @@ pm2 stop ecosystem.config.js
 
 
 # Contact
-Copyright (c) 2021 - Temmuz  By Ebu Enes Yıldırım
+Copyright (c) 2021 - Kasım  By Ebu Enes Yıldırım
 
