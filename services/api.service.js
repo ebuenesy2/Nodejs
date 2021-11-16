@@ -58,55 +58,95 @@ module.exports = {
 
 		// ! ------ Get -------------------------------
 
-			// http://localhost:3000
-			fastify.get('/', function (req, res) {		
+		//! Home
+		fastify.get('/', function (req, res) {			
 
-				console.log('Get Yapıldı - Anasayfa [ api-service.js ] - [  ]');			
-
-				res.send({
-
-					title: 'Yıldırım Dev -  Anasayfa  Get - api - fastify - moleculer - json - [ Port ] [ 3001 ]',
-					zaman: dayjs().toDate()
-				});
-
-			}) // Get
-
-			// http://localhost:3000
-			fastify.get('/env', function (req, res) {
-				res.send({
-					title: 'Env Bilgileri',
-					PORT: process.env.PORT,
-					API:
-					{
-						APi_URL: process.env.APi_URL,
-						APi_URL_Dev: process.env.APi_URL_Dev,
-						APi_URL_Local: process.env.APi_URL_Local,
-						APi_Title: process.env.APi_Title
-					},	
-					Version:
-					{
-						Version: process.env.Version,
-						Release_Date: process.env.Release_Date,
-						Version_Title: process.env.Version_Title,
-						Author: process.env.Author
-					}				
-				
-				});
-
-				console.log('Get Yapıldı - Anasayfa [ api-service.js ]');
-				console.log(process.env.APi_URL)
-			}) // Get
-
-		// http://localhost:3000
-		fastify.get('/version', function (req, res) {
 			res.send({
-				title: 'Verison',
-				version: process.env.Version
+
+				title: 'Yıldırım Dev -  Anasayfa  Get - api - fastify - moleculer - json - [ Port ] [ 3001 ]',
+				zaman: dayjs().toDate()
 			});
 
-			console.log('Get Yapıldı - Anasayfa [ api-service.js ]');
-			console.log(process.env.Version)
-		}) // Get
+			console.log('\u001b[' + 32 + 'm' + 'Get Yapıldı - Anasayfa [ api-service.js ] - [ /env ] ' + '\u001b[0m');	
+
+		}) //! End Home
+
+		// ! ------ Env -----------------------------
+		
+		//! Env
+		fastify.get('/env', function (req, res) {
+			res.send({
+				title: 'Env Bilgileri',
+				PORT: process.env.PORT,
+				API:
+				{
+					APi_URL: process.env.APi_URL,
+					APi_URL_Dev: process.env.APi_URL_Dev,
+					APi_URL_Local: process.env.APi_URL_Local,
+					APi_Title: process.env.APi_Title
+				},	
+				Version:
+				{
+					Version: process.env.Version,
+					Release_Date: process.env.Release_Date,
+					Version_Title: process.env.Version_Title,
+					Author: process.env.Author
+				}				
+			
+			});
+
+			console.log('\u001b[' + 32 + 'm' + 'Env Bilgileri [ /env ] ' + '\u001b[0m');	
+		}) //! End Env
+
+		// ! ------ Env  Son ------------------------
+
+		// ! ------ Version -------------------------
+
+		//! Version
+		fastify.get('/version', function (req, res) {
+			res.send({
+				title: 'Verison Bilgileri',
+				Version: process.env.Version,
+				Release_Date: process.env.Release_Date,
+				Version_Title: process.env.Version_Title,
+				Author: process.env.Author
+			});
+
+			console.log('\u001b[' + 32 + 'm' + 'Verison Bilgileri [ /version ] ' + '\u001b[0m');	
+
+		}) //! Version Son
+		// ! ------ Version Son  --------------------
+
+	    // ! ------ Bilgiler -------------------------
+
+		//! Bilgiler
+		fastify.get('/info', function (req, res) {
+			res.send({
+				title: 'Proje Bilgileri',
+				PORT: process.env.PORT,
+				API:
+				{
+					APi_URL: process.env.APi_URL,
+					APi_URL_Dev: process.env.APi_URL_Dev,
+					APi_URL_Local: process.env.APi_URL_Local,
+					APi_Title: process.env.APi_Title
+				},	
+				Version:
+				{
+					Version: process.env.Version,
+					Release_Date: process.env.Release_Date,
+					Version_Title: process.env.Version_Title,
+					Author: process.env.Author
+				}				
+			
+			});
+
+			console.log('\u001b[' + 32 + 'm' + 'Proje Bilgileri [ /info ] ' + '\u001b[0m');	
+	
+		}) //! End Bilgiler
+
+		// ! ------ Bilgiler Son  --------------------
+		
 
 
 
@@ -141,7 +181,7 @@ module.exports = {
 
 
 
-		//! -------------------------   Token Resolution	-----------------------------
+		//! -------------------------   Token Çözme	-----------------------------
 
 			fastify.post('/token_post', function (req, res) {
 
