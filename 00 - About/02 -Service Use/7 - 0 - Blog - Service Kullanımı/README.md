@@ -85,7 +85,7 @@
               
  ```
  
-    ## Blog - Veri Güncelleme
+ ## Blog - Veri Güncelleme
  
  ```						
 				
@@ -111,7 +111,7 @@
 
  ```
  
-     ## Blog - Veri Silme
+ ## Blog - Veri Silme
  
  ```							
 				//! ----------- Blog ----------------------------- 	
