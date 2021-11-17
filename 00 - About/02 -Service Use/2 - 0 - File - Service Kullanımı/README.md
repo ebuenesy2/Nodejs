@@ -92,3 +92,86 @@
 
            
  ```
+
+  ## File - Dosya Yükleme
+ 
+ ```
+   			   			
+			//! -----------  File UPLOAD ----------------------------- 	
+				let file_upload = await ctx.call('file.upload', {
+					file: ctx.params.blogFile,
+					role: ctx.params.role,
+					userToken: ctx.params.userToken,                  
+					usedPage: "blog"
+				})
+				
+				ctx.params.file_upload = file_upload
+				console.log('\u001b[' + 32 + 'm' + '---------- File Upload ----------' + '\u001b[0m') 
+
+				console.log(file_upload)      
+				console.log('\u001b[' + 32 + 'm' + 'file_upload Image Upload Url : '+ file_upload.DB["uploadDir"] + '\u001b[0m')
+				console.log('\u001b[' + 32 + 'm' + 'file_upload status : '+ file_upload.status + '\u001b[0m')
+				if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m'); }
+				if(file_upload.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m'); }
+
+				console.log('\u001b[' + 32 + 'm' + '---------- File Upload son ----------' + '\u001b[0m')       
+				//! ----------- End File UPLOAD ----------------------------- 
+
+           
+ ``
+ 
+ ```
+   			   			
+
+					//! -----------  File UPLOAD ----------------------------- 	
+					let file_upload = await ctx.call('file.upload', {
+						file: ctx.params.cover_ImageUrl_File,
+						role: ctx.params.role,
+						userToken: ctx.params.userToken,                  
+						usedPage: "user"
+					})
+					//! ----------- End File UPLOAD ----------------------------- 	
+           
+ ``
+ 
+   ## File - Dosya Yükleme Url
+ 
+ ```
+
+				//! -----------  File UPLOAD ----------------------------- 	
+				let file_upload = await ctx.call('file.uploadUrl', {
+					fileUrl: ctx.params.blogFileUrl,
+					role: ctx.params.role,
+					userToken: ctx.params.userToken,                  
+					usedPage: "blog"
+				})
+				
+				ctx.params.file_upload = file_upload
+				console.log('\u001b[' + 32 + 'm' + '---------- File Upload ----------' + '\u001b[0m') 
+
+				console.log(file_upload)      
+				console.log('\u001b[' + 32 + 'm' + 'file_upload Image Upload Url : '+ file_upload.DB["uploadDir"] + '\u001b[0m')
+				console.log('\u001b[' + 32 + 'm' + 'file_upload status : '+ file_upload.status + '\u001b[0m')
+				if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m'); }
+				if(file_upload.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m'); }
+
+				console.log('\u001b[' + 32 + 'm' + '---------- File Upload son ----------' + '\u001b[0m')       
+				//! ----------- End File UPLOAD ----------------------------- 
+
+
+           
+ ``
+ 
+ ```
+                
+
+				//! -----------  File UPLOAD ----------------------------- 	
+				let file_upload = await ctx.call('file.uploadUrl', {
+					fileUrl: ctx.params.blogFileUrl,
+					role: ctx.params.role,
+					userToken: ctx.params.userToken,                  
+					usedPage: "blog"
+				})	
+				//! ----------- End File UPLOAD ----------------------------- 
+           
+ ``
