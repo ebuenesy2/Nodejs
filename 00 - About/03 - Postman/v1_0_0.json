@@ -1,0 +1,2820 @@
+{
+	"info": {
+		"_postman_id": "7f06b3a5-c6cc-401d-a740-92f387b3aa63",
+		"name": "Api-Sabit-Moleculer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Admin - info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/admin/info",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin - Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"name\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/admin/post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"post"
+							]
+						},
+						"description": "{{url}}/api/admin/post"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin - Html",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"name\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/admin/html",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"html"
+							]
+						},
+						"description": "{{url}}/api/admin/post"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin - Tüm Veriler",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/admin/all",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin  -  Arama",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/admin/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin  - Arama  Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":3\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/admin/find_post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"find_post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin - Arama Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userToken\":\"userToken2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/admin/find_token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"find_token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin - Ekle",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"ebu enes 3\",\r\n    \"surname\": \"yıldırım 3\",\r\n    \"username\": \"ebuenesy3\",\r\n    \"email\": \"enes36gmail.com\",\r\n    \"tel\":\"telefon 3\",\r\n    \"password\": \"password 3\"    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/admin/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin - Güncelleme",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userToken",
+									"value": "userToken",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "role - admin",
+									"type": "text"
+								},
+								{
+									"key": "profil_ImageUrl_File",
+									"type": "file",
+									"src": "/C:/Users/ebuen/Pictures/1/10.jpg"
+								},
+								{
+									"key": "profil_ImageUrl_File_Check",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "cover_ImageUrl_File",
+									"type": "file",
+									"src": "/C:/Users/ebuen/Pictures/1/19.jpg"
+								},
+								{
+									"key": "cover_ImageUrl_File_Check",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "name",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/admin/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"update"
+							]
+						},
+						"description": "http://localhost:3000/api/users/update\n\nKullanıcı Güncelleme - Local"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin - Güncelleme - Url",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userToken\": \"userToken\",\r\n    \"role\":\"role admin\",\r\n    \"name\": \"name guncelleme\",\r\n    \"profil_ImageUrl_File\":\"C:\\\\Users\\\\ebuen\\\\Pictures\\\\1\\\\11.jpg\",\r\n    \"profil_ImageUrl_File_Check\":1,\r\n    \"cover_ImageUrl_File\":\"C:\\\\Users\\\\ebuen\\\\Pictures\\\\1\\\\12.jpg\",\r\n    \"cover_ImageUrl_File_Check\":1,\r\n    \"OnlineStatus\":0\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/admin/updateUrl",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"updateUrl"
+							]
+						},
+						"description": "{{url}}/api/user/updateUrl"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin - Sil",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"userToken\": \"userToken3\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/admin/delete/1631039083449",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"delete",
+								"1631039083449"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin -  Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"enes1@gmail.com\",\n    \"password\": \"123\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/admin/loginOnline",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"loginOnline"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin - Çıkışı",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userToken\":\"userToken\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/admin/loginOut",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"loginOut"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Kullanıcı - info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/info",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"info"
+							]
+						},
+						"description": "http://localhost:3000/api/user/info"
+					},
+					"response": []
+				},
+				{
+					"name": "Kullanıcı  - Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user_id\":3\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"post"
+							]
+						},
+						"description": "http://localhost:3000/api/user/find_user"
+					},
+					"response": []
+				},
+				{
+					"name": "Kullanıcı - Html",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/html",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"html"
+							]
+						},
+						"description": "http://localhost:3000/api/user/all\n\nTüm Kullanıcılar - Local"
+					},
+					"response": []
+				},
+				{
+					"name": "Kullanıcı - Tüm Veriler",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/all",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"all"
+							]
+						},
+						"description": "http://localhost:3000/api/user/all\n\nTüm Kullanıcılar - Local"
+					},
+					"response": []
+				},
+				{
+					"name": "Kullanıcı - Arama",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"1"
+							]
+						},
+						"description": "http://localhost:3000/api/user/6101ce0ce3c2ee0c84e11005"
+					},
+					"response": []
+				},
+				{
+					"name": "Kullanıcı - Arama Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":3\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/find_post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"find_post"
+							]
+						},
+						"description": "http://localhost:3000/api/user/find_user"
+					},
+					"response": []
+				},
+				{
+					"name": "Kullanıcı - Arama Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userToken\":\"userToken2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/find_token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"find_token"
+							]
+						},
+						"description": "{{url}}/api/user/find_token"
+					},
+					"response": []
+				},
+				{
+					"name": "Kullanıcı - Ekle",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"name add\",\r\n    \"surname\": \"surname add\",\r\n    \"username\": \"Yeniusername1\",\r\n    \"email\": \"yeni@social.com1\",\r\n    \"tel\":\"tel add 1\",\r\n    \"password\": \"password\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"add"
+							]
+						},
+						"description": "http://localhost:3000/api/users/add\n\n\nKullanıcı Ekle"
+					},
+					"response": []
+				},
+				{
+					"name": "Kullanıcı - Güncelleme",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userToken",
+									"value": "userToken",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "role - admin",
+									"type": "text"
+								},
+								{
+									"key": "profil_ImageUrl_File",
+									"type": "file",
+									"src": "/C:/Users/ebuen/Pictures/1/pexels-umar-mukhtar-1538177.jpg"
+								},
+								{
+									"key": "profil_ImageUrl_File_Check",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "cover_ImageUrl_File",
+									"type": "file",
+									"src": "/C:/Users/ebuen/Pictures/1/8fc15cf2e7573c72c070dd840954a1e3.jpg"
+								},
+								{
+									"key": "cover_ImageUrl_File_Check",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "name",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/user/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"update"
+							]
+						},
+						"description": "http://localhost:3000/api/users/update\n\nKullanıcı Güncelleme - Local"
+					},
+					"response": []
+				},
+				{
+					"name": "Kullanıcı - Güncelleme - Url",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userToken\": \"userToken2\",\r\n    \"role\":\"role user\",\r\n    \"name\": \"name 3\",\r\n    \"profil_ImageUrl_File\":\"C:\\\\Users\\\\ebuen\\\\Pictures\\\\1\\\\9.jpg\",\r\n    \"profil_ImageUrl_File_Check\":0,\r\n    \"cover_ImageUrl_File\":\"C:\\\\Users\\\\ebuen\\\\Pictures\\\\1\\\\10.jpg\",\r\n    \"cover_ImageUrl_File_Check\":0,\r\n    \"OnlineStatus\":0\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/updateUrl",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"updateUrl"
+							]
+						},
+						"description": "{{url}}/api/user/updateUrl"
+					},
+					"response": []
+				},
+				{
+					"name": "Kullanıcı - Silme",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"userToken\": \"userToken3\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/delete/1631039083449",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"delete",
+								"1631039083449"
+							]
+						},
+						"description": "http://localhost:3000/api/user/delete"
+					},
+					"response": []
+				},
+				{
+					"name": "Kullanıcı  - Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"enes3@gmail.com\",\n    \"password\": \"123\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/loginOnline",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"loginOnline"
+							]
+						},
+						"description": "http://localhost:3000/api/user/loginOnline"
+					},
+					"response": []
+				},
+				{
+					"name": "Kullanıcı - Çıkış",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userToken\": \"userToken2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/loginOut",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"loginOut"
+							]
+						},
+						"description": "{{url}}/api/user/loginOut"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Web",
+			"item": [
+				{
+					"name": "Dosya - Bilgiler",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/file/info",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userToken\": \"userToken\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/file/post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"post"
+							]
+						},
+						"description": "http://localhost:3000/api/file/find_user"
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Html",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/file/html",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"html"
+							]
+						},
+						"description": "http://localhost:3000/api/file/html"
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Tüm Veriler",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/file/all",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"all"
+							]
+						},
+						"description": "http://localhost:3000/api/file/all"
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Arama",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/file/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"1"
+							]
+						},
+						"description": "http://localhost:3000/api/file/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Arama Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"id\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/file/find_post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"find_post"
+							]
+						},
+						"description": "http://localhost:3000/api/file/find_user"
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Arama Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"fileToken\":\"fileToken\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/file/find_token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"find_token"
+							]
+						},
+						"description": "http://localhost:3000/api/file/find_user"
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Arama User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userToken\": \"userToken\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/file/find_user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"find_user"
+							]
+						},
+						"description": "http://localhost:3000/api/file/find_user"
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Ekleme",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\":\"token\",\r\n    \"role\":\"admin add\",\r\n    \"userToken\": \"userToken\",\r\n    \"usedPage\":\"usedPage\",\r\n    \"FileId\":\"FileId\",\r\n    \"uploadDir\":\"uploadDir\",\r\n    \"fileName\":\"fileName\",\r\n    \"fileType\": \"image/jpeg\",\r\n    \"fileTypeSplit\": \"image\",\r\n    \"fileOnlyName\": \"fileOnlyName\",\r\n    \"fileExt\": \"fileExt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/file/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"add"
+							]
+						},
+						"description": "http://localhost:3000/api/file/add"
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Güncelleme",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"userToken\": \"userToken\",\r\n    \"fileToken\":\"fileToken\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/file/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"update"
+							]
+						},
+						"description": "http://localhost:3000/api/file/update"
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Silme",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"userToken\": \"userToken\",\r\n    \"fileToken\":\"fileToken2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/file/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"delete"
+							]
+						},
+						"description": "http://localhost:3000/api/file/delete"
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Dosya Bilgileri",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/ebuen/Pictures/1/istanbul-manzarali-turk-bayragi-resimleri-8.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/file/getFile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"getFile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Dosya Yükleme",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/ebuen/Pictures/1/CPFyCCnUEAAsxR7.jpg"
+								},
+								{
+									"key": "role",
+									"value": "role admin",
+									"type": "text"
+								},
+								{
+									"key": "userToken",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTAzOTA4MzQ0OSwidG9rZW4iOiJ0b2tlbiBhZGQiLCJuYW1lIjoiZWJ1IGVuZXMiLCJzdXJuYW1lIjoiecSxbGTEsXLEsW0iLCJ1c2VySW1hZ2VVcmwiOm51bGwsInVzZXJuYW1lIjoiZWJ1ZW5lc3k0IiwiZW1haWwiOiJlYnVlbmVzeTRAaG90bWFpbC5jb20iLCJ0ZWwiOiJ0ZWxlZm9uIDQiLCJwYXNzd29yZCI6InBhc3N3b3JkIDQiLCJjcmVhdGVkX2F0IjoiMjAyMS0wOS0wN1QxODoyNDo0My40NDlaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDktMDdUMTg6MjQ6NDMuNDQ5WiJ9.vXQuEk4anlOhv47gu_O8LfRFDVSJQC9mM-fPUXGR08E",
+									"type": "text"
+								},
+								{
+									"key": "usedPage",
+									"value": "user",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/file/upload",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Dosya Güncelleme",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "old_fileUrl",
+									"value": "C:\\ENES\\Githup\\Nodejs\\public\\upload\\user\\img\\1636310438809.jpg",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/ebuen/Pictures/1/pexels-brett-sayles-1322185.jpg"
+								},
+								{
+									"key": "role",
+									"value": "role admin",
+									"type": "text"
+								},
+								{
+									"key": "userToken",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzMTAzOTA4MzQ0OSwidG9rZW4iOiJ0b2tlbiBhZGQiLCJuYW1lIjoiZWJ1IGVuZXMiLCJzdXJuYW1lIjoiecSxbGTEsXLEsW0iLCJ1c2VySW1hZ2VVcmwiOm51bGwsInVzZXJuYW1lIjoiZWJ1ZW5lc3k0IiwiZW1haWwiOiJlYnVlbmVzeTRAaG90bWFpbC5jb20iLCJ0ZWwiOiJ0ZWxlZm9uIDQiLCJwYXNzd29yZCI6InBhc3N3b3JkIDQiLCJjcmVhdGVkX2F0IjoiMjAyMS0wOS0wN1QxODoyNDo0My40NDlaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDktMDdUMTg6MjQ6NDMuNDQ5WiJ9.vXQuEk4anlOhv47gu_O8LfRFDVSJQC9mM-fPUXGR08E",
+									"type": "text"
+								},
+								{
+									"key": "usedPage",
+									"value": "user",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/file/updateFile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"updateFile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Dosya Silme Url",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userToken\": \"userToken\",\r\n    \"fileUrl\": \"C:\\\\ENES\\\\Githup\\\\Nodejs\\\\public\\\\upload\\\\user\\\\img\\\\1636320047732.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/file/fileDeleteUrl",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"fileDeleteUrl"
+							]
+						},
+						"description": "http://localhost:3000/api/file/fileDelete"
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Dosya Bilgileri - Url",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fileUrl\": \"C:\\\\Users\\\\ebuen\\\\Pictures\\\\1\\\\pexels-pixabay-326055.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/file/getFileUrl",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"getFileUrl"
+							]
+						},
+						"description": "{{url}}/api/file/getFileCurl"
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Dosya Yükleme - Url",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fileUrl\": \"C:\\\\Users\\\\ebuen\\\\Pictures\\\\1\\\\1.jpg\",\r\n    \"role\":\"role admin\",\r\n    \"userToken\":\"userToken\",\r\n    \"usedPage\":\"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/file/uploadUrl",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"uploadUrl"
+							]
+						},
+						"description": "{{url}}/api/file/getFileCurl"
+					},
+					"response": []
+				},
+				{
+					"name": "Dosya - Dosya Güncelleme- Url",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"old_fileUrl\":\"C:\\\\ENES\\\\Githup\\\\Nodejs\\\\public\\\\upload\\\\user\\\\\\blog\\\\1637078493397.jpg\",\r\n    \"fileUrl\":  \"blogFileUrl\":\"C:\\\\Users\\\\ebuen\\\\Pictures\\\\1\\\\2.jpg\",\r\n    \"role\":\"role admin\",\r\n    \"userToken\":\"userToken\",\r\n    \"usedPage\":\"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/file/updateFileUrl",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"file",
+								"updateFileUrl"
+							]
+						},
+						"description": "{{url}}/api/file/getFileCurl"
+					},
+					"response": []
+				},
+				{
+					"name": "Blog - Bilgiler",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/blogs/info",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"info"
+							]
+						},
+						"description": "{{url}}/api/ssk/all"
+					},
+					"response": []
+				},
+				{
+					"name": "Blog - Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"name\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/blogs/post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"post"
+							]
+						},
+						"description": "{{url}}/api/ssk/all"
+					},
+					"response": []
+				},
+				{
+					"name": "Blog - Html",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/blogs/html",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"html"
+							]
+						},
+						"description": "{{url}}/api/ssk/all"
+					},
+					"response": []
+				},
+				{
+					"name": "Blog - Tüm Veriler",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/blogs/all",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"all"
+							]
+						},
+						"description": "{{url}}/api/blogs/all"
+					},
+					"response": []
+				},
+				{
+					"name": "Blog - Arama",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/blogs/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"1"
+							]
+						},
+						"description": "{{url}}/api/blogs/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Blog - Arama Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/blogs/find_post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"find_post"
+							]
+						},
+						"description": "{{url}}/api/ssk/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Blog  - Arama Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"blogToken\":\"blogToken2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/blogs/find_token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"find_token"
+							]
+						},
+						"description": "{{url}}/api/ssk/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Blog - Veri Ekleme",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userToken",
+									"value": "userToken",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "role admin",
+									"type": "text"
+								},
+								{
+									"key": "blogImageControl",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "blogFile",
+									"type": "file",
+									"src": "/C:/Users/ebuen/Pictures/1/9.jpg"
+								},
+								{
+									"key": "blogDescription",
+									"value": "blogDescription",
+									"type": "text"
+								},
+								{
+									"key": "blogContext",
+									"value": "blogContext",
+									"type": "text"
+								},
+								{
+									"key": "blogCategories",
+									"value": "blogCategories,photo,ımage,text,blog",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/blogs/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"add"
+							]
+						},
+						"description": "{{url}}/api/blogs/add"
+					},
+					"response": []
+				},
+				{
+					"name": "Blog - Veri Ekleme URL",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userToken\":\"userToken\",\r\n    \"role\":\"role admin\",\r\n    \"blogImageControl\":0,\r\n    \"blogFileUrl\":\"C:\\\\Users\\\\ebuen\\\\Pictures\\\\1\\\\2.jpg\",   \r\n    \"blogDescription\":\"blogDescription\",\r\n    \"blogContext\":\"blogContext\",\r\n    \"blogCategories\":\"blogCategories\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/blogs/addUrl",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"addUrl"
+							]
+						},
+						"description": "{{url}}/api/blogs/add"
+					},
+					"response": []
+				},
+				{
+					"name": "Blog - Veri Güncelleme",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userToken",
+									"value": "userToken",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "role admin",
+									"type": "text"
+								},
+								{
+									"key": "blogToken",
+									"value": "blogToken2",
+									"type": "text"
+								},
+								{
+									"key": "blogImageControl",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "blogFile",
+									"type": "file",
+									"src": "/C:/Users/ebuen/Pictures/1/6.jpg"
+								},
+								{
+									"key": "blogDescription",
+									"value": "blogDescription guncellme #1",
+									"type": "text"
+								},
+								{
+									"key": "blogContext",
+									"value": "blogContext",
+									"type": "text"
+								},
+								{
+									"key": "blogCategories",
+									"value": "blogCategories,photo,ımage,text,blog",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/blogs/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"update"
+							]
+						},
+						"description": "{{url}}/api/blogs/add"
+					},
+					"response": []
+				},
+				{
+					"name": "Blog - Veri Güncelleme URL",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"blogToken\":\"blogToken2\",\r\n    \"userToken\":\"userToken\",\r\n    \"role\":\"role admin\",  \r\n    \"blogImageControl\":0,\r\n    \"blogFileUrl\":\"C:\\\\Users\\\\ebuen\\\\Pictures\\\\1\\\\7.jpg\",   \r\n    \"blogDescription\":\"blogDescription güncelleme son\",\r\n    \"blogContext\":\"blogContext\",\r\n    \"blogCategories\":\"blogCategories\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/blogs/updateUrl",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"updateUrl"
+							]
+						},
+						"description": "{{url}}/api/blogs/add"
+					},
+					"response": []
+				},
+				{
+					"name": "Blog - Veri Silme",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"userToken\":\"userToken\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/blogs/delete/1637082253051",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"delete",
+								"1637082253051"
+							]
+						},
+						"description": "{{url}}/api/blogs/delete"
+					},
+					"response": []
+				},
+				{
+					"name": "SSK - Bilgiler",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ssk/info",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ssk",
+								"info"
+							]
+						},
+						"description": "{{url}}/api/ssk/all"
+					},
+					"response": []
+				},
+				{
+					"name": "SSK - Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"name post\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/ssk/post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ssk",
+								"post"
+							]
+						},
+						"description": "{{url}}/api/ssk/all"
+					},
+					"response": []
+				},
+				{
+					"name": "SSK - Html",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ssk/html",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ssk",
+								"html"
+							]
+						},
+						"description": "{{url}}/api/ssk/all"
+					},
+					"response": []
+				},
+				{
+					"name": "SSK - Tüm Veriler",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ssk/all",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ssk",
+								"all"
+							]
+						},
+						"description": "{{url}}/api/ssk/all"
+					},
+					"response": []
+				},
+				{
+					"name": "SSK - Arama",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ssk/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ssk",
+								"1"
+							]
+						},
+						"description": "{{url}}/api/ssk/1"
+					},
+					"response": []
+				},
+				{
+					"name": "SSK - Arama Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/ssk/find_post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ssk",
+								"find_post"
+							]
+						},
+						"description": "{{url}}/api/ssk/1"
+					},
+					"response": []
+				},
+				{
+					"name": "SSK - Arama Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sskToken\":\"sskToken1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/ssk/find_token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ssk",
+								"find_token"
+							]
+						},
+						"description": "{{url}}/api/ssk/1"
+					},
+					"response": []
+				},
+				{
+					"name": "SSK - Veri Ekleme",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userToken\": \"userToken\",\r\n    \"soru\":\"soru add yeni\",\r\n    \"cevap\":\"cevap yeni\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/ssk/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ssk",
+								"add"
+							]
+						},
+						"description": "{{url}}/api/ssk/add"
+					},
+					"response": []
+				},
+				{
+					"name": "SSK - Veri Güncelleme",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"userToken\": \"userToken\",\r\n    \"sskToken\":\"sskToken1\",\r\n    \"soru\":\"soru güncelleme\",\r\n    \"cevap\":\"cevap 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/ssk/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ssk",
+								"update"
+							]
+						},
+						"description": "{{url}}/api/ssk/update"
+					},
+					"response": []
+				},
+				{
+					"name": "SSK - Silme",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userToken\":\"userToken\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/ssk/delete/1637000997701",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ssk",
+								"delete",
+								"1637000997701"
+							]
+						},
+						"description": "{{url}}/api/ssk/delete"
+					},
+					"response": []
+				},
+				{
+					"name": "Mesaj - Bilgiler",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/message/info",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"info"
+							]
+						},
+						"description": "{{url}}/api/message/info"
+					},
+					"response": []
+				},
+				{
+					"name": "Mesaj - Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"name post\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/message/post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"post"
+							]
+						},
+						"description": "{{url}}/api/message/info"
+					},
+					"response": []
+				},
+				{
+					"name": "Mesaj - Html",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"name post\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/message/html",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"html"
+							]
+						},
+						"description": "{{url}}/api/message/info"
+					},
+					"response": []
+				},
+				{
+					"name": "Mesaj - Tüm Veriler",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/message/all",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"all"
+							]
+						},
+						"description": "{{url}}/api/message/all"
+					},
+					"response": []
+				},
+				{
+					"name": "Mesaj - Arama",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/message/find/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"find",
+								"1"
+							]
+						},
+						"description": "{{url}}/api/message/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Mesaj - Arama Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":3\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/message/find_post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"find_post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mesaj - Arama Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"MessageToken\":\"MessageToken1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/message/find_token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"find_token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mesaj - Veri Ekleme",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n     \"FromRole\": \"Admin\",\r\n     \"FromUserToken\": \"userToken\",    \r\n     \"ToRole\": \"User\",\r\n     \"ToUserToken\":  \"userTokenTo\",   \r\n     \"Subject\": \"Subject3\",\r\n     \"Message\": \"Gelen  Message\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/message/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"add"
+							]
+						},
+						"description": "{{url}}/api/message/add"
+					},
+					"response": []
+				},
+				{
+					"name": "Mesaj - Veri Güncelleme",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"userToken\":\"userToken\",\r\n    \"MessageToken\":\"MessageToken1\",\r\n    \"Subject\": \"Subject3 Güncelleme\",\r\n    \"Message\": \"Message3 Güncelleme\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/message/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"update"
+							]
+						},
+						"description": "{{url}}/api/message/update"
+					},
+					"response": []
+				},
+				{
+					"name": "Mesaj - Veri Sİlme",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userToken\":\"userToken\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/message/delete/1636893604719",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"delete",
+								"1636893604719"
+							]
+						},
+						"description": "{{url}}/api/message/delete/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Mesaj  - Silinmiş Kutusuna Gönder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userToken\":\"userToken\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/message/deleted_update/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"deleted_update",
+								"3"
+							]
+						},
+						"description": "{{url}}/api/message/deleted_update/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Mesaj - Görüntüleme",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"userToken\": \"userToken\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/message/view/1636936838054",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"view",
+								"1636936838054"
+							]
+						},
+						"description": "{{url}}/api/message/view/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Mesaj - Mesaj Kutusu",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userToken\": \"userToken\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/message/inbox",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"inbox"
+							]
+						},
+						"description": "{{url}}/api/message/inbox"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sabit",
+			"item": [
+				{
+					"name": "Anasayfa - Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						},
+						"description": "http://localhost:3000/"
+					},
+					"response": []
+				},
+				{
+					"name": "Anasayfa - Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "34",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "enesh",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						},
+						"description": "http://localhost:3000/\n\n\nAnasayfa - Post"
+					},
+					"response": []
+				},
+				{
+					"name": "Env",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/env",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"env"
+							]
+						},
+						"description": "http://localhost:3000/env"
+					},
+					"response": []
+				},
+				{
+					"name": "Version",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/version",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"version"
+							]
+						},
+						"description": "{{url}}/version"
+					},
+					"response": []
+				},
+				{
+					"name": "Token - Oluştur",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\t{\n\t\t\"email\":\"ebuenesy2@gmail.com\",\n\t\t\"password\":\"123\"\t\n\t}"
+						},
+						"url": {
+							"raw": "{{url}}/token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"token"
+							]
+						},
+						"description": "http://localhost:3000/api/token"
+					},
+					"response": []
+				},
+				{
+					"name": "Token Çözme",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzNTg1MDM2ODUwNCwidG9rZW4iOiJ0b2tlbiBhZGQiLCJyb2xlIjoiQWRtaW4iLCJuYW1lIjoiZWJ1IGVuZXMgMyIsInN1cm5hbWUiOiJ5xLFsZMSxcsSxbSAzIiwidXNlckltYWdlVXJsIjpudWxsLCJ1c2VybmFtZSI6ImVidWVuZXN5MyIsImVtYWlsIjoiZW5lczM2Z21haWwuY29tIiwidGVsIjoidGVsZWZvbiAzIiwicGFzc3dvcmQiOiJwYXNzd29yZCAzIiwidXNlclRva2VuIjoidXNlclRva2VuIGciLCJjcmVhdGVkX2F0IjoiMjAyMS0xMS0wMlQxMDo1Mjo0OC41MDRaIiwidXBkYXRlZF9hdCI6IjIwMjEtMTEtMDJUMTA6NTI6NDguNTA0WiJ9.cWRM-8OX7-KsvtcImOG_DE5uR0DfYW_Mu4Rw_qg4rDg\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/token_post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"token_post"
+							]
+						},
+						"description": "http://localhost:3000/token_post"
+					},
+					"response": []
+				},
+				{
+					"name": "Logs - Bilgileri",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/logs/info",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"logs",
+								"info"
+							]
+						},
+						"description": "http://localhost:3000/api/logs/info"
+					},
+					"response": []
+				},
+				{
+					"name": "Logs - Html",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/logs/html",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"logs",
+								"html"
+							]
+						},
+						"description": "http://localhost:3000/api/logs/info"
+					},
+					"response": []
+				},
+				{
+					"name": "Logs - Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t \"userToken\": \"userToken\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/logs/post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"logs",
+								"post"
+							]
+						},
+						"description": "http://localhost:3000/api/user/find_user"
+					},
+					"response": []
+				},
+				{
+					"name": "Logs- Tüm Veriler",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/logs/all",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"logs",
+								"all"
+							]
+						},
+						"description": "http://localhost:3000/api/logs/all"
+					},
+					"response": []
+				},
+				{
+					"name": "Logs - Arama",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/logs/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"logs",
+								"3"
+							]
+						},
+						"description": "{{url}}/api/logs/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Logs - Kullanıcı Ara",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t \"userToken\": \"userToken\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/logs/find_user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"logs",
+								"find_user"
+							]
+						},
+						"description": "http://localhost:3000/api/user/find_user"
+					},
+					"response": []
+				},
+				{
+					"name": "Logs - FromToken Ara",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t \"fromToken\": \"fromToken\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/logs/find_fromToken",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"logs",
+								"find_fromToken"
+							]
+						},
+						"description": "http://localhost:3000/api/user/find_user"
+					},
+					"response": []
+				},
+				{
+					"name": "Logs - Veri Ekleme",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\t\n    \"userToken\": \"userToken\",\n    \"from\":\"user\",\n    \"fromToken\":\"fromToken\",\n    \"name\": \"login_successful\",\n    \"description\": \"Başarılı Giriş Yapıldı\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/logs/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"logs",
+								"add"
+							]
+						},
+						"description": "http://localhost:3000/api/login/add"
+					},
+					"response": []
+				},
+				{
+					"name": "Logs - Veri Güncelleme",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"logToken\":\"logToken\",\t\n    \"userToken\": \"userToken\",\n    \"from\":\"user guncelleme\",\n    \"fromToken\":\"fromToken guncelleme\",\n    \"name\": \"login_successful\",\n    \"description\": \"Başarılı Giriş Yapıldı\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/logs/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"logs",
+								"update"
+							]
+						},
+						"description": "http://localhost:3000/api/logs/update"
+					},
+					"response": []
+				},
+				{
+					"name": "Logs - Silme",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"logToken\":\"logToken\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/logs/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"logs",
+								"delete"
+							]
+						},
+						"description": "http://localhost:3000/api/logs/delete"
+					},
+					"response": []
+				},
+				{
+					"name": "Proje - Bilgileri",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/info",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"info"
+							]
+						},
+						"description": "{{url}}/info"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Deneme",
+			"item": [
+				{
+					"name": "Deneme - Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/xdeneme/info",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"xdeneme",
+								"info"
+							]
+						},
+						"description": "{{url}}/api/xdeneme/info"
+					},
+					"response": []
+				},
+				{
+					"name": "Deneme - Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"name\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/xdeneme/post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"xdeneme",
+								"post"
+							]
+						},
+						"description": "{{url}}/api/xdeneme/post"
+					},
+					"response": []
+				},
+				{
+					"name": "Deneme - Html",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/xdeneme/html",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"xdeneme",
+								"html"
+							]
+						},
+						"description": "{{url}}/api/xdeneme/html"
+					},
+					"response": []
+				},
+				{
+					"name": "Deneme - Service",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/xdeneme/service",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"xdeneme",
+								"service"
+							]
+						},
+						"description": "{{url}}/api/xdeneme/service"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
