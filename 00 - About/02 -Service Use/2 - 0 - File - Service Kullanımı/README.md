@@ -45,3 +45,50 @@
 		   //! ----------- File Son --------------------------------------------------------------
            
  ```
+ 
+ ## File - Arama Post
+ 
+ ```
+   			   			
+      			
+  			//! ----------- File ----------------------------------------------------------------- 	
+				let find_post = await ctx.call('file.find_post', {					
+					id: 1
+				})
+				
+				ctx.params.find_post = find_post  
+				console.log('\u001b[' + 32 + 'm' + '---------- File  ----------' + '\u001b[0m')  
+
+				//Console Yazma
+				console.log(find_post) 
+				if(find_post.status==0) { console.log('\u001b[' + 31 + 'm' + 'File Verisi Var' + '\u001b[0m'); }
+				if(find_post.status==1) { console.log('\u001b[' + 32 + 'm' + 'File Verisi Yok' + '\u001b[0m'); }
+
+				console.log('\u001b[' + 32 + 'm' + '---------- File Son -------' + '\u001b[0m')  
+		   //! ----------- File Son --------------------------------------------------------------
+           
+ ```
+ 
+  ## File - Arama Token
+ 
+ ```
+   			   			
+      			
+  			//! ----------- File ----------------------------------------------------------------- 	
+				let find_token = await ctx.call('file.find_token', {					
+					fileToken: "fileToken"
+				})
+				
+				ctx.params.find_token = find_token  
+				console.log('\u001b[' + 32 + 'm' + '---------- File  ----------' + '\u001b[0m')  
+
+				//Console Yazma
+				console.log(find_token) 
+				if(find_token.status==0) { console.log('\u001b[' + 31 + 'm' + 'File Verisi Var' + '\u001b[0m'); }
+				if(find_token.status==1) { console.log('\u001b[' + 32 + 'm' + 'File Verisi Yok' + '\u001b[0m'); }
+
+				console.log('\u001b[' + 32 + 'm' + '---------- File Son -------' + '\u001b[0m')  
+		   //! ----------- File Son --------------------------------------------------------------
+
+           
+ ```
