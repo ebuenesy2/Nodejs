@@ -44,7 +44,30 @@ module.exports = {
 
 			try {
 
-				//! Return Api   
+
+				
+				//! ----------- Blog ----------------------------- 	
+					let blogs_delete = await ctx.call('blogs.delete', {					
+						id: 1637191358145,
+						userToken: "userToken"						
+					})
+
+					ctx.params.blogs_delete = blogs_delete  
+					console.log('\u001b[' + 32 + 'm' + '---------- Blog  ----------' + '\u001b[0m')  
+
+					//Console Yazma
+					console.log(blogs_delete) 
+					console.log('\u001b[' + 32 + 'm' + '---------- Blog Son -------' + '\u001b[0m')  
+				//! ----------- Blog Son ----------------------------- 
+
+
+
+
+
+
+
+
+                //! Return Api   
 				ctx.params.title = "xdeneme.service -> Service"
 				ctx.params.tablo = "xdeneme.json"
 				ctx.params.status = 1		

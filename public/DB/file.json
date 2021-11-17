@@ -1,1 +1,36 @@
-[{"id":1,"role":"Admin","userToken":"userToken","usedPage":"usedPage","FileId":"FileId","uploadDir":"uploadDir","fileUrl":"FileUrl","fileName":"fileName","fileType":"image/jpeg","fileTypeSplit":"image","fileOnlyName":"fileOnlyName","fileExt":"fileExt","fileToken":"fileToken","created_at":"2021-08-12T23:49:13.962Z","updated_at":"2021-08-12T23:49:13.962Z"},{"id":2,"role":"Admin","userToken":"userToken","usedPage":"usedPage","FileId":"FileId","uploadDir":"uploadDir","fileUrl":"FileUrl","fileName":"fileName","fileType":"image/jpeg","fileTypeSplit":"image","fileOnlyName":"fileOnlyName","fileExt":"fileExt","fileToken":"fileToken2","created_at":"2021-08-12T23:49:13.962Z","updated_at":"2021-08-12T23:49:13.962Z"},{"id":1637082252996,"role":"role admin","userToken":"userToken","usedPage":"blog","FileId":"1637082252988.jpg","uploadDir":"C:\\ENES\\Githup\\Nodejs\\public\\upload\\blog\\img\\1637082252988.jpg","fileUrl":"http://localhost:3001//upload//blog//img//1637082252988.jpg","fileName":"9.jpg","fileType":"image/jpeg","fileTypeSplit":"image","fileOnlyName":"9","fileExt":".jpg","fizeWidth":5568,"fizeHeight":3712,"fileSize":2293200,"fileToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYzNzA4MjI1Mjk5Niwicm9sZSI6InJvbGUgYWRtaW4iLCJ1c2VyVG9rZW4iOiJ1c2VyVG9rZW4iLCJ1c2VkUGFnZSI6ImJsb2ciLCJGaWxlSWQiOiIxNjM3MDgyMjUyOTg4LmpwZyIsInVwbG9hZERpciI6IkM6XFxFTkVTXFxHaXRodXBcXE5vZGVqc1xccHVibGljXFx1cGxvYWRcXGJsb2dcXGltZ1xcMTYzNzA4MjI1Mjk4OC5qcGciLCJmaWxlVXJsIjoiaHR0cDovL2xvY2FsaG9zdDozMDAxLy91cGxvYWQvL2Jsb2cvL2ltZy8vMTYzNzA4MjI1Mjk4OC5qcGciLCJmaWxlTmFtZSI6IjkuanBnIiwiZmlsZVR5cGUiOiJpbWFnZS9qcGVnIiwiZmlsZVR5cGVTcGxpdCI6ImltYWdlIiwiZmlsZU9ubHlOYW1lIjoiOSIsImZpbGVFeHQiOiIuanBnIiwiZml6ZVdpZHRoIjo1NTY4LCJmaXplSGVpZ2h0IjozNzEyLCJmaWxlU2l6ZSI6MjI5MzIwMCwiY3JlYXRlZF9hdCI6IjIwMjEtMTEtMTZUMTc6MDQ6MTIuOTk2WiIsInVwZGF0ZWRfYXQiOiIyMDIxLTExLTE2VDE3OjA0OjEyLjk5NloifQ.f_VMf7i2GCSvw8ul0Dlio1F_qkHYOXJHmNOIg6RkL6U","created_at":"2021-11-16T17:04:12.996Z","updated_at":"2021-11-16T17:04:12.996Z"}]
+[
+    {
+        "id":1,    
+        "role":"Admin",
+        "userToken": "userToken",
+        "usedPage":"usedPage",
+        "FileId":"FileId",
+        "uploadDir":"uploadDir",
+        "fileUrl":"FileUrl",
+        "fileName":"fileName",
+        "fileType": "image/jpeg",
+        "fileTypeSplit": "image",
+        "fileOnlyName": "fileOnlyName",
+        "fileExt": "fileExt",
+        "fileToken":"fileToken",
+        "created_at": "2021-08-12T23:49:13.962Z",
+        "updated_at": "2021-08-12T23:49:13.962Z"
+    },
+    {
+        "id":2,      
+        "role":"Admin",
+        "userToken": "userToken",
+        "usedPage":"usedPage",     
+        "FileId":"FileId",
+        "uploadDir":"uploadDir",
+        "fileUrl":"FileUrl",
+        "fileName":"fileName",
+        "fileType": "image/jpeg",
+        "fileTypeSplit": "image",
+        "fileOnlyName": "fileOnlyName",
+        "fileExt": "fileExt",
+        "fileToken":"fileToken2",
+        "created_at": "2021-08-12T23:49:13.962Z",
+        "updated_at": "2021-08-12T23:49:13.962Z"
+     }
+]

@@ -154,26 +154,26 @@ module.exports = {
 			if (dbFind) {
 
 				//! Return Api   
-				ctx.params.title = "user.service -> Veri Arama"
-				ctx.params.tablo = "user.json"
+				ctx.params.title = "admin.service -> Veri Arama"
+				ctx.params.tablo = "admin.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Kullanıcı Veri Arama [ /api/user/find_token ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + 'Admin Veri Arama [ /api/admin/find_token ] ' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
 			else {
 				
 				//! Return Api   
-				ctx.params.title = "user.service -> Veri Arama"
-				ctx.params.tablo = "user.json"
+				ctx.params.title = "admin.service -> Veri Arama"
+				ctx.params.tablo = "admin.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Veri Bulunamadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Kullanıcı Veri Bulunamadı [ /api/user/find_token ] ' + '\u001b[0m');		
+				console.log('\u001b[' + 31 + 'm' + 'Admin Veri Bulunamadı [ /api/admin/find_token ] ' + '\u001b[0m');		
 			}
 
 			//! Return

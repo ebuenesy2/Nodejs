@@ -180,6 +180,7 @@ module.exports = {
 			}
 
 			//! Return
+			delete ctx.params.MessageToken
 			delete ctx.params.userToken
 
 			return ctx.params
@@ -222,11 +223,11 @@ module.exports = {
 					ToNameSurName: ToNameSurName_Info,
 					Subject: ctx.params.Subject,
 					Message: ctx.params.Message,				
-					MessageReaded: ctx.params.MessageReaded,		
-					MessageReaded_at: DateNow,		
-					MessageFileControl: ctx.params.MessageFileControl,	
-					MessageDeleted: ctx.params.MessageDeleted,	
-					MessageDeleted_at: DateNow		
+					MessageReaded: 0,                   
+                    MessageReaded_at: null,			
+                    MessageFileControl: 0,
+                    MessageDeleted: 0,	
+					MessageDeleted_at: null,
 				}
 				
 				const secret = 'secret';
@@ -247,10 +248,10 @@ module.exports = {
 					ToNameSurName: ToNameSurName_Info,
 					Subject: ctx.params.Subject,
 					Message: ctx.params.Message,				
-					MessageReaded: ctx.params.MessageReaded,                   
+					MessageReaded: 0,                   
                     MessageReaded_at: null,			
-                    MessageFileControl: ctx.params.MessageFileControl,
-                    MessageDeleted: ctx.params.MessageDeleted,	
+                    MessageFileControl: 0,
+                    MessageDeleted: 0,	
 					MessageDeleted_at: null,
 					MessageToken:jwt,				
 					created_at: new Date(),

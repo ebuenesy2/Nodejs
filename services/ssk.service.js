@@ -349,6 +349,7 @@ module.exports = {
 			}
 			
 			//! Return
+			delete ctx.params.userToken 
 			delete ctx.params.token 
 			delete ctx.params.sskToken 
 			delete ctx.params.soru 
