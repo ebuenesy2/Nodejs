@@ -28,7 +28,8 @@
  
  ```
 				
-				//! ----------- Log ----------------------------- 	
+	   			
+   			//! ----------- Log ----------------------------------------------------------------- 	
 				let logs_add = await ctx.call('logs.add', {					
 					userToken: "userToken",
 					from: "file",
@@ -46,21 +47,21 @@
 				if(logs_add.status==1) { console.log('\u001b[' + 32 + 'm' + 'Log Verisi Kayıt Edildi' + '\u001b[0m'); }
 
 				console.log('\u001b[' + 32 + 'm' + '---------- Log Son -------' + '\u001b[0m')  
-				//! ----------- Log Son ----------------------------- 
+			//! ----------- Log Son --------------------------------------------------------------
  
 
  ```
 
  ```
-				   			
-   			//! ----------- Log ----------------------------- 	
-   			let logs_add = await ctx.call('logs.add', {					
-				userToken: "userToken",
-				from: "file",
-				fromToken: "fromToken",
-				name: "file_update_successful",
-				description: "Dosya Güncelleme Başarılı"
-			}) 
-			//! ----------- Log Son ----------------------------- 
+			   			
+ 			//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {					
+					userToken: "userToken",
+					from: "file",
+					fromToken: "fromToken",
+					name: "file_update_successful",
+					description: "Dosya Güncelleme Başarılı"
+				}) 
+			//! ----------- Log Son --------------------------------  
 
  ```
