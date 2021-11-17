@@ -175,3 +175,117 @@
 				//! ----------- End File UPLOAD ----------------------------- 
            
  ``
+ 
+    ## File - Dosya Güncelleme 
+ 
+ ```
+
+			//! -----------  File UPLOAD ----------------------------- 	
+			let file_upload = await ctx.call('file.updateFile', {
+				old_fileUrl:dbFind.blogUploadUrl,
+				file: ctx.params.blogFile,
+				role: ctx.params.role,
+				userToken: ctx.params.userToken,                  
+				usedPage: "blog"
+			})
+			
+			ctx.params.file_upload = file_upload
+			console.log('\u001b[' + 32 + 'm' + '---------- File Upload ----------' + '\u001b[0m') 
+
+			console.log(file_upload)      
+			console.log('\u001b[' + 32 + 'm' + 'file_upload Image Upload Url : '+ file_upload.DB["uploadDir"] + '\u001b[0m')
+			console.log('\u001b[' + 32 + 'm' + 'file_upload status : '+ file_upload.status + '\u001b[0m')
+			if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m'); }
+			if(file_upload.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m'); }
+
+			console.log('\u001b[' + 32 + 'm' + '---------- File Upload son ----------' + '\u001b[0m')       
+			//! ----------- End File UPLOAD ----------------------------- 
+           
+ ``
+ 
+ ```
+                						
+						//! -----------  File UPLOAD ----------------------------- 	
+						let file_upload = await ctx.call('file.updateFile', {
+							old_fileUrl:dbFind.blogUploadUrl,
+							file: ctx.params.blogFile,
+							role: ctx.params.role,
+							userToken: ctx.params.userToken,                  
+							usedPage: "blog"
+						})
+						//! ----------- End File UPLOAD ----------------------------- 
+           
+ ``
+ 
+     ## File - Dosya Güncelleme URL
+ 
+ ```
+			
+			//! -----------  File UPLOAD ----------------------------- 	
+			let file_upload = await ctx.call('file.updateFileUrl', {
+				old_fileUrl:dbFind.blogUploadUrl,
+				fileUrl: ctx.params.blogFileUrl,
+				role: ctx.params.role,
+				userToken: ctx.params.userToken,                  
+				usedPage: "blog"
+			})
+			
+			ctx.params.file_upload = file_upload
+			console.log('\u001b[' + 32 + 'm' + '---------- File Upload ----------' + '\u001b[0m') 
+
+			console.log(file_upload)      
+			console.log('\u001b[' + 32 + 'm' + 'file_upload Image Upload Url : '+ file_upload.DB["uploadDir"] + '\u001b[0m')
+			console.log('\u001b[' + 32 + 'm' + 'file_upload status : '+ file_upload.status + '\u001b[0m')
+			if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m'); }
+			if(file_upload.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m'); }
+
+			console.log('\u001b[' + 32 + 'm' + '---------- File Upload son ----------' + '\u001b[0m')       
+			//! ----------- End File UPLOAD ----------------------------- 
+           
+ ``
+ 
+ ```
+                																			
+					//! -----------  File UPLOAD ----------------------------- 	
+					let file_upload = await ctx.call('file.updateFileUrl', {
+						old_fileUrl:dbFind.blogUploadUrl,
+						fileUrl: ctx.params.blogFileUrl,
+						role: ctx.params.role,
+						userToken: ctx.params.userToken,                  
+						usedPage: "blog"
+					})				
+					//! ----------- End File UPLOAD ----------------------------- 
+           
+ ``
+
+     ## File - Silme
+ 
+ ```
+			
+			//! -----------  File Delete ----------------------------- 	
+			let file_delete = await ctx.call('file.fileDeleteUrl', {
+				userToken: ctx.params.userToken,
+				fileUrl: ctx.params.old_fileUrl                 
+			})
+
+			ctx.params.file_delete = file_delete  
+			console.log('\u001b[' + 32 + 'm' + '---------- File Delete ----------' + '\u001b[0m')  
+
+			console.log(file_delete) 
+			if(file_delete.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Silinemedi' + '\u001b[0m'); }
+			if(file_delete.status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Silindi' + '\u001b[0m'); }
+
+			console.log('\u001b[' + 32 + 'm' + '---------- File Delete Son -------' + '\u001b[0m')    
+			//! ----------- End File Delete ----------------------------- 
+ ``
+ 
+ ```
+                																			
+			//! -----------  File Delete ----------------------------- 	
+			let file_delete = await ctx.call('file.fileDeleteUrl', {
+				userToken: ctx.params.userToken,
+				fileUrl: ctx.params.old_fileUrl                 
+			})		
+			//! ----------- End File Delete ----------------------------- 
+           
+ ``
