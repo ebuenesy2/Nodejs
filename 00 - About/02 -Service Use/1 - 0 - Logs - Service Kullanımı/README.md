@@ -33,3 +33,17 @@
  
 
  ```
+
+ ```
+				   			
+   			//! ----------- Log ----------------------------- 	
+   			let logs_add = await ctx.call('logs.add', {					
+				userToken: "userToken",
+				from: "file",
+				fromToken: "fromToken",
+				name: "file_update_successful",
+				description: "Dosya Güncelleme Başarılı"
+			}) 
+			//! ----------- Log Son ----------------------------- 
+
+ ```
