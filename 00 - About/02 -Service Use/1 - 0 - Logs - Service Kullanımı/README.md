@@ -1,8 +1,8 @@
 
-# Service Kullanımı
+# 1 - 0 - Logs - Service Kullanımı
 
 ## Açıklama
  
  ```
- Service Kullanımları
+ Proje içinde durumları alıyor
  ```
