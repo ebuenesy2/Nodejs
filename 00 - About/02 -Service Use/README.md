@@ -1,8 +1,8 @@
 
-## Port Bilgilerim
+# Service Kullanımı
 
+## Açıklama
+ 
  ```
- /3000 => React
- /3001 => Api - Nodejs
- /8000 => Laravel
-  ```
+ Service Kullanımları
+ ```
