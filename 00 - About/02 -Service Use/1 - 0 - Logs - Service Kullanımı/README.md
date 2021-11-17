@@ -6,6 +6,23 @@
  ```
  Proje içinde durumları alıyor
  ```
+ 
+## Logs - Tüm Veriler
+ 
+ ```
+				   			
+   			//! ----------- Log ----------------------------- 	
+				let logs_all = await ctx.call('logs.all');
+				
+				ctx.params.logs_all = logs_all  
+				console.log('\u001b[' + 32 + 'm' + '---------- Log  ----------' + '\u001b[0m')  
+
+				//Console Yazma
+				console.log(logs_all) 
+				console.log('\u001b[' + 32 + 'm' + '---------- Log Son -------' + '\u001b[0m')  
+			//! ----------- Log Son ----------------------------- 
+	
+ ```
 
 ## Logs - Veri Ekleme
  
