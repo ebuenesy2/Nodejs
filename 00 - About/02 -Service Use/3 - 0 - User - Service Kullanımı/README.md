@@ -45,11 +45,11 @@ User service kullanımı ve Kullanıcı işlemleri
  
  ```  	 				   			
 			//! ----------- User ----------------------------- 	
-				let user_find = await ctx.call('user.find_token', {					
+				let user_find_token = await ctx.call('user.find_token', {					
 					userToken: "userToken"
 				})
 						
-				ctx.params.user_find = user_find  
+				ctx.params.user_find_token = user_find_token  
 				console.log('\u001b[' + 32 + 'm' + '---------- User  ----------' + '\u001b[0m')  
 
 				//Console Yazma
@@ -70,7 +70,7 @@ User service kullanımı ve Kullanıcı işlemleri
 					username: "username ad",
 					email: "email ad",
 					tel: "tel ad",
-					password: "password ad",
+					password: "password ad"
 				})
 						
 				ctx.params.user_add = user_add  
