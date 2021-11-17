@@ -1,8 +1,11 @@
 
-## Port Bilgilerim
+## UseOf  - Proje Kullanımı
 
  ```
- /3000 => React
- /3001 => Api - Nodejs
- /8000 => Laravel
+ * Proje Kullanılan Alanlar
+ 
+ ** Php - Laravel
+ ** React
+ ** Android
+ 
   ```
