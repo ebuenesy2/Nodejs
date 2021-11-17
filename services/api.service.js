@@ -337,6 +337,17 @@ module.exports = {
 		//!---------------- blogs son ----------------------------------------------------------------------------------------------
 
 
+		//!------------- xdeneme  --------------------------------------------------------------------------------------------------
+
+			fastify.get('/api/xdeneme/info',async (req,res)=> this.broker.call("xdeneme.info")) //! İnfo
+			fastify.post('/api/xdeneme/post', async (req, res) => this.broker.call("xdeneme.post",{...req.body})) //! POST
+			fastify.get('/api/xdeneme/html', async (req, res) => this.broker.call("xdeneme.html")) //! Html
+			fastify.get('/api/xdeneme/service', async (req, res) => this.broker.call("xdeneme.service")) //! Service
+	
+	
+	//!---------------- xdeneme son ----------------------------------------------------------------------------------------------
+
+
 		//************************************* Server  **************************************************** */
 		// ! Server dinliyor
 			const start = async () => {
