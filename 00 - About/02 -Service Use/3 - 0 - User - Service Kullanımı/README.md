@@ -124,3 +124,38 @@ User service kullanımı ve Kullanıcı işlemleri
 				console.log('\u001b[' + 32 + 'm' + '---------- User Son -------' + '\u001b[0m')  
 			//! ----------- User Son ----------------------------- 
  ```
+ 
+  ## Kullanıcı - Üye Girişi
+ 
+ ```	  					   				   			   			
+			//! ----------- User ----------------------------- 	
+				let user_loginOnline = await ctx.call('user.loginOnline', {					
+					email: "enes3@gmail.com",				
+					password: "123"			
+				})
+						
+				ctx.params.user_loginOnline = user_loginOnline  
+				console.log('\u001b[' + 32 + 'm' + '---------- User  ----------' + '\u001b[0m')  
+
+				//Console Yazma
+				console.log(user_loginOnline) 
+				console.log('\u001b[' + 32 + 'm' + '---------- User Son -------' + '\u001b[0m')  
+			//! ----------- User Son ----------------------------- 
+ ```
+ 
+   ## Kullanıcı - Üye Çıkışı
+ 
+ ```	  					   				   			   					   			
+			//! ----------- User ----------------------------- 	
+				let user_loginOut = await ctx.call('user.loginOut', {					
+					userToken: "userToken2"	
+				})
+						
+				ctx.params.user_loginOut = user_loginOut  
+				console.log('\u001b[' + 32 + 'm' + '---------- User  ----------' + '\u001b[0m')  
+
+				//Console Yazma
+				console.log(user_loginOut) 
+				console.log('\u001b[' + 32 + 'm' + '---------- User Son -------' + '\u001b[0m')  
+			//! ----------- User Son ----------------------------- 
+ ```
