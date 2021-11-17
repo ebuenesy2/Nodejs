@@ -107,7 +107,7 @@ User service kullanımı ve Kullanıcı işlemleri
 			//! ----------- User Son ----------------------------- 
  ```
  
-    ## Kullanıcı - Veri Silme
+ ## Kullanıcı - Veri Silme
  
  ```	   					   				   			
 			//! ----------- User ----------------------------- 	
