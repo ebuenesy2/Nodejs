@@ -83,7 +83,8 @@ module.exports = {
 					APi_URL: process.env.APi_URL,
 					APi_URL_Dev: process.env.APi_URL_Dev,
 					APi_URL_Local: process.env.APi_URL_Local,
-					APi_Title: process.env.APi_Title
+					APi_Title: process.env.APi_Title,
+					APi_Name: process.env.APi_Name
 				},	
 				Version:
 				{
@@ -129,7 +130,8 @@ module.exports = {
 					APi_URL: process.env.APi_URL,
 					APi_URL_Dev: process.env.APi_URL_Dev,
 					APi_URL_Local: process.env.APi_URL_Local,
-					APi_Title: process.env.APi_Title
+					APi_Title: process.env.APi_Title,
+					APi_Name: process.env.APi_Name
 				},	
 				Version:
 				{
