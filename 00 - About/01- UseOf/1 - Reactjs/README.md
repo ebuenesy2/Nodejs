@@ -1,8 +1,35 @@
+# React - Api
 
-## Port Bilgilerim
+## Açıklama
 
- ```
- /3000 => React
- /3001 => Api - Nodejs
- /8000 => Laravel
-  ```
+```
+Api Veri Alma -  Gönderme
+```
+
+## Terminal
+
+```
+npm i axios
+```
+
+## İmport
+
+```
+import axios from 'axios'
+```
+
+## Kullanılan Url
+
+```
+Kullanılan Url
+```
+
+## Api Get
+```
+Api Get
+```
+
+## State Okuma
+```
+ State Kullanımı
+```
