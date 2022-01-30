@@ -352,14 +352,16 @@ module.exports = {
 
 		//************************************* Server  **************************************************** */
 		// ! Server dinliyor
-			const start = async () => {
-				try {
-					await fastify.listen(process.env.PORT || 3000, '0.0.0.0')
-				} catch (err) {
-					fastify.log.error(err)
-					process.exit(1)
-				}				
-			}
+		const start = async () => {
+			try {
+				  await fastify.listen(process.env.PORT || 3001, '0.0.0.0')
+				  console.log('\u001b[' + 32 + 'm' + 'Port Listening [ '+process.env.PORT+' ]' + '\u001b[0m');	
+				  
+			} catch (err) {
+				fastify.log.error(err)
+				process.exit(1)
+			}				
+		}
 
 		// ! Başlatıyor
 			start()

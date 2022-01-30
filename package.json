@@ -1,10 +1,10 @@
 {
-  "name": "moleculer-demo",
+  "name": "nodejs-yildirimdev",
   "version": "1.0.0",
   "description": "My Moleculer-based microservices project",
   "scripts": {
     "dev": "moleculer-runner --repl --hot services/**/*.service.js",
-    "start": "npm start",
+    "start": "npm run dev",
     "cli": "moleculer connect NATS",
     "ci": "jest --watch",
     "test": "jest --coverage",
