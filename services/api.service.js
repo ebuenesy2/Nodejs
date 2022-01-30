@@ -158,7 +158,6 @@ module.exports = {
 			fastify.post('/', function (req, res) {
 
 				//res.send(req.body.name);
-
 				res.send(req.body);
 				console.log(req.body);
 
@@ -170,7 +169,6 @@ module.exports = {
 
 			// ! Get Token
 			fastify.post('/token', function (req, res) {
-
 
 				const secret = 'secret';
 				const data = req.body;
