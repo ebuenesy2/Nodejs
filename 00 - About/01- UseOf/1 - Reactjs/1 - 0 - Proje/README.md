@@ -21,7 +21,7 @@ import axios from 'axios'
 ## Kullanılan Url
 
 ```
-Kullanılan Url
+http://localhost:3001/info
 ```
 
 ## Api Get
