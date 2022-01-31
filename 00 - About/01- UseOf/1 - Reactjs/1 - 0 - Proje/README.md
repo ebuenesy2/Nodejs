@@ -26,10 +26,11 @@ http://localhost:3001/info
 
 ## Api Get
 ```
-         //! Sabit Veriler
-         state = {
+        //! Sabit Veriler
+        state = {
             error:null,
-            items: []
+            isLoading:"false",
+            items: []           
         }
 
         //! Axios
@@ -39,9 +40,10 @@ http://localhost:3001/info
                 const response = await axios.get("http://localhost:3001/info");
                 console.log(response);
                     
-                //! Verileri Kaydet
+                //! Verileri Kaydet                  
                 this.setState({error:null}) //! Hata Durumu          
-                this.setState({items:response.data}) //! Tüm Veriler                                       
+                this.setState({items:response.data}) //! Tüm Veriler
+                this.setState({isLoading:"true"})                                    
      
             } catch (error) { this.setState({error:error}) }
     
@@ -50,5 +52,8 @@ http://localhost:3001/info
 
 ## State Okuma
 ```
-    <h1> {this.state.items.title} </h1>  
+ {this.state.isLoading? "oldu" : "olmadı"}    
+```
+```
+<h1> {this.state.items.title} </h1>  
 ```
