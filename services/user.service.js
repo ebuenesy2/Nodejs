@@ -823,6 +823,94 @@ module.exports = {
 
 			return ctx.params
 		},
+		async loginOnlineUsername(ctx) {
+
+			// ! Arama
+			const user_email = db.filter(u => u.username == ctx.params.username);
+			const dbFind = db.filter(u => u.username == ctx.params.username && u.password == ctx.params.password);
+              
+			// Giriş Başarılı ise
+			if (dbFind.length > 0) {
+				
+				//! -----------  User UPDATE ----------------------------- 	
+				let user_updateUrl = await ctx.call('user.updateUrl', {
+					userToken:dbFind[0].userToken,
+					role: dbFind[0].role,					               
+					OnlineStatus: 1,                  
+					OnlineLastLogin_At: new Date()					        
+				})		
+				//! ----------- End User UPDATE -----------------------------
+				
+
+			    //! Kullanıcı Güncelleme Yapıldı
+				if(user_updateUrl.status=="0") { 	console.log('\u001b[' + 31 + 'm' + 'Kullanıcı Güncelleme Yapılmadı' + '\u001b[0m'); }
+				if(user_updateUrl.status=="1") { 	
+				
+					console.log('\u001b[' + 32 + 'm' + 'Kullanıcı Güncelleme Yapıldı' + '\u001b[0m');
+
+					//! ----------- Log ----------------------------- 	
+					let logs_add = await ctx.call('logs.add', {					
+						userToken:dbFind[0].userToken,
+						from: "user",
+						fromToken:dbFind[0].userToken,						
+						name: "user_login_successful",
+						description: "Başarılı Kullanıcı Giriş Yapıldı"
+					})
+					//! ----------- Log Son -----------------------------
+
+				}       				
+
+				//! Return Api
+				ctx.params.title = "Kullanıcı Username Login"
+				ctx.params.tablo = "user.json"
+				ctx.params.status = 1
+				ctx.params.mesaj = "Başarılı Giriş  Oldu"
+				ctx.params.userInfo=dbFind[0]
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Kullanıcı Login [ /api/user/loginOnline ] Başarılı' + '\u001b[0m');	
+			}
+
+			//! Kullanıcı Yoksa
+			else {
+				
+				if (user_email.length <= 0)  {	console.log('\u001b[' + 31 + 'm' + 'Email Yok' + '\u001b[0m'); }
+				if (user_email.length > 0) { 	
+					console.log('\u001b[' + 32 + 'm' + 'Email Var' + '\u001b[0m');
+
+					//! ----------- Log ----------------------------- 	
+					let logs_add = await ctx.call('logs.add', {					
+						userToken:user_email[0].userToken,
+						from: "user",
+						fromToken:user_email[0].userToken,						
+						name: "user_login_error",
+						description: "Hatalı  Kullanıcı Giriş Yapıldı"
+					})
+					//! ----------- Log Son -----------------------------
+
+
+				 }
+								
+			
+				//! Return Api
+				ctx.params.title = "Kullanıcı Username Login"
+				ctx.params.tablo = "user.json"
+				ctx.params.status = 0
+				ctx.params.mesaj = "Hatalı Giriş Oldu"
+				ctx.params.userInfo=null
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Kullanıcı Login [ /api/user/loginOnline ] Başarısız ' + '\u001b[0m');		
+
+			}					
+           
+			
+			//! Delete
+			delete ctx.params.username
+			delete ctx.params.password
+
+			return ctx.params
+		},
 		async loginOut(ctx){
 
 			// ! Arama

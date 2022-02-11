@@ -777,6 +777,7 @@ module.exports = {
 				ctx.params.tablo = "admin.json"
 				ctx.params.status = 1
 				ctx.params.mesaj = "Başarılı Giriş  Oldu"
+				ctx.params.userInfo=dbFind[0]
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + 'Admin Login [ /api/admin/loginOnline ] Başarılı' + '\u001b[0m');	
@@ -811,6 +812,7 @@ module.exports = {
 				ctx.params.tablo = "admin.json"
 				ctx.params.status = 0
 				ctx.params.mesaj = mesaj
+				ctx.params.userInfo=null
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + 'Admin Login [ /api/admin/loginOnline ] Başarısız ' + '\u001b[0m');		
@@ -820,6 +822,97 @@ module.exports = {
 			
 			//! Delete
 			delete ctx.params.email
+			delete ctx.params.password
+
+			return ctx.params
+		},
+		async loginOnlineUsername(ctx) {
+
+			// ! Arama
+			const user_email = db.filter(u => u.username == ctx.params.username);
+			const dbFind = db.filter(u => u.username == ctx.params.username && u.password == ctx.params.password);
+              
+			// Giriş Başarılı ise
+			if (dbFind.length > 0) {
+				
+				//! -----------  Admin UPDATE ----------------------------- 	
+				let user_updateUrl = await ctx.call('admin.updateUrl', {
+					userToken:dbFind[0].userToken,
+					role: dbFind[0].role,					               
+					OnlineStatus: 1,                  
+					OnlineLastLogin_At: new Date()					        
+				})		
+				//! ----------- End Admin UPDATE -----------------------------
+				
+
+			    //! Admin Güncelleme Yapıldı
+				if(user_updateUrl.status=="0") { 	console.log('\u001b[' + 31 + 'm' + 'Admin Güncelleme Yapılmadı' + '\u001b[0m'); }
+				if(user_updateUrl.status=="1") { 	
+				
+					console.log('\u001b[' + 32 + 'm' + 'Admin Güncelleme Yapıldı' + '\u001b[0m');
+
+					//! ----------- Log ----------------------------- 	
+					let logs_add = await ctx.call('logs.add', {					
+						userToken:dbFind[0].userToken,
+						from: "admin",
+						fromToken:dbFind[0].userToken,						
+						name: "admin_login_successful",
+						description: "Başarılı Admin Giriş Yapıldı"
+					})
+					//! ----------- Log Son -----------------------------
+
+				}       				
+
+				//! Return Api
+				ctx.params.title = "Admin username Login"
+				ctx.params.tablo = "admin.json"
+				ctx.params.status = 1
+				ctx.params.mesaj = "Başarılı Giriş  Oldu"
+				ctx.params.userInfo=dbFind[0]
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Admin Login [ /api/admin/loginOnline ] Başarılı' + '\u001b[0m');	
+			}
+
+			//! Kullanıcı Yoksa
+			else {
+				 
+				let mesaj="Hatalı Giriş Oldu";
+
+				if (user_email.length <= 0)  {	console.log('\u001b[' + 31 + 'm' + 'Email Yok' + '\u001b[0m');  mesaj="Hatalı Giriş Oldu -> Email Yok"; }
+				if (user_email.length > 0) { 	
+					
+					console.log('\u001b[' + 32 + 'm' + 'Email Var' + '\u001b[0m'); mesaj="Hatalı Giriş Oldu -> Email Var";
+
+					//! ----------- Log ----------------------------- 	
+					let logs_add = await ctx.call('logs.add', {					
+						userToken:user_email[0].userToken,
+						from: "admin",
+						fromToken:user_email[0].userToken,						
+						name: "admin_login_error",
+						description: "Hatalı  Admin Giriş Yapıldı"
+					})
+					//! ----------- Log Son -----------------------------
+
+
+				 }
+								
+			
+				//! Return Api
+				ctx.params.title = "Admin username Login"
+				ctx.params.tablo = "admin.json"
+				ctx.params.status = 0
+				ctx.params.mesaj = mesaj
+				ctx.params.userInfo=null
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Admin Login [ /api/admin/loginOnline ] Başarısız ' + '\u001b[0m');		
+
+			}					
+           
+			
+			//! Delete
+			delete ctx.params.username
 			delete ctx.params.password
 
 			return ctx.params

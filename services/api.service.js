@@ -255,6 +255,7 @@ module.exports = {
 			fastify.post('/api/user/delete/:id', async (req, res) => this.broker.call("user.delete",{id: req.params.id,...req.body})) //! DELETE
 			
 			fastify.post('/api/user/loginOnline', async (req, res) => this.broker.call("user.loginOnline",{...req.body})) //! Login
+			fastify.post('/api/user/loginOnlineUsername', async (req, res) => this.broker.call("user.loginOnlineUsername",{...req.body})) //! Login User
 			fastify.post('/api/user/loginOut', async (req, res) => this.broker.call("user.loginOut",{...req.body})) //! Loginout
 
 		//!---------------- user son ----------------------------------------------------------------------------------------------
@@ -278,6 +279,7 @@ module.exports = {
 			fastify.post('/api/admin/delete/:id', async (req, res) => this.broker.call("admin.delete",{id: req.params.id,...req.body})) //! DELETE
 			
 			fastify.post('/api/admin/loginOnline', async (req, res) => this.broker.call("admin.loginOnline",{...req.body})) //! Login
+			fastify.post('/api/admin/loginOnlineUsername', async (req, res) => this.broker.call("admin.loginOnlineUsername",{...req.body})) //! Login
 			fastify.post('/api/admin/loginOut', async (req, res) => this.broker.call("admin.loginOut",{...req.body})) //! Loginout
 
 		//!---------------- admin son ----------------------------------------------------------------------------------------------
