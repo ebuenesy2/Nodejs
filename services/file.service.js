@@ -768,9 +768,7 @@ module.exports = {
 						fs.writeFile('./public/DB/file.json', JSON.stringify(db), err => {
 
 							// Hata varsa
-							if (err) {
-								console.log(err)
-							}
+							if (err) { console.log(err) }
 
 							//Console Yazma
 							console.log("Json Veri Kayıt Edildi -> File"); // Success
@@ -811,7 +809,7 @@ module.exports = {
 				ctx.params.tablo = "file.json"        
 				ctx.params.status = status				
 				ctx.params.DB=fileData
-				ctx.params.mesaj="Dosya Yüklenemedi"
+				ctx.params.mesaj="Dosya Yüklendi"
 				
 				//Console Yazma
 				if(status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Yükleme [ /api/file/upload ] Yüklendi' + '\u001b[0m'); }
@@ -837,7 +835,6 @@ module.exports = {
 			delete ctx.params.role
 			delete ctx.params.userToken
 			delete ctx.params.usedPage
-
 			delete ctx.params.file
 			
 			return ctx.params

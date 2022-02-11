@@ -777,6 +777,7 @@ module.exports = {
 				ctx.params.tablo = "user.json"
 				ctx.params.status = 1
 				ctx.params.mesaj = "Başarılı Giriş  Oldu"
+				ctx.params.userInfo=dbFind[0]
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + 'Kullanıcı Login [ /api/user/loginOnline ] Başarılı' + '\u001b[0m');	
@@ -808,6 +809,7 @@ module.exports = {
 				ctx.params.tablo = "user.json"
 				ctx.params.status = 0
 				ctx.params.mesaj = "Hatalı Giriş Oldu"
+				ctx.params.userInfo=null
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + 'Kullanıcı Login [ /api/user/loginOnline ] Başarısız ' + '\u001b[0m');		
