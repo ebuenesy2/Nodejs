@@ -338,6 +338,26 @@ module.exports = {
 		
 		//!---------------- blogs son ----------------------------------------------------------------------------------------------
 
+		
+		//!-------------  Pass -----------------------------------------------------------------------------------------
+
+			fastify.get('/api/pass/info', async (req, res) => this.broker.call("pass.info")) //! İnfo			
+			fastify.post('/api/pass/post', async (req, res) => this.broker.call("pass.post", { ...req.body })) //! POST
+			fastify.get('/api/pass/html', async (req, res) => this.broker.call("pass.html")) //! Html
+			fastify.get('/api/pass/all', async (req, res) => this.broker.call("pass.all")) //! All
+
+			fastify.get('/api/pass/:id', async (req, res) => this.broker.call("pass.find", { id: req.params.id })) //!Search
+			fastify.post('/api/pass/find_user', async (req, res) => this.broker.call("pass.find_user", { ...req.body })) //! Search Pass	
+			fastify.post('/api/pass/findPassName', async (req, res) => this.broker.call("pass.findPassName", { ...req.body })) //! Search findPassName	
+			fastify.post('/api/pass/findToken', async (req, res) => this.broker.call("pass.findToken", { ...req.body })) //! Search Pass	
+			fastify.post('/api/pass/findCategoryToken', async (req, res) => this.broker.call("pass.findCategoryToken", { ...req.body })) //! Search Pass	
+
+			fastify.post('/api/pass/add', async (req, res) => this.broker.call("pass.add", { ...req.body })) //! CREATE
+			fastify.post('/api/pass/update', async (req, res) => this.broker.call("pass.update", { ...req.body })) //! UPDATE
+			fastify.post('/api/pass/delete', async (req, res) => this.broker.call("pass.delete", { ...req.body })) //! DELETE				
+
+		//!---------------- Pass Son --------------------------------------------------------------------------------------------
+
 
 		//!------------- xdeneme  --------------------------------------------------------------------------------------------------
 
