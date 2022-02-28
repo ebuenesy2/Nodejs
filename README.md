@@ -111,7 +111,7 @@ npm start
 ## Çalıştırma - Heroku üzerine
 
 ```
-https://api-yildirim-dev.herokuapp.com/
+https://yildirimdev-server.herokuapp.com/
 ```
 
 
