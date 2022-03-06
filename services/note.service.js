@@ -52,7 +52,7 @@ module.exports = {
 				ctx.params.DB = db		
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Note Tüm Veriler Okundu [ /api/pass/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + 'Note Tüm Veriler Okundu [ /api/note/all ] ' + '\u001b[0m');
 
 			} catch (error) {
 
@@ -64,7 +64,7 @@ module.exports = {
 				ctx.params.DB = error
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Note Tüm Veriler Okunamadı [ /api/pass/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Note Tüm Veriler Okunamadı [ /api/note/all ] ' + '\u001b[0m');
 				console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');			
 			}
 
@@ -133,7 +133,7 @@ module.exports = {
 				ctx.params.title = "note.service -> Veri Arama"
 				ctx.params.tablo = "note.json"
 				ctx.params.status = 0
-				ctx.params.DB = "Note  Bulunmadı"
+				ctx.params.DB = "Veri Bulunmadı"
 			
 				
 				//Console Yazma
@@ -173,7 +173,7 @@ module.exports = {
 				ctx.params.tablo = "note.json"
 				ctx.params.status = 0
 				ctx.params.size=0
-				ctx.params.DB = "Note Bulunmadı"
+				ctx.params.DB = "Veri Bulunmadı"
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + 'Note Veri Arama [ /api/note/find_token ] Bulunamadı' + '\u001b[0m');
@@ -234,12 +234,7 @@ module.exports = {
 					title: ctx.params.title,
 					content: ctx.params.content,
 					created_at: CreateDate,
-                    created_byToken: ctx.params.created_byToken,
-					updated_at: null,
-					updated_byToken: null,
-                    isDeleted: false,
-                    isDeleted_at:null,
-                    isDeleted_byToken:null
+                    created_byToken: ctx.params.created_byToken				
 				}
 				
 				const secret = 'secret';
@@ -273,7 +268,7 @@ module.exports = {
 					if (err) { console.log(err) }
 					
 					//Console Yazma
-					console.log("Note Veri Kayıt Edildi -> Password"); // Success
+					console.log("Note Veri Kayıt Edildi -> Note"); // Success
 				});
 
 				//! Return Api
@@ -283,7 +278,7 @@ module.exports = {
 				ctx.params.mesaj = "Veri Eklendi"				
 		    
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Note Ekleme [ /api/note/add ] Eklendi' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + 'Note Veri Ekleme [ /api/note/add ] Eklendi' + '\u001b[0m');
 
 
 			} catch (error) {
@@ -295,11 +290,11 @@ module.exports = {
 				ctx.params.mesaj = error
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Note Ekleme [ /api/note/add ] Eklenemedi' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Note Veri Eklenemedi [ /api/note/add ] Eklenemedi' + '\u001b[0m');
 			}
 
 			//! Return
-			delete ctx.params.userToken
+			delete ctx.params.created_byToken
 			delete ctx.params.title
 			delete ctx.params.content
 
@@ -308,7 +303,7 @@ module.exports = {
 		async update(ctx) {
 
 			// ! Arama
-			const dbFind = db.find(u => u.passToken == ctx.params.passToken);		
+			const dbFind = db.find(u => u.createdToken == ctx.params.createdToken);		
 
 			//! Veri Varsa 
 			if (dbFind) {
@@ -316,93 +311,150 @@ module.exports = {
 				// Referans Veriler Güncelleme Yapıyor
 				Object.keys(ctx.params).forEach(key => {  dbFind[key] = ctx.params[key] })				
 				dbFind["updated_at"] = new Date()
+				dbFind["updated_byToken"] = ctx.params.updated_byToken
 				// End  Referans Veriler Güncelleme Yapıyor
 
 				// Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/pass.json', JSON.stringify(db), err => {
+				fs.writeFile('./public/DB/note.json', JSON.stringify(db), err => {
 
 					// Hata varsa
 					if (err) { console.log(err) }
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi -> Password"); // Success
+					console.log("Json Veri Kayıt Edildi -> Note"); // Success
 				});
 				// End Json içine Verileri Yazıyor -> db
 				
 				//! Return Api
-				ctx.params.title = "pass.service -> Veri Güncelleme"
-				ctx.params.tablo = "pass.json"
+				ctx.params.title = "note.service -> Note Veri Güncelleme"
+				ctx.params.tablo = "note.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Password Güncelleme [ /api/pass/update ] Güncellendi' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + ' Note Veri Güncelleme [ /api/note/update ] Güncellendi' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
 			else {
 			
 				//! Return Api
-				ctx.params.title = "pass.service -> Veri Güncelleme"
-				ctx.params.tablo = "pass.json"
+				ctx.params.title = "note.service -> Veri Güncelleme"
+				ctx.params.tablo = "note.json"
 				ctx.params.status = 0
-				ctx.params.DB = "Password Bulunamadı"
+				ctx.params.DB = "Veri Bulunamadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Password Güncelleme [ /api/pass/update ] Güncellenemeddi' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Note Veri Güncellenemedi [ /api/note/update ] Güncellenemeddi' + '\u001b[0m');
 			}
 
 			//! Return
-			delete ctx.params.passToken
-			delete ctx.params.userToken
-			delete ctx.params.passName
-			delete ctx.params.passUrl
-			delete ctx.params.passUserName
-			delete ctx.params.pass
-			delete ctx.params.passCategoryToken
+			delete ctx.params.created_byToken
+			delete ctx.params.createdToken
+			delete ctx.params.title
+			delete ctx.params.content
+
+			return ctx.params
+		},
+        async updated_delete(ctx) {
+
+			// ! Arama
+			const dbFind = db.find(u => u.createdToken == ctx.params.createdToken);		
+
+			//! Veri Varsa 
+			if (dbFind) {
+
+				// Referans Veriler Güncelleme Yapıyor
+				Object.keys(ctx.params).forEach(key => {  dbFind[key] = ctx.params[key] })				
+				dbFind["isDeleted"] = true
+				dbFind["isDeleted_at"] = new Date()
+				dbFind["isDeleted_byToken"] = ctx.params.isDeleted_byToken
+				// End  Referans Veriler Güncelleme Yapıyor
+
+				// Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/note.json', JSON.stringify(db), err => {
+
+					// Hata varsa
+					if (err) { console.log(err) }
+
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi -> Note"); // Success
+				});
+				// End Json içine Verileri Yazıyor -> db
+				
+				//! Return Api
+				ctx.params.title = "note.service -> Note Veri Güncelleme"
+				ctx.params.tablo = "note.json"
+				ctx.params.status = 1
+				ctx.params.DB = dbFind
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + ' Note Veri Güncelleme [ /api/note/update ] Güncellendi' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+			
+				//! Return Api
+				ctx.params.title = "note.service -> Veri Güncelleme"
+				ctx.params.tablo = "note.json"
+				ctx.params.status = 0
+				ctx.params.DB = "Veri Bulunamadı"
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Note Veri Güncellenemedi [ /api/note/update ] Güncellenemeddi' + '\u001b[0m');
+			}
+
+			//! Return
+			delete ctx.params.created_byToken
+			delete ctx.params.createdToken
+			delete ctx.params.title
+			delete ctx.params.content
 
 			return ctx.params
 		},
 		async delete(ctx) {
 
 			//! Arama
-			var index = db.findIndex(a => a.logToken === ctx.params.logToken);
+			var index = db.findIndex(a => a.id == ctx.params.id);
 			if (index > -1) {
 				db.splice(index, 1);
 
 				// Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/pass.json', JSON.stringify(db), err => {
+				fs.writeFile('./public/DB/note.json', JSON.stringify(db), err => {
 
 					// Hata varsa
 					if (err) { console.log(err) }
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Silindi -> Password"); // Success
+					console.log("Json Veri Kayıt Silindi -> Note"); // Success
 				});
 
 				//! Return Api
-				ctx.params.title = "pass.service -> Veri Silme"
-				ctx.params.tablo = "pass.json"
+				ctx.params.title = "note.service -> Veri Silme"
+				ctx.params.tablo = "note.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Password Silindi"
+				ctx.params.mesaj = "Veri Silindi"
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Password Silme [ /api/pass/delete ] Silindi' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + 'Note Veri Silindi [ /api/note/delete ] Silindi' + '\u001b[0m');
 
 			} else {
 
 				//! Return Api
-				ctx.params.title = "pass.service -> Veri Silme"
-				ctx.params.tablo = "pass.json"
+				ctx.params.title = "note.service -> Veri Silme"
+				ctx.params.tablo = "note.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "pass Bulunmadı"
+				ctx.params.mesaj = "Veri Bulunamadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Log Silme [ /api/pass/delete ] Silinemedi' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Note Veri Siinemedi [ /api/note/delete ] Silinemedi' + '\u001b[0m');
 			}
 
 			//! Return
-			delete ctx.params.passToken
+			delete ctx.params.userToken
+			delete ctx.params.id
+
     		return ctx.params
 		}
 

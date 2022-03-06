@@ -372,6 +372,7 @@ module.exports = {
 		fastify.post('/api/note/find_user', async (req, res) => this.broker.call("note.find_user",{...req.body})) //!  Search-UserToken	
 		fastify.post('/api/note/add', async (req, res) => this.broker.call("note.add",{...req.body})) //! CREATE		
 		fastify.post('/api/note/update', async (req, res) => this.broker.call("note.update",{...req.body})) //! UPDATE
+		fastify.post('/api/note/updated_delete', async (req, res) => this.broker.call("note.updated_delete",{...req.body})) //! UPDATE
 		fastify.post('/api/note/delete/:id', async (req, res) => this.broker.call("note.delete",{id: req.params.id,...req.body})) //! DELETE
 		
 	//!---------------- note son ----------------------------------------------------------------------------------------------
