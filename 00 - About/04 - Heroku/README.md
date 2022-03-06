@@ -1,8 +1,16 @@
 
-# Service Kullanımı
+# Heroku Kullanımı
 
-## Açıklama
- 
+ ## Kullanıcı Bilgileri - Url 
  ```
- Service Kullanımları
+https://dashboard.heroku.com/apps
+ ```
+ 
+## Kullanıcı Bilgileri - User 
+ ```
+ebuenesyildirim@gmail.com
+ ```
+ ## Kullanıcı Bilgileri - Password 
+ ```
+t.c.2622147enes
  ```
