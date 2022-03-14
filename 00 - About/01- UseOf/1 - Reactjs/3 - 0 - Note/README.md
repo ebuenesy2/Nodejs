@@ -26,7 +26,29 @@ https://yildirimdev-server.herokuapp.com/api/note/all
 
 ## Api Get
 ```
-Api Get
+//! Sabit Veriler
+state = {
+error:null,
+isLoading:"false",
+items: []
+}
+
+
+//! Axios
+async componentDidMount() {
+try {
+
+const response = await axios.get("http://localhost:3001/info");
+console.log(response);
+
+//! Verileri Kaydet
+this.setState({error:null}) //! Hata Durumu
+this.setState({items:response.data}) //! Tüm Veriler
+this.setState({isLoading:"true"})
+
+} catch (error) { this.setState({error:error}) }
+
+}
 ```
 
 ## State Okuma
