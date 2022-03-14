@@ -21,7 +21,7 @@ import axios from 'axios'
 ## Kullanılan Url
 
 ```
-Kullanılan Url
+https://yildirimdev-server.herokuapp.com/api/note/all
 ```
 
 ## Api Get
