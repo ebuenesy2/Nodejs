@@ -307,16 +307,6 @@ module.exports = {
 								
 							});
 							
-							//! ----------- Log ----------------------------- 	
-							let logs_add = await ctx.call('logs.add', {					
-								userToken: jwt,
-								from: "user",
-								fromToken: jwt,
-								name: "user_add_successful",
-								description: "Başarılı Kullanıcı Kayıt Yapıldı"
-							})			
-							//! ----------- Log Son ----------------------------- 
-
 							//! Return Api   
 							status = 1	
 							mesaj="Kullanıcı Eklendi"	
