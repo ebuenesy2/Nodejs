@@ -307,6 +307,18 @@ module.exports = {
 								
 							});
 							
+							/*
+							//! ----------- Log ----------------------------- 	
+							let logs_add = await ctx.call('logs.add', {					
+								userToken: jwt,
+								from: "user",
+								fromToken: jwt,
+								name: "user_add_successful",
+								description: "Başarılı Kullanıcı Kayıt Yapıldı"
+							})			
+							//! ----------- Log Son ----------------------------- 
+							*/
+
 							//! Return Api   
 							status = 1	
 							mesaj="Kullanıcı Eklendi"	
@@ -452,7 +464,7 @@ module.exports = {
 				});	
 				// End Json içine Verileri Yazıyor -> db
 				
-	
+	            /*
 				//! ----------- Log ----------------------------- 	
 				let logs_add = await ctx.call('logs.add', {					
 					userToken: ctx.params.userToken,
@@ -462,6 +474,7 @@ module.exports = {
 					description: "Başarılı Kullanıcı Güncelleme Yapıldı"
 				})			
 				//! ----------- Log Son -----------------------------  
+				*/
 
 				//! Return Api   
 				ctx.params.title = "user.service -> Veri Guncelleme"
