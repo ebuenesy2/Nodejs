@@ -624,7 +624,7 @@ module.exports = {
 				});	
 				// End Json içine Verileri Yazıyor -> db
 				
-	
+	            /*
 				//! ----------- Log ----------------------------- 	
 				let logs_add = await ctx.call('logs.add', {					
 					userToken: ctx.params.userToken,
@@ -634,6 +634,7 @@ module.exports = {
 					description: "Başarılı Kullanıcı Güncelleme Yapıldı"
 				})			
 				//! ----------- Log Son -----------------------------  
+				*/
 
 				//! Return Api   
 				ctx.params.title = "user.service -> Veri Guncelleme"
@@ -701,6 +702,7 @@ module.exports = {
 					console.log("Json Veri Kayıt Silindi -> User"); // Success
 				});
 
+				/*
 				//! ----------- Log ----------------------------- 	
 				let logs_add = await ctx.call('logs.add', {					
 					userToken: ctx.params.userToken,
@@ -710,6 +712,7 @@ module.exports = {
 					description: "Silme Kullanıcı işlemi Başarılı"
 				})
 				//! ----------- Log Son ----------------------------- 
+				*/
 
 				//! Return Api
 				ctx.params.title = "user.service -> Veri Silme"
@@ -763,6 +766,7 @@ module.exports = {
 				
 					console.log('\u001b[' + 32 + 'm' + 'Kullanıcı Güncelleme Yapıldı' + '\u001b[0m');
 
+					/*
 					//! ----------- Log ----------------------------- 	
 					let logs_add = await ctx.call('logs.add', {					
 						userToken:dbFind[0].userToken,
@@ -772,6 +776,7 @@ module.exports = {
 						description: "Başarılı Kullanıcı Giriş Yapıldı"
 					})
 					//! ----------- Log Son -----------------------------
+					*/
 
 				}       				
 
@@ -793,6 +798,7 @@ module.exports = {
 				if (user_email.length > 0) { 	
 					console.log('\u001b[' + 32 + 'm' + 'Email Var' + '\u001b[0m');
 
+					/*
 					//! ----------- Log ----------------------------- 	
 					let logs_add = await ctx.call('logs.add', {					
 						userToken:user_email[0].userToken,
@@ -802,6 +808,7 @@ module.exports = {
 						description: "Hatalı  Kullanıcı Giriş Yapıldı"
 					})
 					//! ----------- Log Son -----------------------------
+					*/
 
 
 				 }
@@ -851,6 +858,7 @@ module.exports = {
 				
 					console.log('\u001b[' + 32 + 'm' + 'Kullanıcı Güncelleme Yapıldı' + '\u001b[0m');
 
+					/*
 					//! ----------- Log ----------------------------- 	
 					let logs_add = await ctx.call('logs.add', {					
 						userToken:dbFind[0].userToken,
@@ -860,6 +868,7 @@ module.exports = {
 						description: "Başarılı Kullanıcı Giriş Yapıldı"
 					})
 					//! ----------- Log Son -----------------------------
+					*/
 
 				}       				
 
@@ -881,6 +890,7 @@ module.exports = {
 				if (user_email.length > 0) { 	
 					console.log('\u001b[' + 32 + 'm' + 'Email Var' + '\u001b[0m');
 
+					/*
 					//! ----------- Log ----------------------------- 	
 					let logs_add = await ctx.call('logs.add', {					
 						userToken:user_email[0].userToken,
@@ -890,6 +900,7 @@ module.exports = {
 						description: "Hatalı  Kullanıcı Giriş Yapıldı"
 					})
 					//! ----------- Log Son -----------------------------
+					*/
 
 
 				 }
@@ -940,6 +951,8 @@ module.exports = {
 				
 					console.log('\u001b[' + 32 + 'm' + 'Kullanıcı Güncelleme Yapıldı' + '\u001b[0m');
 
+
+					/*
 					//! ----------- Log ----------------------------- 	
 					let logs_add = await ctx.call('logs.add', {					
 						userToken:dbFind.userToken,
@@ -949,6 +962,7 @@ module.exports = {
 						description: "Başarılı Kullanıcı Çıkış Yapıldı"
 					})
 					//! ----------- Log Son -----------------------------
+					*/
 
 				}     		
 				
