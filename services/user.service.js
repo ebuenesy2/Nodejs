@@ -148,7 +148,7 @@ module.exports = {
 		async find_token(ctx) {
 
 			//! Arama
-			const dbFind = db.find(u => u.userToken == ctx.params.userToken);	
+			const dbFind = db.find(u => u.token == ctx.params.token);	
 
 			//! Veri Varsa
 			if (dbFind) {
@@ -177,7 +177,7 @@ module.exports = {
 			}
 
 			//! Return
-			delete ctx.params.userToken
+			delete ctx.params.token
 
 			return ctx.params
 		},
@@ -259,7 +259,8 @@ module.exports = {
 								tel: ctx.params.tel,
 								password: ctx.params.password,														
 								created_at: DateNow,
-								updated_at: DateNow
+								created_byToken:ctx.params.created_byToken,
+								updated_at: null
 							}
 
 							
@@ -283,12 +284,18 @@ module.exports = {
 								email: ctx.params.email,
 								tel: ctx.params.tel,
 								password: ctx.params.password,								
-								userToken:jwt,
-								OnlineStatus:0,												
-								OnlineLastLogin_At:null,												
-								OnlineLastLoginout_At:null,												
+								token:jwt,
+								onlineStatus:0,												
+								onlineLastLogin_At:null,												
+								onlineLastLoginout_At:null,												
 								created_at: DateNow,
-								updated_at: DateNow
+								created_byToken:ctx.params.created_byToken,
+								updated_at: null,
+								updated_byToken:null,
+								isActive:true,
+								isDeleted:false,
+								isDeleted_at:null,
+								isDeleted_byToken:null
 							}				
 
 							//Verileri Kaydet
@@ -357,6 +364,7 @@ module.exports = {
 
 				delete ctx.params.tel
 				delete ctx.params.password
+			    delete ctx.params.created_byToken
 
 				return ctx.params
 
@@ -364,7 +372,7 @@ module.exports = {
 		async update(ctx) {
 
 			// ! Arama
-			const dbFind = db.find(u => u.userToken == ctx.params.userToken);
+			const dbFind = db.find(u => u.token == ctx.params.token);
 
 			// Kullanıcı Varsa
 			if (dbFind) {
