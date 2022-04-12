@@ -212,7 +212,7 @@ module.exports = {
 		async find_token(ctx) {
 
 			//! Arama
-			const dbFind = db.find(u => u.fileToken == ctx.params.fileToken);	
+			const dbFind = db.find(u => u.token == ctx.params.token);	
 
 			//! Veri Varsa
 			if (dbFind) {
@@ -241,14 +241,14 @@ module.exports = {
 			}
 
 			//! Return
-			delete ctx.params.fileToken
+			delete ctx.params.token
 
 			return ctx.params
 		},
 		async find_user(ctx) {
 
 			// ! Arama
-			const dbFind = db.filter(u => u.userToken == ctx.params.userToken);
+			const dbFind = db.filter(u => u.created_byToken == ctx.params.created_byToken);
 
 			// ! Veri Varsa
 			if (dbFind.length > 0) {
@@ -295,9 +295,7 @@ module.exports = {
 
 				let TokenInfo={				
 					id: TokenId,
-					token: ctx.params.token,
-					role: ctx.params.role,					
-					userToken: ctx.params.userToken,
+					role: ctx.params.role,				
 					usedPage:ctx.params.usedPage,
 					FileId: ctx.params.FileId,
 					uploadDir: ctx.params.uploadDir,
@@ -307,7 +305,7 @@ module.exports = {
 					fileOnlyName: ctx.params.fileOnlyName,
 					fileExt: ctx.params.fileExt,
 					created_at: CreateDate,
-					updated_at: CreateDate
+					created_byToken:ctx.params.created_byToken
 				}
 				
 				const secret = 'secret';
@@ -318,9 +316,7 @@ module.exports = {
 				//! Eklenecek veriler
 				const willSaveData = {
 					id: TokenId,
-					token: ctx.params.token,
-					role: ctx.params.role,					
-					userToken: ctx.params.userToken,
+					role: ctx.params.role,
 					usedPage:ctx.params.usedPage,
 					FileId: ctx.params.FileId,
 					uploadDir: ctx.params.uploadDir,
@@ -329,9 +325,16 @@ module.exports = {
 					fileTypeSplit: ctx.params.fileTypeSplit,
 					fileOnlyName: ctx.params.fileOnlyName,
 					fileExt: ctx.params.fileExt,
-					fileToken:jwt,				
+					token:jwt,				
 					created_at: CreateDate,
-					updated_at: CreateDate
+					created_byToken:ctx.params.created_byToken,
+					isUpdated:false,
+					updated_at: null,
+					updated_byToken : null,
+					isActive: true,
+				    isDeleted:false,
+					isDeleted_at: null,
+					isDeleted_byToken:null
 				}
 
 				//Verileri Kaydet
@@ -349,15 +352,15 @@ module.exports = {
 					console.log("Json Veri Kayıt Edildi -> File"); // Success
 				});				
 
-				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {					
-					userToken: ctx.params.userToken,
-					from: "file",
-					fromToken: jwt,
-					name: "file_add_successful",
-					description: "Dosya Ekleme Başarılı"
-				})			
-				//! ----------- Log Son ----------------------------- 
+				// //! ----------- Log ----------------------------- 	
+				// let logs_add = await ctx.call('logs.add', {					
+				// 	userToken: ctx.params.userToken,
+				// 	from: "file",
+				// 	fromToken: jwt,
+				// 	name: "file_add_successful",
+				// 	description: "Dosya Ekleme Başarılı"
+				// })			
+				// //! ----------- Log Son ----------------------------- 
 
 
 				//! Return Api   
@@ -386,7 +389,7 @@ module.exports = {
 			//! Return
 			delete ctx.params.token
 			delete ctx.params.role
-			delete ctx.params.userToken
+			delete ctx.params.created_byToken
 			delete ctx.params.usedPage
 			delete ctx.params.FileId
 			delete ctx.params.uploadDir
@@ -404,7 +407,7 @@ module.exports = {
 		async update(ctx) 	{
 
 			// ! Arama
-			const dbFind = db.find(u => u.fileToken == ctx.params.fileToken);		
+			const dbFind = db.find(u => u.token == ctx.params.token);		
 
 			//! Veri Varsa 
 			if (dbFind) {
@@ -413,6 +416,7 @@ module.exports = {
 				Object.keys(ctx.params).forEach(key => {
 					dbFind[key] = ctx.params[key]
 				})		
+				dbFind["isUpdated"] = true
 				dbFind["updated_at"] = new Date()
 				// End  Referans Veriler Güncelleme Yapıyor		
 
@@ -430,15 +434,15 @@ module.exports = {
 				// End Json içine Verileri Yazıyor -> db
 			
 
-				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {					
-					userToken: ctx.params.userToken,
-					from: "file",
-					fromToken: ctx.params.fileToken,
-					name: "file_update_successful",
-					description: "Dosya Güncelleme Başarılı"
-				})			
-			   //! ----------- Log Son ----------------------------- 
+			// 	//! ----------- Log ----------------------------- 	
+			// 	let logs_add = await ctx.call('logs.add', {					
+			// 		userToken: ctx.params.userToken,
+			// 		from: "file",
+			// 		fromToken: ctx.params.fileToken,
+			// 		name: "file_update_successful",
+			// 		description: "Dosya Güncelleme Başarılı"
+			// 	})			
+			//    //! ----------- Log Son ----------------------------- 
 
 			    //! Return Api
 				ctx.params.title = "file.service -> Veri Güncelleme"
@@ -466,8 +470,8 @@ module.exports = {
 			}
 
 			//! Return
-			delete ctx.params.fileToken
-			delete ctx.params.userToken			
+			delete ctx.params.token
+			delete ctx.params.updated_byToken			
 
 			return ctx.params
 

@@ -2,7 +2,6 @@
     {
         "id":1,    
         "role":"Admin",
-        "userToken": "userToken",
         "usedPage":"usedPage",
         "FileId":"FileId",
         "uploadDir":"uploadDir",
@@ -12,15 +11,21 @@
         "fileTypeSplit": "image",
         "fileOnlyName": "fileOnlyName",
         "fileExt": "fileExt",
-        "fileToken":"fileToken",
-        "created_at": "2021-08-12T23:49:13.962Z",
-        "updated_at": "2021-08-12T23:49:13.962Z"
+        "token":"token",
+        "created_at": "2022-03-06T13:14:43.211Z",
+        "created_byToken":"created_byToken",
+        "isUpdated":false,
+        "updated_at": "2022-03-06T13:14:43.211Z",
+        "updated_byToken" : "updated_byToken",
+        "isActive": true,
+        "isDeleted":false,
+        "isDeleted_at": "2022-03-06T13:14:43.211Z",
+        "isDeleted_byToken":"isDeleted_byToken"
     },
     {
         "id":2,      
         "role":"Admin",
-        "userToken": "userToken",
-        "usedPage":"usedPage",     
+        "usedPage":"usedPage_admin_post_user",     
         "FileId":"FileId",
         "uploadDir":"uploadDir",
         "fileUrl":"FileUrl",
@@ -29,8 +34,15 @@
         "fileTypeSplit": "image",
         "fileOnlyName": "fileOnlyName",
         "fileExt": "fileExt",
-        "fileToken":"fileToken2",
-        "created_at": "2021-08-12T23:49:13.962Z",
-        "updated_at": "2021-08-12T23:49:13.962Z"
+        "token":"token2",
+        "created_at": "2022-03-06T13:14:43.211Z",
+        "created_byToken":"created_byToken",
+        "isUpdated":true,
+        "updated_at": "2022-03-06T13:14:43.211Z",
+        "updated_byToken" : "updated_byToken",
+        "isActive": true,
+        "isDeleted":false,
+        "isDeleted_at": "2022-03-06T13:14:43.211Z",
+        "isDeleted_byToken":"isDeleted_byToken"
      }
 ]
