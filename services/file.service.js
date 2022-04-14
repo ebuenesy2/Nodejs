@@ -475,11 +475,88 @@ module.exports = {
 
 			return ctx.params
 
-		},				
+		},
+		async delete_update(ctx) 	{
+
+			// ! Arama
+			const dbFind = db.find(u => u.token == ctx.params.token);		
+             
+            //! Veri Varsa 
+			if (dbFind) {
+
+				// Referans Veriler Güncelleme Yapıyor
+				Object.keys(ctx.params).forEach(key => {
+					dbFind[key] = ctx.params[key]
+				})
+				dbFind["isDeleted_at"] = new Date()
+				// End  Referans Veriler Güncelleme Yapıyor		
+
+				// Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/file.json', JSON.stringify(db), err => {
+
+					// Hata varsa
+					if (err) {
+						console.log(err)
+					}
+
+					//Console Yazma
+					console.log("Json Veri Kayıt Edildi -> File"); // Success
+				});
+				// End Json içine Verileri Yazıyor -> db
+			
+
+			// 	//! ----------- Log ----------------------------- 	
+			// 	let logs_add = await ctx.call('logs.add', {					
+			// 		userToken: ctx.params.userToken,
+			// 		from: "file",
+			// 		fromToken: ctx.params.fileToken,
+			// 		name: "file_update_successful",
+			// 		description: "Dosya Güncelleme Başarılı"
+			// 	})			
+			//    //! ----------- Log Son ----------------------------- 
+
+			    //! Return Api
+				ctx.params.title = "file.service -> Veri Geçisi Silme"
+				ctx.params.tablo = "file.json"			
+				ctx.params.status = 1
+				ctx.params.mesaj="Dosya Güncellendi"
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'File Güncelleme [ /api/file/update ] Güncellendi' + '\u001b[0m');
+
+			}
+
+			//! Veri Yoksa 
+			else {
+
+				//! Return Api
+				ctx.params.title = "file.service -> Veri Geçisi Silme"
+				ctx.params.tablo = "file.json"			
+				ctx.params.status = 0
+				ctx.params.mesaj="Dosya Güncellenemedi"
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'File Güncelleme [ /api/file/update ] Güncellenemedi' + '\u001b[0m');
+
+			}
+
+
+
+			
+		
+			//! Return
+			delete ctx.params.token
+			delete ctx.params.isDeleted_byToken
+			delete ctx.params.isDeleted
+			delete ctx.params.isActive	
+
+			return ctx.params
+
+		},
 		async delete(ctx) {
 		
 			//! Arama
-			var index = db.findIndex(a => a.fileToken === ctx.params.fileToken);
+			var index = db.findIndex(a => a.token === ctx.params.token);
 			if (index > -1) {
 				db.splice(index, 1);
 
@@ -496,15 +573,15 @@ module.exports = {
 				});
 
 				
-				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {					
-					userToken: ctx.params.userToken,
-					from: "file",
-					fromToken: ctx.params.fileToken,
-					name: "file_delete_successful",
-					description: "Dosya Silme Başarılı"
-				})
-				//! ----------- Log Son ----------------------------- 
+				// //! ----------- Log ----------------------------- 	
+				// let logs_add = await ctx.call('logs.add', {					
+				// 	userToken: ctx.params.userToken,
+				// 	from: "file",
+				// 	fromToken: ctx.params.fileToken,
+				// 	name: "file_delete_successful",
+				// 	description: "Dosya Silme Başarılı"
+				// })
+				// //! ----------- Log Son ----------------------------- 
 
 				//! Return Api
 				ctx.params.title = "file.service -> Veri Silme"
@@ -528,8 +605,8 @@ module.exports = {
 			}
 
 			//! Return
-			delete ctx.params.fileToken
-			delete ctx.params.userToken
+			delete ctx.params.token
+			delete ctx.params.isDeleted_byToken
 
 			return ctx.params
 
@@ -713,8 +790,7 @@ module.exports = {
 
 						let TokenInfo={				
 							id: TokenId,							
-							role: ctx.params.role,					
-							userToken: ctx.params.userToken,
+							role: ctx.params.role,
 							usedPage:ctx.params.usedPage,
 							FileId: FileId,
 							uploadDir:filePath,
@@ -731,7 +807,7 @@ module.exports = {
 							fizeHeight:fizeHeight,
 							fileSize:fileSize,	
 							created_at: CreateDate,
-							updated_at: CreateDate
+							created_byToken:ctx.params.created_byToken
 						}
 						
 						const secret = 'secret';
@@ -742,8 +818,7 @@ module.exports = {
 						//! Eklenecek veriler
 						const willSaveData = {
 							id: TokenId,						
-							role: ctx.params.role,					
-							userToken: ctx.params.userToken,
+							role: ctx.params.role,
 							usedPage:ctx.params.usedPage,
 							FileId: FileId,
 							uploadDir:filePath,
@@ -758,7 +833,14 @@ module.exports = {
 							fileSize:fileSize,
 							fileToken:jwt,							
 							created_at: CreateDate,
-							updated_at: CreateDate
+							created_byToken:ctx.params.created_byToken,
+							isUpdated:false,
+							updated_at: null,
+							updated_byToken : null,
+							isActive: true,
+							isDeleted:false,
+							isDeleted_at: null,
+							isDeleted_byToken:null
 						}
 
 						//Verileri Kaydet
@@ -780,15 +862,15 @@ module.exports = {
 
 						status = 1; //! Status
 
-						//! ----------- Log ----------------------------- 	
-						logs_add = await ctx.call('logs.add', {					
-							userToken: ctx.params.userToken,
-							from: "file",
-							fromToken: jwt,
-							name: "file_upload_successful",
-							description: "Dosya Yükleme Başarılı"
-						})
-						//! ----------- Log Son -----------------------------
+						// //! ----------- Log ----------------------------- 	
+						// logs_add = await ctx.call('logs.add', {					
+						// 	userToken: ctx.params.userToken,
+						// 	from: "file",
+						// 	fromToken: jwt,
+						// 	name: "file_upload_successful",
+						// 	description: "Dosya Yükleme Başarılı"
+						// })
+						// //! ----------- Log Son -----------------------------
 						
 					} catch (error) {  
 						
@@ -837,7 +919,7 @@ module.exports = {
 			//! Return Delete		
 			delete ctx.params.token
 			delete ctx.params.role
-			delete ctx.params.userToken
+			delete ctx.params.created_byToken
 			delete ctx.params.usedPage
 			delete ctx.params.file
 			
@@ -850,7 +932,7 @@ module.exports = {
 			let file_upload = await ctx.call('file.upload', {
 				file: ctx.params.file,
 				role: ctx.params.role,
-				userToken: ctx.params.userToken,                  
+				created_byToken: ctx.params.created_byToken,                  
 				usedPage: ctx.params.usedPage
 			})
 			//! ----------- End File UPLOAD ----------------------------- 	
@@ -859,20 +941,22 @@ module.exports = {
 
 				//! -----------  File Delete ----------------------------- 	
 				let file_delete = await ctx.call('file.fileDeleteUrl', {
-					userToken: ctx.params.userToken,
+					created_byToken: ctx.params.userToken,
 					fileUrl: ctx.params.old_fileUrl                 
 				})                
     			//! ----------- End File Delete ----------------------------- 
 
-				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {					
-					userToken: ctx.params.userToken,
-					from: "file",
-					fromToken: file_upload.DB["fileToken"],
-					name: "file_update_successful",
-					description: "Dosya Güncelleme Başarılı"
-				})
-				//! ----------- Log Son -----------------------------
+				console.log("file_delete:",file_delete);
+
+				// //! ----------- Log ----------------------------- 	
+				// let logs_add = await ctx.call('logs.add', {					
+				// 	userToken: ctx.params.userToken,
+				// 	from: "file",
+				// 	fromToken: file_upload.DB["fileToken"],
+				// 	name: "file_update_successful",
+				// 	description: "Dosya Güncelleme Başarılı"
+				// })
+				// //! ----------- Log Son -----------------------------
 				
 		    }
 
