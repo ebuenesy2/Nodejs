@@ -831,7 +831,7 @@ module.exports = {
 							fizeWidth:fizeWidth,
 							fizeHeight:fizeHeight,
 							fileSize:fileSize,
-							fileToken:jwt,							
+							token:jwt,							
 							created_at: CreateDate,
 							created_byToken:ctx.params.created_byToken,
 							isUpdated:false,
@@ -926,7 +926,7 @@ module.exports = {
 			return ctx.params
 			
 		},
-		async updateFile(ctx) {
+		async updateFile(ctx) { //! Kontrol Et
 		
 			//! -----------  File UPLOAD ----------------------------- 	
 			let file_upload = await ctx.call('file.upload', {
@@ -997,7 +997,7 @@ module.exports = {
 			
 			return ctx.params				
 		},		
-		async fileDeleteUrl(ctx) {
+		async fileDeleteUrl(ctx) { //! File Delete
 
 			//! Tanım
 			let status=0; 
@@ -1021,15 +1021,15 @@ module.exports = {
 							}		
 						})		
 						
-						//! ----------- Log ----------------------------- 	
-						let logs_add = await ctx.call('logs.add', {					
-							userToken: ctx.params.userToken,
-							from: "file",
-							fromToken: ctx.params.fileUrl,
-							name: "file_delete_successful",
-							description: "Dosya Silme Başarılı"
-						})
-                        //! ----------- Log Son -----------------------------				
+						// //! ----------- Log ----------------------------- 	
+						// let logs_add = await ctx.call('logs.add', {					
+						// 	userToken: ctx.params.userToken,
+						// 	from: "file",
+						// 	fromToken: ctx.params.fileUrl,
+						// 	name: "file_delete_successful",
+						// 	description: "Dosya Silme Başarılı"
+						// })
+                        // //! ----------- Log Son -----------------------------				
 
 						//! Return
 						status=1;
@@ -1097,10 +1097,8 @@ module.exports = {
 						await sharp(fileUrl)
 						.metadata()
 						.then(({ width, height, size, format }) => {
-
 							fizeWidth=width;
 							fizeHeight=height;					
-							
 						});
 					}
 
@@ -1295,7 +1293,7 @@ module.exports = {
 							fizeWidth:fizeWidth,
 							fizeHeight:fizeHeight,
 							fileSize:fileSize,
-							fileToken:jwt,							
+							token:jwt,							
 							created_at: CreateDate,
 							updated_at: CreateDate
 						}
@@ -1414,15 +1412,15 @@ module.exports = {
 				})                
 				//! ----------- End File Delete ----------------------------- 
 
-				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {					
-					userToken: ctx.params.userToken,
-					from: "file",
-					fromToken: file_upload.DB["fileToken"],
-					name: "file_update_successful",
-					description: "Dosya Güncelleme Başarılı"
-				})
-				//! ----------- Log Son -----------------------------	
+				// //! ----------- Log ----------------------------- 	
+				// let logs_add = await ctx.call('logs.add', {					
+				// 	userToken: ctx.params.userToken,
+				// 	from: "file",
+				// 	fromToken: file_upload.DB["fileToken"],
+				// 	name: "file_update_successful",
+				// 	description: "Dosya Güncelleme Başarılı"
+				// })
+				// //! ----------- Log Son -----------------------------	
 			
 		    }
 
