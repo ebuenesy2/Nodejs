@@ -538,11 +538,7 @@ module.exports = {
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + 'File Güncelleme [ /api/file/update ] Güncellenemedi' + '\u001b[0m');
 
-			}
-
-
-
-			
+			}			
 		
 			//! Return
 			delete ctx.params.token
@@ -1320,15 +1316,15 @@ module.exports = {
 						status = 1; //! Status
 
 												
-						//! ----------- Log ----------------------------- 	
-						let logs_add = await ctx.call('logs.add', {					
-							userToken: ctx.params.userToken,
-							from: "file",
-							fromToken: jwt,
-							name: "file_upload_successful",
-							description: "Dosya Yükleme Başarılı"
-						})
-                        //! ----------- Log Son -----------------------------	
+						// //! ----------- Log ----------------------------- 	
+						// let logs_add = await ctx.call('logs.add', {					
+						// 	userToken: ctx.params.userToken,
+						// 	from: "file",
+						// 	fromToken: jwt,
+						// 	name: "file_upload_successful",
+						// 	description: "Dosya Yükleme Başarılı"
+						// })
+                        // //! ----------- Log Son -----------------------------	
 													
 					} catch (error) {
 

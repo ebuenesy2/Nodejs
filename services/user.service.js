@@ -400,11 +400,11 @@ module.exports = {
 
 						//! -----------  File Delete ----------------------------- 	
 						let file_delete = await ctx.call('file.fileDeleteUrl', {
-							userToken: ctx.params.userToken,
+							token: ctx.params.token,
 							fileUrl: dbFind.userImageUploadUrl               
 						})                
 						//! ----------- End File Delete ----------------------------- 
-
+					
 						//! Güncelleme
 						dbFind["userImageUploadUrl"] = file_upload.DB["uploadDir"];                 
 						dbFind["userImageUrl"] = file_upload.DB["fileUrl"];	
@@ -423,7 +423,7 @@ module.exports = {
 					file_upload = await ctx.call('file.upload', {
 						file: ctx.params.cover_ImageUrl_File,
 						role: ctx.params.role,
-						userToken: ctx.params.userToken,                  
+						token: ctx.params.token,                  
 						usedPage: "user"
 					})
 					//! ----------- End File UPLOAD ----------------------------- 	
@@ -433,7 +433,7 @@ module.exports = {
 
 						//! -----------  File Delete ----------------------------- 	
 						let file_delete = await ctx.call('file.fileDeleteUrl', {
-							userToken: ctx.params.userToken,
+							token: ctx.params.token,
 							fileUrl: dbFind.coverImageUploadUrl               
 						})                
 						//! ----------- End File Delete ----------------------------- 
@@ -533,7 +533,7 @@ module.exports = {
 		async updateUrl(ctx){
 		
 			// ! Arama
-			const dbFind = db.find(u => u.userToken == ctx.params.userToken);		
+			const dbFind = db.find(u => u.token == ctx.params.token);		
 
 			//! Veri Varsa 
 			if (dbFind) {
@@ -542,16 +542,16 @@ module.exports = {
 				let file_upload=[]; 			
 				
 				//! Resim Yükleme Onay - Profil
-				if(ctx.params.profil_ImageUrl_File_Check=="0") { 	console.log('\u001b[' + 31 + 'm' + 'Profil Resim Yükleme Onaylanmadı' + '\u001b[0m'); }
+				if(ctx.params.profil_ImageUrl_File_Check=="0") { 	console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi [ /api/file/uploadUrl ] Yüklenemedi' + '\u001b[0m'); }
 				if(ctx.params.profil_ImageUrl_File_Check=="1") { 	
 				
-					console.log('\u001b[' + 32 + 'm' + 'Profil Resim Yükleme Onaylandı' + '\u001b[0m');
+					console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi [ /api/file/uploadUrl ] Yüklendi' + '\u001b[0m');
 
 					//! -----------  File UPLOAD ----------------------------- 	
 					file_upload = await ctx.call('file.uploadUrl', {
 						fileUrl: ctx.params.profil_ImageUrl_File,
 						role: ctx.params.role,
-						userToken: ctx.params.userToken,                  
+						token: ctx.params.token,                  
 						usedPage: "user"
 					})
 					//! ----------- End File UPLOAD ----------------------------- 	
@@ -559,11 +559,11 @@ module.exports = {
 					if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m'); }
 					if(file_upload.status==1) { 
 
-						console.log("Dosya Yüklendi");
+						console.log('\u001b[' + 32 + 'm' + 'Dosya Yüklendi' + '\u001b[0m'); }
 
 						//! -----------  File Delete ----------------------------- 	
 						let file_delete = await ctx.call('file.fileDeleteUrl', {
-							userToken: ctx.params.userToken,
+							token: ctx.params.token,
 							fileUrl: dbFind.userImageUploadUrl               
 						})                
 						//! ----------- End File Delete ----------------------------- 
@@ -572,7 +572,7 @@ module.exports = {
 						dbFind["userImageUploadUrl"] = file_upload.DB["uploadDir"];                 
 						dbFind["userImageUrl"] = file_upload.DB["fileUrl"];	
 					}
-				}
+				
 
 				console.log(); //! Boşluk Ekleniliyor
 
@@ -586,10 +586,12 @@ module.exports = {
 					file_upload = await ctx.call('file.uploadUrl', {
 						fileUrl: ctx.params.cover_ImageUrl_File,
 						role: ctx.params.role,
-						userToken: ctx.params.userToken,                  
+						token: ctx.params.token,                  
 						usedPage: "user"
 					})
 					//! ----------- End File UPLOAD ----------------------------- 	
+
+				
 									
 					if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yüklenemedi' + '\u001b[0m'); }
 					if(file_upload.status==1) { 
@@ -688,9 +690,9 @@ module.exports = {
 			delete ctx.params.email
 			delete ctx.params.username
 			delete ctx.params.tel
-			delete ctx.params.OnlineStatus
-			delete ctx.params.OnlineLastLogin_At
-			delete ctx.params.OnlineLastLoginout_At
+			delete ctx.params.onlineStatus
+			delete ctx.params.onlineLastLogin_At
+			delete ctx.params.onlineLastLoginout_At
 			
 
 			return ctx.params		
@@ -720,7 +722,7 @@ module.exports = {
 				let logs_add = await ctx.call('logs.add', {					
 					userToken: ctx.params.userToken,
 					from: "user",
-					fromToken: dbFind.userToken,
+					fromToken: dbFind.token,
 					name: "user_delete_successful",
 					description: "Silme Kullanıcı işlemi Başarılı"
 				})
@@ -750,7 +752,7 @@ module.exports = {
 
 			//! Return Delete			
             delete ctx.params.id
-			delete ctx.params.userToken
+			delete ctx.params.token
 
 			return ctx.params	
 		},
@@ -759,19 +761,20 @@ module.exports = {
 			// ! Arama
 			const user_email = db.filter(u => u.email == ctx.params.email);
 			const dbFind = db.filter(u => u.email == ctx.params.email && u.password == ctx.params.password);
-              
+
+
 			// Giriş Başarılı ise
 			if (dbFind.length > 0) {
 				
 				//! -----------  User UPDATE ----------------------------- 	
 				let user_updateUrl = await ctx.call('user.updateUrl', {
-					userToken:dbFind[0].userToken,
+					token:dbFind[0].token,
+					updated_byToken:dbFind[0].token,
 					role: dbFind[0].role,					               
-					OnlineStatus: 1,                  
-					OnlineLastLogin_At: new Date()					        
+					onlineStatus: true,                  
+					onlineLastLogin_At: new Date()					        
 				})		
 				//! ----------- End User UPDATE -----------------------------
-				
 
 			    //! Kullanıcı Güncelleme Yapıldı
 				if(user_updateUrl.status=="0") { 	console.log('\u001b[' + 31 + 'm' + 'Kullanıcı Güncelleme Yapılmadı' + '\u001b[0m'); }
@@ -850,17 +853,18 @@ module.exports = {
 
 			// ! Arama
 			const user_email = db.filter(u => u.username == ctx.params.username);
-			const dbFind = db.filter(u => u.username == ctx.params.username && u.password == ctx.params.password);
+			const dbFind = db.filter(u => u.username == ctx.params.username && u.password == ctx.params.password);		
               
 			// Giriş Başarılı ise
 			if (dbFind.length > 0) {
 				
 				//! -----------  User UPDATE ----------------------------- 	
 				let user_updateUrl = await ctx.call('user.updateUrl', {
-					userToken:dbFind[0].userToken,
+					token:dbFind[0].token,
+					updated_byToken:dbFind[0].token,
 					role: dbFind[0].role,					               
-					OnlineStatus: 1,                  
-					OnlineLastLogin_At: new Date()					        
+					onlineStatus: true,                  
+					onlineLastLogin_At: new Date()					        
 				})		
 				//! ----------- End User UPDATE -----------------------------
 				
@@ -941,72 +945,70 @@ module.exports = {
 		async loginOut(ctx){
 
 			// ! Arama
-			//const user = db.filter(u => u.email == ctx.params.email && u.password == ctx.params.password);
-			const dbFind = db.find(u => u.userToken == ctx.params.userToken);		
-
-            // Veri Varsa
-			if (dbFind) {
-				
-                 	
+			//const user = db.filter(u => u.email == ctx.params.email && u.password == ctx.params.password);		
+			const dbFind = db.filter(u => u.token == ctx.params.token);		
+		
+			//! Kullanıcı Varsa
+			if (dbFind) {  
+		
 				//! -----------  User UPDATE ----------------------------- 	
 				let user_updateUrl = await ctx.call('user.updateUrl', {
-					userToken:dbFind.userToken,
-					role: dbFind.role,					               
-					OnlineStatus: 0,                  
-					OnlineLastLoginout_At: new Date()					        
+					token:dbFind[0].token,
+					updated_byToken:dbFind[0].token,
+					role: dbFind[0].role,					               
+					onlineStatus: false,                  
+					onlineLastLogin_At: new Date()					        
 				})		
-				//! ----------- End User UPDATE -----------------------------
+				//! ----------- End User UPDATE ----------------------------
 				
 
-			    //! Kullanıcı Güncelleme Yapıldı
+		   		//! Kullanıcı Güncelleme Yapıldı
 				if(user_updateUrl.status=="0") { 	console.log('\u001b[' + 31 + 'm' + 'Kullanıcı Güncelleme Yapılmadı' + '\u001b[0m'); }
 				if(user_updateUrl.status=="1") { 	
 				
 					console.log('\u001b[' + 32 + 'm' + 'Kullanıcı Güncelleme Yapıldı' + '\u001b[0m');
 
-
 					/*
 					//! ----------- Log ----------------------------- 	
 					let logs_add = await ctx.call('logs.add', {					
-						userToken:dbFind.userToken,
+						userToken:dbFind[0].userToken,
 						from: "user",
-						fromToken:dbFind.userToken,						
-						name: "user_loginout_successful",
-						description: "Başarılı Kullanıcı Çıkış Yapıldı"
+						fromToken:dbFind[0].userToken,						
+						name: "user_login_successful",
+						description: "Başarılı Kullanıcı Giriş Yapıldı"
 					})
 					//! ----------- Log Son -----------------------------
 					*/
 
-				}     		
-				
+				}       		
 
 				//! Return Api
 				ctx.params.title = "Kullanıcı Loginout"
 				ctx.params.tablo = "user.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Başarılı Çıkış Oldu"
+				ctx.params.mesaj = "Başarılı Çıkış  Yapıldı"
+				ctx.params.userInfo=dbFind
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + 'Kullanıcı Loginout [ /api/user/loginOut ] Başarılı' + '\u001b[0m');	
-			}
-
-			//! Veri Yoksa
-			else {
-								
+			}		
 			
+			//! Kullanıcı Yoksa
+			else {
+
 				//! Return Api
 				ctx.params.title = "Kullanıcı Loginout"
 				ctx.params.tablo = "user.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Çıkış Başarısız"
+				ctx.params.mesaj = "Hatalı, Çıkış Yapılmadı"
+				ctx.params.userInfo=null
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Kullanıcı Loginout [ /api/user/loginOut ] Başarısız ' + '\u001b[0m');		
-
-			}
-
-			//delete
-			delete ctx.params.userToken 
+				console.log('\u001b[' + 31 + 'm' + 'Kullanıcı Loginout [ /api/user/Loginout ] Başarısız ' + '\u001b[0m');		
+			}	
+					
+			//! Delete
+			delete ctx.params.token
 
 			return ctx.params
 		}	
