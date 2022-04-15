@@ -374,7 +374,7 @@ module.exports = {
 			// ! Arama
 			const dbFind = db.find(u => u.token == ctx.params.token);
 
-			// Kullanıcı Varsa
+		    	// Kullanıcı Varsa
 			if (dbFind) {
 
 				//! Tanım
@@ -390,7 +390,7 @@ module.exports = {
 					file_upload = await ctx.call('file.upload', {
 						file: ctx.params.profil_ImageUrl_File,
 						role: ctx.params.role,
-						userToken: ctx.params.userToken,                  
+						token: ctx.params.token,                  
 						usedPage: "user"
 					})
 					//! ----------- End File UPLOAD ----------------------------- 	
@@ -456,7 +456,9 @@ module.exports = {
 				Object.keys(ctx.params).forEach(key => {					
 					if(key!="profil_ImageUrl_File" || key!="cover_ImageUrl_File"  ) { dbFind[key] = ctx.params[key] }  //! Only Text 				
 				})
+				dbFind["isUpdated"] = true
 				dbFind["updated_at"] = new Date()
+			
 				// End  Referans Veriler Güncelleme Yapıyor
 				
 		        // Json içine Verileri Yazıyor -> db
@@ -510,12 +512,13 @@ module.exports = {
 			}
 
 			//! Return Delete			
-            delete ctx.params.userToken
+            delete ctx.params.token
 			delete ctx.params.role
 			delete ctx.params.profil_ImageUrl_File
             delete ctx.params.profil_ImageUrl_File_Check
 			delete ctx.params.cover_ImageUrl_File
             delete ctx.params.cover_ImageUrl_File_Check
+			delete ctx.params.updated_byToken
 							
 			delete ctx.params.name
 			delete ctx.params.surname
@@ -616,6 +619,7 @@ module.exports = {
 				Object.keys(ctx.params).forEach(key => {					
 					if(key!="profil_ImageUrl_File" || key!="cover_ImageUrl_File"  ) { dbFind[key] = ctx.params[key] }  //! Only Text 				
 				})
+				dbFind["isUpdated"] = true
 				dbFind["updated_at"] = new Date()
 				// End  Referans Veriler Güncelleme Yapıyor
 				
@@ -671,12 +675,13 @@ module.exports = {
 
 			
 			//! Return Delete			
-            delete ctx.params.userToken
+            delete ctx.params.token
 			delete ctx.params.role
 			delete ctx.params.profil_ImageUrl_File
             delete ctx.params.profil_ImageUrl_File_Check
 			delete ctx.params.cover_ImageUrl_File
             delete ctx.params.cover_ImageUrl_File_Check
+			delete ctx.params.updated_byToken
 							
 			delete ctx.params.name
 			delete ctx.params.surname
