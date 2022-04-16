@@ -1,0 +1,4 @@
+[docs] Update "How to customize" page anchor links #32315
+[Joy] Add Badge component (#31401)
+[blog] Fix images for the docs separation post (#32257) 
+[docs] Link to advanced components page (#32290)

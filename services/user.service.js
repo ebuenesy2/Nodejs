@@ -703,19 +703,36 @@ module.exports = {
 			const dbFind = db.find(u => u.id == ctx.params.id);
 			var index = db.findIndex(a => a.id == ctx.params.id);
 			if (index > -1) {
+
+
+                
+				//! ----------- Json Delete ----------------------------- 	
 				db.splice(index, 1);
 
 				// Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/user.json', JSON.stringify(db), err => {
 
-					// Hata varsa
-					if (err) {
-						console.log(err)
-					}
+					if (err) {  console.log(err) } // Hata varsa
 
-					//Console Yazma
 					console.log("Json Veri Kayıt Silindi -> User"); // Success
 				});
+				//! ----------- Json Delete  Son ----------------------------- 	
+				
+				
+				//! -----------  File Delete ----------------------------- 	
+				let file_delete_user = await ctx.call('file.fileDeleteUrl', {
+					token: ctx.params.token,
+					fileUrl: dbFind.userImageUploadUrl               
+				})                
+				//! ----------- End File Delete ----------------------------- 
+
+				//! -----------  File Delete ----------------------------- 	
+				let file_delete_cover = await ctx.call('file.fileDeleteUrl', {
+					token: ctx.params.token,
+					fileUrl: dbFind.coverImageUploadUrl               
+				})                
+				//! ----------- End File Delete ----------------------------- 
+
 
 				/*
 				//! ----------- Log ----------------------------- 	
@@ -957,7 +974,7 @@ module.exports = {
 					updated_byToken:dbFind[0].token,
 					role: dbFind[0].role,					               
 					onlineStatus: false,                  
-					onlineLastLogin_At: new Date()					        
+					onlineLastLoginout_At: new Date()					        
 				})		
 				//! ----------- End User UPDATE ----------------------------
 				
