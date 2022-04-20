@@ -149,7 +149,7 @@ module.exports = {
         async find_token(ctx) { 
 
 			// ! Arama
-			const dbFind = db.filter(u => u.createdToken == ctx.params.createdToken);
+			const dbFind = db.filter(u => u.token == ctx.params.token);
 
 			//! Veri Varsa
 			if (dbFind.length > 0) {
@@ -180,7 +180,7 @@ module.exports = {
 			}
 
 			//! Return
-			delete ctx.params.createdToken
+			delete ctx.params.token
 			return ctx.params
 		},
 		async find_user(ctx) {
@@ -192,7 +192,7 @@ module.exports = {
 			if (dbFind.length > 0) {
 
 				//! Return Api
-				ctx.params.title = "note.service -> Veri Arama"
+				ctx.params.title = "note.service -> Veri Kullanıcı Arama"
 				ctx.params.tablo = "note.json"
 				ctx.params.status = 1
 				ctx.params.size=dbFind.length
@@ -253,8 +253,8 @@ module.exports = {
 					updated_at: null,
 					updated_byToken: null,
                     isDeleted: false,
-                    isDeleted_at:null,
-                    isDeleted_byToken:null
+                    Deleted_at:null,
+                    Deleted_byToken:null
 				}
 
 				//Verileri Kaydet
@@ -310,8 +310,8 @@ module.exports = {
 
 				// Referans Veriler Güncelleme Yapıyor
 				Object.keys(ctx.params).forEach(key => {  dbFind[key] = ctx.params[key] })				
+				dbFind["isUpdated"] =  true
 				dbFind["updated_at"] = new Date()
-				dbFind["updated_byToken"] = ctx.params.updated_byToken
 				// End  Referans Veriler Güncelleme Yapıyor
 
 				// Json içine Verileri Yazıyor -> db
@@ -345,12 +345,12 @@ module.exports = {
 				ctx.params.DB = "Veri Bulunamadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Note Veri Güncellenemedi [ /api/note/update ] Güncellenemeddi' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Note Veri Güncellenemedi [ /api/note/update ] Güncellenemedi' + '\u001b[0m');
 			}
 
 			//! Return
-			delete ctx.params.created_byToken
-			delete ctx.params.createdToken
+			delete ctx.params.updated_byToken
+			delete ctx.params.token
 			delete ctx.params.title
 			delete ctx.params.content
 
@@ -359,16 +359,17 @@ module.exports = {
         async updated_delete(ctx) {
 
 			// ! Arama
-			const dbFind = db.find(u => u.createdToken == ctx.params.createdToken);		
+			const dbFind = db.find(u => u.id == ctx.params.id);		
 
 			//! Veri Varsa 
 			if (dbFind) {
 
 				// Referans Veriler Güncelleme Yapıyor
 				Object.keys(ctx.params).forEach(key => {  dbFind[key] = ctx.params[key] })				
+				dbFind["isActive"] = false
 				dbFind["isDeleted"] = true
-				dbFind["isDeleted_at"] = new Date()
-				dbFind["isDeleted_byToken"] = ctx.params.isDeleted_byToken
+				dbFind["Deleted_at"] = new Date()
+				dbFind["Deleted_byToken"] = ctx.params.Deleted_byToken
 				// End  Referans Veriler Güncelleme Yapıyor
 
 				// Json içine Verileri Yazıyor -> db
@@ -406,8 +407,8 @@ module.exports = {
 			}
 
 			//! Return
-			delete ctx.params.created_byToken
-			delete ctx.params.createdToken
+			delete ctx.params.Deleted_byToken
+			delete ctx.params.id
 			delete ctx.params.title
 			delete ctx.params.content
 
@@ -452,7 +453,7 @@ module.exports = {
 			}
 
 			//! Return
-			delete ctx.params.userToken
+			delete ctx.params.Deleted_byToken
 			delete ctx.params.id
 
     		return ctx.params

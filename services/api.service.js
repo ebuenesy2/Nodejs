@@ -261,9 +261,6 @@ module.exports = {
 
 		//!---------------- user son ----------------------------------------------------------------------------------------------
 
-
-	    //************************************* Admin  **************************************************** */
-
 		//!-------------  admin --------------------------------------------------------------------------------------------------
 
 			fastify.get('/api/admin/info',async (req,res)=> this.broker.call("admin.info")) //! İnfo
@@ -321,45 +318,7 @@ module.exports = {
 			
 	    //!---------------- ssk son ----------------------------------------------------------------------------------------------
 
-		//!------------- blogs  --------------------------------------------------------------------------------------------------
-
-			fastify.get('/api/blogs/info',async (req,res)=> this.broker.call("blogs.info")) //! İnfo
-			fastify.post('/api/blogs/post', async (req, res) => this.broker.call("blogs.post",{...req.body})) //! POST
-			fastify.get('/api/blogs/html', async (req, res) => this.broker.call("blogs.html")) //! Html
-			fastify.get('/api/blogs/all', async (req, res) => this.broker.call("blogs.all")) //! All
-			fastify.get('/api/blogs/:id', async (req, res) => this.broker.call("blogs.find",{id: req.params.id})) //! Search	
-
-			fastify.post('/api/blogs/find_post', async (req, res) => this.broker.call("blogs.find_post",{...req.body})) //!  Search-Post
-			fastify.post('/api/blogs/find_token', async (req, res) => this.broker.call("blogs.find_token",{...req.body})) //!  Search-Token	
-			fastify.post('/api/blogs/add', async (req, res) => this.broker.call("blogs.add",{...req.body})) //! CREATE		
-			fastify.post('/api/blogs/addUrl', async (req, res) => this.broker.call("blogs.addUrl",{...req.body})) //! CREATE - URL		
-			fastify.post('/api/blogs/update', async (req, res) => this.broker.call("blogs.update",{...req.body})) //! UPDATE
-			fastify.post('/api/blogs/updateUrl', async (req, res) => this.broker.call("blogs.updateUrl",{...req.body})) //! UPDATE - URL
-			fastify.post('/api/blogs/delete/:id', async (req, res) => this.broker.call("blogs.delete",{id: req.params.id,...req.body})) //! DELETE
 		
-		//!---------------- blogs son ----------------------------------------------------------------------------------------------
-
-		
-		//!-------------  Pass -----------------------------------------------------------------------------------------
-
-			fastify.get('/api/pass/info', async (req, res) => this.broker.call("pass.info")) //! İnfo			
-			fastify.post('/api/pass/post', async (req, res) => this.broker.call("pass.post", { ...req.body })) //! POST
-			fastify.get('/api/pass/html', async (req, res) => this.broker.call("pass.html")) //! Html
-			fastify.get('/api/pass/all', async (req, res) => this.broker.call("pass.all")) //! All
-
-			fastify.get('/api/pass/:id', async (req, res) => this.broker.call("pass.find", { id: req.params.id })) //!Search
-			fastify.post('/api/pass/find_user', async (req, res) => this.broker.call("pass.find_user", { ...req.body })) //! Search Pass	
-			fastify.post('/api/pass/findPassName', async (req, res) => this.broker.call("pass.findPassName", { ...req.body })) //! Search findPassName	
-			fastify.post('/api/pass/findToken', async (req, res) => this.broker.call("pass.findToken", { ...req.body })) //! Search Pass	
-			fastify.post('/api/pass/findCategoryToken', async (req, res) => this.broker.call("pass.findCategoryToken", { ...req.body })) //! Search Pass	
-
-			fastify.post('/api/pass/add', async (req, res) => this.broker.call("pass.add", { ...req.body })) //! CREATE
-			fastify.post('/api/pass/update', async (req, res) => this.broker.call("pass.update", { ...req.body })) //! UPDATE
-			fastify.post('/api/pass/delete', async (req, res) => this.broker.call("pass.delete", { ...req.body })) //! DELETE				
-
-		//!---------------- Pass Son --------------------------------------------------------------------------------------------
-
-			   		   			
 		//!------------- note  --------------------------------------------------------------------------------------------------
 
 			fastify.get('/api/note/info',async (req,res)=> this.broker.call("note.info")) //! İnfo
@@ -373,12 +332,10 @@ module.exports = {
 			fastify.post('/api/note/find_user', async (req, res) => this.broker.call("note.find_user",{...req.body})) //!  Search-UserToken	
 			fastify.post('/api/note/add', async (req, res) => this.broker.call("note.add",{...req.body})) //! CREATE		
 			fastify.post('/api/note/update', async (req, res) => this.broker.call("note.update",{...req.body})) //! UPDATE
-			fastify.post('/api/note/updated_delete', async (req, res) => this.broker.call("note.updated_delete",{...req.body})) //! UPDATE
+			fastify.post('/api/note/updated_delete/:id', async (req, res) => this.broker.call("note.updated_delete",{id:req.params.id,...req.body})) //! UPDATE DELETE
 			fastify.post('/api/note/delete/:id', async (req, res) => this.broker.call("note.delete",{id: req.params.id,...req.body})) //! DELETE
 		
 	    //!---------------- note son ----------------------------------------------------------------------------------------------
-
-
 
 
 

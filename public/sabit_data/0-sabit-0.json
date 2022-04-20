@@ -4,7 +4,7 @@
         "token":"token",
         "created_at": "2022-03-06T13:14:43.211Z",
         "created_byToken":"created_byToken",
-        "isUpdated":true,
+        "isUpdated":false,
         "updated_at": "2022-03-06T13:14:43.211Z",
         "updated_byToken" : "updated_byToken",
         "isActive": true,
