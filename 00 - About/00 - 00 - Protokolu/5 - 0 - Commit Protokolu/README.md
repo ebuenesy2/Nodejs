@@ -1,5 +1,5 @@
 
-# Socket Protokolu
+# Commit Protokolu
 
 ## Açıklama
  

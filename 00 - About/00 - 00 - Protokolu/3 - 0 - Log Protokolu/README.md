@@ -1,5 +1,5 @@
 
-# Protokol
+#  Log - Bildirim Protokolu
 
 ## Açıklama
  
