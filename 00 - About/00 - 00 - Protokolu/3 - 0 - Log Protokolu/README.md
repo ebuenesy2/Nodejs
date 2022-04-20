@@ -4,7 +4,13 @@
 ## Açıklama
  
  ```
-Protokol yazma 
+Bildirim verilerini tutuyor
+ ```
+ 
+## İçerik
+ 
+ ```
+Bildirim verilerini tutuyor
  ```
  
 ## Json
