@@ -151,7 +151,7 @@ module.exports = {
 		async find_token(ctx) {
 
 			//! Arama
-			const dbFind = db.find(u => u.MessageToken == ctx.params.MessageToken);	
+			const dbFind = db.find(u => u.token == ctx.params.token);	
 
 			//! Veri Varsa
 			if (dbFind) {
@@ -180,8 +180,7 @@ module.exports = {
 			}
 
 			//! Return
-			delete ctx.params.MessageToken
-			delete ctx.params.userToken
+			delete ctx.params.token
 
 			return ctx.params
 		},   
@@ -192,24 +191,23 @@ module.exports = {
 			let FromUserToken_Info=ctx.params.FromUserToken;             
             let FromRole_Info=ctx.params.FromRole;   
             let Fromuser_info;
-            if(FromRole_Info=="User") { Fromuser_info = await ctx.call('user.find_token', {"userToken":FromUserToken_Info})}
-            if(FromRole_Info=="Admin") { Fromuser_info = await ctx.call('admin.find_token', {"userToken":FromUserToken_Info})}            
+            if(FromRole_Info=="User") { Fromuser_info = await ctx.call('user.find_token', {"token":FromUserToken_Info})}
+            if(FromRole_Info=="Admin") { Fromuser_info = await ctx.call('admin.find_token', {"token":FromUserToken_Info})}            
             let FromNameSurName_Info=Fromuser_info['DB']['name']+" "+Fromuser_info['DB']['surname']; 
 
             let ToUserToken_Info=ctx.params.ToUserToken;             
             let ToRole_Info=ctx.params.ToRole;   
             let Touser_info;
-            if(ToRole_Info=="User") { Touser_info = await ctx.call('user.find_token', {"userToken":ToUserToken_Info})}
-            if(ToRole_Info=="Admin") { Touser_info = await ctx.call('admin.find_token', {"userToken":ToUserToken_Info})}            
+            if(ToRole_Info=="User") { Touser_info = await ctx.call('user.find_token', {"token":ToUserToken_Info})}
+            if(ToRole_Info=="Admin") { Touser_info = await ctx.call('admin.find_token', {"token":ToUserToken_Info})}            
             let ToNameSurName_Info=Touser_info['DB']['name']+" "+Touser_info['DB']['surname']; 
                  
             //! ----------- UserInfo Son ----------------------------- 			
                     
 			try {
 
-				//! Ortak
+				//! Token
 				let TokenId=new Date().getTime();
-				let DateNow=new Date();
 
 				let TokenInfo={				
 					id: TokenId,	
@@ -223,11 +221,9 @@ module.exports = {
 					ToNameSurName: ToNameSurName_Info,
 					Subject: ctx.params.Subject,
 					Message: ctx.params.Message,				
-					MessageReaded: 0,                   
+					MessageReaded: false,                   
                     MessageReaded_at: null,			
-                    MessageFileControl: 0,
-                    MessageDeleted: 0,	
-					MessageDeleted_at: null,
+                    MessageFileControl: false,
 				}
 				
 				const secret = 'secret';
@@ -248,14 +244,19 @@ module.exports = {
 					ToNameSurName: ToNameSurName_Info,
 					Subject: ctx.params.Subject,
 					Message: ctx.params.Message,				
-					MessageReaded: 0,                   
+					MessageReaded: false,                   
                     MessageReaded_at: null,			
-                    MessageFileControl: 0,
-                    MessageDeleted: 0,	
-					MessageDeleted_at: null,
-					MessageToken:jwt,				
+                    MessageFileControl: false,
+					token:jwt,				
 					created_at: new Date(),
-					updated_at: new Date()
+					created_byToken: ctx.params.created_byToken,
+					isUpdated: false,
+					updated_at: null,
+					updated_byToken : null,
+					isActive: true,
+					isDeleted: false,
+					Deleted_at: null,
+					Deleted_byToken: null
 				}
 
 				//Verileri Kaydet
@@ -276,15 +277,15 @@ module.exports = {
 				//End Json içine Verileri Yazıyor -> db			
 
 
-				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {					
-					userToken: ctx.params.FromUserToken,
-					from: "mesaj",
-					fromToken: jwt,
-					name: "message_add_successful",
-					description: "Mesaj Yazma Başarılı"
-				})			
-				//! ----------- Log Son ----------------------------- 
+				// //! ----------- Log ----------------------------- 	
+				// let logs_add = await ctx.call('logs.add', {					
+				// 	userToken: ctx.params.FromUserToken,
+				// 	from: "mesaj",
+				// 	fromToken: jwt,
+				// 	name: "message_add_successful",
+				// 	description: "Mesaj Yazma Başarılı"
+				// })			
+				// //! ----------- Log Son ----------------------------- 
 
 
 				//! Return Api   
@@ -321,10 +322,8 @@ module.exports = {
             delete ctx.params.ToUserName 
             delete ctx.params.ToNameSurName 
             delete ctx.params.Subject 
-            delete ctx.params.Message 
-            delete ctx.params.MessageReaded
-            delete ctx.params.MessageFileControl
-            delete ctx.params.MessageDeleted
+            delete ctx.params.Message
+			delete ctx.params.created_byToken            
 
 			return ctx.params
 
@@ -333,26 +332,16 @@ module.exports = {
 		async update(ctx) {
 			
 			// ! Arama
-			const dbFind = db.find(u => u.MessageToken == ctx.params.MessageToken); 
+			const dbFind = db.find(u => u.token == ctx.params.token); 
 
 			//! Veri Varsa 
 			if (dbFind) {
-
-				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {					
-					userToken: ctx.params.userToken,
-					from: "mesaj",
-					fromToken: ctx.params.MessageToken,
-					name: "message_update_successful",
-                    description: "Mesaj Güncelleme Başarılı"
-				})	
-				delete ctx.params.userToken 		
-				//! ----------- Log Son -----------------------------  
             
 				// Referans Veriler Güncelleme Yapıyor
 				Object.keys(ctx.params).forEach(key => {
 					dbFind[key] = ctx.params[key]
 				})				
+				dbFind["isUpdated"] = true
 				dbFind["updated_at"] = new Date()
 				// End  Referans Veriler Güncelleme Yapıyor
 
@@ -368,6 +357,18 @@ module.exports = {
 					console.log("Json Veri Kayıt Edildi -> Mesaj"); // Success
 				});	
 				// End Json içine Verileri Yazıyor -> db		
+
+
+				// //! ----------- Log ----------------------------- 	
+				// let logs_add = await ctx.call('logs.add', {					
+				// 	userToken: ctx.params.userToken,
+				// 	from: "mesaj",
+				// 	fromToken: ctx.params.token,
+				// 	name: "message_update_successful",
+                //     description: "Mesaj Güncelleme Başarılı"
+				// })	
+				// delete ctx.params.userToken 		
+				// //! ----------- Log Son -----------------------------  
 						
 
                 //! Return Api   
@@ -397,7 +398,6 @@ module.exports = {
 			
             //! Delete
             delete ctx.params.token          
-            delete ctx.params.MessageToken
             delete ctx.params.FromRole 
             delete ctx.params.FromUserToken 
             delete ctx.params.FromUserName 
@@ -407,6 +407,7 @@ module.exports = {
             delete ctx.params.Subject 
             delete ctx.params.Message 
             delete ctx.params.MessageReaded         
+            delete ctx.params.updated_byToken
 
 			return ctx.params	  
 
@@ -432,16 +433,16 @@ module.exports = {
 				});	
 				// End Json içine Verileri Yazıyor -> db	
 				
-				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {					
-					userToken: ctx.params.userToken,
-					from: "mesaj",
-					fromToken: dbFind.MessageToken,
-					name: "message_delete_successful",
-                    description: "Mesaj Silme Başarılı"
-				})	
-				delete ctx.params.userToken 		
-				//! ----------- Log Son -----------------------------  
+				// //! ----------- Log ----------------------------- 	
+				// let logs_add = await ctx.call('logs.add', {					
+				// 	userToken: ctx.params.userToken,
+				// 	from: "mesaj",
+				// 	fromToken: dbFind.MessageToken,
+				// 	name: "message_delete_successful",
+                //     description: "Mesaj Silme Başarılı"
+				// })	
+				// delete ctx.params.userToken 		
+				// //! ----------- Log Son -----------------------------  
 				
                 //! Return Api   
 				ctx.params.title = "message.service -> Veri Silme"
@@ -483,9 +484,9 @@ module.exports = {
 			if (dbFind) {     
 							
 			//! Güncelleme
-			dbFind["MessageDeleted"] = "1"
-			dbFind["MessageDeleted_at"] = new Date()
-			dbFind["updated_at"] = new Date()
+			dbFind["isDeleted"] = true
+			dbFind["isActive"] = false
+			dbFind["Deleted_at"] = new Date()
 
 			// Json içine Verileri Yazıyor -> db
 			fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
@@ -501,15 +502,15 @@ module.exports = {
 			// End Json içine Verileri Yazıyor -> db
 
 
-			//! ----------- Log ----------------------------- 	
-			let logs_add = await ctx.call('logs.add', {					
-				userToken: ctx.params.userToken,
-				from: "mesaj",
-				fromToken: dbFind.MessageToken,
-				name: "message_deleted_update_successful",
-				description: "Mesaj Silme Kutusu Başarılı"
-			})			
-			//! ----------- Log Son -----------------------------  
+			// //! ----------- Log ----------------------------- 	
+			// let logs_add = await ctx.call('logs.add', {					
+			// 	userToken: ctx.params.userToken,
+			// 	from: "mesaj",
+			// 	fromToken: dbFind.MessageToken,
+			// 	name: "message_deleted_update_successful",
+			// 	description: "Mesaj Silme Kutusu Başarılı"
+			// })			
+			// //! ----------- Log Son -----------------------------  
 
 
 			//! Return Api	
@@ -539,7 +540,8 @@ module.exports = {
 		
 		//! Delete
 		delete ctx.params.id          
-		delete ctx.params.userToken        
+		delete ctx.params.userToken
+		delete ctx.params.Deleted_byToken    
 				
 		return ctx.params
 
@@ -558,17 +560,14 @@ module.exports = {
 			{			
 								
 				//! Güncelleme
-				dbFind["MessageReaded"] = "1"
-				dbFind["MessageReaded_at"] = new Date()
-				dbFind["updated_at"] = new Date()
+				dbFind["MessageReaded"] = true
+				dbFind["MessageReaded_at"] = new Date()			
 
 				// Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
 
 					// Hata varsa
-					if (err) {
-						console.log(err)
-					}
+					if (err) { console.log(err) }
 
 					//Console Yazma
 					console.log("Json Veri Kayıt Edildi -> Mesaj"); // Success
@@ -576,15 +575,15 @@ module.exports = {
 				// End Json içine Verileri Yazıyor -> db
 
 
-				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {					
-					userToken: ctx.params.userToken,
-					from: "mesaj",
-					fromToken: dbFind.MessageToken,
-					name: "message_read_successful",
-					description: "Mesaj Görüntüleme Başarılı"
-				})			
-				//! ----------- Log Son -----------------------------  
+				// //! ----------- Log ----------------------------- 	
+				// let logs_add = await ctx.call('logs.add', {					
+				// 	userToken: ctx.params.userToken,
+				// 	from: "mesaj",
+				// 	fromToken: dbFind.MessageToken,
+				// 	name: "message_read_successful",
+				// 	description: "Mesaj Görüntüleme Başarılı"
+				// })			
+				// //! ----------- Log Son -----------------------------  
 
 
 				//! Return Api	
@@ -635,13 +634,13 @@ module.exports = {
 		},
         async inbox(ctx) {
 
-			const message_inbox  = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageDeleted == "0"); //! Gelen Mesaj
-			const message_unreaded = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageReaded == "0" && u.MessageDeleted == "0"); //! Okunmamış Mesajlar
-			const message_readed = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageReaded == "1" && u.MessageDeleted == "0"); //! Okunmuş Mesajlar
-			const message_deleted_message  = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageDeleted == "1"); //! Silinen Mesaj
+			const message_inbox  = db.filter(u => u.ToUserToken == ctx.params.userToken && u.isDeleted == false); //! Gelen Mesaj
+			const message_unreaded = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageReaded == false && u.isDeleted == false); //! Okunmamış Mesajlar
+			const message_readed = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageReaded == true && u.isDeleted == false ); //! Okunmuş Mesajlar
+			const message_deleted_message  = db.filter(u => u.ToUserToken == ctx.params.userToken && u.isDeleted == true ); //! Silinen Mesaj
 
             const message_sent = db.filter(u => u.FromUserToken == ctx.params.userToken); //! Gönderilmiş Mesajlar
-            const message_unreaded_sent = db.filter(u => u.FromUserToken == ctx.params.userToken && u.MessageReaded == "0"); //! Okunmamış Gönderilmiş Mesajlar            
+            const message_unreaded_sent = db.filter(u => u.FromUserToken == ctx.params.userToken && u.MessageReaded == false ); //! Okunmamış Gönderilmiş Mesajlar            
 
             //! Return
             ctx.params.title = "Mesaj Kutusu"

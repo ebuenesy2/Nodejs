@@ -294,8 +294,8 @@ module.exports = {
 								updated_byToken:null,
 								isActive:true,
 								isDeleted:false,
-								isDeleted_at:null,
-								isDeleted_byToken:null
+								Deleted_at:null,
+								Deleted_byToken:null
 							}				
 
 							//Verileri Kaydet

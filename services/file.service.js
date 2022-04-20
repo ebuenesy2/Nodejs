@@ -333,8 +333,8 @@ module.exports = {
 					updated_byToken : null,
 					isActive: true,
 				    isDeleted:false,
-					isDeleted_at: null,
-					isDeleted_byToken:null
+					Deleted_at: null,
+					Deleted_byToken:null
 				}
 
 				//Verileri Kaydet
@@ -488,7 +488,7 @@ module.exports = {
 				Object.keys(ctx.params).forEach(key => {
 					dbFind[key] = ctx.params[key]
 				})
-				dbFind["isDeleted_at"] = new Date()
+				dbFind["Deleted_at"] = new Date()
 				// End  Referans Veriler Güncelleme Yapıyor		
 
 				// Json içine Verileri Yazıyor -> db
@@ -542,7 +542,7 @@ module.exports = {
 		
 			//! Return
 			delete ctx.params.token
-			delete ctx.params.isDeleted_byToken
+			delete ctx.params.Deleted_byToken
 			delete ctx.params.isDeleted
 			delete ctx.params.isActive	
 
@@ -602,7 +602,7 @@ module.exports = {
 
 			//! Return
 			delete ctx.params.token
-			delete ctx.params.isDeleted_byToken
+			delete ctx.params.Deleted_byToken
 
 			return ctx.params
 
@@ -1291,7 +1291,14 @@ module.exports = {
 							fileSize:fileSize,
 							token:jwt,							
 							created_at: CreateDate,
-							updated_at: CreateDate
+							created_byToken:ctx.params.created_byToken,
+							isUpdated:false,
+							updated_at: null,
+							updated_byToken : null,
+							isActive: true,
+							isDeleted:false,
+							Deleted_at: null,
+							Deleted_byToken:null
 						}
 
 						//Verileri Kaydet

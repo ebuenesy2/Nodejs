@@ -2,8 +2,8 @@
     {
         "id": 1,        
         "role":"User",
-        "name": "name 1",
-        "surname": "surname 1",
+        "name": "user name 1",
+        "surname": "user surname 1",
         "userImageUrl": "https://www.wpdurum.com/uploads/thumbs/en-guzel-kiz-profil-resimleri-indirdur.jpg",
         "userImageUploadUrl": "userImageUploadUrl",
         "coverImageUrl": null,
@@ -23,8 +23,8 @@
         "updated_byToken" : "updated_byToken",
         "isActive": true,
         "isDeleted":false,
-        "isDeleted_at": "2022-03-06T13:14:43.211Z",
-        "isDeleted_byToken":"isDeleted_byToken"
+        "Deleted_at": "2022-03-06T13:14:43.211Z",
+        "Deleted_byToken":"Deleted_byToken"
     },
     {
         "id": 3,     
@@ -50,8 +50,8 @@
         "updated_byToken" : "updated_byToken",
         "isActive": true,
         "isDeleted":false,
-        "isDeleted_at": "2022-03-06T13:14:43.211Z",
-        "isDeleted_byToken":"isDeleted_byToken"
+        "Deleted_at": "2022-03-06T13:14:43.211Z",
+        "Deleted_byToken":"Deleted_byToken"
     },
     {
         "id": 1631039083449,       
@@ -77,7 +77,7 @@
         "updated_byToken" : "updated_byToken",
         "isActive": true,
         "isDeleted":false,
-        "isDeleted_at": "2022-03-06T13:14:43.211Z",
-        "isDeleted_byToken":"isDeleted_byToken"      
+        "Deleted_at": "2022-03-06T13:14:43.211Z",
+        "Deleted_byToken":"Deleted_byToken"      
     }
 ]

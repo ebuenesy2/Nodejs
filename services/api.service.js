@@ -362,32 +362,24 @@ module.exports = {
 			   		   			
 		//!------------- note  --------------------------------------------------------------------------------------------------
 
-		fastify.get('/api/note/info',async (req,res)=> this.broker.call("note.info")) //! İnfo
-		fastify.post('/api/note/post', async (req, res) => this.broker.call("note.post",{...req.body})) //! POST
-		fastify.get('/api/note/html',async (req,res)=> this.broker.call("note.html")) //! Html
-		fastify.get('/api/note/all', async (req, res) => this.broker.call("note.all")) //! All
-		fastify.get('/api/note/:id', async (req, res) => this.broker.call("note.find",{id: req.params.id})) //! Search	
+			fastify.get('/api/note/info',async (req,res)=> this.broker.call("note.info")) //! İnfo
+			fastify.post('/api/note/post', async (req, res) => this.broker.call("note.post",{...req.body})) //! POST
+			fastify.get('/api/note/html',async (req,res)=> this.broker.call("note.html")) //! Html
+			fastify.get('/api/note/all', async (req, res) => this.broker.call("note.all")) //! All
+			fastify.get('/api/note/:id', async (req, res) => this.broker.call("note.find",{id: req.params.id})) //! Search	
 
-		fastify.post('/api/note/find_post', async (req, res) => this.broker.call("note.find_post",{...req.body})) //!  Search-Post
-		fastify.post('/api/note/find_token', async (req, res) => this.broker.call("note.find_token",{...req.body})) //!  Search-Token	
-		fastify.post('/api/note/find_user', async (req, res) => this.broker.call("note.find_user",{...req.body})) //!  Search-UserToken	
-		fastify.post('/api/note/add', async (req, res) => this.broker.call("note.add",{...req.body})) //! CREATE		
-		fastify.post('/api/note/update', async (req, res) => this.broker.call("note.update",{...req.body})) //! UPDATE
-		fastify.post('/api/note/updated_delete', async (req, res) => this.broker.call("note.updated_delete",{...req.body})) //! UPDATE
-		fastify.post('/api/note/delete/:id', async (req, res) => this.broker.call("note.delete",{id: req.params.id,...req.body})) //! DELETE
+			fastify.post('/api/note/find_post', async (req, res) => this.broker.call("note.find_post",{...req.body})) //!  Search-Post
+			fastify.post('/api/note/find_token', async (req, res) => this.broker.call("note.find_token",{...req.body})) //!  Search-Token	
+			fastify.post('/api/note/find_user', async (req, res) => this.broker.call("note.find_user",{...req.body})) //!  Search-UserToken	
+			fastify.post('/api/note/add', async (req, res) => this.broker.call("note.add",{...req.body})) //! CREATE		
+			fastify.post('/api/note/update', async (req, res) => this.broker.call("note.update",{...req.body})) //! UPDATE
+			fastify.post('/api/note/updated_delete', async (req, res) => this.broker.call("note.updated_delete",{...req.body})) //! UPDATE
+			fastify.post('/api/note/delete/:id', async (req, res) => this.broker.call("note.delete",{id: req.params.id,...req.body})) //! DELETE
 		
-	//!---------------- note son ----------------------------------------------------------------------------------------------
+	    //!---------------- note son ----------------------------------------------------------------------------------------------
 
 
-		//!------------- xdeneme  --------------------------------------------------------------------------------------------------
 
-			fastify.get('/api/xdeneme/info',async (req,res)=> this.broker.call("xdeneme.info")) //! İnfo
-			fastify.post('/api/xdeneme/post', async (req, res) => this.broker.call("xdeneme.post",{...req.body})) //! POST
-			fastify.get('/api/xdeneme/html', async (req, res) => this.broker.call("xdeneme.html")) //! Html
-			fastify.get('/api/xdeneme/service', async (req, res) => this.broker.call("xdeneme.service")) //! Service
-	
-	
-	//!---------------- xdeneme son ----------------------------------------------------------------------------------------------
 
 
 		//************************************* Server  **************************************************** */

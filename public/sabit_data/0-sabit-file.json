@@ -19,8 +19,8 @@
         "updated_byToken" : "updated_byToken",
         "isActive": true,
         "isDeleted":false,
-        "isDeleted_at": "2022-03-06T13:14:43.211Z",
-        "isDeleted_byToken":"isDeleted_byToken"
+        "Deleted_at": "2022-03-06T13:14:43.211Z",
+        "Deleted_byToken":"Deleted_byToken"
     },
     {
         "id":2,      
@@ -42,7 +42,7 @@
         "updated_byToken" : "updated_byToken",
         "isActive": true,
         "isDeleted":false,
-        "isDeleted_at": "2022-03-06T13:14:43.211Z",
-        "isDeleted_byToken":"isDeleted_byToken"
+        "Deleted_at": "2022-03-06T13:14:43.211Z",
+        "Deleted_byToken":"Deleted_byToken"
      }
 ]
