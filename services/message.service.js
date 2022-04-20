@@ -556,12 +556,13 @@ module.exports = {
 		if (dbFind) {     
 
 			// Gelen Kutusuna Düşmüş ise
-			if(dbFind["ToUserToken"]==ctx.params.userToken) 
+			if(dbFind["readed_byToken"]==ctx.params.readed_byToken) 
 			{			
 								
 				//! Güncelleme
-				dbFind["MessageReaded"] = true
-				dbFind["MessageReaded_at"] = new Date()			
+				dbFind["isReaded"] = true
+				dbFind["readed_at"] = new Date()			
+				dbFind["readed_byToken"] = ctx.params.readed_byToken			
 
 				// Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
@@ -626,7 +627,7 @@ module.exports = {
 		
 		//! Delete
 		delete ctx.params.id          
-		delete ctx.params.userToken        
+		delete ctx.params.readed_byToken        
 				
 		return ctx.params
 
@@ -634,13 +635,13 @@ module.exports = {
 		},
         async inbox(ctx) {
 
-			const message_inbox  = db.filter(u => u.ToUserToken == ctx.params.userToken && u.isDeleted == false); //! Gelen Mesaj
-			const message_unreaded = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageReaded == false && u.isDeleted == false); //! Okunmamış Mesajlar
-			const message_readed = db.filter(u => u.ToUserToken == ctx.params.userToken && u.MessageReaded == true && u.isDeleted == false ); //! Okunmuş Mesajlar
+			const message_inbox  = db.filter(u => u.ToUserToken == ctx.params.userToken && u.isReaded == false); //! Gelen Mesaj
+			const message_unreaded = db.filter(u => u.ToUserToken == ctx.params.userToken && u.isReaded == false && u.isDeleted == false); //! Okunmamış Mesajlar
+			const message_readed = db.filter(u => u.ToUserToken == ctx.params.userToken && u.isReaded == true && u.isDeleted == false ); //! Okunmuş Mesajlar
 			const message_deleted_message  = db.filter(u => u.ToUserToken == ctx.params.userToken && u.isDeleted == true ); //! Silinen Mesaj
 
             const message_sent = db.filter(u => u.FromUserToken == ctx.params.userToken); //! Gönderilmiş Mesajlar
-            const message_unreaded_sent = db.filter(u => u.FromUserToken == ctx.params.userToken && u.MessageReaded == false ); //! Okunmamış Gönderilmiş Mesajlar            
+            const message_unreaded_sent = db.filter(u => u.FromUserToken == ctx.params.userToken && u.isReaded == false ); //! Okunmamış Gönderilmiş Mesajlar            
 
             //! Return
             ctx.params.title = "Mesaj Kutusu"
