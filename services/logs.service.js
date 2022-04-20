@@ -112,79 +112,151 @@ module.exports = {
 
 			return ctx.params
 		},
+	    async find_post(ctx) { 
+
+			// ! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);
+			
+			//! Veri Varsa
+			if (dbFind) {
+
+				//! Return Api
+				ctx.params.title = "logs.service -> Veri Arama"
+				ctx.params.tablo = "logs.json"
+				ctx.params.status = 1
+				ctx.params.DB = dbFind	
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Logs Veri Arama [ /api/logs/find_token ] Bulundu' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+
+				//! Return Api
+				ctx.params.title = "logs.service -> Veri Arama"
+				ctx.params.tablo = "logs.json"
+				ctx.params.status = 0
+				ctx.params.DB = "Veri Bulunmadı"
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Logs Veri Arama [ /api/logs/find_token ] Bulunamadı' + '\u001b[0m');
+			}
+
+			//! Return
+			delete ctx.params.id
+			return ctx.params
+		},
+		async find_token(ctx) { 
+
+			// ! Arama
+			const dbFind = db.filter(u => u.token == ctx.params.token);
+
+			//! Veri Varsa
+			if (dbFind.length > 0) {
+
+				//! Return Api
+				ctx.params.title = "logs.service -> Veri Arama"
+				ctx.params.tablo = "logs.json"
+				ctx.params.status = 1
+				ctx.params.size=dbFind.length
+				ctx.params.DB = dbFind		
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + 'Logs Veri Arama [ /api/logs/find_token ] Bulundu' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+
+				//! Return Api
+				ctx.params.title = "logs.service -> Veri Arama"
+				ctx.params.tablo = "logs.json"
+				ctx.params.status = 0
+				ctx.params.size=0
+				ctx.params.DB = "Veri Bulunmadı"
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + 'Logs Veri Arama [ /api/logs/find_token ] Bulunamadı' + '\u001b[0m');
+			}
+
+			//! Return
+			delete ctx.params.token
+			return ctx.params
+		},
 		async find_user(ctx) {
 
 			// ! Arama
-			const dbFind = db.filter(u => u.userToken == ctx.params.userToken);
+			const dbFind = db.filter(u => u.created_byToken == ctx.params.created_byToken);
 
 			//! Veri Varsa
 			if (dbFind.length > 0) {
 
 				//! Return Api
-				ctx.params.title = "logs.service -> Kullanıcı Arama"
+				ctx.params.title = "logs.service -> Veri Kullanıcı Arama"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=dbFind.length
 				ctx.params.DB = dbFind		
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Log Kullanıcı Arama [ /api/logs/find_user ] Bulundu' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + 'Logs Veri Arama [ /api/logs/find_user ] Bulundu' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
 			else {
 
 				//! Return Api
-				ctx.params.title = "logs.service -> Kullanıcı Arama"
-				ctx.params.tablo = "logs.json"
+				ctx.params.title = "note.service -> Veri Arama"
+				ctx.params.tablo = "note.json"
 				ctx.params.status = 0
 				ctx.params.size=0
-				ctx.params.DB = "Kullanıcı Bulunmadı"
+				ctx.params.DB = "Veri Bulunmadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Log Kullanıcı Arama [ /api/logs/find_user ] Bulunamadı' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Logs Veri Arama [ /api/note/find_user ] Bulunamadı' + '\u001b[0m');
 			}
 
 			//! Return
-			delete ctx.params.userToken
+			delete ctx.params.created_byToken
 
 			return ctx.params
 		},
-		async find_fromToken(ctx) {
+		async find_user_tablo(ctx) {
 
 			// ! Arama
-			const dbFind = db.filter(u => u.fromToken == ctx.params.fromToken);
+			const dbFind = db.filter(u => u.created_byToken == ctx.params.created_byToken && u.tablo == ctx.params.tablo);
 
 			//! Veri Varsa
 			if (dbFind.length > 0) {
 
 				//! Return Api
-				ctx.params.title = "logs.service -> FromToken Arama"
+				ctx.params.title = "logs.service -> Veri Kullanıcı Tablo Arama"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=dbFind.length
 				ctx.params.DB = dbFind		
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Log FromToken Arama [ /api/logs/find_fromToken ] Bulundu' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + 'Logs Veri Arama [ /api/logs/find_user ] Bulundu' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
 			else {
 
 				//! Return Api
-				ctx.params.title = "logs.service -> FromToken Arama"
-				ctx.params.tablo = "logs.json"
+				ctx.params.title = "logs.service -> Veri Kullanıcı Tablo Arama"
+				ctx.params.tablo = "note.json"
 				ctx.params.status = 0
 				ctx.params.size=0
-				ctx.params.DB = "FromToken Bulunmadı"
+				ctx.params.DB = "Veri Bulunmadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Log FromToken Arama [ /api/logs/find_fromToken ] Bulunamadı' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Logs Veri Arama [ /api/note/find_user ] Bulunamadı' + '\u001b[0m');
 			}
 
 			//! Return
-			delete ctx.params.userToken
+			delete ctx.params.created_byToken
 
 			return ctx.params
 		},
@@ -194,17 +266,13 @@ module.exports = {
 
 				//! Token
 				let TokenId=new Date().getTime();
-				let CreateDate=new Date();			
 
 				let TokenInfo={				
 					id: TokenId,
-					userToken: ctx.params.userToken,
-					from: ctx.params.from,
-					fromToken: ctx.params.fromToken,
-					name: ctx.params.name,
+					tablo: ctx.params.tablo,
+					title: ctx.params.title,
 					description: ctx.params.description,
-					created_at: CreateDate,
-					updated_at: CreateDate
+					created_byToken: ctx.params.created_byToken
 				}
 				
 				const secret = 'secret';
@@ -215,14 +283,22 @@ module.exports = {
 				//! Eklenecek veriler
 				const willSaveData = {
 					id: TokenId,			
-					userToken: ctx.params.userToken,
-					from: ctx.params.from,
-					fromToken: ctx.params.fromToken,
-					name: ctx.params.name,
+					tablo: ctx.params.tablo,
+					title: ctx.params.title,
 					description: ctx.params.description,
-					logToken:jwt,	
-					created_at: CreateDate,
-					updated_at: CreateDate
+					token:jwt,				
+					created_at: new Date(),
+					created_byToken: ctx.params.created_byToken,
+					isUpdated: false,
+					updated_at: null,
+					updated_byToken : null,
+					isReaded: false,                   
+                    readed_at: null,	
+                    readed_byToken: null,	
+					isActive: true,
+					isDeleted: false,
+					Deleted_at: null,
+					Deleted_byToken: null
 				}
 
 				//Verileri Kaydet
@@ -265,11 +341,9 @@ module.exports = {
 			}
 
 			//! Return
-			delete ctx.params.userToken
-			delete ctx.params.from
-			delete ctx.params.fromToken
-			delete ctx.params.name
 			delete ctx.params.description
+			delete ctx.params.created_byToken
+
 
 			return ctx.params
 
@@ -277,7 +351,7 @@ module.exports = {
 		async update(ctx) {
 
 			// ! Arama
-			const dbFind = db.find(u => u.logToken == ctx.params.logToken);		
+			const dbFind = db.find(u => u.token == ctx.params.token);		
 
 			//! Veri Varsa 
 			if (dbFind) {
@@ -286,6 +360,7 @@ module.exports = {
 				Object.keys(ctx.params).forEach(key => {
 					dbFind[key] = ctx.params[key]
 				})				
+				dbFind["isUpdated"] = true
 				dbFind["updated_at"] = new Date()
 				// End  Referans Veriler Güncelleme Yapıyor
 
@@ -326,12 +401,9 @@ module.exports = {
 			}
 
 			//! Return
-			delete ctx.params.logToken
-			delete ctx.params.userToken
-			delete ctx.params.from
-			delete ctx.params.fromToken
-			delete ctx.params.name
-			delete ctx.params.description
+			delete ctx.params.token
+			delete ctx.params.updated_byToken
+			
 
 			return ctx.params
 
@@ -339,7 +411,7 @@ module.exports = {
 		async delete(ctx) {
 
 			//! Arama
-			var index = db.findIndex(a => a.logToken === ctx.params.logToken);
+			var index = db.findIndex(a => a.id == ctx.params.id);
 			if (index > -1) {
 				db.splice(index, 1);
 
@@ -347,22 +419,20 @@ module.exports = {
 				fs.writeFile('./public/DB/logs.json', JSON.stringify(db), err => {
 
 					// Hata varsa
-					if (err) {
-						console.log(err)
-					}
+					if (err) { console.log(err) }
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Silindi -> Log"); // Success
+					console.log("Json Veri Kayıt Silindi -> Note"); // Success
 				});
 
 				//! Return Api
 				ctx.params.title = "logs.service -> Veri Silme"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "logs Silindi"
+				ctx.params.mesaj = "Veri Silindi"
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Log Silme [ /api/logs/delete ] Silindi' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + 'Logs Veri Silindi [ /api/logs/delete ] Silindi' + '\u001b[0m');
 
 			} else {
 
@@ -370,14 +440,15 @@ module.exports = {
 				ctx.params.title = "logs.service -> Veri Silme"
 				ctx.params.tablo = "logs.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "logs Bulunmadı"
+				ctx.params.mesaj = "Veri Bulunamadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Log Silme [ /api/logs/delete ] Silinemedi' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + 'Logs Veri Siinemedi [ /api/logs/delete ] Silinemedi' + '\u001b[0m');
 			}
 
 			//! Return
-			delete ctx.params.logToken
+			delete ctx.params.Deleted_byToken
+			delete ctx.params.id
 
     		return ctx.params
 		}

@@ -204,12 +204,14 @@ module.exports = {
 			fastify.get('/api/logs/all', async (req, res) => this.broker.call("logs.all")) //! All
 
 			fastify.get('/api/logs/:id', async (req, res) => this.broker.call("logs.find",{id: req.params.id})) //!Search
+			fastify.post('/api/logs/find_post', async (req, res) => this.broker.call("logs.find_post",{...req.body})) //! Search Post	
+			fastify.post('/api/logs/find_token', async (req, res) => this.broker.call("logs.find_token",{...req.body})) //! Search Token	
 			fastify.post('/api/logs/find_user', async (req, res) => this.broker.call("logs.find_user",{...req.body})) //! Search User	
-			fastify.post('/api/logs/find_fromToken', async (req, res) => this.broker.call("logs.find_fromToken",{...req.body})) //! Search User	
+			fastify.post('/api/logs/find_user_tablo', async (req, res) => this.broker.call("logs.find_user_tablo",{...req.body})) //! Search User - Tablo	
 
 			fastify.post('/api/logs/add', async (req, res) => this.broker.call("logs.add",{...req.body})) //! CREATE
 			fastify.post('/api/logs/update', async (req, res) => this.broker.call("logs.update",{...req.body})) //! UPDATE
-			fastify.post('/api/logs/delete', async (req, res) => this.broker.call("logs.delete",{...req.body})) //! DELETE				
+			fastify.post('/api/logs/delete/:id', async (req, res) => this.broker.call("logs.delete",{id: req.params.id,...req.body})) //! DELETE			
 
 		//!---------------- Logs son --------------------------------------------------------------------------------------------
 			
