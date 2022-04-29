@@ -7,6 +7,11 @@
 Console Ekranına yazma protokolü
  ```
  
+## Kullanımı
+ 
+ ```
+console.log('\u001b[' + 32 + 'm' + '[FİLE_NAME] Mesaj [ /api/user/all ] ' + '\u001b[0m');
+ ```
  
 ## Olumlu
  
@@ -14,7 +19,7 @@ Console Ekranına yazma protokolü
 console.log('\u001b[' + 32 + 'm' + '[User] Tüm Veriler Okundu [ /api/user/all ] ' + '\u001b[0m');
  ```
 
-## Olumlu
+## Olumsuz
  
  ```
 console.log('\u001b[' + 31 + 'm' + '[User] Tüm Veriler Okunamadı [ /api/user/all ] ' + '\u001b[0m');
