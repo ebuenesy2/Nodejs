@@ -53,7 +53,7 @@ module.exports = {
 				ctx.params.DB = db		
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'User Tüm Veriler Okundu [ /api/user/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[User] Tüm Veriler Okundu [ /api/user/all ] ' + '\u001b[0m');
 
 			} catch (error) {
 
@@ -65,7 +65,7 @@ module.exports = {
 				ctx.params.DB = error
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'User Tüm Veriler Okunamadı [ /api/user/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[User] Tüm Veriler Okunamadı [ /api/user/all ] ' + '\u001b[0m');
 				console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
 			
 			}
