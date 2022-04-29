@@ -27,3 +27,20 @@ console.log('\u001b[' + 31 + 'm' + '[User] Tüm Veriler Okunamadı [ /api/user/a
  ```
 console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
  ```
+
+# Json
+
+## Olumlu
+ ```
+console.log('\u001b[' + 32 + 'm' + '[User] Tüm Veriler Okundu [ /api/user/all ] ' + '\u001b[0m');
+ ```
+ 
+ 
+## Olumsuz
+ 
+ ```
+console.log('\u001b[' + 31 + 'm' + '[User] Json Veri Kayıt Edilemedi [ User.json ] ' + '\u001b[0m');	
+ ```
+ ```
+console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+ ```
