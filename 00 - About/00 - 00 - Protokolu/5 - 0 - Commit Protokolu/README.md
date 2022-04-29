@@ -6,11 +6,17 @@
  ```
 [tablo] Delete - Mesaj
  ```
+```
+[file] Delete - Çoklu Veri Silme #1
+ ```
  
  ## Örnek
  
  ```
-[file] Delete - Çoklu Veri Silme #1
+[docs] Correctly capitalize Ctrl
+ ```
+  ```
+[Joy] Add extendSxProp to Link (#32505)
  ```
 
 
