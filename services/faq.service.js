@@ -3,17 +3,17 @@ const dayjs = require('dayjs'); //! Zaman
 const fs = require("fs"); //! Dosya
 const sign = require('jwt-encode'); //! Token
 const jwt_decode = require('jwt-decode'); //! Token
-const db = require('../public/DB/ssk.json'); //! Json
+const db = require('../public/DB/faq.json'); //! Json
 
 
 module.exports = {
-	name: "ssk",
+	name: "faq",
 
 	actions: {
 		async info(ctx) {
 
 			//! Return Api
-			ctx.params.title = "ssk.service"
+			ctx.params.title = "faq.service"
 			ctx.params.time = dayjs().toDate()
 			ctx.params.APi_URL = process.env.APi_URL
 
@@ -45,26 +45,26 @@ module.exports = {
 			try {
 
 				//! Return Api   
-				ctx.params.title = "ssk.service -> Tüm Veriler"
-				ctx.params.tablo = "ssk.json"
+				ctx.params.title = "faq.service -> Tüm Veriler"
+				ctx.params.tablo = "faq.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
 				ctx.params.DB = db		
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[Ssk] [All] Tüm Veriler Okundu [ /api/ssk/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Faq] [All] Tüm Veriler Okundu [ /api/faq/all ] ' + '\u001b[0m');
 
 			} catch (error) {
 
 				//! Return Api   
-				ctx.params.title = "ssk.service -> Tüm Veriler"
-				ctx.params.tablo = "ssk.json"
+				ctx.params.title = "faq.service -> Tüm Veriler"
+				ctx.params.tablo = "faq.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
 				ctx.params.DB = error
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[Ssk] [All] SSK Tüm Veriler Okunamadı [ /api/ssk/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[Faq] [All] SSK Tüm Veriler Okunamadı [ /api/faq/all ] ' + '\u001b[0m');
 				console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
 			
 			}
@@ -81,28 +81,28 @@ module.exports = {
 			if (dbFind) {	               
                 
 				//! Return Api   
-				ctx.params.title = "ssk.service -> Veri Arama"
-				ctx.params.tablo = "ssk.json"
+				ctx.params.title = "faq.service -> Veri Arama"
+				ctx.params.tablo = "faq.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[Ssk] [Find] Veri Arama [ /api/ssk/find ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Faq] [Find] Veri Arama [ /api/faq/find ] ' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
 			else {
 				
 				//! Return Api   
-				ctx.params.title = "ssk.service -> Veri Arama"
-				ctx.params.tablo = "ssk.json"
+				ctx.params.title = "faq.service -> Veri Arama"
+				ctx.params.tablo = "faq.json"
 				ctx.params.status = 0
-				ctx.params.DB = "SSK  Bulunmadı"
+				ctx.params.DB = "Faq  Bulunmadı"
 			
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[Ssk] [Find] Veri Bulunamadı [ /api/ssk/find ] ' + '\u001b[0m');	
+				console.log('\u001b[' + 31 + 'm' + '[Faq] [Find] Veri Bulunamadı [ /api/faq/find ] ' + '\u001b[0m');	
 
 			}
 
@@ -120,28 +120,28 @@ module.exports = {
 			if (dbFind) {	               
                 
 				//! Return Api   
-				ctx.params.title = "ssk.service -> Veri Arama"
-				ctx.params.tablo = "ssk.json"
+				ctx.params.title = "faq.service -> Veri Arama"
+				ctx.params.tablo = "faq.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[Ssk] [Find] Veri Arama [ /api/ssk/find_post ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Faq] [Find] Veri Arama [ /api/faq/find_post ] ' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
 			else {
 				
 				//! Return Api   
-				ctx.params.title = "ssk.service -> Veri Arama"
-				ctx.params.tablo = "ssk.json"
+				ctx.params.title = "faq.service -> Veri Arama"
+				ctx.params.tablo = "faq.json"
 				ctx.params.status = 0
-				ctx.params.DB = "SSK  Bulunmadı"
+				ctx.params.DB = "Faq  Bulunmadı"
 			
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[Ssk] [Find] Veri Bulunamadı [ /api/ssk/find_post ] ' + '\u001b[0m');	
+				console.log('\u001b[' + 31 + 'm' + '[Faq] [Find] Veri Bulunamadı [ /api/faq/find_post ] ' + '\u001b[0m');	
 
 			}
 
@@ -159,28 +159,28 @@ module.exports = {
 			if (dbFind) {	               
                 
 				//! Return Api   
-				ctx.params.title = "ssk.service -> Veri Arama"
-				ctx.params.tablo = "ssk.json"
+				ctx.params.title = "faq.service -> Veri Arama"
+				ctx.params.tablo = "faq.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[Ssk] [Find] Veri Arama [ /api/ssk/find_token ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Faq] [Find] Veri Arama [ /api/faq/find_token ] ' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
 			else {
 				
 				//! Return Api   
-				ctx.params.title = "ssk.service -> Veri Arama"
-				ctx.params.tablo = "ssk.json"
+				ctx.params.title = "faq.service -> Veri Arama"
+				ctx.params.tablo = "faq.json"
 				ctx.params.status = 0
-				ctx.params.DB = "SSK  Bulunmadı"
+				ctx.params.DB = "Faq  Bulunmadı"
 			
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[Ssk] [Find] Veri Bulunamadı [ /api/ssk/find_token ] ' + '\u001b[0m');	
+				console.log('\u001b[' + 31 + 'm' + '[Faq] [Find] Veri Bulunamadı [ /api/faq/find_token ] ' + '\u001b[0m');	
 
 			}
 
@@ -229,16 +229,16 @@ module.exports = {
 
 	
 				//Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/ssk.json', JSON.stringify(db), err => {
+				fs.writeFile('./public/DB/faq.json', JSON.stringify(db), err => {
 
 					// Hata varsa
 					if (err) {
-						console.log('\u001b[' + 31 + 'm' + '[Ssk] [Json] [Add] Json Veri Kayıt Edilemedi [ ssk.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + '[Faq] [Json] [Add] Json Veri Kayıt Edilemedi [ faq.json ] ' + '\u001b[0m');	
 						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
 					}							
 
 					//Console Yazma
-					console.log('\u001b[' + 32 + 'm' + '[Ssk] [Json] [Add] Json Veri Kayıt Edildi [ ssk.json ] ' + '\u001b[0m');								
+					console.log('\u001b[' + 32 + 'm' + '[Faq] [Json] [Add] Json Veri Kayıt Edildi [ faq.json ] ' + '\u001b[0m');								
 					
 				});
 				// End Json içine Verileri Yazıyor -> db					
@@ -256,25 +256,25 @@ module.exports = {
 
 
 				//! Return Api   
-				ctx.params.title = "ssk.service -> Veri Ekleme"
-				ctx.params.tablo = "ssk.json"
+				ctx.params.title = "faq.service -> Veri Ekleme"
+				ctx.params.tablo = "faq.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "SSK Eklendi"	
+				ctx.params.mesaj = "Veri Eklendi"	
 				
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[Ssk] [Add] Veri Eklendi [ /api/ssk/add ] ' + '\u001b[0m');	
+				console.log('\u001b[' + 32 + 'm' + '[Faq] [Add] Veri Eklendi [ /api/faq/add ] ' + '\u001b[0m');	
 				
 
 			} catch (error) {
 
 				//! Return Api   
-				ctx.params.title = "ssk.service -> Veri Ekleme"
-				ctx.params.tablo = "ssk.json"
+				ctx.params.title = "faq.service -> Veri Ekleme"
+				ctx.params.tablo = "faq.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "SSK Eklenemedi"	
+				ctx.params.mesaj = "Veri Eklenemedi"	
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[Ssk] [Add] Veri Eklenemedi [ /api/ssk/add ] ' + '\u001b[0m');	
+				console.log('\u001b[' + 31 + 'm' + '[Faq] [Add] Veri Eklenemedi [ /api/faq/add ] ' + '\u001b[0m');	
 
 			}
 
@@ -302,16 +302,16 @@ module.exports = {
 				// End  Referans Veriler Güncelleme Yapıyor
 	
 				//Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/ssk.json', JSON.stringify(db), err => {
+				fs.writeFile('./public/DB/faq.json', JSON.stringify(db), err => {
 
 					// Hata varsa
 					if (err) {
-						console.log('\u001b[' + 31 + 'm' + '[Ssk] [Json] [Update] Json Veri Kayıt Edilemedi [ ssk.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + '[Faq] [Json] [Update] Json Veri Kayıt Edilemedi [ faq.json ] ' + '\u001b[0m');	
 						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
 					}							
 
 					//Console Yazma
-					console.log('\u001b[' + 32 + 'm' + '[Ssk] [Json] [Update] Json Veri Kayıt Edildi [ ssk.json ] ' + '\u001b[0m');								
+					console.log('\u001b[' + 32 + 'm' + '[Faq] [Json] [Update] Json Veri Kayıt Edildi [ faq.json ] ' + '\u001b[0m');								
 					
 				});
 				// End Json içine Verileri Yazıyor -> db	
@@ -328,13 +328,13 @@ module.exports = {
 				
               
                 //! Return Api	
-				ctx.params.title = "ssk.service -> Veri Güncelleme"
-				ctx.params.tablo = "ssk.json"        
+				ctx.params.title = "faq.service -> Veri Güncelleme"
+				ctx.params.tablo = "faq.json"        
 				ctx.params.status = 1			
 				ctx.params.mesaj="Veri Güncellendi"
 
 				//Console Yazma	
-				console.log('\u001b[' + 32 + 'm' + '[Ssk] [Update] Veri Güncelleme [ /api/ssk/update ]' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Faq] [Update] Veri Güncelleme [ /api/faq/update ]' + '\u001b[0m');
 
 			}
 
@@ -343,13 +343,13 @@ module.exports = {
 				
 				
                //! Return Api	
-			   ctx.params.title = "ssk.service -> Veri Güncelleme"
-			   ctx.params.tablo = "ssk.json"        
+			   ctx.params.title = "faq.service -> Veri Güncelleme"
+			   ctx.params.tablo = "faq.json"        
 			   ctx.params.status = 0			
 			   ctx.params.mesaj="Veri Güncellendi"
 
 			   //Console Yazma	
-			   console.log('\u001b[' + 32 + 'm' + '[Ssk] [Update] Veri Güncelleme [ /api/ssk/update ] ' + '\u001b[0m');
+			   console.log('\u001b[' + 32 + 'm' + '[Faq] [Update] Veri Güncelleme [ /api/faq/update ] ' + '\u001b[0m');
 
 			}
 			
@@ -371,16 +371,16 @@ module.exports = {
 				db.splice(index, 1);
 
 				//Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/ssk.json', JSON.stringify(db), err => {
+				fs.writeFile('./public/DB/faq.json', JSON.stringify(db), err => {
 
 					// Hata varsa
 					if (err) {
-						console.log('\u001b[' + 31 + 'm' + '[Ssk] [Json] [Delete] Json Veri Kayıt Edilemedi [ ssk.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + '[Faq] [Json] [Delete] Json Veri Kayıt Edilemedi [ ssk.json ] ' + '\u001b[0m');	
 						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
 					}							
 
 					//Console Yazma
-					console.log('\u001b[' + 32 + 'm' + '[Ssk] [Json] [Delete] Json Veri Kayıt Edildi [ ssk.json ] ' + '\u001b[0m');								
+					console.log('\u001b[' + 32 + 'm' + '[Faq] [Json] [Delete] Json Veri Kayıt Edildi [ ssk.json ] ' + '\u001b[0m');								
 					
 				});
 				// End Json içine Verileri Yazıyor -> db	
@@ -397,25 +397,25 @@ module.exports = {
 				// //! ----------- Log Son -----------------------------  
 				
                 //! Return Api   
-				ctx.params.title = "ssk.service -> Veri Silme"
-				ctx.params.tablo = "ssk.json"
+				ctx.params.title = "faq.service -> Veri Silme"
+				ctx.params.tablo = "faq.json"
 				ctx.params.status = 1
 				ctx.params.mesaj = "Veri Silindi"	
 				
 				//Console Yazma	
-			    console.log('\u001b[' + 32 + 'm' + '[Ssk] [Delete] Veri Silindi [ /api/ssk/delete/:id ] ' + '\u001b[0m');
+			    console.log('\u001b[' + 32 + 'm' + '[Faq] [Delete] Veri Silindi [ /api/faq/delete/:id ] ' + '\u001b[0m');
                
 
 			} else {
 
 				//! Return Api   
-				ctx.params.title = "ssk.service -> Veri Silme"
-				ctx.params.tablo = "ssk.json"
+				ctx.params.title = "faq.service -> Veri Silme"
+				ctx.params.tablo = "faq.json"
 				ctx.params.status = 0
 				ctx.params.mesaj = "Veri Silinemedi"	
 				
 				//Console Yazma	
-				console.log('\u001b[' + 31 + 'm' + '[Ssk] [Delete] Veri Silinemedi [ /api/ssk/delete/:id ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[Faq] [Delete] Veri Silinemedi [ /api/faq/delete/:id ] ' + '\u001b[0m');
 
 			}
 			

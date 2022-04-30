@@ -304,21 +304,21 @@ module.exports = {
 		
 		//!---------------- message son ----------------------------------------------------------------------------------------------
 		   		   			
-		//!------------- ssk  --------------------------------------------------------------------------------------------------
+		//!------------- faq  --------------------------------------------------------------------------------------------------
 
-			fastify.get('/api/ssk/info',async (req,res)=> this.broker.call("ssk.info")) //! İnfo
-			fastify.post('/api/ssk/post', async (req, res) => this.broker.call("ssk.post",{...req.body})) //! POST
-			fastify.get('/api/ssk/html',async (req,res)=> this.broker.call("ssk.html")) //! Html
-			fastify.get('/api/ssk/all', async (req, res) => this.broker.call("ssk.all")) //! All
-			fastify.get('/api/ssk/:id', async (req, res) => this.broker.call("ssk.find",{id: req.params.id})) //! Search	
+			fastify.get('/api/faq/info',async (req,res)=> this.broker.call("faq.info")) //! İnfo
+			fastify.post('/api/faq/post', async (req, res) => this.broker.call("faq.post",{...req.body})) //! POST
+			fastify.get('/api/faq/html',async (req,res)=> this.broker.call("faq.html")) //! Html
+			fastify.get('/api/faq/all', async (req, res) => this.broker.call("faq.all")) //! All
+			fastify.get('/api/faq/:id', async (req, res) => this.broker.call("faq.find",{id: req.params.id})) //! Search	
 
-			fastify.post('/api/ssk/find_post', async (req, res) => this.broker.call("ssk.find_post",{...req.body})) //!  Search-Post
-			fastify.post('/api/ssk/find_token', async (req, res) => this.broker.call("ssk.find_token",{...req.body})) //!  Search-Token	
-			fastify.post('/api/ssk/add', async (req, res) => this.broker.call("ssk.add",{...req.body})) //! CREATE		
-			fastify.post('/api/ssk/update', async (req, res) => this.broker.call("ssk.update",{...req.body})) //! UPDATE
-			fastify.post('/api/ssk/delete/:id', async (req, res) => this.broker.call("ssk.delete",{id: req.params.id,...req.body})) //! DELETE
+			fastify.post('/api/faq/find_post', async (req, res) => this.broker.call("faq.find_post",{...req.body})) //!  Search-Post
+			fastify.post('/api/faq/find_token', async (req, res) => this.broker.call("faq.find_token",{...req.body})) //!  Search-Token	
+			fastify.post('/api/faq/add', async (req, res) => this.broker.call("faq.add",{...req.body})) //! CREATE		
+			fastify.post('/api/faq/update', async (req, res) => this.broker.call("faq.update",{...req.body})) //! UPDATE
+			fastify.post('/api/faq/delete/:id', async (req, res) => this.broker.call("faq.delete",{id: req.params.id,...req.body})) //! DELETE
 			
-	    //!---------------- ssk son ----------------------------------------------------------------------------------------------
+	    //!---------------- faq son ----------------------------------------------------------------------------------------------
 
 		
 		//!------------- note  --------------------------------------------------------------------------------------------------
