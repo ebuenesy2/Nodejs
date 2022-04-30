@@ -117,7 +117,7 @@ module.exports = {
 				ctx.params.DB = db		
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'File Tüm Veriler Okundu [ /api/file/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[File] [All] Tüm Veriler Okundu [ /api/file/all ] ' + '\u001b[0m');
 
 			} catch (error) {
 
@@ -129,7 +129,7 @@ module.exports = {
 				ctx.params.DB = error
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'File Tüm Veriler Okunamadı [ /api/file/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[File] [All] Tüm Veriler Okunamadı [ /api/file/all ] ' + '\u001b[0m');
 				console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
 			
 			}
@@ -152,7 +152,7 @@ module.exports = {
 				ctx.params.DB = dbFind
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'File Veri Arama [ /api/file/find ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[File] [Find] Veri Arama [ /api/file/:id ] ' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
@@ -162,10 +162,10 @@ module.exports = {
 				ctx.params.title = "file.service -> Veri Arama"
 				ctx.params.tablo = "file.json"
 				ctx.params.status = 0
-				ctx.params.DB = "Dosya Bulunamadı"
+				ctx.params.DB = "Veri Bulunamadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'File Veri Bulunamadı [ /api/file/find ] ' + '\u001b[0m');		
+				console.log('\u001b[' + 31 + 'm' + '[File] [Find] Veri Bulunamadı [ /api/file/:id ] ' + '\u001b[0m');		
 			}
 
 			//! Return
@@ -182,26 +182,26 @@ module.exports = {
 			if (dbFind) {
 
 				//! Return Api   
-				ctx.params.title = "file.service -> Veri Arama"
+				ctx.params.title = "file.service -> Veri Post Arama"
 				ctx.params.tablo = "file.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'File Veri Arama [ /api/file/find_post ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[File] [Find] Veri Post Arama [ /api/file/find_post ] ' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
 			else {
 				
 				//! Return Api   
-				ctx.params.title = "file.service -> Veri Arama"
+				ctx.params.title = "file.service -> Veri Post Arama"
 				ctx.params.tablo = "file.json"
 				ctx.params.status = 0
-				ctx.params.DB = "Dosya Bulunamadı"
+				ctx.params.DB = "Veri Bulunamadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'File Veri Bulunamadı [ /api/file/find_post ] ' + '\u001b[0m');		
+				console.log('\u001b[' + 31 + 'm' + '[File] [Find] Veri Bulunamadı [ /api/file/find_post ] ' + '\u001b[0m');		
 			}
 
 			//! Return
@@ -218,13 +218,13 @@ module.exports = {
 			if (dbFind) {
 
 				//! Return Api   
-				ctx.params.title = "file.service -> Veri Arama"
+				ctx.params.title = "file.service -> Veri Token Arama"
 				ctx.params.tablo = "file.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'File Veri Arama [ /api/file/find_token ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[File] [Find] Veri Token Arama [ /api/file/find_token ] ' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
@@ -237,7 +237,7 @@ module.exports = {
 				ctx.params.DB = "Veri Bulunamadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'File Veri Bulunamadı [ /api/file/find_token ] ' + '\u001b[0m');		
+				console.log('\u001b[' + 31 + 'm' + '[File] [Find] Veri Bulunamadı [ /api/file/find_token ] ' + '\u001b[0m');		
 			}
 
 			//! Return
@@ -254,14 +254,14 @@ module.exports = {
 			if (dbFind.length > 0) {
 
 				//! Return Api   
-				ctx.params.title = "file.service -> Kullanıcı Arama"
+				ctx.params.title = "file.service -> Veri Kullanıcı Arama"
 				ctx.params.tablo = "file.json"
 				ctx.params.status = 1
                 ctx.params.size=dbFind.length
 				ctx.params.DB = dbFind
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'File Veri Arama [ /api/file/find ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[File] [Find] Veri Kullanıcı Arama [ /api/file/find ] ' + '\u001b[0m');
 
 			}
 
@@ -269,19 +269,19 @@ module.exports = {
 			else {
 				
 				//! Return Api   
-				ctx.params.title = "file.service -> Kullanıcı Arama"
+				ctx.params.title = "file.service -> Veri Kullanıcı Arama"
 				ctx.params.tablo = "file.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
-				ctx.params.DB = "Dosya Bulunmadı"
+				ctx.params.DB = "Veri Bulunmadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'File Veri Bulunamadı [ /api/file/find ] ' + '\u001b[0m');				
+				console.log('\u001b[' + 31 + 'm' + '[File] [Find] Veri Bulunamadı [ /api/file/find ] ' + '\u001b[0m');				
 
 			}
 
 			//! Return
-			delete ctx.params.userToken
+			delete ctx.params.created_byToken
 
 			return ctx.params
 		},
@@ -345,11 +345,13 @@ module.exports = {
 
 					// Hata varsa
 					if (err) {
-						console.log(err)
-					}
+						console.log('\u001b[' + 31 + 'm' + '[File] [Json] [Add] Json Veri Kayıt Edilemedi [ file.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+					}							
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi -> File"); // Success
+					console.log('\u001b[' + 32 + 'm' + '[File] [Json] [Add] Json Veri Kayıt Edildi [ file.json ] ' + '\u001b[0m');	
+
 				});				
 
 				// //! ----------- Log ----------------------------- 	
@@ -367,10 +369,10 @@ module.exports = {
 				ctx.params.title = "file.service -> Veri Ekleme"
 				ctx.params.tablo = "file.json"			
 				ctx.params.status = 1
-				ctx.params.mesaj="Dosya Eklendi"		
+				ctx.params.mesaj="Veri Eklendi"		
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'File Veri Eklendi [ /api/file/add ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[File] [Add] Veri Eklendi [ /api/file/add ] ' + '\u001b[0m');
 
 
 			} catch (error) {
@@ -379,10 +381,10 @@ module.exports = {
 				ctx.params.title = "file.service -> Veri Ekleme"
 				ctx.params.tablo = "file.json"			
 				ctx.params.status = 0
-				ctx.params.mesaj="Dosya Eklenemedi"			
+				ctx.params.mesaj="Veri Eklenemedi"			
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'File Veri Eklenemedi [ /api/file/add ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[File] [Add] Veri Eklenemedi [ /api/file/add ] ' + '\u001b[0m');
 
 			}
 
@@ -423,13 +425,16 @@ module.exports = {
 				// Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/file.json', JSON.stringify(db), err => {
 
+				     
 					// Hata varsa
 					if (err) {
-						console.log(err)
-					}
+						console.log('\u001b[' + 31 + 'm' + '[File] [Json] [Update] Json Veri Kayıt Edilemedi [ file.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+					}							
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi -> File"); // Success
+					console.log('\u001b[' + 32 + 'm' + '[File]  [Json] [Update] Json Veri Kayıt Edildi [ file.json ] ' + '\u001b[0m');	
+
 				});
 				// End Json içine Verileri Yazıyor -> db
 			
@@ -448,10 +453,10 @@ module.exports = {
 				ctx.params.title = "file.service -> Veri Güncelleme"
 				ctx.params.tablo = "file.json"			
 				ctx.params.status = 1
-				ctx.params.mesaj="Dosya Güncellendi"
+				ctx.params.mesaj="Veri Güncellendi"
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'File Güncelleme [ /api/file/update ] Güncellendi' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[File] [Update] Veri Güncellendi [ /api/file/update ]' + '\u001b[0m');
 
 			}
 
@@ -462,10 +467,10 @@ module.exports = {
 				ctx.params.title = "file.service -> Veri Güncelleme"
 				ctx.params.tablo = "file.json"			
 				ctx.params.status = 0
-				ctx.params.mesaj="Dosya Güncellenemedi"
+				ctx.params.mesaj="Veri Güncellenemedi"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'File Güncelleme [ /api/file/update ] Güncellenemedi' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[File] [Update] Veri Güncellenemedi [ /api/file/update ]' + '\u001b[0m');
 
 			}
 
@@ -494,13 +499,15 @@ module.exports = {
 				// Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/file.json', JSON.stringify(db), err => {
 
+
 					// Hata varsa
 					if (err) {
-						console.log(err)
-					}
+						console.log('\u001b[' + 31 + 'm' + '[File] [Json] [Deleted_Update] Json Veri Kayıt Edilemedi [ file.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+					}							
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi -> File"); // Success
+					console.log('\u001b[' + 32 + 'm' + '[File] [Json] [Deleted_Update] Json Veri Kayıt Edildi [ file.json ] ' + '\u001b[0m');	
 				});
 				// End Json içine Verileri Yazıyor -> db
 			
@@ -519,10 +526,10 @@ module.exports = {
 				ctx.params.title = "file.service -> Veri Geçisi Silme"
 				ctx.params.tablo = "file.json"			
 				ctx.params.status = 1
-				ctx.params.mesaj="Dosya Güncellendi"
+				ctx.params.mesaj="Veri Güncellendi"
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'File Güncelleme [ /api/file/update ] Güncellendi' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[File] [Update] Veri Güncellendi [ /api/file/delete_update ]' + '\u001b[0m');
 
 			}
 
@@ -533,10 +540,10 @@ module.exports = {
 				ctx.params.title = "file.service -> Veri Geçisi Silme"
 				ctx.params.tablo = "file.json"			
 				ctx.params.status = 0
-				ctx.params.mesaj="Dosya Güncellenemedi"
+				ctx.params.mesaj="Veri Güncellenemedi"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'File Güncelleme [ /api/file/update ] Güncellenemedi' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[File] [Update] Veri Güncellenemedi [ /api/file/delete_update ]' + '\u001b[0m');
 
 			}			
 		
@@ -553,21 +560,36 @@ module.exports = {
 		
 			//! Arama
 			var index = db.findIndex(a => a.token === ctx.params.token);
+			const dbFind = db.find(u => u.token == ctx.params.token);
+
 			if (index > -1) {
+
+				//! -----------  File Delete ----------------------------- 	
+				let file_delete = await ctx.call('file.fileDeleteUrl', {
+					userToken: ctx.params.userToken,
+					fileUrl: dbFind.uploadDir                 
+				})                
+				//! ----------- End File Delete -----------------------------
+				
+				if (file_delete.status==1)  { console.log('\u001b[' + 32 + 'm' + '[File] [Delete] Dosya Silindi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
+				if (file_delete.status==0)  { console.log('\u001b[' + 31 + 'm' + '[File] [Delete] Dosya Silinemedi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
+
 				db.splice(index, 1);
 
 				// Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/logs.json', JSON.stringify(db), err => {
+				fs.writeFile('./public/DB/file.json', JSON.stringify(db), err => {
+
 
 					// Hata varsa
 					if (err) {
-						console.log(err)
-					}
+						console.log('\u001b[' + 31 + 'm' + '[File] [Json] [Delete] Json Veri Kayıt Edilemedi [ file.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+					}							
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Silindi -> File"); // Success
+					console.log('\u001b[' + 32 + 'm' + '[File] [Json] [Delete] Json Veri Kayıt Edildi [ file.json ] ' + '\u001b[0m');	
 				});
-
+				// End Json içine Verileri Yazıyor -> db
 				
 				// //! ----------- Log ----------------------------- 	
 				// let logs_add = await ctx.call('logs.add', {					
@@ -583,10 +605,10 @@ module.exports = {
 				ctx.params.title = "file.service -> Veri Silme"
 				ctx.params.tablo = "file.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Dosya Silindi"				
+				ctx.params.mesaj = "Veri Silindi"				
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Dosya Silme [ /api/file/delete ] Silindi' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[File] [Delete] Veri Silindi [ /api/file/delete ]' + '\u001b[0m');
 
 			} else {
 
@@ -594,10 +616,10 @@ module.exports = {
 				ctx.params.title = "file.service -> Veri Silme"
 				ctx.params.tablo = "file.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Dosya Silinemedi"	
+				ctx.params.mesaj = "Veri Silinemedi"	
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Dosya Silme [ /api/file/delete ] Silinemedi' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[File] [Delete] Veri Silinemedi [ /api/file/delete ]' + '\u001b[0m');
 			}
 
 			//! Return
@@ -646,7 +668,7 @@ module.exports = {
 	
 		
 				//! Return Api
-				ctx.params.title = "file.service -> Veri Bilgiler"
+				ctx.params.title = "file.service -> Dosya Bilgileri"
 				ctx.params.tablo = "file.json"
 				if(fileName!="") { ctx.params.status = 1 }
 				if(fileName=="") { ctx.params.status = 0 }
@@ -663,14 +685,14 @@ module.exports = {
 				ctx.params.fileSize=fileSize
 
 				//Console Yazma
-				if(fileName!="") { console.log('\u001b[' + 32 + 'm' + 'Dosya Bilgileri Alıyor [ /api/file/getFile ] Bulundu' + '\u001b[0m'); }
-				if(fileName=="") { console.log('\u001b[' + 31 + 'm' + 'Dosya Bilgileri Alıyor [ /api/file/getFile ] Bulunamadı' + '\u001b[0m'); }
+				if(fileName!="") { console.log('\u001b[' + 32 + 'm' + '[File] [GetFile] Dosya Bilgileri Alındı [ /api/file/getFile ]' + '\u001b[0m'); }
+				if(fileName=="") { console.log('\u001b[' + 31 + 'm' + '[File] [GetFile] Dosya Bilgileri Alınamadı [ /api/file/getFile ]' + '\u001b[0m'); }
 
 
 			} catch (error) {
 
 				//! Return Api
-				ctx.params.title = "file.service -> Veri Bilgiler"
+				ctx.params.title = "file.service -> Dosya Bilgileri"
 				ctx.params.tablo = "file.json"
 				ctx.params.status = 0
 				
@@ -681,12 +703,12 @@ module.exports = {
 				ctx.params.fileOnlyName="Dosya Bulunamadı"
 				ctx.params.fileExt="Dosya Bulunamadı"
 
-				ctx.params.fizeWidth="Dosya Bulunamadı"
-				ctx.params.fizeHeight="Dosya Bulunamadı"
-				ctx.params.fileSize="Dosya Bulunamadı"
+				ctx.params.fizeWidth=0
+				ctx.params.fizeHeight=0
+				ctx.params.fileSize=0
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Dosya Bilgileri Alıyor [ /api/file/getFile ] Bulunamadı' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[File] [GetFile] Dosya Bilgileri Bulunamadı [ /api/file/getFile ]' + '\u001b[0m');
 
 			}
 
@@ -744,7 +766,7 @@ module.exports = {
 								sharp(file.data)					
 								.toBuffer().then(data => {
 									fs.writeFile(filePath, data, (err) => {
-										if (err) throw Error("Media yüklenirken hata oluştu.")
+										if (err) throw Error("[File] [Media]  Dosya yüklenirken hata oluştu.")
 										else return true
 									});
 								})
@@ -848,12 +870,16 @@ module.exports = {
 
 						// Json içine Verileri Yazıyor -> db
 						fs.writeFile('./public/DB/file.json', JSON.stringify(db), err => {
-
+						
 							// Hata varsa
-							if (err) { console.log(err) }
+							if (err) {
+								console.log('\u001b[' + 31 + 'm' + '[File] [Json] [Upload] Json Veri Kayıt Edilemedi [ file.json ] ' + '\u001b[0m');	
+								console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+							}							
 
 							//Console Yazma
-							console.log("Json Veri Kayıt Edildi -> File"); // Success
+							console.log('\u001b[' + 32 + 'm' + '[File] [Json] [Upload] Json Veri Kayıt Edildi [ file.json ] ' + '\u001b[0m');	
+
 						});
 
 						status = 1; //! Status
@@ -894,8 +920,8 @@ module.exports = {
 				ctx.params.mesaj="Dosya Yüklendi"
 				
 				//Console Yazma
-				if(status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Yükleme [ /api/file/upload ] Yüklendi' + '\u001b[0m'); }
-				if(status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yükleme [ /api/file/upload ] Yüklenemedi' + '\u001b[0m'); }
+				if(status==1) { console.log('\u001b[' + 32 + 'm' + '[File] [Upload] Dosya Yüklendi [ /api/file/upload ]' + '\u001b[0m'); }
+				if(status==0) { console.log('\u001b[' + 31 + 'm' + '[File] [Upload] Dosya Yüklenemedi [ /api/file/upload ]' + '\u001b[0m'); }
 				
 			} catch (error) {	
 					
@@ -907,7 +933,7 @@ module.exports = {
 				ctx.params.mesaj="Dosya Yüklenemedi"								
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Dosya Yükleme [ /api/file/upload ] Yüklenemeddi' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[File] [Upload] Dosya Yüklenemedi [ /api/file/upload ]' + '\u001b[0m');
 				console.log(error);
 
 			}
@@ -942,7 +968,8 @@ module.exports = {
 				})                
     			//! ----------- End File Delete ----------------------------- 
 
-				console.log("file_delete:",file_delete);
+		        if (file_delete.status==1)  { console.log('\u001b[' + 32 + 'm' + '[File] [Upload] Dosya Silindi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
+				if (file_delete.status==0)  { console.log('\u001b[' + 31 + 'm' + '[File] [Upload] Dosya Silinemedi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
 
 				// //! ----------- Log ----------------------------- 	
 				// let logs_add = await ctx.call('logs.add', {					
@@ -967,7 +994,7 @@ module.exports = {
 				ctx.params.mesaj="Dosya Güncellendi"
 				
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Dosya Güncelleme [ /api/file/updateFile ] Güncellendi' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[File] [Update] Dosya Güncellendi [ /api/file/updateFile ]' + '\u001b[0m');
             }
 			else if(file_upload.status==0) {
 
@@ -979,7 +1006,7 @@ module.exports = {
 				ctx.params.mesaj="Dosya Güncellenmedi"	
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Dosya Güncelleme [ /api/file/updateFile ] Güncellenmedi' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[File] [Update] Dosya Güncellenmedi [ /api/file/updateFile ]' + '\u001b[0m');
             }
 			//! ----------- Return Son ------------------------- 
 			
@@ -989,7 +1016,8 @@ module.exports = {
 			delete ctx.params.file			
 			delete ctx.params.role
 			delete ctx.params.userToken
-			delete ctx.params.usedPage			
+			delete ctx.params.usedPage
+			delete ctx.params.created_byToken
 			
 			return ctx.params				
 		},		
@@ -1032,7 +1060,7 @@ module.exports = {
 						mesaj="Dosya Silindi";	
 					
 						//Console Yazma
-						console.log('\u001b[' + 32 + 'm' + 'Dosya Silme [ /api/file/fileDeleteUrl ] Silindi' + '\u001b[0m');					
+						console.log('\u001b[' + 32 + 'm' + '[File] [Delete] Dosya Silindi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');					
 
 				 } 
 				 else {
@@ -1041,7 +1069,7 @@ module.exports = {
 					 logs_add="";
 
 					//Console Yazma
-					console.log('\u001b[' + 31 + 'm' + 'Dosya Silme [ /api/file/fileDeleteUrl ] Dosya Bulunamadı' + '\u001b[0m');		
+					console.log('\u001b[' + 31 + 'm' + '[File] [Delete] Dosya Bulunamadı [ /api/file/fileDeleteUrl ]' + '\u001b[0m');		
 				 }
 				 
 				} catch (error) {
@@ -1051,7 +1079,7 @@ module.exports = {
 					logs_add="";
 
 					//Console Yazma
-					console.log('\u001b[' + 31 + 'm' + 'Dosya Silme [ /api/file/fileDeleteUrl ] Silinemedi' + '\u001b[0m');	
+					console.log('\u001b[' + 31 + 'm' + '[File] [Delete] Dosya Silinemedi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');	
 					console.log(error);
 				}
 				
@@ -1130,8 +1158,8 @@ module.exports = {
 				ctx.params.fileSize=fileSize
 
 				//Console Yazma
-				if(fileName!="") { console.log('\u001b[' + 32 + 'm' + 'Dosya Bilgileri Alıyor [ /api/file/getFile ] Bulundu' + '\u001b[0m'); }
-				if(fileName=="") { console.log('\u001b[' + 31 + 'm' + 'Dosya Bilgileri Alıyor [ /api/file/getFile ] Bulunamadı' + '\u001b[0m'); }
+				if(fileName!="") { console.log('\u001b[' + 32 + 'm' + '[File] [GetFile] Dosya Bilgileri Alıyor [ /api/file/getFileUrl ]' + '\u001b[0m'); }
+				if(fileName=="") { console.log('\u001b[' + 31 + 'm' + '[File] [GetFile] Dosya Bulunamadı [ /api/file/getFileUrl ]' + '\u001b[0m'); }
 			
 			} catch (error) {
 
@@ -1147,12 +1175,12 @@ module.exports = {
 				ctx.params.fileOnlyName="Dosya Bulunamadı"
 				ctx.params.fileExt="Dosya Bulunamadı"
 
-				ctx.params.fizeWidth="Dosya Bulunamadı"
-				ctx.params.fizeHeight="Dosya Bulunamadı"
-				ctx.params.fileSize="Dosya Bulunamadı"
+				ctx.params.fizeWidth=0
+				ctx.params.fizeHeight=0
+				ctx.params.fileSize=0
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Dosya Bilgileri Alıyor [ /api/file/getFile ] Bulunamadı' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[File] [GetFile] Dosya Bulunamadı [ /api/file/getFileUrl ]' + '\u001b[0m');
 				console.log(error);
 			}
 			
@@ -1310,14 +1338,16 @@ module.exports = {
 
 						// Json içine Verileri Yazıyor -> db
 						fs.writeFile('./public/DB/file.json', JSON.stringify(db), err => {
-
+						
 							// Hata varsa
 							if (err) {
-								console.log(err)
-							}
+								console.log('\u001b[' + 31 + 'm' + '[File] [Json] [Upload] Json Veri Kayıt Edilemedi [ file.json ] ' + '\u001b[0m');	
+								console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+							}							
 
 							//Console Yazma
-							console.log("Json Veri Kayıt Edildi -> File"); // Success
+							console.log('\u001b[' + 32 + 'm' + '[File] [Json] [Upload] Json Veri Kayıt Edildi [ file.json ] ' + '\u001b[0m');	
+
 						});
 
 						status = 1; //! Status
@@ -1369,8 +1399,8 @@ module.exports = {
 				ctx.params.mesaj="Dosya Yüklendi"	
 
 				//Console Yazma
-				if(status==1) { console.log('\u001b[' + 32 + 'm' + 'Dosya Yükleme [ /api/file/uploadUrl ] Yüklendi' + '\u001b[0m'); }
-				if(status==0) { console.log('\u001b[' + 31 + 'm' + 'Dosya Yükleme [ /api/file/uploadUrl ] Yüklenemeddi' + '\u001b[0m'); }
+				if(status==1) { console.log('\u001b[' + 32 + 'm' + '[File] [Upload] Dosya Yüklendi [ /api/file/uploadUrl ]' + '\u001b[0m'); }
+				if(status==0) { console.log('\u001b[' + 31 + 'm' + '[File] [Upload] Dosya Yüklenemedi [ /api/file/uploadUrl ]' + '\u001b[0m'); }
 			}
 			if(status==0) { 
 
@@ -1382,7 +1412,7 @@ module.exports = {
 				ctx.params.mesaj="Dosya Yüklenemedi"								
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Dosya Yükleme [ /api/file/uploadUrl ] Yüklenemeddi' + '\u001b[0m');			
+				console.log('\u001b[' + 31 + 'm' + '[File] [Upload] Dosya Yüklenemedi [ /api/file/uploadUrl ]' + '\u001b[0m');			
 			 }
 
 			
@@ -1413,7 +1443,10 @@ module.exports = {
 					userToken: ctx.params.userToken,
 					fileUrl: ctx.params.old_fileUrl                 
 				})                
-				//! ----------- End File Delete ----------------------------- 
+				//! ----------- End File Delete -----------------------------
+				
+				if (file_delete.status==1)  { console.log('\u001b[' + 32 + 'm' + '[File] [Upload] Dosya Silindi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
+				if (file_delete.status==0)  { console.log('\u001b[' + 31 + 'm' + '[File] [Upload] Dosya Silinemedi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
 
 				// //! ----------- Log ----------------------------- 	
 				// let logs_add = await ctx.call('logs.add', {					
@@ -1438,7 +1471,7 @@ module.exports = {
 				ctx.params.mesaj="Dosya Güncellendi"	
 				
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Dosya Güncelleme [ /api/file/updateFile ] Güncellendi' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[File] [Update] Dosya Güncellendi [ /api/file/updateFileUrl ]' + '\u001b[0m');
             }
 			else if(file_upload.status==0) {
 
@@ -1450,7 +1483,7 @@ module.exports = {
 				ctx.params.mesaj="Dosya Güncellenmedi"	
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Dosya Güncelleme [ /api/file/updateFile ] Güncellenmedi' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[File] [Update] Dosya Güncellenmedi [ /api/file/updateFileUrl ]' + '\u001b[0m');
             }
 			//! ----------- Return Son ------------------------- 
 			
@@ -1461,7 +1494,8 @@ module.exports = {
 			delete ctx.params.file			
 			delete ctx.params.role
 			delete ctx.params.userToken
-			delete ctx.params.usedPage			
+			delete ctx.params.usedPage	
+			delete ctx.params.created_byToken		
 			
 			return ctx.params				
 		}	
