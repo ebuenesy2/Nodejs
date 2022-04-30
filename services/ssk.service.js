@@ -52,7 +52,7 @@ module.exports = {
 				ctx.params.DB = db		
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'SSK Tüm Veriler Okundu [ /api/ssk/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Ssk] [All] Tüm Veriler Okundu [ /api/ssk/all ] ' + '\u001b[0m');
 
 			} catch (error) {
 
@@ -64,7 +64,7 @@ module.exports = {
 				ctx.params.DB = error
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'SSK Tüm Veriler Okunamadı [ /api/ssk/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[Ssk] [All] SSK Tüm Veriler Okunamadı [ /api/ssk/all ] ' + '\u001b[0m');
 				console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
 			
 			}
@@ -88,7 +88,7 @@ module.exports = {
 			
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'SSK Veri Arama [ /api/ssk/find ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Ssk] [Find] Veri Arama [ /api/ssk/find ] ' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
@@ -102,7 +102,7 @@ module.exports = {
 			
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'SSK Veri Bulunamadı [ /api/ssk/find ] ' + '\u001b[0m');	
+				console.log('\u001b[' + 31 + 'm' + '[Ssk] [Find] Veri Bulunamadı [ /api/ssk/find ] ' + '\u001b[0m');	
 
 			}
 
@@ -127,7 +127,7 @@ module.exports = {
 			
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'SSK Veri Arama [ /api/ssk/find_post ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Ssk] [Find] Veri Arama [ /api/ssk/find_post ] ' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
@@ -141,7 +141,7 @@ module.exports = {
 			
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'SSK Veri Bulunamadı [ /api/ssk/find_post ] ' + '\u001b[0m');	
+				console.log('\u001b[' + 31 + 'm' + '[Ssk] [Find] Veri Bulunamadı [ /api/ssk/find_post ] ' + '\u001b[0m');	
 
 			}
 
@@ -166,7 +166,7 @@ module.exports = {
 			
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'SSK Veri Arama [ /api/ssk/find_token ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Ssk] [Find] Veri Arama [ /api/ssk/find_token ] ' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
@@ -180,7 +180,7 @@ module.exports = {
 			
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'SSK Veri Bulunamadı [ /api/ssk/find_token ] ' + '\u001b[0m');	
+				console.log('\u001b[' + 31 + 'm' + '[Ssk] [Find] Veri Bulunamadı [ /api/ssk/find_token ] ' + '\u001b[0m');	
 
 			}
 
@@ -227,21 +227,21 @@ module.exports = {
 				//Verileri Kaydet
 				db.push(willSaveData)
 
-                
+	
 				//Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/ssk.json', JSON.stringify(db), err => {
 
 					// Hata varsa
 					if (err) {
-						console.log(err)
+						console.log('\u001b[' + 31 + 'm' + '[Ssk] [Json] [Add] Json Veri Kayıt Edilemedi [ ssk.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
 					}							
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi -> Mesaj "); // Success
-				});	
-				//End Json içine Verileri Yazıyor -> db			
-	
-				
+					console.log('\u001b[' + 32 + 'm' + '[Ssk] [Json] [Add] Json Veri Kayıt Edildi [ ssk.json ] ' + '\u001b[0m');								
+					
+				});
+				// End Json içine Verileri Yazıyor -> db					
 
 
 				// //! ----------- Log ----------------------------- 	
@@ -262,7 +262,7 @@ module.exports = {
 				ctx.params.mesaj = "SSK Eklendi"	
 				
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'SSK Veri Eklendi [ /api/ssk/add ] ' + '\u001b[0m');	
+				console.log('\u001b[' + 32 + 'm' + '[Ssk] [Add] Veri Eklendi [ /api/ssk/add ] ' + '\u001b[0m');	
 				
 
 			} catch (error) {
@@ -274,7 +274,7 @@ module.exports = {
 				ctx.params.mesaj = "SSK Eklenemedi"	
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'SSK Veri Eklenemedi [ /api/ssk/add ] ' + '\u001b[0m');	
+				console.log('\u001b[' + 31 + 'm' + '[Ssk] [Add] Veri Eklenemedi [ /api/ssk/add ] ' + '\u001b[0m');	
 
 			}
 
@@ -284,9 +284,6 @@ module.exports = {
 		    delete ctx.params.cevap 
               
 			return ctx.params
-
-
-
 		},
 		async update(ctx) {
 
@@ -303,16 +300,20 @@ module.exports = {
 				dbFind["isUpdated"] = true
 				dbFind["updated_at"] = new Date()
 				// End  Referans Veriler Güncelleme Yapıyor
+	
+				//Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/ssk.json', JSON.stringify(db), err => {
 
-				// Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/ssk.json', JSON.stringify(db), err => {					
-				
 					// Hata varsa
-					if (err) { console.log(err) }
+					if (err) {
+						console.log('\u001b[' + 31 + 'm' + '[Ssk] [Json] [Update] Json Veri Kayıt Edilemedi [ ssk.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+					}							
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi -> SSK"); // Success
-				});	
+					console.log('\u001b[' + 32 + 'm' + '[Ssk] [Json] [Update] Json Veri Kayıt Edildi [ ssk.json ] ' + '\u001b[0m');								
+					
+				});
 				// End Json içine Verileri Yazıyor -> db	
 	
 				// //! ----------- Log ----------------------------- 	
@@ -333,7 +334,7 @@ module.exports = {
 				ctx.params.mesaj="Veri Güncellendi"
 
 				//Console Yazma	
-				console.log('\u001b[' + 32 + 'm' + 'Veri Güncelleme [ /api/ssk/update ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Ssk] [Update] Veri Güncelleme [ /api/ssk/update ]' + '\u001b[0m');
 
 			}
 
@@ -348,7 +349,7 @@ module.exports = {
 			   ctx.params.mesaj="Veri Güncellendi"
 
 			   //Console Yazma	
-			   console.log('\u001b[' + 32 + 'm' + 'Veri Güncelleme [ /api/ssk/update ] ' + '\u001b[0m');
+			   console.log('\u001b[' + 32 + 'm' + '[Ssk] [Update] Veri Güncelleme [ /api/ssk/update ] ' + '\u001b[0m');
 
 			}
 			
@@ -369,17 +370,19 @@ module.exports = {
 			if (index > -1) {
 				db.splice(index, 1);
 
-			   // Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {					
-				
+				//Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/ssk.json', JSON.stringify(db), err => {
+
 					// Hata varsa
 					if (err) {
-						console.log(err)
-					}
+						console.log('\u001b[' + 31 + 'm' + '[Ssk] [Json] [Delete] Json Veri Kayıt Edilemedi [ ssk.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+					}							
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi -> SSK"); // Success
-				});	
+					console.log('\u001b[' + 32 + 'm' + '[Ssk] [Json] [Delete] Json Veri Kayıt Edildi [ ssk.json ] ' + '\u001b[0m');								
+					
+				});
 				// End Json içine Verileri Yazıyor -> db	
 				
 				// //! ----------- Log ----------------------------- 	
@@ -400,7 +403,7 @@ module.exports = {
 				ctx.params.mesaj = "Veri Silindi"	
 				
 				//Console Yazma	
-			    console.log('\u001b[' + 32 + 'm' + 'SSK Veri Silindi [ /api/ssk/delete/:id ] ' + '\u001b[0m');
+			    console.log('\u001b[' + 32 + 'm' + '[Ssk] [Delete] Veri Silindi [ /api/ssk/delete/:id ] ' + '\u001b[0m');
                
 
 			} else {
@@ -412,7 +415,7 @@ module.exports = {
 				ctx.params.mesaj = "Veri Silinemedi"	
 				
 				//Console Yazma	
-				console.log('\u001b[' + 31 + 'm' + 'SSK Veri Silinemedi [ /api/message/update ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[Ssk] [Delete] Veri Silinemedi [ /api/ssk/delete/:id ] ' + '\u001b[0m');
 
 			}
 			
