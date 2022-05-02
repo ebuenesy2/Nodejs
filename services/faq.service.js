@@ -346,10 +346,10 @@ module.exports = {
 			   ctx.params.title = "faq.service -> Veri Güncelleme"
 			   ctx.params.tablo = "faq.json"        
 			   ctx.params.status = 0			
-			   ctx.params.mesaj="Veri Güncellendi"
+			   ctx.params.mesaj="Veri Güncellenemedi"
 
 			   //Console Yazma	
-			   console.log('\u001b[' + 32 + 'm' + '[Faq] [Update] Veri Güncelleme [ /api/faq/update ] ' + '\u001b[0m');
+			   console.log('\u001b[' + 31 + 'm' + '[Faq] [Update] Veri Güncellenemedi [ /api/faq/update ] ' + '\u001b[0m');
 
 			}
 			
@@ -426,6 +426,6 @@ module.exports = {
 
 			return ctx.params	
 
-		},
+		}
 	}
 }

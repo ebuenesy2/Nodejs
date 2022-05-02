@@ -11,11 +11,11 @@ module.exports = {
 
 	actions: {
 		async info(ctx) {
-			
+
 			//! Return Api
 			ctx.params.title = "message.service"
 			ctx.params.time = dayjs().toDate()
-			ctx.params.APi_URL=process.env.APi_URL
+			ctx.params.APi_URL = process.env.APi_URL
 
 			return ctx.params
 		},
@@ -26,7 +26,6 @@ module.exports = {
 			delete ctx.params.createdAt;
 
 			return ctx.params
-
 		},
 		async html(ctx) {
 		
@@ -53,7 +52,7 @@ module.exports = {
 				ctx.params.DB = db		
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Mesaj Tüm Veriler Okundu [ /api/message/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Message] [All] Tüm Veriler Okundu [ /api/message/all ] ' + '\u001b[0m');
 
 			} catch (error) {
 
@@ -65,7 +64,7 @@ module.exports = {
 				ctx.params.DB = error
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Mesaj Tüm Veriler Okunamadı [ /api/message/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[Message] [All] SSK Tüm Veriler Okunamadı [ /api/message/all ] ' + '\u001b[0m');
 				console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
 			
 			}
@@ -78,7 +77,7 @@ module.exports = {
 			// ! Arama
 			const dbFind = db.find(u => u.id == ctx.params.id);
 
-				//! Veri Varsa
+			//! Veri Varsa
 			if (dbFind) {	               
                 
 				//! Return Api   
@@ -89,7 +88,7 @@ module.exports = {
 			
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Mesaj Veri Arama [ /api/message/find ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Message] [Find] Veri Arama [ /api/message/find ] ' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
@@ -99,35 +98,36 @@ module.exports = {
 				ctx.params.title = "message.service -> Veri Arama"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 0
-				ctx.params.DB = "Mesaj  Bulunmadı"
+				ctx.params.DB = "Message  Bulunmadı"
 			
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Mesaj Veri Bulunamadı [ /api/message/find ] ' + '\u001b[0m');	
+				console.log('\u001b[' + 31 + 'm' + '[Message] [Find] Veri Bulunamadı [ /api/message/find ] ' + '\u001b[0m');	
 
 			}
 
-			//! Return
+            //! Return
 			delete ctx.params.id
 
 			return ctx.params
-		},	
+		},
 		async find_post(ctx) {
 
-			//! Arama
+			// ! Arama
 			const dbFind = db.find(u => u.id == ctx.params.id);
 
 			//! Veri Varsa
-			if (dbFind) {
-
+			if (dbFind) {	               
+                
 				//! Return Api   
 				ctx.params.title = "message.service -> Veri Arama"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
+			
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Mesaj Veri Arama [ /api/message/find_post ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Message] [Find] Veri Arama [ /api/message/find_post ] ' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
@@ -137,33 +137,36 @@ module.exports = {
 				ctx.params.title = "message.service -> Veri Arama"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 0
-				ctx.params.DB = "Mesaj Bulunamadı"
-
+				ctx.params.DB = "Message  Bulunmadı"
+			
+				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Mesaj Veri Bulunamadı [ /api/message/find_post ] ' + '\u001b[0m');		
+				console.log('\u001b[' + 31 + 'm' + '[Message] [Find] Veri Bulunamadı [ /api/message/find_post ] ' + '\u001b[0m');	
+
 			}
 
-			//! Return
+            //! Return
 			delete ctx.params.id
 
 			return ctx.params
 		},
 		async find_token(ctx) {
 
-			//! Arama
+			// ! Arama
 			const dbFind = db.find(u => u.token == ctx.params.token);	
 
 			//! Veri Varsa
-			if (dbFind) {
-
+			if (dbFind) {	               
+                
 				//! Return Api   
 				ctx.params.title = "message.service -> Veri Arama"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
+			
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Mesaj Veri Arama [ /api/message/find_token ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Message] [Find] Veri Arama [ /api/message/find_token ] ' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
@@ -173,13 +176,15 @@ module.exports = {
 				ctx.params.title = "message.service -> Veri Arama"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 0
-				ctx.params.DB = "Mesaj Bulunamadı"
-
+				ctx.params.DB = "Message  Bulunmadı"
+			
+				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Mesaj Veri Bulunamadı [ /api/message/find_token ] ' + '\u001b[0m');		
+				console.log('\u001b[' + 31 + 'm' + '[Message] [Find] Veri Bulunamadı [ /api/message/find_token ] ' + '\u001b[0m');	
+
 			}
 
-			//! Return
+            //! Return
 			delete ctx.params.token
 
 			return ctx.params
@@ -260,20 +265,21 @@ module.exports = {
 
 				//Verileri Kaydet
 				db.push(willSaveData)
-
                 
 				//Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
 
 					// Hata varsa
 					if (err) {
-						console.log(err)
+						console.log('\u001b[' + 31 + 'm' + '[Message] [Json] [Add] Json Veri Kayıt Edilemedi [ message.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
 					}							
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi -> Mesaj "); // Success
-				});	
-				//End Json içine Verileri Yazıyor -> db			
+					console.log('\u001b[' + 32 + 'm' + '[Message] [Json] [Add] Json Veri Kayıt Edildi [ message.json ] ' + '\u001b[0m');								
+					
+				});
+				// End Json içine Verileri Yazıyor -> db	
 
 
 				// //! ----------- Log ----------------------------- 	
@@ -291,10 +297,10 @@ module.exports = {
 				ctx.params.title = "message.service -> Veri Ekleme"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Mesaj Eklendi"	
+				ctx.params.mesaj = "Veri Eklendi"	
 				
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + 'Mesaj Veri Eklendi [ /api/message/add ] ' + '\u001b[0m');	
+				console.log('\u001b[' + 32 + 'm' + '[Message] [Add] Veri Eklendi [ /api/message/add ] ' + '\u001b[0m');	
 				
 
 			} catch (error) {
@@ -303,12 +309,12 @@ module.exports = {
 				ctx.params.title = "message.service -> Veri Ekleme"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Mesaj Eklenemedi"	
+				ctx.params.mesaj = "Veri Eklenemedi"	
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + 'Mesaj Veri Eklenemedi [ /api/message/add ] ' + '\u001b[0m');	
+				console.log('\u001b[' + 31 + 'm' + '[Message] [Add] Veri Eklenemedi [ /api/message/add ] ' + '\u001b[0m');	
 
-			}   
+			}  
 
             //! Delete
             delete ctx.params.token 
@@ -326,89 +332,90 @@ module.exports = {
 
 			return ctx.params
 
-
 		},
 		async update(ctx) {
-			
+
 			// ! Arama
-			const dbFind = db.find(u => u.token == ctx.params.token); 
+			const dbFind = db.find(u => u.token == ctx.params.token);
 
 			//! Veri Varsa 
 			if (dbFind) {
-            
+              
 				// Referans Veriler Güncelleme Yapıyor
-				Object.keys(ctx.params).forEach(key => {
-					dbFind[key] = ctx.params[key]
-				})				
+				Object.keys(ctx.params).forEach(key => {					
+					if(key!="userToken"  ) { dbFind[key] = ctx.params[key] }  //! Only Text 				
+				})
 				dbFind["isUpdated"] = true
 				dbFind["updated_at"] = new Date()
 				// End  Referans Veriler Güncelleme Yapıyor
+	
+				//Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
 
-				// Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {					
-				
 					// Hata varsa
 					if (err) {
-						console.log(err)
-					}
+						console.log('\u001b[' + 31 + 'm' + '[Message] [Json] [Update] Json Veri Kayıt Edilemedi [ message.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+					}							
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi -> Mesaj"); // Success
-				});	
-				// End Json içine Verileri Yazıyor -> db		
-
-
+					console.log('\u001b[' + 32 + 'm' + '[Message] [Json] [Update] Json Veri Kayıt Edildi [ message.json ] ' + '\u001b[0m');								
+					
+				});
+				// End Json içine Verileri Yazıyor -> db	
+	
 				// //! ----------- Log ----------------------------- 	
 				// let logs_add = await ctx.call('logs.add', {					
 				// 	userToken: ctx.params.userToken,
-				// 	from: "mesaj",
-				// 	fromToken: ctx.params.token,
-				// 	name: "message_update_successful",
-                //     description: "Mesaj Güncelleme Başarılı"
-				// })	
-				// delete ctx.params.userToken 		
+				// 	from: "ssk",
+				// 	fromToken: ctx.params.sskToken,
+				// 	name: "faq_update_successful",
+				// 	description: "SSK Güncelleme Başarılı"
+				// })			
 				// //! ----------- Log Son -----------------------------  
-						
-
-                //! Return Api   
-				ctx.params.title = "message.service -> Veri Güncelleme"
-				ctx.params.tablo = "message.json"
-				ctx.params.status = 1
-				ctx.params.mesaj = "Mesaj Güncellendi"	
 				
+              
+                //! Return Api	
+				ctx.params.title = "message.service -> Veri Güncelleme"
+				ctx.params.tablo = "message.json"        
+				ctx.params.status = 1			
+				ctx.params.mesaj="Veri Güncellendi"
+
 				//Console Yazma	
-			    console.log('\u001b[' + 32 + 'm' + 'Mesaj Veri Güncellendi [ /api/message/update ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Message] [Update] Veri Güncelleme [ /api/message/update ]' + '\u001b[0m');
 
 			}
 
 			//! Veri Yoksa 
 			else {
-
-				//! Return Api   
-				ctx.params.title = "message.service -> Veri Güncelleme"
-				ctx.params.tablo = "message.json"
-				ctx.params.status = 1
-				ctx.params.mesaj = "Mesaj Güncellenemedi"	
 				
-				//Console Yazma	
-				console.log('\u001b[' + 31 + 'm' + 'Mesaj Veri Güncellenemedi [ /api/message/update ] ' + '\u001b[0m');
+				
+               //! Return Api	
+			   ctx.params.title = "message.service -> Veri Güncelleme"
+			   ctx.params.tablo = "message.json"        
+			   ctx.params.status = 0			
+			   ctx.params.mesaj="Veri Güncellenemedi"
+
+			   //Console Yazma	
+			   console.log('\u001b[' + 31 + 'm' + '[Message] [Update] Veri Güncellenemedi [ /api/message/update ] ' + '\u001b[0m');
 
 			}
 			
             //! Delete
-            delete ctx.params.token          
+            delete ctx.params.token 
             delete ctx.params.FromRole 
             delete ctx.params.FromUserToken 
             delete ctx.params.FromUserName 
+            delete ctx.params.FromNameSurName 
             delete ctx.params.ToRole 
             delete ctx.params.ToUserToken 
             delete ctx.params.ToUserName 
+            delete ctx.params.ToNameSurName 
             delete ctx.params.Subject 
-            delete ctx.params.Message 
-            delete ctx.params.MessageReaded         
-            delete ctx.params.updated_byToken
+            delete ctx.params.Message
+			delete ctx.params.updated_byToken            
 
-			return ctx.params	  
+			return ctx.params
 
 		},
 		async delete(ctx) {
@@ -419,26 +426,28 @@ module.exports = {
 			if (index > -1) {
 				db.splice(index, 1);
 
-			   // Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {					
-				
+				//Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
+
 					// Hata varsa
 					if (err) {
-						console.log(err)
-					}
+						console.log('\u001b[' + 31 + 'm' + '[Message] [Json] [Delete] Json Veri Kayıt Edilemedi [ message.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+					}							
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi -> Mesaj"); // Success
-				});	
+					console.log('\u001b[' + 32 + 'm' + '[Message] [Json] [Delete] Json Veri Kayıt Edildi [ message.json ] ' + '\u001b[0m');								
+					
+				});
 				// End Json içine Verileri Yazıyor -> db	
 				
 				// //! ----------- Log ----------------------------- 	
 				// let logs_add = await ctx.call('logs.add', {					
 				// 	userToken: ctx.params.userToken,
-				// 	from: "mesaj",
-				// 	fromToken: dbFind.MessageToken,
-				// 	name: "message_delete_successful",
-                //     description: "Mesaj Silme Başarılı"
+				// 	from: "ssk",
+				// 	fromToken: dbFind.sskToken,
+				// 	name: "faq_delete_successful",
+                //     description: "SSK Silme Başarılı"
 				// })	
 				// delete ctx.params.userToken 		
 				// //! ----------- Log Son -----------------------------  
@@ -447,10 +456,10 @@ module.exports = {
 				ctx.params.title = "message.service -> Veri Silme"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Mesaj Silindi"	
+				ctx.params.mesaj = "Veri Silindi"	
 				
 				//Console Yazma	
-			    console.log('\u001b[' + 32 + 'm' + 'Mesaj Veri Silindi [ /api/message/delete ] ' + '\u001b[0m');
+			    console.log('\u001b[' + 32 + 'm' + '[Message] [Delete] Veri Silindi [ /api/message/delete/:id ] ' + '\u001b[0m');
                
 
 			} else {
@@ -459,17 +468,17 @@ module.exports = {
 				ctx.params.title = "message.service -> Veri Silme"
 				ctx.params.tablo = "message.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Mesaj Silinemedi"	
+				ctx.params.mesaj = "Veri Silinemedi"	
 				
 				//Console Yazma	
-				console.log('\u001b[' + 31 + 'm' + 'Mesaj Veri Silinemedi [ /api/message/delete ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[Message] [Delete] Veri Silinemedi [ /api/message/delete/:id ] ' + '\u001b[0m');
 
 			}
 			
 			
 			//! Return Delete			
 			delete ctx.params.id
-			delete ctx.params.userToken
+			delete ctx.params.Deleted_byToken
 
 			return ctx.params	
 
@@ -486,19 +495,22 @@ module.exports = {
 			dbFind["isDeleted"] = true
 			dbFind["isActive"] = false
 			dbFind["Deleted_at"] = new Date()
+			dbFind["Deleted_byToken"] = ctx.params.Deleted_byToken
 
-			// Json içine Verileri Yazıyor -> db
+			//Json içine Verileri Yazıyor -> db
 			fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
 
 				// Hata varsa
 				if (err) {
-					console.log(err)
-				}
+					console.log('\u001b[' + 31 + 'm' + '[Message] [Json] [Delete_Updated] Json Veri Kayıt Edilemedi [ message.json ] ' + '\u001b[0m');	
+					console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+				}							
 
 				//Console Yazma
-				console.log("Json Veri Kayıt Edildi -> Mesaj"); // Success
+				console.log('\u001b[' + 32 + 'm' + '[Message] [Json] [Delete_Updated] Json Veri Kayıt Edildi [ message.json ] ' + '\u001b[0m');								
+				
 			});
-			// End Json içine Verileri Yazıyor -> db
+			// End Json içine Verileri Yazıyor -> db	
 
 
 			// //! ----------- Log ----------------------------- 	
@@ -512,38 +524,48 @@ module.exports = {
 			// //! ----------- Log Son -----------------------------  
 
 
-			//! Return Api	
-			ctx.params.title = "message.service -> Silinen Mesajlar"
-			ctx.params.tablo = "message.json"        
-			ctx.params.status = 1			
-			ctx.params.mesaj="Mesaj Silinen Kutusuna Gönderildi"
+                //! Return Api	
+				ctx.params.title = "message.service -> Veri Geçisi Silme"
+				ctx.params.tablo = "message.json"        
+				ctx.params.status = 1			
+				ctx.params.mesaj="Veri Güncellendi"
 
-			//Console Yazma	
-			console.log('\u001b[' + 32 + 'm' + 'Mesaj Silinen Kutusuna Gönderildi [ /api/message/deleted_update ] ' + '\u001b[0m');
+				//Console Yazma	
+				console.log('\u001b[' + 32 + 'm' + '[Message] [Delete_Updated] Veri Güncelleme [ /api/message/deleted_update/:id ]' + '\u001b[0m');
 
-		}
+			}
 
-	    //! Veri Yoksa
-		else {
-
-			//! Return Api	
-			ctx.params.title = "message.service -> Silinen Mesajlar"
-			ctx.params.tablo = "message.json"        
-			ctx.params.status = 0					
-			ctx.params.mesaj="Mesaj Silinen Kutusuna Gönderilmedi"
-
-			//Console Yazma	
-			console.log('\u001b[' + 31 + 'm' + 'Mesaj Silinen Kutusuna Gönderilmedi [ /api/message/deleted_update ] ' + '\u001b[0m');
-
-		}
-		
-		//! Delete
-		delete ctx.params.id          
-		delete ctx.params.userToken
-		delete ctx.params.Deleted_byToken    
+			//! Veri Yoksa 
+			else {
 				
-		return ctx.params
+				
+               //! Return Api	
+			   ctx.params.title = "message.service -> Veri Geçisi Silme"
+			   ctx.params.tablo = "message.json"        
+			   ctx.params.status = 0			
+			   ctx.params.mesaj="Veri Güncellenemedi"
 
+			   //Console Yazma	
+			   console.log('\u001b[' + 32 + 'm' + '[Message] [Delete_Updated] Veri Güncelleme [ /api/message/deleted_update/:id ] ' + '\u001b[0m');
+
+			}
+			
+            //! Delete
+            delete ctx.params.id 
+            delete ctx.params.token 
+            delete ctx.params.FromRole 
+            delete ctx.params.FromUserToken 
+            delete ctx.params.FromUserName 
+            delete ctx.params.FromNameSurName 
+            delete ctx.params.ToRole 
+            delete ctx.params.ToUserToken 
+            delete ctx.params.ToUserName 
+            delete ctx.params.ToNameSurName 
+            delete ctx.params.Subject 
+            delete ctx.params.Message
+			delete ctx.params.Deleted_byToken            
+
+			return ctx.params
       
 		},
 		async view(ctx) {
@@ -554,23 +576,27 @@ module.exports = {
 		//! Veri Varsa 
 		if (dbFind) {     
 
-			// Gelen Kutusuna Düşmüş ise
-			if(dbFind["readed_byToken"]==ctx.params.readed_byToken) 
-			{			
+			//! Aynı Kişi ise
+			if (dbFind["ToUserToken"] == ctx.params.readed_byToken) {
 								
 				//! Güncelleme
 				dbFind["isReaded"] = true
-				dbFind["readed_at"] = new Date()			
-				dbFind["readed_byToken"] = ctx.params.readed_byToken			
+				dbFind["readed_at"] = new Date()
+				dbFind["readed_byToken"] = ctx.params.readed_byToken
+			
 
-				// Json içine Verileri Yazıyor -> db
+				//Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
 
 					// Hata varsa
-					if (err) { console.log(err) }
+					if (err) {
+						console.log('\u001b[' + 31 + 'm' + '[Message] [Json] [View] Json Veri Kayıt Edilemedi [ message.json ] ' + '\u001b[0m');
+						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+					}
 
 					//Console Yazma
-					console.log("Json Veri Kayıt Edildi -> Mesaj"); // Success
+					console.log('\u001b[' + 32 + 'm' + '[Message] [Json] [View] Json Veri Kayıt Edildi [ message.json ] ' + '\u001b[0m');
+					
 				});
 				// End Json içine Verileri Yazıyor -> db
 
@@ -587,40 +613,42 @@ module.exports = {
 
 
 				//! Return Api	
-				ctx.params.title = "message.service -> Mesaj Görüntüleme"
-				ctx.params.tablo = "message.json"        
-				ctx.params.status = 1			
-				ctx.params.mesaj="Mesaj Görüntülendi"
+				ctx.params.title = "message.service -> Veri Görüntüleme"
+				ctx.params.tablo = "message.json"
+				ctx.params.status = 1
+				ctx.params.mesaj = "Veri Görüntülendi"
 
 				//Console Yazma	
-				console.log('\u001b[' + 32 + 'm' + 'Mesaj Görüntülendi [ /api/message/view ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Message] [View] Veri Görüntülendi [ /api/message/view/:id ]' + '\u001b[0m');
 			}
-			else
-			{
+
+			//! Aynı Kişi Değilse
+			else {
+
 				//! Return Api	
-				ctx.params.title = "message.service -> Mesaj Görüntüleme"
+				ctx.params.title = "message.service -> Veri Görüntüleme"
 				ctx.params.tablo = "message.json"        
 				ctx.params.status = 0			
-				ctx.params.mesaj="Mesaj Görüntülenmedi"
+				ctx.params.mesaj="Veri Görüntülenemedi -> Farklı Kişi"
 
 				//Console Yazma	
-				console.log('\u001b[' + 32 + 'm' + 'Mesaj Görüntülenmedi [ /api/message/view ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[Message] [View] Veri Görüntülenemedi [ /api/message/view/:id ] ' + '\u001b[0m');
 
 			}
-
+		
 		}
 
 	    //! Veri Yoksa
 		else {
 
-			//! Return Api	
-			ctx.params.title = "message.service -> Mesaj Görüntüleme"
-			ctx.params.tablo = "message.json"        
-			ctx.params.status = 0			
-			ctx.params.mesaj="Mesaj Görüntülenmedi"
+               //! Return Api	
+			   ctx.params.title = "message.service -> Veri Görüntüleme"
+			   ctx.params.tablo = "message.json"        
+			   ctx.params.status = 0			
+			   ctx.params.mesaj="Veri Görüntülenemedi"
 
-			//Console Yazma	
-			console.log('\u001b[' + 32 + 'm' + 'Mesaj Görüntülenmedi [ /api/message/view ] ' + '\u001b[0m');
+			   //Console Yazma	
+			   console.log('\u001b[' + 31 + 'm' + '[Message] [View] Veri Görüntülenemedi [ /api/message/view/:id ] ' + '\u001b[0m');
 
 		}
 		
@@ -660,7 +688,8 @@ module.exports = {
             ctx.params.size_message_unreaded_sent=message_unreaded_sent.length
             ctx.params.data_message_unreaded_sent = message_unreaded_sent
                       
-            console.log('\u001b[' + 32 + 'm' + 'Gelen Kutusu [ message/:userId ]' + '\u001b[0m'); //! Console
+		
+			console.log('\u001b[' + 32 + 'm' + '[Message] [View] Gelen Kutusu [ /api/message/inbox ] ' + '\u001b[0m');
              
 			//! Delete
 			delete ctx.params.userToken 

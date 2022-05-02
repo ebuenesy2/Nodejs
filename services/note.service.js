@@ -346,10 +346,10 @@ module.exports = {
 			   ctx.params.title = "note.service -> Veri Güncelleme"
 			   ctx.params.tablo = "note.json"        
 			   ctx.params.status = 0			
-			   ctx.params.mesaj="Veri Güncellendi"
+			   ctx.params.mesaj="Veri Güncellenemedi"
 
 			   //Console Yazma	
-			   console.log('\u001b[' + 32 + 'm' + '[Note] [Update] Veri Güncelleme [ /api/note/update ] ' + '\u001b[0m');
+			   console.log('\u001b[' + 31 + 'm' + '[Note] [Update] Veri Güncellenemedi [ /api/note/update ] ' + '\u001b[0m');
 
 			}
 			
@@ -415,7 +415,7 @@ module.exports = {
 				ctx.params.mesaj = "Veri Silinemedi"	
 				
 				//Console Yazma	
-				console.log('\u001b[' + 31 + 'm' + '[Note] [Delete] Veri Silinemedi [ /api/note/note/:id ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[Note] [Delete] Veri Silinemedi [ /api/note/delete/:id ] ' + '\u001b[0m');
 
 			}
 			
@@ -426,6 +426,6 @@ module.exports = {
 
 			return ctx.params	
 
-		},
+		}
 	}
 }
