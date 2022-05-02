@@ -23,7 +23,7 @@
   * Admin Bilgileri
   * Admin Login
   * Mesaj Alma ve Gönderme
-  * SSk - Sık Sorulan Sorular
+  * Faq - Sık Sorulan Sorular
   
   ```
 
@@ -37,7 +37,7 @@
  /api/file => Dosya
  /api/user => Kullanıcı
  /api/admin => Admin
- /api/ssk => Sık Sorulan Sorular
+ /api/faq => Sık Sorulan Sorular
  /api/message => Messajlar
   ```
   
