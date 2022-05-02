@@ -807,6 +807,79 @@ module.exports = {
 
 			return ctx.params	
 		},
+		async delete_update(ctx) {
+
+			// ! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);	
+
+			//! Veri Varsa 
+			if (dbFind) {
+              
+				//! Güncelleme
+				dbFind["isDeleted"] = true
+				dbFind["isActive"] = false
+				dbFind["Deleted_at"] = new Date()
+				dbFind["Deleted_byToken"] = ctx.params.Deleted_byToken
+	
+				//Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/admin.json', JSON.stringify(db), err => {
+
+					// Hata varsa
+					if (err) {
+						console.log('\u001b[' + 31 + 'm' + '[Admin] [Json] [Delete_Updated] Json Veri Kayıt Edilemedi [ admin.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+					}							
+
+					//Console Yazma
+					console.log('\u001b[' + 32 + 'm' + '[Admin] [Json] [Delete_Updated] Json Veri Kayıt Edildi [ admin.json ] ' + '\u001b[0m');								
+					
+				});
+				// End Json içine Verileri Yazıyor -> db	
+	
+				// //! ----------- Log ----------------------------- 	
+				// let logs_add = await ctx.call('logs.add', {					
+				// 	userToken: ctx.params.userToken,
+				// 	from: "ssk",
+				// 	fromToken: ctx.params.sskToken,
+				// 	name: "faq_update_successful",
+				// 	description: "SSK Güncelleme Başarılı"
+				// })			
+				// //! ----------- Log Son -----------------------------  
+				
+              
+                //! Return Api	
+				ctx.params.title = "admin.service -> Veri Geçisi Silme"
+				ctx.params.tablo = "admin.json"        
+				ctx.params.status = 1			
+				ctx.params.mesaj="Veri Güncellendi"
+
+				//Console Yazma	
+				console.log('\u001b[' + 32 + 'm' + '[Admin] [Delete_Updated] Veri Güncelleme [ /api/admin/update ]' + '\u001b[0m');
+
+			}
+
+			//! Veri Yoksa 
+			else {
+				
+				
+               //! Return Api	
+			   ctx.params.title = "admin.service -> Veri Geçisi Silme"
+			   ctx.params.tablo = "admin.json"        
+			   ctx.params.status = 0			
+			   ctx.params.mesaj="Veri Güncellenemedi"
+
+			   //Console Yazma	
+			   console.log('\u001b[' + 31 + 'm' + '[Admin] [Delete_Updated] Veri Güncellenemedi [ /api/admin/update ] ' + '\u001b[0m');
+
+			}
+			
+			//! Return
+			delete ctx.params.id
+			delete ctx.params.Deleted_byToken 
+			
+			return ctx.params
+
+		},
 		async loginOnline(ctx) {
 
 			// ! Arama

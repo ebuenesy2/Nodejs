@@ -483,7 +483,7 @@ module.exports = {
 			return ctx.params	
 
 		},
-        async deleted_update(ctx) {
+        async delete_update(ctx) {
 		
 			//! Arama
 			const dbFind = db.find(u => u.id == ctx.params.id);			

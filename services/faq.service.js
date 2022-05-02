@@ -467,6 +467,79 @@ module.exports = {
 
 			return ctx.params	
 
-		}
+		},
+		async delete_update (ctx) {
+
+			// ! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);
+
+			//! Veri Varsa 
+			if (dbFind) {
+              
+				//! Güncelleme
+				dbFind["isDeleted"] = true
+				dbFind["isActive"] = false
+				dbFind["Deleted_at"] = new Date()
+				dbFind["Deleted_byToken"] = ctx.params.Deleted_byToken
+	
+				//Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/faq.json', JSON.stringify(db), err => {
+
+					// Hata varsa
+					if (err) {
+						console.log('\u001b[' + 31 + 'm' + '[Faq] [Json] [Delete_Updated] Json Veri Kayıt Edilemedi [ faq.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+					}							
+
+					//Console Yazma
+					console.log('\u001b[' + 32 + 'm' + '[Faq] [Json] [Delete_Updated] Json Veri Kayıt Edildi [ faq.json ] ' + '\u001b[0m');								
+					
+				});
+				// End Json içine Verileri Yazıyor -> db	
+	
+				// //! ----------- Log ----------------------------- 	
+				// let logs_add = await ctx.call('logs.add', {					
+				// 	userToken: ctx.params.userToken,
+				// 	from: "ssk",
+				// 	fromToken: ctx.params.sskToken,
+				// 	name: "faq_update_successful",
+				// 	description: "SSK Güncelleme Başarılı"
+				// })			
+				// //! ----------- Log Son -----------------------------  
+				
+              
+                //! Return Api	
+				ctx.params.title = "faq.service -> Veri Geçisi Silme"
+				ctx.params.tablo = "faq.json"        
+				ctx.params.status = 1			
+				ctx.params.mesaj="Veri Güncellendi"
+
+				//Console Yazma	
+				console.log('\u001b[' + 32 + 'm' + '[Faq] [Delete_Updated] Veri Güncelleme [ /api/faq/update ]' + '\u001b[0m');
+
+			}
+
+			//! Veri Yoksa 
+			else {
+				
+				
+               //! Return Api	
+			   ctx.params.title = "faq.service -> Veri Geçisi Silme"
+			   ctx.params.tablo = "faq.json"        
+			   ctx.params.status = 0			
+			   ctx.params.mesaj="Veri Güncellenemedi"
+
+			   //Console Yazma	
+			   console.log('\u001b[' + 31 + 'm' + '[Faq] [Delete_Updated] Veri Güncellenemedi [ /api/faq/update ] ' + '\u001b[0m');
+
+			}
+			
+			//! Return
+			delete ctx.params.id
+			delete ctx.params.Deleted_byToken 
+
+			return ctx.params
+
+		},
 	}
 }

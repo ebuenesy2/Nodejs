@@ -522,81 +522,6 @@ module.exports = {
 			return ctx.params
 
 		},
-		async delete_update(ctx) 	{
-
-			// ! Arama
-			const dbFind = db.find(u => u.token == ctx.params.token);		
-             
-            //! Veri Varsa 
-			if (dbFind) {
-
-				// Referans Veriler Güncelleme Yapıyor
-				Object.keys(ctx.params).forEach(key => {
-					dbFind[key] = ctx.params[key]
-				})
-				dbFind["Deleted_at"] = new Date()
-				// End  Referans Veriler Güncelleme Yapıyor		
-
-				// Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/file.json', JSON.stringify(db), err => {
-
-
-					// Hata varsa
-					if (err) {
-						console.log('\u001b[' + 31 + 'm' + '[File] [Json] [Deleted_Update] Json Veri Kayıt Edilemedi [ file.json ] ' + '\u001b[0m');	
-						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
-					}							
-
-					//Console Yazma
-					console.log('\u001b[' + 32 + 'm' + '[File] [Json] [Deleted_Update] Json Veri Kayıt Edildi [ file.json ] ' + '\u001b[0m');	
-				});
-				// End Json içine Verileri Yazıyor -> db
-			
-
-			// 	//! ----------- Log ----------------------------- 	
-			// 	let logs_add = await ctx.call('logs.add', {					
-			// 		userToken: ctx.params.userToken,
-			// 		from: "file",
-			// 		fromToken: ctx.params.fileToken,
-			// 		name: "file_update_successful",
-			// 		description: "Dosya Güncelleme Başarılı"
-			// 	})			
-			//    //! ----------- Log Son ----------------------------- 
-
-			    //! Return Api
-				ctx.params.title = "file.service -> Veri Geçisi Silme"
-				ctx.params.tablo = "file.json"			
-				ctx.params.status = 1
-				ctx.params.mesaj="Veri Güncellendi"
-
-				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[File] [Update] Veri Güncellendi [ /api/file/delete_update ]' + '\u001b[0m');
-
-			}
-
-			//! Veri Yoksa 
-			else {
-
-				//! Return Api
-				ctx.params.title = "file.service -> Veri Geçisi Silme"
-				ctx.params.tablo = "file.json"			
-				ctx.params.status = 0
-				ctx.params.mesaj="Veri Güncellenemedi"
-
-				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[File] [Update] Veri Güncellenemedi [ /api/file/delete_update ]' + '\u001b[0m');
-
-			}			
-		
-			//! Return
-			delete ctx.params.token
-			delete ctx.params.Deleted_byToken
-			delete ctx.params.isDeleted
-			delete ctx.params.isActive	
-
-			return ctx.params
-
-		},
 		async delete(ctx) {
 		
 			//! Arama
@@ -670,6 +595,81 @@ module.exports = {
 			return ctx.params
 
 		}, 	
+		async delete_update(ctx) 	{
+
+			// ! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);		
+             
+            //! Veri Varsa 
+			if (dbFind) {
+
+				//! Güncelleme
+				dbFind["isDeleted"] = true
+				dbFind["isActive"] = false
+				dbFind["Deleted_at"] = new Date()
+				dbFind["Deleted_byToken"] = ctx.params.Deleted_byToken	
+
+				// Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/file.json', JSON.stringify(db), err => {
+
+
+					// Hata varsa
+					if (err) {
+						console.log('\u001b[' + 31 + 'm' + '[File] [Json] [Deleted_Update] Json Veri Kayıt Edilemedi [ file.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+					}							
+
+					//Console Yazma
+					console.log('\u001b[' + 32 + 'm' + '[File] [Json] [Deleted_Update] Json Veri Kayıt Edildi [ file.json ] ' + '\u001b[0m');	
+				});
+				// End Json içine Verileri Yazıyor -> db
+			
+
+			// 	//! ----------- Log ----------------------------- 	
+			// 	let logs_add = await ctx.call('logs.add', {					
+			// 		userToken: ctx.params.userToken,
+			// 		from: "file",
+			// 		fromToken: ctx.params.fileToken,
+			// 		name: "file_update_successful",
+			// 		description: "Dosya Güncelleme Başarılı"
+			// 	})			
+			//    //! ----------- Log Son ----------------------------- 
+
+			    //! Return Api
+				ctx.params.title = "file.service -> Veri Geçisi Silme"
+				ctx.params.tablo = "file.json"			
+				ctx.params.status = 1
+				ctx.params.mesaj="Veri Güncellendi"
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[File] [Update] Veri Güncellendi [ /api/file/delete_update ]' + '\u001b[0m');
+
+			}
+
+			//! Veri Yoksa 
+			else {
+
+				//! Return Api
+				ctx.params.title = "file.service -> Veri Geçisi Silme"
+				ctx.params.tablo = "file.json"			
+				ctx.params.status = 0
+				ctx.params.mesaj="Veri Güncellenemedi"
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[File] [Update] Veri Güncellenemedi [ /api/file/delete_update ]' + '\u001b[0m');
+
+			}			
+		
+			//! Return
+			delete ctx.params.id
+			delete ctx.params.token
+			delete ctx.params.Deleted_byToken
+			delete ctx.params.isDeleted
+			delete ctx.params.isActive		
+
+			return ctx.params
+
+		},
         async getFile(ctx) {
 
 			try {

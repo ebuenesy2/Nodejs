@@ -481,6 +481,69 @@ module.exports = {
 
 			return ctx.params	
 
+		},
+		async delete_update(ctx) {
+
+			// ! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);		
+
+			//! Veri Varsa 
+			if (dbFind) {
+              
+				//! Güncelleme
+				dbFind["isDeleted"] = true
+				dbFind["isActive"] = false
+				dbFind["Deleted_at"] = new Date()
+				dbFind["Deleted_byToken"] = ctx.params.Deleted_byToken
+		
+				//Json içine Verileri Yazıyor -> db
+				fs.writeFile('./public/DB/logs.json', JSON.stringify(db), err => {
+
+					// Hata varsa
+					if (err) {
+						console.log('\u001b[' + 31 + 'm' + '[Logs] [Json] [Delete_Updated] Json Veri Kayıt Edilemedi [ logs.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+					}							
+
+					//Console Yazma
+					console.log('\u001b[' + 32 + 'm' + '[Logs] [Json] [Delete_Updated] Json Veri Kayıt Edildi [ logs.json ] ' + '\u001b[0m');								
+					
+				});
+				// End Json içine Verileri Yazıyor -> db	
+					
+              
+                //! Return Api	
+				ctx.params.title = "logs.service -> Veri Geçisi Silme"
+				ctx.params.tablo = "logs.json"        
+				ctx.params.status = 1			
+				ctx.params.mesaj="Veri Güncellendi"
+
+				//Console Yazma	
+				console.log('\u001b[' + 32 + 'm' + '[Logs] [Delete_Updated] Veri Güncelleme [ /api/logs/delete_update ]' + '\u001b[0m');
+
+			}
+
+			//! Veri Yoksa 
+			else {
+				
+				
+               //! Return Api	
+			   ctx.params.title = "logs.service -> Veri Geçisi Silme"
+			   ctx.params.tablo = "logs.json"        
+			   ctx.params.status = 0			
+			   ctx.params.mesaj="Veri Güncellenemedi"
+
+			   //Console Yazma	
+			   console.log('\u001b[' + 31 + 'm' + '[Logs] [Delete_Updated] Veri Güncellenemedi [ /api/logs/delete_update ] ' + '\u001b[0m');
+
+			}
+			
+			//! Return
+			delete ctx.params.id
+			delete ctx.params.Deleted_byToken   
+
+			return ctx.params
+
 		}
 	}
 }

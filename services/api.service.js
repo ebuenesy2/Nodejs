@@ -211,7 +211,8 @@ module.exports = {
 
 			fastify.post('/api/logs/add', async (req, res) => this.broker.call("logs.add",{...req.body})) //! CREATE
 			fastify.post('/api/logs/update', async (req, res) => this.broker.call("logs.update",{...req.body})) //! UPDATE
-			fastify.post('/api/logs/delete/:id', async (req, res) => this.broker.call("logs.delete",{id: req.params.id,...req.body})) //! DELETE			
+			fastify.post('/api/logs/delete/:id', async (req, res) => this.broker.call("logs.delete", { id: req.params.id, ...req.body })) //! DELETE
+			fastify.post('/api/logs/delete_update/:id', async (req, res) => this.broker.call("logs.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
 
 		//!---------------- Logs son --------------------------------------------------------------------------------------------
 			
@@ -228,9 +229,9 @@ module.exports = {
 			fastify.post('/api/file/find_user', async (req, res) => this.broker.call("file.find_user", { ...req.body })) //! Search User	
 			fastify.post('/api/file/find_user_tablo', async (req, res) => this.broker.call("file.find_user_tablo",{...req.body})) //! Search User - Tablo	
 			fastify.post('/api/file/add', async (req, res) => this.broker.call("file.add",{...req.body})) //! CREATE
-			fastify.post('/api/file/update', async (req, res) => this.broker.call("file.update",{...req.body})) //! UPDATE
-			fastify.post('/api/file/delete_update', async (req, res) => this.broker.call("file.delete_update",{...req.body})) //! DELETE			
-			fastify.post('/api/file/delete', async (req, res) => this.broker.call("file.delete",{...req.body})) //! DELETE			
+			fastify.post('/api/file/update', async (req, res) => this.broker.call("file.update",{...req.body})) //! UPDATE		
+			fastify.post('/api/file/delete', async (req, res) => this.broker.call("file.delete", { ...req.body })) //! DELETE
+			fastify.post('/api/file/delete_update/:id', async (req, res) => this.broker.call("file.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
 					
 			fastify.post('/api/file/getFile',async (req,res)=> this.broker.call("file.getFile",{...req.body})) //! File Info
 			fastify.post('/api/file/upload',async (req,res)=> this.broker.call("file.upload",{...req.body})) //! Upload
@@ -256,7 +257,8 @@ module.exports = {
 			fastify.post('/api/user/add', async (req, res) => this.broker.call("user.add",{...req.body})) //! CREATE
 			fastify.post('/api/user/update', async (req, res) => this.broker.call("user.update",{...req.body})) //! UPDATE
 			fastify.post('/api/user/updateUrl', async (req, res) => this.broker.call("user.updateUrl",{...req.body})) //! UPDATE - URL
-			fastify.post('/api/user/delete/:id', async (req, res) => this.broker.call("user.delete",{id: req.params.id,...req.body})) //! DELETE
+			fastify.post('/api/user/delete/:id', async (req, res) => this.broker.call("user.delete", { id: req.params.id, ...req.body })) //! DELETE
+			fastify.post('/api/user/delete_update/:id', async (req, res) => this.broker.call("user.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
 			
 			fastify.post('/api/user/loginOnline', async (req, res) => this.broker.call("user.loginOnline",{...req.body})) //! Login
 			fastify.post('/api/user/loginOnlineUsername', async (req, res) => this.broker.call("user.loginOnlineUsername",{...req.body})) //! Login User
@@ -277,7 +279,8 @@ module.exports = {
 			fastify.post('/api/admin/add', async (req, res) => this.broker.call("admin.add",{...req.body})) //! CREATE
 			fastify.post('/api/admin/update', async (req, res) => this.broker.call("admin.update",{...req.body})) //! UPDATE
 			fastify.post('/api/admin/updateUrl', async (req, res) => this.broker.call("admin.updateUrl",{...req.body})) //! UPDATE - URL
-			fastify.post('/api/admin/delete/:id', async (req, res) => this.broker.call("admin.delete",{id: req.params.id,...req.body})) //! DELETE
+			fastify.post('/api/admin/delete/:id', async (req, res) => this.broker.call("admin.delete", { id: req.params.id, ...req.body })) //! DELETE
+			fastify.post('/api/admin/delete_update/:id', async (req, res) => this.broker.call("admin.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
 			
 			fastify.post('/api/admin/loginOnline', async (req, res) => this.broker.call("admin.loginOnline",{...req.body})) //! Login
 			fastify.post('/api/admin/loginOnlineUsername', async (req, res) => this.broker.call("admin.loginOnlineUsername",{...req.body})) //! Login
@@ -298,7 +301,7 @@ module.exports = {
 			fastify.post('/api/message/add', async (req, res) => this.broker.call("message.add",{...req.body})) //! CREATE		
 			fastify.post('/api/message/update', async (req, res) => this.broker.call("message.update",{...req.body})) //! UPDATE
 			fastify.post('/api/message/delete/:id', async (req, res) => this.broker.call("message.delete",{id: req.params.id,...req.body})) //! DELETE
-			fastify.post('/api/message/deleted_update/:id', async (req, res) => this.broker.call("message.deleted_update",{id: req.params.id,...req.body})) //! DELETED Update
+			fastify.post('/api/message/delete_update/:id', async (req, res) => this.broker.call("message.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
 		    
 			fastify.post('/api/message/view/:id', async (req, res) => this.broker.call("message.view",{id: req.params.id,...req.body})) //!Search - View
 			fastify.post('/api/message/inbox', async (req, res) => this.broker.call("message.inbox",{...req.body})) //! Inbox			
@@ -318,7 +321,8 @@ module.exports = {
 			fastify.post('/api/faq/find_user', async (req, res) => this.broker.call("faq.find_user", { ...req.body })) //! Search User	
 			fastify.post('/api/faq/add', async (req, res) => this.broker.call("faq.add",{...req.body})) //! CREATE		
 			fastify.post('/api/faq/update', async (req, res) => this.broker.call("faq.update",{...req.body})) //! UPDATE
-			fastify.post('/api/faq/delete/:id', async (req, res) => this.broker.call("faq.delete",{id: req.params.id,...req.body})) //! DELETE
+			fastify.post('/api/faq/delete/:id', async (req, res) => this.broker.call("faq.delete", { id: req.params.id, ...req.body })) //! DELETE
+			fastify.post('/api/faq/delete_update/:id', async (req, res) => this.broker.call("faq.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
 			
 	    //!---------------- faq son ----------------------------------------------------------------------------------------------
 
@@ -330,14 +334,15 @@ module.exports = {
 			fastify.get('/api/note/html',async (req,res)=> this.broker.call("note.html")) //! Html
 			fastify.get('/api/note/all', async (req, res) => this.broker.call("note.all")) //! All
 			fastify.get('/api/note/:id', async (req, res) => this.broker.call("note.find",{id: req.params.id})) //! Search	
-
 			fastify.post('/api/note/find_post', async (req, res) => this.broker.call("note.find_post",{...req.body})) //!  Search-Post
 			fastify.post('/api/note/find_token', async (req, res) => this.broker.call("note.find_token",{...req.body})) //!  Search-Token	
-			fastify.post('/api/note/find_user', async (req, res) => this.broker.call("note.find_user",{...req.body})) //!  Search-UserToken	
+			fastify.post('/api/note/find_user', async (req, res) => this.broker.call("note.find_user", { ...req.body })) //!  Search-UserToken	
+			
 			fastify.post('/api/note/add', async (req, res) => this.broker.call("note.add",{...req.body})) //! CREATE		
 			fastify.post('/api/note/update', async (req, res) => this.broker.call("note.update",{...req.body})) //! UPDATE
 			fastify.post('/api/note/updated_delete/:id', async (req, res) => this.broker.call("note.updated_delete",{id:req.params.id,...req.body})) //! UPDATE DELETE
-			fastify.post('/api/note/delete/:id', async (req, res) => this.broker.call("note.delete",{id: req.params.id,...req.body})) //! DELETE
+			fastify.post('/api/note/delete/:id', async (req, res) => this.broker.call("note.delete", { id: req.params.id, ...req.body })) //! DELETE
+			fastify.post('/api/note/delete_update/:id', async (req, res) => this.broker.call("note.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
 		
 	    //!---------------- note son ----------------------------------------------------------------------------------------------
 
