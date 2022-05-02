@@ -189,6 +189,45 @@ module.exports = {
 
 			return ctx.params
 		},
+		async find_user(ctx) {
+
+			// ! Arama
+			const dbFind = db.filter(u => u.created_byToken == ctx.params.created_byToken);
+
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "note.service -> Veri Arama"
+				ctx.params.tablo = "note.json"
+				ctx.params.status = 1
+				ctx.params.DB = dbFind
+			
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[Note] [Find] Veri Arama [ /api/note/find_user ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "note.service -> Veri Arama"
+				ctx.params.tablo = "note.json"
+				ctx.params.status = 0
+				ctx.params.DB = "Note  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[Note] [Find] Veri Bulunamadı [ /api/note/find_user ] ' + '\u001b[0m');	
+
+			}
+
+            //! Return
+			delete ctx.params.created_byToken
+
+			return ctx.params
+		},
 		async add(ctx) {  
 
 			try {

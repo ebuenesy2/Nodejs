@@ -314,7 +314,8 @@ module.exports = {
 			fastify.get('/api/faq/:id', async (req, res) => this.broker.call("faq.find",{id: req.params.id})) //! Search	
 
 			fastify.post('/api/faq/find_post', async (req, res) => this.broker.call("faq.find_post",{...req.body})) //!  Search-Post
-			fastify.post('/api/faq/find_token', async (req, res) => this.broker.call("faq.find_token",{...req.body})) //!  Search-Token	
+			fastify.post('/api/faq/find_token', async (req, res) => this.broker.call("faq.find_token", { ...req.body })) //!  Search-Token
+			fastify.post('/api/faq/find_user', async (req, res) => this.broker.call("faq.find_user", { ...req.body })) //! Search User	
 			fastify.post('/api/faq/add', async (req, res) => this.broker.call("faq.add",{...req.body})) //! CREATE		
 			fastify.post('/api/faq/update', async (req, res) => this.broker.call("faq.update",{...req.body})) //! UPDATE
 			fastify.post('/api/faq/delete/:id', async (req, res) => this.broker.call("faq.delete",{id: req.params.id,...req.body})) //! DELETE
