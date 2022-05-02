@@ -261,7 +261,7 @@ module.exports = {
 				ctx.params.DB = dbFind
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[File] [Find] Veri Kullanıcı Arama [ /api/file/find ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[File] [Find] Veri Kullanıcı Arama [ /api/file/find_user ] ' + '\u001b[0m');
 
 			}
 
@@ -276,12 +276,53 @@ module.exports = {
 				ctx.params.DB = "Veri Bulunmadı"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[File] [Find] Veri Bulunamadı [ /api/file/find ] ' + '\u001b[0m');				
+				console.log('\u001b[' + 31 + 'm' + '[File] [Find] Veri Bulunamadı [ /api/file/find_user ] ' + '\u001b[0m');				
 
 			}
 
 			//! Return
 			delete ctx.params.created_byToken
+
+			return ctx.params
+		},
+		async find_user_tablo(ctx) {
+
+			// ! Arama
+			const dbFind = db.filter(u => u.created_byToken == ctx.params.created_byToken && u.usedPage == ctx.params.usedPage);
+
+			// ! Veri Varsa
+			if (dbFind.length > 0) {
+
+				//! Return Api   
+				ctx.params.title = "file.service -> Veri Arama"
+				ctx.params.tablo = "file.json"
+				ctx.params.status = 1
+                ctx.params.size=dbFind.length
+				ctx.params.DB = dbFind
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[File] [Find] Veri Arama [ /api/file/find_user_tablo ] ' + '\u001b[0m');
+
+			}
+
+			//! Kullanıcı Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "file.service -> Veri Arama"
+				ctx.params.tablo = "file.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.DB = "Veri Bulunmadı"
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[File] [Find] Veri Bulunamadı [ /api/file/find_user_tablo ] ' + '\u001b[0m');				
+
+			}
+
+			//! Return
+			delete ctx.params.created_byToken
+			delete ctx.params.usedPage
 
 			return ctx.params
 		},
@@ -1417,6 +1458,7 @@ module.exports = {
 
 			
 			//! Return
+			delete ctx.params.created_byToken
 			delete ctx.params.fileUrl;
 			delete ctx.params.role;
 			delete ctx.params.userToken;
