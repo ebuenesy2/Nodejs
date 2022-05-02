@@ -302,16 +302,16 @@ module.exports = {
 				// End  Referans Veriler Güncelleme Yapıyor
 	
 				//Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/faq.json', JSON.stringify(db), err => {
+				fs.writeFile('./public/DB/note.json', JSON.stringify(db), err => {
 
 					// Hata varsa
 					if (err) {
-						console.log('\u001b[' + 31 + 'm' + '[Faq] [Json] [Update] Json Veri Kayıt Edilemedi [ faq.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + '[Note] [Json] [Update] Json Veri Kayıt Edilemedi [ note.json ] ' + '\u001b[0m');	
 						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
 					}							
 
 					//Console Yazma
-					console.log('\u001b[' + 32 + 'm' + '[Faq] [Json] [Update] Json Veri Kayıt Edildi [ faq.json ] ' + '\u001b[0m');								
+					console.log('\u001b[' + 32 + 'm' + '[Note] [Json] [Update] Json Veri Kayıt Edildi [ note.json ] ' + '\u001b[0m');								
 					
 				});
 				// End Json içine Verileri Yazıyor -> db	
@@ -328,13 +328,13 @@ module.exports = {
 				
               
                 //! Return Api	
-				ctx.params.title = "faq.service -> Veri Güncelleme"
-				ctx.params.tablo = "faq.json"        
+				ctx.params.title = "note.service -> Veri Güncelleme"
+				ctx.params.tablo = "note.json"        
 				ctx.params.status = 1			
 				ctx.params.mesaj="Veri Güncellendi"
 
 				//Console Yazma	
-				console.log('\u001b[' + 32 + 'm' + '[Faq] [Update] Veri Güncelleme [ /api/faq/update ]' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Note] [Update] Veri Güncelleme [ /api/note/update ]' + '\u001b[0m');
 
 			}
 
@@ -343,21 +343,21 @@ module.exports = {
 				
 				
                //! Return Api	
-			   ctx.params.title = "faq.service -> Veri Güncelleme"
-			   ctx.params.tablo = "faq.json"        
+			   ctx.params.title = "note.service -> Veri Güncelleme"
+			   ctx.params.tablo = "note.json"        
 			   ctx.params.status = 0			
 			   ctx.params.mesaj="Veri Güncellendi"
 
 			   //Console Yazma	
-			   console.log('\u001b[' + 32 + 'm' + '[Faq] [Update] Veri Güncelleme [ /api/faq/update ] ' + '\u001b[0m');
+			   console.log('\u001b[' + 32 + 'm' + '[Note] [Update] Veri Güncelleme [ /api/note/update ] ' + '\u001b[0m');
 
 			}
 			
 			//! Return
 			delete ctx.params.updated_byToken 
 			delete ctx.params.token 
-			delete ctx.params.soru 
-			delete ctx.params.cevap 
+			delete ctx.params.title 
+			delete ctx.params.content 
 
 			return ctx.params
 
@@ -371,16 +371,16 @@ module.exports = {
 				db.splice(index, 1);
 
 				//Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/faq.json', JSON.stringify(db), err => {
+				fs.writeFile('./public/DB/note.json', JSON.stringify(db), err => {
 
 					// Hata varsa
 					if (err) {
-						console.log('\u001b[' + 31 + 'm' + '[Faq] [Json] [Delete] Json Veri Kayıt Edilemedi [ ssk.json ] ' + '\u001b[0m');	
+						console.log('\u001b[' + 31 + 'm' + '[Note] [Json] [Delete] Json Veri Kayıt Edilemedi [ note.json ] ' + '\u001b[0m');	
 						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
 					}							
 
 					//Console Yazma
-					console.log('\u001b[' + 32 + 'm' + '[Faq] [Json] [Delete] Json Veri Kayıt Edildi [ ssk.json ] ' + '\u001b[0m');								
+					console.log('\u001b[' + 32 + 'm' + '[Note] [Json] [Delete] Json Veri Kayıt Edildi [ note.json ] ' + '\u001b[0m');								
 					
 				});
 				// End Json içine Verileri Yazıyor -> db	
@@ -397,25 +397,25 @@ module.exports = {
 				// //! ----------- Log Son -----------------------------  
 				
                 //! Return Api   
-				ctx.params.title = "faq.service -> Veri Silme"
-				ctx.params.tablo = "faq.json"
+				ctx.params.title = "note.service -> Veri Silme"
+				ctx.params.tablo = "note.json"
 				ctx.params.status = 1
 				ctx.params.mesaj = "Veri Silindi"	
 				
 				//Console Yazma	
-			    console.log('\u001b[' + 32 + 'm' + '[Faq] [Delete] Veri Silindi [ /api/faq/delete/:id ] ' + '\u001b[0m');
+			    console.log('\u001b[' + 32 + 'm' + '[Note] [Delete] Veri Silindi [ /api/note/delete/:id ] ' + '\u001b[0m');
                
 
 			} else {
 
 				//! Return Api   
-				ctx.params.title = "faq.service -> Veri Silme"
-				ctx.params.tablo = "faq.json"
+				ctx.params.title = "note.service -> Veri Silme"
+				ctx.params.tablo = "note.json"
 				ctx.params.status = 0
 				ctx.params.mesaj = "Veri Silinemedi"	
 				
 				//Console Yazma	
-				console.log('\u001b[' + 31 + 'm' + '[Faq] [Delete] Veri Silinemedi [ /api/faq/delete/:id ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[Note] [Delete] Veri Silinemedi [ /api/note/note/:id ] ' + '\u001b[0m');
 
 			}
 			
