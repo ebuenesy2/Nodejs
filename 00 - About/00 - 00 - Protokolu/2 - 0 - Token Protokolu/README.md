@@ -1,7 +1,25 @@
 
 # Token Protokolu
 
-## Token Oluşturma
+## Açıklama
+ ```
+ * id
+ * Tanım
+ 
+ Fazla bilgiye gerek yok
+ ```
+
+## Zorunlu Alanlar [TokenInfo]
+ 
+ ```
+				let TokenInfo={				
+					id: TokenId,
+					title: ctx.params.title,
+					content: ctx.params.content                    				
+				}	
+ ```
+ 
+ ## Token Oluşturma
  
  ```
                 //! Token
@@ -11,9 +29,7 @@
 				let TokenInfo={				
 					id: TokenId,
 					title: ctx.params.title,
-					content: ctx.params.content,
-					created_at: CreateDate,
-                    created_byToken: ctx.params.created_byToken				
+					content: ctx.params.content							
 				}
 				
 				const secret = 'secret';
@@ -21,3 +37,4 @@
 				const jwt = sign(data, secret);		
 				//! End Token		
  ```
+
