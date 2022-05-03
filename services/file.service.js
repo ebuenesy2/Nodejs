@@ -428,15 +428,20 @@ module.exports = {
 
 				});				
 
-				// //! ----------- Log ----------------------------- 	
-				// let logs_add = await ctx.call('logs.add', {					
-				// 	userToken: ctx.params.userToken,
-				// 	from: "file",
-				// 	fromToken: jwt,
-				// 	name: "file_add_successful",
-				// 	description: "Dosya Ekleme Başarılı"
-				// })			
-				// //! ----------- Log Son ----------------------------- 
+				//! ----------- Log ----------------------------- 	
+				 let logs_add = await ctx.call('logs.add', {
+				 	table: "file",
+				 	title: "file_add_successful",
+					description: "Dosya Ekleme Başarılı",
+					logStatus:"successful",
+					fromToken: jwt,
+					created_byToken: ctx.params.created_byToken
+				 })				
+
+				if(logs_add.status=="1") { 	console.log('\u001b[' + 32 + 'm' + '[File] [Logs] [Add] Bildirim Eklendi' + '\u001b[0m'); }
+				if(logs_add.status=="0") { 	console.log('\u001b[' + 31 + 'm' + '[File] [Logs] [Add] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
 
 
 				//! Return Api   
