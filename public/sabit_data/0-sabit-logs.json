@@ -1,7 +1,7 @@
 [
     {
         "id": 1,   
-        "tablo":"file",
+        "table":"file",
         "title": " file_add_successful",
         "description": "Dosya Ekleme Başarılı",
         "logStatus":"successful",
@@ -22,7 +22,7 @@
     },
     {   
         "id": 2,
-        "tablo":"user",
+        "table":"user",
         "title": "user_login_error",
         "description": "Hatalı  Kullanıcı Giriş Yapıldı",
         "logStatus":"error",
@@ -43,7 +43,7 @@
     },
     {
         "id": 3,      
-        "tablo":"file",
+        "table":"file",
         "title": "file_delete_successful",
         "description": "Dosya Silme Başarılı",
         "logStatus":"successful",

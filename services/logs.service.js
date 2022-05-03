@@ -13,7 +13,8 @@ module.exports = {
 		async info(ctx) {
 
 			//! Return Api
-			ctx.params.title = "logs.service"
+			ctx.params.title = "logs.service -> Info"
+			ctx.params.table = "logs.json"
 			ctx.params.time = dayjs().toDate()
 			ctx.params.APi_URL = process.env.APi_URL
 
@@ -46,7 +47,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "logs.service -> Tüm Veriler"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
 				ctx.params.DB = db		
@@ -58,7 +59,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "logs.service -> Tüm Veriler"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
 				ctx.params.DB = error
@@ -82,7 +83,7 @@ module.exports = {
                 
 				//! Return Api   
 				ctx.params.title = "logs.service -> Veri Arama"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
@@ -96,7 +97,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "logs.service -> Veri Arama"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Logs  Bulunmadı"
 			
@@ -121,7 +122,7 @@ module.exports = {
                 
 				//! Return Api   
 				ctx.params.title = "logs.service -> Veri Arama"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
@@ -135,7 +136,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "logs.service -> Veri Arama"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Logs  Bulunmadı"
 			
@@ -160,7 +161,7 @@ module.exports = {
                 
 				//! Return Api   
 				ctx.params.title = "logs.service -> Veri Arama"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
@@ -174,7 +175,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "logs.service -> Veri Arama"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Logs  Bulunmadı"
 			
@@ -199,7 +200,7 @@ module.exports = {
                 
 				//! Return Api   
 				ctx.params.title = "logs.service -> Veri Arama"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=dbFind.length
 				ctx.params.DB = dbFind
@@ -214,7 +215,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "logs.service -> Veri Arama"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
 				ctx.params.DB = "Logs  Bulunmadı"
@@ -234,14 +235,15 @@ module.exports = {
 		async find_user_table(ctx) {
 
 			// ! Arama
-			const dbFind = db.filter(u => u.created_byToken == ctx.params.created_byToken && u.tablo == ctx.params.tablo);
+			const dbFind = db.filter(u => u.created_byToken == ctx.params.created_byToken && u.table == ctx.params.table);
+			delete ctx.params.table
 
 			//! Veri Varsa
 			if (dbFind) {	               
                 
 				//! Return Api   
 				ctx.params.title = "logs.service -> Veri Arama"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=dbFind.length
 				ctx.params.DB = dbFind
@@ -256,7 +258,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "logs.service -> Veri Arama"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
 				ctx.params.DB = "Logs  Bulunmadı"
@@ -273,6 +275,135 @@ module.exports = {
 
 			return ctx.params
 		},
+		async find_table(ctx) {
+
+			// ! Arama
+			const dbFind = db.filter(u => u.table == ctx.params.table);
+			delete ctx.params.table
+
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "logs.service -> Veri Arama"
+				ctx.params.table = "logs.json"
+				ctx.params.status = 1
+				ctx.params.size=dbFind.length
+				ctx.params.DB = dbFind
+			
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[Logs] [Find] Veri Arama [ /api/logs/find_table ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "logs.service -> Veri Arama"
+				ctx.params.table = "logs.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.DB = "Logs  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[Logs] [Find] Veri Bulunamadı [ /api/logs/find_table ] ' + '\u001b[0m');	
+
+			}
+
+            //! Return
+			delete ctx.params.token
+			delete ctx.params.created_byToken
+
+			return ctx.params
+		},
+		async find_fromToken(ctx) {
+
+			// ! Arama
+			const dbFind = db.filter(u => u.fromToken == ctx.params.fromToken);
+
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "logs.service -> Veri Arama"
+				ctx.params.table = "logs.json"
+				ctx.params.status = 1
+				ctx.params.size=dbFind.length
+				ctx.params.DB = dbFind
+			
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[Logs] [Find] Veri Arama [ /api/logs/find_fromToken ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "logs.service -> Veri Arama"
+				ctx.params.table = "logs.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.DB = "Logs  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[Logs] [Find] Veri Bulunamadı [ /api/logs/find_fromToken ] ' + '\u001b[0m');	
+
+			}
+
+            //! Return
+			delete ctx.params.token
+			delete ctx.params.created_byToken
+			delete ctx.params.fromToken
+
+			return ctx.params
+		},
+		async find_user_fromToken(ctx) {
+
+			// ! Arama
+			const dbFind = db.filter(u => u.created_byToken == ctx.params.created_byToken && u.fromToken == ctx.params.fromToken);
+
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "logs.service -> Veri Arama"
+				ctx.params.table = "logs.json"
+				ctx.params.status = 1
+				ctx.params.size=dbFind.length
+				ctx.params.DB = dbFind
+			
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[Logs] [Find] Veri Arama [ /api/logs/find_user_fromToken ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "logs.service -> Veri Arama"
+				ctx.params.table = "logs.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.DB = "Logs  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[Logs] [Find] Veri Bulunamadı [ /api/logs/find_user_fromToken ] ' + '\u001b[0m');	
+
+			}
+
+            //! Return
+			delete ctx.params.token
+			delete ctx.params.created_byToken
+			delete ctx.params.fromToken
+
+			return ctx.params
+		},
 		async add(ctx) {  
 
 			try {
@@ -282,7 +413,7 @@ module.exports = {
 
 				let TokenInfo={				
 					id: TokenId,
-					tablo: ctx.params.tablo,
+					table: ctx.params.table,
 					title: ctx.params.title
 				}
 				
@@ -294,7 +425,7 @@ module.exports = {
 				//! Eklenecek veriler
 				const willSaveData = {
 					id: TokenId,			
-					tablo: ctx.params.tablo,
+					table: ctx.params.table,
 					title: ctx.params.title,
 					description: ctx.params.description,
 					logStatus: ctx.params.logStatus,
@@ -331,11 +462,14 @@ module.exports = {
 					console.log('\u001b[' + 32 + 'm' + '[Logs] [Json] [Add] Json Veri Kayıt Edildi [ logs.json ] ' + '\u001b[0m');								
 					
 				});
-				// End Json içine Verileri Yazıyor -> db					
+				// End Json içine Verileri Yazıyor -> db
+				
+				//! Delete
+				delete ctx.params.table
 
 				//! Return Api   
 				ctx.params.title = "logs.service -> Veri Ekleme"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.mesaj = "Veri Eklendi"	
 				
@@ -347,7 +481,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "logs.service -> Veri Ekleme"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 0
 				ctx.params.mesaj = "Veri Eklenemedi"	
 				
@@ -394,12 +528,14 @@ module.exports = {
 					console.log('\u001b[' + 32 + 'm' + '[Logs] [Json] [Update] Json Veri Kayıt Edildi [ logs.json ] ' + '\u001b[0m');								
 					
 				});
-				// End Json içine Verileri Yazıyor -> db	
-					
+				// End Json içine Verileri Yazıyor -> db
+			  
+				//! Delete
+				delete ctx.params.table
               
                 //! Return Api	
 				ctx.params.title = "logs.service -> Veri Güncelleme"
-				ctx.params.tablo = "logs.json"        
+				ctx.params.table = "logs.json"        
 				ctx.params.status = 1			
 				ctx.params.mesaj="Veri Güncellendi"
 
@@ -414,7 +550,7 @@ module.exports = {
 				
                //! Return Api	
 			   ctx.params.title = "logs.service -> Veri Güncelleme"
-			   ctx.params.tablo = "logs.json"        
+			   ctx.params.table = "logs.json"        
 			   ctx.params.status = 0			
 			   ctx.params.mesaj="Veri Güncellenemedi"
 
@@ -456,7 +592,7 @@ module.exports = {
 				
                 //! Return Api   
 				ctx.params.title = "logs.service -> Veri Silme"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.mesaj = "Veri Silindi"	
 				
@@ -468,7 +604,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "logs.service -> Veri Silme"
-				ctx.params.tablo = "logs.json"
+				ctx.params.table = "logs.json"
 				ctx.params.status = 0
 				ctx.params.mesaj = "Veri Silinemedi"	
 				
@@ -517,7 +653,7 @@ module.exports = {
               
                 //! Return Api	
 				ctx.params.title = "logs.service -> Veri Geçisi Silme"
-				ctx.params.tablo = "logs.json"        
+				ctx.params.table = "logs.json"        
 				ctx.params.status = 1			
 				ctx.params.mesaj="Veri Güncellendi"
 
@@ -532,7 +668,7 @@ module.exports = {
 				
                //! Return Api	
 			   ctx.params.title = "logs.service -> Veri Geçisi Silme"
-			   ctx.params.tablo = "logs.json"        
+			   ctx.params.table = "logs.json"        
 			   ctx.params.status = 0			
 			   ctx.params.mesaj="Veri Güncellenemedi"
 

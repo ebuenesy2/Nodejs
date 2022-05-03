@@ -208,7 +208,9 @@ module.exports = {
 			fastify.post('/api/logs/find_token', async (req, res) => this.broker.call("logs.find_token",{...req.body})) //! Search Token	
 			fastify.post('/api/logs/find_user', async (req, res) => this.broker.call("logs.find_user",{...req.body})) //! Search User	
 			fastify.post('/api/logs/find_user_table', async (req, res) => this.broker.call("logs.find_user_table",{...req.body})) //! Search User - Tablo	
-			fastify.post('/api/logs/find_table', async (req, res) => this.broker.call("logs.find_tablo",{...req.body})) //! Search User - Tablo	
+			fastify.post('/api/logs/find_table', async (req, res) => this.broker.call("logs.find_table",{...req.body})) //! Search  Tablo	
+			fastify.post('/api/logs/find_fromToken', async (req, res) => this.broker.call("logs.find_fromToken",{...req.body})) //! Search  FromToken	
+			fastify.post('/api/logs/find_user_fromToken', async (req, res) => this.broker.call("logs.find_user_fromToken",{...req.body})) //! Search  FromToken	
 
 			fastify.post('/api/logs/add', async (req, res) => this.broker.call("logs.add",{...req.body})) //! CREATE
 			fastify.post('/api/logs/update', async (req, res) => this.broker.call("logs.update",{...req.body})) //! UPDATE
