@@ -21,9 +21,7 @@
 				let TokenInfo={				
 					id: TokenId,
 					title: ctx.params.title,
-					content: ctx.params.content,
-					created_at: CreateDate,
-                    created_byToken: ctx.params.created_byToken				
+					content: ctx.params.content							
 				}
 				
 				const secret = 'secret';
