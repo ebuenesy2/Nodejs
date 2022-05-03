@@ -13,6 +13,7 @@ Bildirim verilerini tutuyor
 * Tablo
 * Title
 * Description
+* FromToken -> Hangi Veri Olduğu Kayıt edilecek
 * Created_byToken
  ```
 
