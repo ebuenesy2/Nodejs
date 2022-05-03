@@ -19,6 +19,15 @@ Api Return
 	ctx.params.DB = db		
  ```
  
+  ```
+   //! Return Api	
+   ctx.params.title = "note.service -> Veri Güncelleme"
+   ctx.params.table = "note.json"        
+   ctx.params.status = 0			
+   ctx.params.message="Veri Güncellenemedi"	
+ ```
+ 
+ 
  
  ## Gelen Veri
  
