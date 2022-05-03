@@ -58,8 +58,4 @@ Protokol yazma
 * SSK Güncelleme Başarılı : faq_update_successful
 * SSK Silme Başarılı : faq_delete_successful
 
-* Blog Ekleme Başarılı : blogs_add_successful
-* Blog Güncelleme Başarılı : blogs_update_successful
-* Blog Silme Başarılı : blogs_delete_successful
-
  ```
