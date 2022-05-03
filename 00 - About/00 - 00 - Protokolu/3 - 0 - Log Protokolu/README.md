@@ -13,6 +13,7 @@ Bildirim verilerini tutuyor
 * Tablo
 * Title
 * Description
+* LogStatus -> successful / error
 * FromToken -> Hangi Veri Olduğu Kayıt edilecek
 * Created_byToken
  ```
