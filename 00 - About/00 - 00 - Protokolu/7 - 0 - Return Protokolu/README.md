@@ -18,4 +18,16 @@ Api Return
 	ctx.params.size=db.length
 	ctx.params.DB = db		
  ```
+ 
+ 
+ ## Gelen Veri
+ 
+ ```
+    "title": "logs.service -> Tüm Veriler",
+    "tablo": "logs.json",
+    "status": 1,
+    "size": 5,
+    "DB": []
+ ```
+
 
