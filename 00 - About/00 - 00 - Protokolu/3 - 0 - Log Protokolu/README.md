@@ -14,7 +14,7 @@ Bildirim verilerini tutuyor
 * Title
 * Description
 * LogStatus -> successful / error
-* FromToken -> Hangi Veri Olduğu Kayıt edilecek
+* FromToken -> Kayıt Edilecek Veri
 * Created_byToken
  ```
 
