@@ -13,7 +13,8 @@ module.exports = {
 		async info(ctx) {
 
 			//! Return Api
-			ctx.params.title = "faq.service"
+			ctx.params.title = "faq.service -> Info"
+			ctx.params.table = "faq.json"
 			ctx.params.time = dayjs().toDate()
 			ctx.params.APi_URL = process.env.APi_URL
 
@@ -46,7 +47,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "faq.service -> Tüm Veriler"
-				ctx.params.tablo = "faq.json"
+				ctx.params.table = "faq.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
 				ctx.params.DB = db		
@@ -58,7 +59,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "faq.service -> Tüm Veriler"
-				ctx.params.tablo = "faq.json"
+				ctx.params.table = "faq.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
 				ctx.params.DB = error
@@ -82,7 +83,7 @@ module.exports = {
                 
 				//! Return Api   
 				ctx.params.title = "faq.service -> Veri Arama"
-				ctx.params.tablo = "faq.json"
+				ctx.params.table = "faq.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
@@ -96,7 +97,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "faq.service -> Veri Arama"
-				ctx.params.tablo = "faq.json"
+				ctx.params.table = "faq.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Faq  Bulunmadı"
 			
@@ -121,7 +122,7 @@ module.exports = {
                 
 				//! Return Api   
 				ctx.params.title = "faq.service -> Veri Arama"
-				ctx.params.tablo = "faq.json"
+				ctx.params.table = "faq.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
@@ -135,7 +136,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "faq.service -> Veri Arama"
-				ctx.params.tablo = "faq.json"
+				ctx.params.table = "faq.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Faq  Bulunmadı"
 			
@@ -160,7 +161,7 @@ module.exports = {
                 
 				//! Return Api   
 				ctx.params.title = "faq.service -> Veri Arama"
-				ctx.params.tablo = "faq.json"
+				ctx.params.table = "faq.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
@@ -174,7 +175,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "faq.service -> Veri Arama"
-				ctx.params.tablo = "faq.json"
+				ctx.params.table = "faq.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Faq  Bulunmadı"
 			
@@ -199,7 +200,7 @@ module.exports = {
                 
 				//! Return Api   
 				ctx.params.title = "faq.service -> Veri Arama"
-				ctx.params.tablo = "faq.json"
+				ctx.params.table = "faq.json"
 				ctx.params.status = 1
 				ctx.params.size=dbFind.length
 				ctx.params.DB = dbFind
@@ -214,7 +215,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "faq.service -> Veri Arama"
-				ctx.params.tablo = "faq.json"
+				ctx.params.table = "faq.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
 				ctx.params.DB = "Faq  Bulunmadı"
@@ -288,19 +289,19 @@ module.exports = {
 				// //! ----------- Log ----------------------------- 	
 				// let logs_add = await ctx.call('logs.add', {					
 				// 	userToken: ctx.params.FromUserToken,
-				// 	from: "mesaj",
+				// 	from: "message",
 				// 	fromToken: jwt,
 				// 	name: "message_add_successful",
-				// 	description: "Mesaj Yazma Başarılı"
+				// 	description: "message Yazma Başarılı"
 				// })			
 				// //! ----------- Log Son ----------------------------- 
 
 
 				//! Return Api   
 				ctx.params.title = "faq.service -> Veri Ekleme"
-				ctx.params.tablo = "faq.json"
+				ctx.params.table = "faq.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Veri Eklendi"	
+				ctx.params.message = "Veri Eklendi"	
 				
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Faq] [Add] Veri Eklendi [ /api/faq/add ] ' + '\u001b[0m');	
@@ -310,9 +311,9 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "faq.service -> Veri Ekleme"
-				ctx.params.tablo = "faq.json"
+				ctx.params.table = "faq.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Veri Eklenemedi"	
+				ctx.params.message = "Veri Eklenemedi"	
 				
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[Faq] [Add] Veri Eklenemedi [ /api/faq/add ] ' + '\u001b[0m');	
@@ -370,9 +371,9 @@ module.exports = {
               
                 //! Return Api	
 				ctx.params.title = "faq.service -> Veri Güncelleme"
-				ctx.params.tablo = "faq.json"        
+				ctx.params.table = "faq.json"        
 				ctx.params.status = 1			
-				ctx.params.mesaj="Veri Güncellendi"
+				ctx.params.message="Veri Güncellendi"
 
 				//Console Yazma	
 				console.log('\u001b[' + 32 + 'm' + '[Faq] [Update] Veri Güncelleme [ /api/faq/update ]' + '\u001b[0m');
@@ -385,9 +386,9 @@ module.exports = {
 				
                //! Return Api	
 			   ctx.params.title = "faq.service -> Veri Güncelleme"
-			   ctx.params.tablo = "faq.json"        
+			   ctx.params.table = "faq.json"        
 			   ctx.params.status = 0			
-			   ctx.params.mesaj="Veri Güncellenemedi"
+			   ctx.params.message="Veri Güncellenemedi"
 
 			   //Console Yazma	
 			   console.log('\u001b[' + 31 + 'm' + '[Faq] [Update] Veri Güncellenemedi [ /api/faq/update ] ' + '\u001b[0m');
@@ -439,9 +440,9 @@ module.exports = {
 				
                 //! Return Api   
 				ctx.params.title = "faq.service -> Veri Silme"
-				ctx.params.tablo = "faq.json"
+				ctx.params.table = "faq.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Veri Silindi"	
+				ctx.params.message = "Veri Silindi"	
 				
 				//Console Yazma	
 			    console.log('\u001b[' + 32 + 'm' + '[Faq] [Delete] Veri Silindi [ /api/faq/delete/:id ] ' + '\u001b[0m');
@@ -451,9 +452,9 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "faq.service -> Veri Silme"
-				ctx.params.tablo = "faq.json"
+				ctx.params.table = "faq.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Veri Silinemedi"	
+				ctx.params.message = "Veri Silinemedi"	
 				
 				//Console Yazma	
 				console.log('\u001b[' + 31 + 'm' + '[Faq] [Delete] Veri Silinemedi [ /api/faq/delete/:id ] ' + '\u001b[0m');
@@ -510,9 +511,9 @@ module.exports = {
               
                 //! Return Api	
 				ctx.params.title = "faq.service -> Veri Geçisi Silme"
-				ctx.params.tablo = "faq.json"        
+				ctx.params.table = "faq.json"        
 				ctx.params.status = 1			
-				ctx.params.mesaj="Veri Güncellendi"
+				ctx.params.message="Veri Güncellendi"
 
 				//Console Yazma	
 				console.log('\u001b[' + 32 + 'm' + '[Faq] [Delete_Updated] Veri Güncelleme [ /api/faq/update ]' + '\u001b[0m');
@@ -525,9 +526,9 @@ module.exports = {
 				
                //! Return Api	
 			   ctx.params.title = "faq.service -> Veri Geçisi Silme"
-			   ctx.params.tablo = "faq.json"        
+			   ctx.params.table = "faq.json"        
 			   ctx.params.status = 0			
-			   ctx.params.mesaj="Veri Güncellenemedi"
+			   ctx.params.message="Veri Güncellenemedi"
 
 			   //Console Yazma	
 			   console.log('\u001b[' + 31 + 'm' + '[Faq] [Delete_Updated] Veri Güncellenemedi [ /api/faq/update ] ' + '\u001b[0m');

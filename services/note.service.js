@@ -13,7 +13,8 @@ module.exports = {
 		async info(ctx) {
 
 			//! Return Api
-			ctx.params.title = "note.service"
+			ctx.params.title = "note.service -> Info"
+			ctx.params.table = "note.json"
 			ctx.params.time = dayjs().toDate()
 			ctx.params.APi_URL = process.env.APi_URL
 
@@ -46,7 +47,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "note.service -> Tüm Veriler"
-				ctx.params.tablo = "note.json"
+				ctx.params.table = "note.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
 				ctx.params.DB = db		
@@ -58,7 +59,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "note.service -> Tüm Veriler"
-				ctx.params.tablo = "note.json"
+				ctx.params.table = "note.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
 				ctx.params.DB = error
@@ -82,7 +83,7 @@ module.exports = {
                 
 				//! Return Api   
 				ctx.params.title = "note.service -> Veri Arama"
-				ctx.params.tablo = "note.json"
+				ctx.params.table = "note.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
@@ -96,7 +97,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "note.service -> Veri Arama"
-				ctx.params.tablo = "note.json"
+				ctx.params.table = "note.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Note  Bulunmadı"
 			
@@ -121,7 +122,7 @@ module.exports = {
                 
 				//! Return Api   
 				ctx.params.title = "note.service -> Veri Arama"
-				ctx.params.tablo = "note.json"
+				ctx.params.table = "note.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
@@ -135,7 +136,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "note.service -> Veri Arama"
-				ctx.params.tablo = "note.json"
+				ctx.params.table = "note.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Note  Bulunmadı"
 			
@@ -160,7 +161,7 @@ module.exports = {
                 
 				//! Return Api   
 				ctx.params.title = "note.service -> Veri Arama"
-				ctx.params.tablo = "note.json"
+				ctx.params.table = "note.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
@@ -174,7 +175,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "note.service -> Veri Arama"
-				ctx.params.tablo = "note.json"
+				ctx.params.table = "note.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Note  Bulunmadı"
 			
@@ -199,7 +200,7 @@ module.exports = {
                 
 				//! Return Api   
 				ctx.params.title = "note.service -> Veri Arama"
-				ctx.params.tablo = "note.json"
+				ctx.params.table = "note.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
@@ -213,7 +214,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "note.service -> Veri Arama"
-				ctx.params.tablo = "note.json"
+				ctx.params.table = "note.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Note  Bulunmadı"
 			
@@ -296,9 +297,9 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "note.service -> Veri Ekleme"
-				ctx.params.tablo = "note.json"
+				ctx.params.table = "note.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Veri Eklendi"	
+				ctx.params.message = "Veri Eklendi"	
 				
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Note] [Add] Veri Eklendi [ /api/note/add ] ' + '\u001b[0m');	
@@ -308,9 +309,9 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "note.service -> Veri Ekleme"
-				ctx.params.tablo = "note.json"
+				ctx.params.table = "note.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Veri Eklenemedi"	
+				ctx.params.message = "Veri Eklenemedi"	
 				
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[Note] [Add] Veri Eklenemedi [ /api/note/add ] ' + '\u001b[0m');	
@@ -319,7 +320,6 @@ module.exports = {
 
 			//! Delete
 		    delete ctx.params.created_byToken 
-		    delete ctx.params.title 
 		    delete ctx.params.content 
               
 			return ctx.params
@@ -368,9 +368,9 @@ module.exports = {
               
                 //! Return Api	
 				ctx.params.title = "note.service -> Veri Güncelleme"
-				ctx.params.tablo = "note.json"        
+				ctx.params.table = "note.json"        
 				ctx.params.status = 1			
-				ctx.params.mesaj="Veri Güncellendi"
+				ctx.params.message="Veri Güncellendi"
 
 				//Console Yazma	
 				console.log('\u001b[' + 32 + 'm' + '[Note] [Update] Veri Güncelleme [ /api/note/update ]' + '\u001b[0m');
@@ -383,9 +383,9 @@ module.exports = {
 				
                //! Return Api	
 			   ctx.params.title = "note.service -> Veri Güncelleme"
-			   ctx.params.tablo = "note.json"        
+			   ctx.params.table = "note.json"        
 			   ctx.params.status = 0			
-			   ctx.params.mesaj="Veri Güncellenemedi"
+			   ctx.params.message="Veri Güncellenemedi"
 
 			   //Console Yazma	
 			   console.log('\u001b[' + 31 + 'm' + '[Note] [Update] Veri Güncellenemedi [ /api/note/update ] ' + '\u001b[0m');
@@ -395,7 +395,6 @@ module.exports = {
 			//! Return
 			delete ctx.params.updated_byToken 
 			delete ctx.params.token 
-			delete ctx.params.title 
 			delete ctx.params.content 
 
 			return ctx.params
@@ -437,9 +436,9 @@ module.exports = {
 				
                 //! Return Api   
 				ctx.params.title = "note.service -> Veri Silme"
-				ctx.params.tablo = "note.json"
+				ctx.params.table  = "note.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Veri Silindi"	
+				ctx.params.message = "Veri Silindi"	
 				
 				//Console Yazma	
 			    console.log('\u001b[' + 32 + 'm' + '[Note] [Delete] Veri Silindi [ /api/note/delete/:id ] ' + '\u001b[0m');
@@ -449,9 +448,9 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "note.service -> Veri Silme"
-				ctx.params.tablo = "note.json"
+				ctx.params.table  = "note.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Veri Silinemedi"	
+				ctx.params.message = "Veri Silinemedi"	
 				
 				//Console Yazma	
 				console.log('\u001b[' + 31 + 'm' + '[Note] [Delete] Veri Silinemedi [ /api/note/delete/:id ] ' + '\u001b[0m');
@@ -508,9 +507,9 @@ module.exports = {
               
                 //! Return Api	
 				ctx.params.title = "note.service -> Veri Geçisi Silme"
-				ctx.params.tablo = "note.json"        
+				ctx.params.table  = "note.json"        
 				ctx.params.status = 1			
-				ctx.params.mesaj="Veri Güncellendi"
+				ctx.params.message="Veri Güncellendi"
 
 				//Console Yazma	
 				console.log('\u001b[' + 32 + 'm' + '[Note] [Delete_Updated] Veri Güncelleme [ /api/note/update ]' + '\u001b[0m');
@@ -523,9 +522,9 @@ module.exports = {
 				
                //! Return Api	
 			   ctx.params.title = "note.service -> Veri Geçisi Silme"
-			   ctx.params.tablo = "note.json"        
+			   ctx.params.table  = "note.json"        
 			   ctx.params.status = 0			
-			   ctx.params.mesaj="Veri Güncellenemedi"
+			   ctx.params.message="Veri Güncellenemedi"
 
 			   //Console Yazma	
 			   console.log('\u001b[' + 31 + 'm' + '[Note] [Delete_Updated] Veri Güncellenemedi [ /api/note/update ] ' + '\u001b[0m');

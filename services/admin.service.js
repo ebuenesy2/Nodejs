@@ -13,7 +13,8 @@ module.exports = {
 		async info(ctx) {
 		
 			//! Return Api
-			ctx.params.title = "admin.service"
+			ctx.params.title = "admin.service -> Info"
+			ctx.params.table = "admin.json"
 			ctx.params.time = dayjs().toDate()
 			ctx.params.APi_URL=process.env.APi_URL
 
@@ -47,7 +48,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "admin.service -> Tüm Veriler"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
 				ctx.params.DB = db		
@@ -59,7 +60,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "admin.service -> Tüm Veriler"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
 				ctx.params.DB = error
@@ -83,7 +84,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "admin.service -> Veri Arama"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 
@@ -96,7 +97,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "admin.service -> Veri Arama"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Veri Bulunamadı"
 
@@ -119,7 +120,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "admin.service -> Veri Arama"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 
@@ -132,7 +133,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "admin.service -> Veri Arama"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Veri Bulunamadı"
 
@@ -155,7 +156,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "admin.service -> Veri Arama"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 
@@ -168,7 +169,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "admin.service -> Veri Arama"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Veri Bulunamadı"
 
@@ -188,7 +189,7 @@ module.exports = {
 				    //! Sabit
 				    let error_check=0;    
 				    let status=0;    
-				    let mesaj="";    
+				    let message="";    
 
 					// ! Find
 					const admin_email = db.find(u => u.email == ctx.params.email);
@@ -199,28 +200,28 @@ module.exports = {
 					if(admin_email) {
 						error_check=1
 						status = 0
-						mesaj = "Bu Email Kayıtlıdır."			
+						message = "Bu Email Kayıtlıdır."			
 					}
 
 					//! email check
 					if(ctx.params.email==""||ctx.params.email==null) {
 						error_check=1
 						status = 0
-						mesaj = "Email Boş Geçiremez."						
+						message = "Email Boş Geçiremez."						
 					}
 
 					//! username check
 					if(admin_username) {
 						error_check=1
 						status = 0
-						mesaj = "Bu Kullanıcı Adı [ username ] Kayıtlıdır."			
+						message = "Bu Kullanıcı Adı [ username ] Kayıtlıdır."			
 					}
 
 					//! username check
 					if(ctx.params.username==""||ctx.params.username==null) {
 						error_check=1
 						status = 0
-						mesaj = "Kullanıcı Adı [ username ] Boş Geçiremez."						
+						message = "Kullanıcı Adı [ username ] Boş Geçiremez."						
 					}
 
 					
@@ -228,14 +229,14 @@ module.exports = {
 					if(admin_tel) {
 						error_check=1
 						status = 0
-						mesaj = "Bu Telefon Numarası [ tel ] Kayıtlıdır."			
+						message = "Bu Telefon Numarası [ tel ] Kayıtlıdır."			
 					}
 
 					//! username check
 					if(ctx.params.tel==""||ctx.params.tel==null) {
 						error_check=1
 						status = 0
-						mesaj = "Bu Telefon Numarası [ tel ] Kayıtlıdır."					
+						message = "Bu Telefon Numarası [ tel ] Kayıtlıdır."					
 					}
                     
 					
@@ -318,20 +319,20 @@ module.exports = {
 
 							//! Return Api   
 							status = 1	
-							mesaj="Kullanıcı Eklendi"	
+							message="Kullanıcı Eklendi"	
 					}
 
 					//! Return Api   
 					ctx.params.title = "admin.service -> Veri Ekleme"
-					ctx.params.tablo = "admin.json"
+					ctx.params.table = "admin.json"
 					ctx.params.status = status
-					ctx.params.mesaj = mesaj	
+					ctx.params.message = message	
 
 					//Console Yazma
 					if(status==1) { console.log('\u001b[' + 32 + 'm' + '[Admin] [Add] Kullanıcı Veri Eklendi [ /api/admin/add ]' + '\u001b[0m'); }
 					if (status == 0) {
 						console.log('\u001b[' + 31 + 'm' + '[Admin] [Add] Kullanıcı Veri Eklenemedi [ /api/admin/add ]' + '\u001b[0m');
-						console.log('\u001b[' + 31 + 'm' + '[Admin] [Add] Error: '+mesaj + '\u001b[0m');
+						console.log('\u001b[' + 31 + 'm' + '[Admin] [Add] Error: '+message + '\u001b[0m');
 					}
 										
 													    
@@ -339,9 +340,9 @@ module.exports = {
 
                     //! Return Api   
 					ctx.params.title = "admin.service -> Veri Ekleme"
-					ctx.params.tablo = "admin.json"			
+					ctx.params.table = "admin.json"			
 					ctx.params.status = 0
-					ctx.params.mesaj = "Kullanıcı Eklenemedi"			
+					ctx.params.message = "Kullanıcı Eklenemedi"			
 
 					//Console Yazma
 					console.log('\u001b[' + 31 + 'm' + '[Admin] [Add] Kullanıcı Veri Eklenemedi [ /api/admin/add ]' + '\u001b[0m');
@@ -489,9 +490,9 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "admin.service -> Veri Guncelleme"
-				ctx.params.tablo = "admin.json"			
+				ctx.params.table = "admin.json"			
 				ctx.params.status = 1
-				ctx.params.mesaj = "Kullanıcı Kayıt Güncellendi"	
+				ctx.params.message = "Kullanıcı Kayıt Güncellendi"	
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Admin] [Update] Kullanıcı Kayıt Güncellendi [ /api/admin/update ] ' + '\u001b[0m');			         
@@ -503,9 +504,9 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "admin.service -> Veri Guncelleme"
-				ctx.params.tablo = "admin.json"			
+				ctx.params.table = "admin.json"			
 				ctx.params.status = 0
-				ctx.params.mesaj = "Kullanıcı Guncellenemedi"			
+				ctx.params.message = "Kullanıcı Guncellenemedi"			
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[Admin] [Update] Kullanıcı Kayıt Guncellenemedi [ /api/admin/update ] ' + '\u001b[0m');
@@ -662,9 +663,9 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "admin.service -> Veri Guncelleme"
-				ctx.params.tablo = "admin.json"			
+				ctx.params.table = "admin.json"			
 				ctx.params.status = 1
-				ctx.params.mesaj = "Kullanıcı Kayıt Güncellendi"	
+				ctx.params.message = "Kullanıcı Kayıt Güncellendi"	
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Admin] [Update] Kullanıcı Kayıt Güncellendi [ /api/admin/updateUrl ] ' + '\u001b[0m');		
@@ -676,9 +677,9 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "admin.service -> Veri Guncelleme"
-				ctx.params.tablo = "admin.json"			
+				ctx.params.table = "admin.json"			
 				ctx.params.status = 0
-				ctx.params.mesaj = "Kullanıcı Guncellenemedi"			
+				ctx.params.message = "Kullanıcı Guncellenemedi"			
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[Admin] [Update] Kullanıcı Kayıt Guncellenemedi [ /api/admin/updateUrl ] ' + '\u001b[0m');
@@ -771,9 +772,9 @@ module.exports = {
 				
 				//! Return Api
 				ctx.params.title = "admin.service -> Veri Silme"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Kullanıcı Silindi"
+				ctx.params.message = "Kullanıcı Silindi"
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Admin] [Delete] Kullanıcı Silindi [ /api/admin/delete ]' + '\u001b[0m');	
@@ -782,9 +783,9 @@ module.exports = {
 				
 				//! Return Api
 				ctx.params.title = "admin.service -> Veri Silme"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Kullanıcı Silinemedi"
+				ctx.params.message = "Kullanıcı Silinemedi"
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[Admin] [Delete] Kullanıcı Silinemedi [ /api/admin/delete ]' + '\u001b[0m');	
@@ -838,9 +839,9 @@ module.exports = {
               
                 //! Return Api	
 				ctx.params.title = "admin.service -> Veri Geçisi Silme"
-				ctx.params.tablo = "admin.json"        
+				ctx.params.table = "admin.json"        
 				ctx.params.status = 1			
-				ctx.params.mesaj="Veri Güncellendi"
+				ctx.params.message="Veri Güncellendi"
 
 				//Console Yazma	
 				console.log('\u001b[' + 32 + 'm' + '[Admin] [Delete_Updated] Veri Güncelleme [ /api/admin/update ]' + '\u001b[0m');
@@ -853,9 +854,9 @@ module.exports = {
 				
                //! Return Api	
 			   ctx.params.title = "admin.service -> Veri Geçisi Silme"
-			   ctx.params.tablo = "admin.json"        
+			   ctx.params.table = "admin.json"        
 			   ctx.params.status = 0			
-			   ctx.params.mesaj="Veri Güncellenemedi"
+			   ctx.params.message="Veri Güncellenemedi"
 
 			   //Console Yazma	
 			   console.log('\u001b[' + 31 + 'm' + '[Admin] [Delete_Updated] Veri Güncellenemedi [ /api/admin/update ] ' + '\u001b[0m');
@@ -911,9 +912,9 @@ module.exports = {
 
 				//! Return Api
 				ctx.params.title = "Kullanıcı Login"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Başarılı Giriş  Oldu"
+				ctx.params.message = "Başarılı Giriş  Oldu"
 				ctx.params.userInfo=dbFind[0]
 
 				//Console Yazma
@@ -945,9 +946,9 @@ module.exports = {
 			
 				//! Return Api
 				ctx.params.title = "Kullanıcı Login"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Hatalı Giriş Oldu"
+				ctx.params.message = "Hatalı Giriş Oldu"
 				ctx.params.userInfo=null
 
 				//Console Yazma
@@ -1004,9 +1005,9 @@ module.exports = {
 
 				//! Return Api
 				ctx.params.title = "Kullanıcı Username Login"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Başarılı Giriş  Oldu"
+				ctx.params.message = "Başarılı Giriş  Oldu"
 				ctx.params.userInfo=dbFind[0]
 
 				//Console Yazma
@@ -1038,9 +1039,9 @@ module.exports = {
 			
 				//! Return Api
 				ctx.params.title = "Kullanıcı Username Login"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Hatalı Giriş Oldu"
+				ctx.params.message = "Hatalı Giriş Oldu"
 				ctx.params.userInfo=null
 
 				//Console Yazma
@@ -1097,9 +1098,9 @@ module.exports = {
 
 				//! Return Api
 				ctx.params.title = "Kullanıcı Loginout"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Başarılı Çıkış  Yapıldı"
+				ctx.params.message = "Başarılı Çıkış  Yapıldı"
 				ctx.params.userInfo=dbFind
 
 				//Console Yazma
@@ -1111,9 +1112,9 @@ module.exports = {
 
 				//! Return Api
 				ctx.params.title = "Kullanıcı Loginout"
-				ctx.params.tablo = "admin.json"
+				ctx.params.table = "admin.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Hatalı Giriş Oldu"
+				ctx.params.message = "Hatalı Giriş Oldu"
 				ctx.params.userInfo=null
 
 				//Console Yazma

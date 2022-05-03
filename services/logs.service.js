@@ -471,7 +471,7 @@ module.exports = {
 				ctx.params.title = "logs.service -> Veri Ekleme"
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Veri Eklendi"	
+				ctx.params.message = "Veri Eklendi"	
 				
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Logs] [Add] Veri Eklendi [ /api/logs/add ] ' + '\u001b[0m');	
@@ -483,7 +483,7 @@ module.exports = {
 				ctx.params.title = "logs.service -> Veri Ekleme"
 				ctx.params.table = "logs.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Veri Eklenemedi"	
+				ctx.params.message = "Veri Eklenemedi"	
 				
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[Logs] [Add] Veri Eklenemedi [ /api/logs/add ] ' + '\u001b[0m');	
@@ -537,7 +537,7 @@ module.exports = {
 				ctx.params.title = "logs.service -> Veri Güncelleme"
 				ctx.params.table = "logs.json"        
 				ctx.params.status = 1			
-				ctx.params.mesaj="Veri Güncellendi"
+				ctx.params.message="Veri Güncellendi"
 
 				//Console Yazma	
 				console.log('\u001b[' + 32 + 'm' + '[Logs] [Update] Veri Güncelleme [ /api/logs/update ]' + '\u001b[0m');
@@ -552,7 +552,7 @@ module.exports = {
 			   ctx.params.title = "logs.service -> Veri Güncelleme"
 			   ctx.params.table = "logs.json"        
 			   ctx.params.status = 0			
-			   ctx.params.mesaj="Veri Güncellenemedi"
+			   ctx.params.message="Veri Güncellenemedi"
 
 			   //Console Yazma	
 			   console.log('\u001b[' + 31 + 'm' + '[Logs] [Update] Veri Güncellenemedi [ /api/logs/update ] ' + '\u001b[0m');
@@ -594,7 +594,7 @@ module.exports = {
 				ctx.params.title = "logs.service -> Veri Silme"
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Veri Silindi"	
+				ctx.params.message = "Veri Silindi"	
 				
 				//Console Yazma	
 			    console.log('\u001b[' + 32 + 'm' + '[Logs] [Delete] Veri Silindi [ /api/logs/delete/:id ] ' + '\u001b[0m');
@@ -606,7 +606,7 @@ module.exports = {
 				ctx.params.title = "logs.service -> Veri Silme"
 				ctx.params.table = "logs.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Veri Silinemedi"	
+				ctx.params.message = "Veri Silinemedi"	
 				
 				//Console Yazma	
 				console.log('\u001b[' + 31 + 'm' + '[Logs] [Delete] Veri Silinemedi [ /api/logs/delete/:id ] ' + '\u001b[0m');
@@ -655,7 +655,7 @@ module.exports = {
 				ctx.params.title = "logs.service -> Veri Geçisi Silme"
 				ctx.params.table = "logs.json"        
 				ctx.params.status = 1			
-				ctx.params.mesaj="Veri Güncellendi"
+				ctx.params.message="Veri Güncellendi"
 
 				//Console Yazma	
 				console.log('\u001b[' + 32 + 'm' + '[Logs] [Delete_Updated] Veri Güncelleme [ /api/logs/delete_update ]' + '\u001b[0m');
@@ -670,7 +670,7 @@ module.exports = {
 			   ctx.params.title = "logs.service -> Veri Geçisi Silme"
 			   ctx.params.table = "logs.json"        
 			   ctx.params.status = 0			
-			   ctx.params.mesaj="Veri Güncellenemedi"
+			   ctx.params.message="Veri Güncellenemedi"
 
 			   //Console Yazma	
 			   console.log('\u001b[' + 31 + 'm' + '[Logs] [Delete_Updated] Veri Güncellenemedi [ /api/logs/delete_update ] ' + '\u001b[0m');

@@ -78,7 +78,8 @@ module.exports = {
 		async info(ctx) {
 
 			//! Return Api
-			ctx.params.title = "file.service"
+			ctx.params.title = "file.service -> Info"
+			ctx.params.table = "file.json"
 			ctx.params.time = dayjs().toDate()
 			ctx.params.APi_URL=process.env.APi_URL
 		
@@ -111,7 +112,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "file.service -> Tüm Veriler"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
 				ctx.params.DB = db		
@@ -123,7 +124,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "file.service -> Tüm Veriler"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
 				ctx.params.DB = error
@@ -147,7 +148,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "file.service -> Veri Arama"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 
@@ -160,7 +161,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "file.service -> Veri Arama"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Veri Bulunamadı"
 
@@ -183,7 +184,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "file.service -> Veri Post Arama"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 
@@ -196,7 +197,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "file.service -> Veri Post Arama"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Veri Bulunamadı"
 
@@ -219,7 +220,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "file.service -> Veri Token Arama"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 
@@ -232,7 +233,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "file.service -> Veri Arama"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Veri Bulunamadı"
 
@@ -255,7 +256,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "file.service -> Veri Kullanıcı Arama"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 1
                 ctx.params.size=dbFind.length
 				ctx.params.DB = dbFind
@@ -270,7 +271,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "file.service -> Veri Kullanıcı Arama"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
 				ctx.params.DB = "Veri Bulunmadı"
@@ -295,7 +296,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "file.service -> Veri Arama"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 1
                 ctx.params.size=dbFind.length
 				ctx.params.DB = dbFind
@@ -310,7 +311,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "file.service -> Veri Arama"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
 				ctx.params.DB = "Veri Bulunmadı"
@@ -400,9 +401,9 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "file.service -> Veri Ekleme"
-				ctx.params.tablo = "file.json"			
+				ctx.params.table = "file.json"			
 				ctx.params.status = 1
-				ctx.params.mesaj="Veri Eklendi"		
+				ctx.params.message="Veri Eklendi"		
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[File] [Add] Veri Eklendi [ /api/file/add ] ' + '\u001b[0m');
@@ -412,9 +413,9 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "file.service -> Veri Ekleme"
-				ctx.params.tablo = "file.json"			
+				ctx.params.table = "file.json"			
 				ctx.params.status = 0
-				ctx.params.mesaj="Veri Eklenemedi"			
+				ctx.params.message="Veri Eklenemedi"			
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[File] [Add] Veri Eklenemedi [ /api/file/add ] ' + '\u001b[0m');
@@ -484,9 +485,9 @@ module.exports = {
 
 			    //! Return Api
 				ctx.params.title = "file.service -> Veri Güncelleme"
-				ctx.params.tablo = "file.json"			
+				ctx.params.table = "file.json"			
 				ctx.params.status = 1
-				ctx.params.mesaj="Veri Güncellendi"
+				ctx.params.message="Veri Güncellendi"
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[File] [Update] Veri Güncellendi [ /api/file/update ]' + '\u001b[0m');
@@ -498,9 +499,9 @@ module.exports = {
 
 				//! Return Api
 				ctx.params.title = "file.service -> Veri Güncelleme"
-				ctx.params.tablo = "file.json"			
+				ctx.params.table = "file.json"			
 				ctx.params.status = 0
-				ctx.params.mesaj="Veri Güncellenemedi"
+				ctx.params.message="Veri Güncellenemedi"
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[File] [Update] Veri Güncellenemedi [ /api/file/update ]' + '\u001b[0m');
@@ -561,9 +562,9 @@ module.exports = {
 
 				//! Return Api
 				ctx.params.title = "file.service -> Veri Silme"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Veri Silindi"				
+				ctx.params.message = "Veri Silindi"				
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[File] [Delete] Veri Silindi [ /api/file/delete ]' + '\u001b[0m');
@@ -572,9 +573,9 @@ module.exports = {
 
 				//! Return Api
 				ctx.params.title = "file.service -> Veri Silme"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Veri Silinemedi"	
+				ctx.params.message = "Veri Silinemedi"	
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[File] [Delete] Veri Silinemedi [ /api/file/delete ]' + '\u001b[0m');
@@ -629,9 +630,9 @@ module.exports = {
 
 			    //! Return Api
 				ctx.params.title = "file.service -> Veri Geçisi Silme"
-				ctx.params.tablo = "file.json"			
+				ctx.params.table = "file.json"			
 				ctx.params.status = 1
-				ctx.params.mesaj="Veri Güncellendi"
+				ctx.params.message="Veri Güncellendi"
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[File] [Update] Veri Güncellendi [ /api/file/delete_update ]' + '\u001b[0m');
@@ -643,9 +644,9 @@ module.exports = {
 
 				//! Return Api
 				ctx.params.title = "file.service -> Veri Geçisi Silme"
-				ctx.params.tablo = "file.json"			
+				ctx.params.table = "file.json"			
 				ctx.params.status = 0
-				ctx.params.mesaj="Veri Güncellenemedi"
+				ctx.params.message="Veri Güncellenemedi"
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[File] [Update] Veri Güncellenemedi [ /api/file/delete_update ]' + '\u001b[0m');
@@ -702,7 +703,7 @@ module.exports = {
 		
 				//! Return Api
 				ctx.params.title = "file.service -> Dosya Bilgileri"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				if(fileName!="") { ctx.params.status = 1 }
 				if(fileName=="") { ctx.params.status = 0 }
 				
@@ -726,7 +727,7 @@ module.exports = {
 
 				//! Return Api
 				ctx.params.title = "file.service -> Dosya Bilgileri"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 0
 				
 				ctx.params.fileName="Dosya Bulunamadı"
@@ -947,10 +948,10 @@ module.exports = {
 
 				//! Return Api	
 				ctx.params.title = "file.service -> Dosya Yükleme"
-				ctx.params.tablo = "file.json"        
+				ctx.params.table = "file.json"        
 				ctx.params.status = status				
 				ctx.params.DB=fileData
-				ctx.params.mesaj="Dosya Yüklendi"
+				ctx.params.message="Dosya Yüklendi"
 				
 				//Console Yazma
 				if(status==1) { console.log('\u001b[' + 32 + 'm' + '[File] [Upload] Dosya Yüklendi [ /api/file/upload ]' + '\u001b[0m'); }
@@ -960,10 +961,10 @@ module.exports = {
 					
 				//! Return Api
 				ctx.params.title = "file.service -> Dosya Yükleme"
-				ctx.params.tablo = "file.json" 
+				ctx.params.table = "file.json" 
 				ctx.params.status = 0
 				ctx.params.DB="Dosya Yüklenemedi"
-				ctx.params.mesaj="Dosya Yüklenemedi"								
+				ctx.params.message="Dosya Yüklenemedi"								
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[File] [Upload] Dosya Yüklenemedi [ /api/file/upload ]' + '\u001b[0m');
@@ -1021,10 +1022,10 @@ module.exports = {
 
 				//! Return Api	
 				ctx.params.title = "file.service -> Dosya Güncelleme"
-				ctx.params.tablo = "file.json"        
+				ctx.params.table = "file.json"        
 				ctx.params.status = 1
 				ctx.params.DB=file_upload.DB
-				ctx.params.mesaj="Dosya Güncellendi"
+				ctx.params.message="Dosya Güncellendi"
 				
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[File] [Update] Dosya Güncellendi [ /api/file/updateFile ]' + '\u001b[0m');
@@ -1033,10 +1034,10 @@ module.exports = {
 
 				//! Return Api	
 				ctx.params.title = "file.service -> Dosya Güncelleme"
-				ctx.params.tablo = "file.json"        
+				ctx.params.table = "file.json"        
 				ctx.params.status = 0	
 				ctx.params.DB="Dosya Güncellenmedi"
-				ctx.params.mesaj="Dosya Güncellenmedi"	
+				ctx.params.message="Dosya Güncellenmedi"	
 				
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[File] [Update] Dosya Güncellenmedi [ /api/file/updateFile ]' + '\u001b[0m');
@@ -1090,7 +1091,7 @@ module.exports = {
 
 						//! Return
 						status=1;
-						mesaj="Dosya Silindi";	
+						message="Dosya Silindi";	
 					
 						//Console Yazma
 						console.log('\u001b[' + 32 + 'm' + '[File] [Delete] Dosya Silindi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');					
@@ -1098,7 +1099,7 @@ module.exports = {
 				 } 
 				 else {
 					 status=0;
-					 mesaj="Dosya Bulunamadı";
+					 message="Dosya Bulunamadı";
 					 logs_add="";
 
 					//Console Yazma
@@ -1108,7 +1109,7 @@ module.exports = {
 				} catch (error) {
 
 					status=1;				
-					mesaj="Dosya Silinemedi";
+					message="Dosya Silinemedi";
 					logs_add="";
 
 					//Console Yazma
@@ -1119,9 +1120,9 @@ module.exports = {
 				
 				//! Return Api
 				ctx.params.title="Dosya Silme"
-				ctx.params.tablo="file.json"
+				ctx.params.table="file.json"
 				ctx.params.status=status
-				ctx.params.mesaj=mesaj			
+				ctx.params.message=message			
 
 				//! Return Delete
 				delete ctx.params.userToken		
@@ -1175,7 +1176,7 @@ module.exports = {
 				
 				//! Return Api
 				ctx.params.title = "file.service -> Veri Bilgiler"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				if(fileName!="") { ctx.params.status = 1 }
 				if(fileName=="") { ctx.params.status = 0 }			
 				
@@ -1198,7 +1199,7 @@ module.exports = {
 
 				//! Return Api
 				ctx.params.title = "file.service -> Veri Bilgiler"
-				ctx.params.tablo = "file.json"
+				ctx.params.table = "file.json"
 				ctx.params.status = 0
 				
 				ctx.params.fileName="Dosya Bulunamadı"
@@ -1426,10 +1427,10 @@ module.exports = {
 
 				//! Return Api	
 				ctx.params.title = "file.service -> Dosya Yükleme"
-				ctx.params.tablo = "file.json"        
+				ctx.params.table = "file.json"        
 				ctx.params.status = status				
 				ctx.params.DB=fileData
-				ctx.params.mesaj="Dosya Yüklendi"	
+				ctx.params.message="Dosya Yüklendi"	
 
 				//Console Yazma
 				if(status==1) { console.log('\u001b[' + 32 + 'm' + '[File] [Upload] Dosya Yüklendi [ /api/file/uploadUrl ]' + '\u001b[0m'); }
@@ -1439,10 +1440,10 @@ module.exports = {
 
 				//! Return Api
 				ctx.params.title = "file.service -> Dosya Yükleme"
-				ctx.params.tablo = "file.json" 
+				ctx.params.table = "file.json" 
 				ctx.params.status = 0
 				ctx.params.DB="Dosya Yüklenemedi"
-				ctx.params.mesaj="Dosya Yüklenemedi"								
+				ctx.params.message="Dosya Yüklenemedi"								
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[File] [Upload] Dosya Yüklenemedi [ /api/file/uploadUrl ]' + '\u001b[0m');			
@@ -1499,10 +1500,10 @@ module.exports = {
 
 				//! Return Api	
 				ctx.params.title = "file.service -> Dosya Güncelleme"
-				ctx.params.tablo = "file.json"        
+				ctx.params.table = "file.json"        
 				ctx.params.status = 1
 				ctx.params.DB=file_upload.DB	
-				ctx.params.mesaj="Dosya Güncellendi"	
+				ctx.params.message="Dosya Güncellendi"	
 				
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[File] [Update] Dosya Güncellendi [ /api/file/updateFileUrl ]' + '\u001b[0m');
@@ -1511,10 +1512,10 @@ module.exports = {
 
 				//! Return Api	
 				ctx.params.title = "file.service -> Dosya Güncelleme"
-				ctx.params.tablo = "file.json"        
+				ctx.params.table = "file.json"        
 				ctx.params.status = 0
 				ctx.params.DB="Dosya Güncellenmedi"		
-				ctx.params.mesaj="Dosya Güncellenmedi"	
+				ctx.params.message="Dosya Güncellenmedi"	
 				
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[File] [Update] Dosya Güncellenmedi [ /api/file/updateFileUrl ]' + '\u001b[0m');

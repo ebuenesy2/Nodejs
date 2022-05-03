@@ -13,7 +13,8 @@ module.exports = {
 		async info(ctx) {
 
 			//! Return Api
-			ctx.params.title = "message.service"
+			ctx.params.title = "message.service -> Info"
+			ctx.params.table = "message.json"
 			ctx.params.time = dayjs().toDate()
 			ctx.params.APi_URL = process.env.APi_URL
 
@@ -46,7 +47,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "message.service -> Tüm Veriler"
-				ctx.params.tablo = "message.json"
+				ctx.params.table = "message.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
 				ctx.params.DB = db		
@@ -58,7 +59,7 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "message.service -> Tüm Veriler"
-				ctx.params.tablo = "message.json"
+				ctx.params.table = "message.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
 				ctx.params.DB = error
@@ -82,7 +83,7 @@ module.exports = {
                 
 				//! Return Api   
 				ctx.params.title = "message.service -> Veri Arama"
-				ctx.params.tablo = "message.json"
+				ctx.params.table = "message.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
@@ -96,7 +97,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "message.service -> Veri Arama"
-				ctx.params.tablo = "message.json"
+				ctx.params.table = "message.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Message  Bulunmadı"
 			
@@ -121,7 +122,7 @@ module.exports = {
                 
 				//! Return Api   
 				ctx.params.title = "message.service -> Veri Arama"
-				ctx.params.tablo = "message.json"
+				ctx.params.table = "message.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
@@ -135,7 +136,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "message.service -> Veri Arama"
-				ctx.params.tablo = "message.json"
+				ctx.params.table = "message.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Message  Bulunmadı"
 			
@@ -160,7 +161,7 @@ module.exports = {
                 
 				//! Return Api   
 				ctx.params.title = "message.service -> Veri Arama"
-				ctx.params.tablo = "message.json"
+				ctx.params.table = "message.json"
 				ctx.params.status = 1
 				ctx.params.DB = dbFind
 			
@@ -174,7 +175,7 @@ module.exports = {
 				
 				//! Return Api   
 				ctx.params.title = "message.service -> Veri Arama"
-				ctx.params.tablo = "message.json"
+				ctx.params.table = "message.json"
 				ctx.params.status = 0
 				ctx.params.DB = "Message  Bulunmadı"
 			
@@ -287,9 +288,9 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "message.service -> Veri Ekleme"
-				ctx.params.tablo = "message.json"
+				ctx.params.table = "message.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Veri Eklendi"	
+				ctx.params.message = "Veri Eklendi"	
 				
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Message] [Add] Veri Eklendi [ /api/message/add ] ' + '\u001b[0m');	
@@ -299,9 +300,9 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "message.service -> Veri Ekleme"
-				ctx.params.tablo = "message.json"
+				ctx.params.table = "message.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Veri Eklenemedi"	
+				ctx.params.message = "Veri Eklenemedi"	
 				
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[Message] [Add] Veri Eklenemedi [ /api/message/add ] ' + '\u001b[0m');	
@@ -369,9 +370,9 @@ module.exports = {
               
                 //! Return Api	
 				ctx.params.title = "message.service -> Veri Güncelleme"
-				ctx.params.tablo = "message.json"        
+				ctx.params.table = "message.json"        
 				ctx.params.status = 1			
-				ctx.params.mesaj="Veri Güncellendi"
+				ctx.params.message="Veri Güncellendi"
 
 				//Console Yazma	
 				console.log('\u001b[' + 32 + 'm' + '[Message] [Update] Veri Güncelleme [ /api/message/update ]' + '\u001b[0m');
@@ -384,9 +385,9 @@ module.exports = {
 				
                //! Return Api	
 			   ctx.params.title = "message.service -> Veri Güncelleme"
-			   ctx.params.tablo = "message.json"        
+			   ctx.params.table = "message.json"        
 			   ctx.params.status = 0			
-			   ctx.params.mesaj="Veri Güncellenemedi"
+			   ctx.params.message="Veri Güncellenemedi"
 
 			   //Console Yazma	
 			   console.log('\u001b[' + 31 + 'm' + '[Message] [Update] Veri Güncellenemedi [ /api/message/update ] ' + '\u001b[0m');
@@ -446,9 +447,9 @@ module.exports = {
 				
                 //! Return Api   
 				ctx.params.title = "message.service -> Veri Silme"
-				ctx.params.tablo = "message.json"
+				ctx.params.table = "message.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Veri Silindi"	
+				ctx.params.message = "Veri Silindi"	
 				
 				//Console Yazma	
 			    console.log('\u001b[' + 32 + 'm' + '[Message] [Delete] Veri Silindi [ /api/message/delete/:id ] ' + '\u001b[0m');
@@ -458,9 +459,9 @@ module.exports = {
 
 				//! Return Api   
 				ctx.params.title = "message.service -> Veri Silme"
-				ctx.params.tablo = "message.json"
+				ctx.params.table = "message.json"
 				ctx.params.status = 0
-				ctx.params.mesaj = "Veri Silinemedi"	
+				ctx.params.message = "Veri Silinemedi"	
 				
 				//Console Yazma	
 				console.log('\u001b[' + 31 + 'm' + '[Message] [Delete] Veri Silinemedi [ /api/message/delete/:id ] ' + '\u001b[0m');
@@ -518,9 +519,9 @@ module.exports = {
 
                 //! Return Api	
 				ctx.params.title = "message.service -> Veri Geçisi Silme"
-				ctx.params.tablo = "message.json"        
+				ctx.params.table = "message.json"        
 				ctx.params.status = 1			
-				ctx.params.mesaj="Veri Güncellendi"
+				ctx.params.message="Veri Güncellendi"
 
 				//Console Yazma	
 				console.log('\u001b[' + 32 + 'm' + '[Message] [Delete_Updated] Veri Güncelleme [ /api/message/deleted_update/:id ]' + '\u001b[0m');
@@ -533,9 +534,9 @@ module.exports = {
 				
                //! Return Api	
 			   ctx.params.title = "message.service -> Veri Geçisi Silme"
-			   ctx.params.tablo = "message.json"        
+			   ctx.params.table = "message.json"        
 			   ctx.params.status = 0			
-			   ctx.params.mesaj="Veri Güncellenemedi"
+			   ctx.params.message="Veri Güncellenemedi"
 
 			   //Console Yazma	
 			   console.log('\u001b[' + 32 + 'm' + '[Message] [Delete_Updated] Veri Güncelleme [ /api/message/deleted_update/:id ] ' + '\u001b[0m');
@@ -606,9 +607,9 @@ module.exports = {
 
 				//! Return Api	
 				ctx.params.title = "message.service -> Veri Görüntüleme"
-				ctx.params.tablo = "message.json"
+				ctx.params.table = "message.json"
 				ctx.params.status = 1
-				ctx.params.mesaj = "Veri Görüntülendi"
+				ctx.params.message = "Veri Görüntülendi"
 
 				//Console Yazma	
 				console.log('\u001b[' + 32 + 'm' + '[Message] [View] Veri Görüntülendi [ /api/message/view/:id ]' + '\u001b[0m');
@@ -619,9 +620,9 @@ module.exports = {
 
 				//! Return Api	
 				ctx.params.title = "message.service -> Veri Görüntüleme"
-				ctx.params.tablo = "message.json"        
+				ctx.params.table = "message.json"        
 				ctx.params.status = 0			
-				ctx.params.mesaj="Veri Görüntülenemedi -> Farklı Kişi"
+				ctx.params.message="Veri Görüntülenemedi -> Farklı Kişi"
 
 				//Console Yazma	
 				console.log('\u001b[' + 31 + 'm' + '[Message] [View] Veri Görüntülenemedi [ /api/message/view/:id ] ' + '\u001b[0m');
@@ -635,9 +636,9 @@ module.exports = {
 
                //! Return Api	
 			   ctx.params.title = "message.service -> Veri Görüntüleme"
-			   ctx.params.tablo = "message.json"        
+			   ctx.params.table = "message.json"        
 			   ctx.params.status = 0			
-			   ctx.params.mesaj="Veri Görüntülenemedi"
+			   ctx.params.message="Veri Görüntülenemedi"
 
 			   //Console Yazma	
 			   console.log('\u001b[' + 31 + 'm' + '[Message] [View] Veri Görüntülenemedi [ /api/message/view/:id ] ' + '\u001b[0m');
@@ -664,7 +665,7 @@ module.exports = {
 
             //! Return
             ctx.params.title = "Mesaj Kutusu"
-            ctx.params.tablo = "message.json"
+            ctx.params.table = "message.json"
             ctx.params.status = 1
             ctx.params.size_message_inbox=message_inbox.length
             ctx.params.data_message_inbox = message_inbox
