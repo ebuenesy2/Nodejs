@@ -4,7 +4,8 @@
 ## Açıklama
  
  ```
-Api Return Sağlama
+Api Return
+
  ```
  
  ## Kullanımı
@@ -12,7 +13,7 @@ Api Return Sağlama
  ```
 	//! Return Api   
 	ctx.params.title = "user.service -> Tüm Veriler"
-	ctx.params.tablo = "user.json"
+	ctx.params.table = "user.json"
 	ctx.params.status = 1
 	ctx.params.size=db.length
 	ctx.params.DB = db		
