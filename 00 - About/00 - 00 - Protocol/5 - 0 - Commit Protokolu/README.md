@@ -23,5 +23,5 @@
  ## Commit yazma ve push yapma
  
  ```
-githup push
+[ Logs ] [ Update ] [ Protocol ] Data Updated.
  ```
