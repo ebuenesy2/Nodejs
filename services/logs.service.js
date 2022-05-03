@@ -231,7 +231,7 @@ module.exports = {
 
 			return ctx.params
 		},
-		async find_user_tablo(ctx) {
+		async find_user_table(ctx) {
 
 			// ! Arama
 			const dbFind = db.filter(u => u.created_byToken == ctx.params.created_byToken && u.tablo == ctx.params.tablo);
@@ -248,7 +248,7 @@ module.exports = {
 			
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[Logs] [Find] Veri Arama [ /api/logs/find_user_tablo ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Logs] [Find] Veri Arama [ /api/logs/find_user_table ] ' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
@@ -263,7 +263,7 @@ module.exports = {
 			
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[Logs] [Find] Veri Bulunamadı [ /api/logs/find_user_tablo ] ' + '\u001b[0m');	
+				console.log('\u001b[' + 31 + 'm' + '[Logs] [Find] Veri Bulunamadı [ /api/logs/find_user_table ] ' + '\u001b[0m');	
 
 			}
 
@@ -297,6 +297,8 @@ module.exports = {
 					tablo: ctx.params.tablo,
 					title: ctx.params.title,
 					description: ctx.params.description,
+					logStatus: ctx.params.logStatus,
+					fromToken: ctx.params.fromToken,
 					token:jwt,				
 					created_at: new Date(),
 					created_byToken: ctx.params.created_byToken,
@@ -355,8 +357,11 @@ module.exports = {
 			}
 
 			//! Return
-			delete ctx.params.description
 			delete ctx.params.created_byToken
+			delete ctx.params.description
+			delete ctx.params.logStatus
+		    delete ctx.params.fromToken
+			
               
 			return ctx.params
 		},
