@@ -1,6 +1,14 @@
 
 # Token Protokolu
 
+## Açıklama
+ ```
+ * id
+ * Tanım
+ 
+ Fazla bilgiye gerek yok
+ ```
+
 ## Zorunlu Alanlar [TokenInfo]
  
  ```
