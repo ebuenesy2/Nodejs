@@ -23,5 +23,5 @@
  ## Commit yazma ve push yapma
  
  ```
-[ Logs ] [ Update ] [ Protokol ] Data Updated.
+[ Logs ] [ Update ] [ Protocol ] Data Updated.
  ```
