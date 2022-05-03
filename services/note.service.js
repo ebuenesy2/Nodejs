@@ -237,8 +237,8 @@ module.exports = {
 
 				let TokenInfo={				
 					id: TokenId,	
-					soru: ctx.params.soru,
-					cevap: ctx.params.cevap
+					title: ctx.params.soru,
+					content: ctx.params.cevap
 				}
 				
 				const secret = 'secret';

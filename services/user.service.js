@@ -249,18 +249,7 @@ module.exports = {
 								id: TokenId,
 								role:"User",	
 								name: ctx.params.name,
-								surname: ctx.params.surname,
-								userImageUrl: null,
-								userImageUploadUrl: null,
-								coverImageUrl: null,
-								coverImageUploadUrl: null,
-								username: ctx.params.username,
-								email: ctx.params.email,
-								tel: ctx.params.tel,
-								password: ctx.params.password,														
-								created_at: DateNow,
-								created_byToken:ctx.params.created_byToken,
-								updated_at: null
+								surname: ctx.params.surname
 							}
 
 							

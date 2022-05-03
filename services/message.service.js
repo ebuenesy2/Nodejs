@@ -217,16 +217,8 @@ module.exports = {
 				let TokenInfo={				
 					id: TokenId,	
 					FromRole: ctx.params.FromRole,
-					FromUserToken: ctx.params.FromUserToken,				
-                    FromUserName: Fromuser_info['DB']['username'],
-					FromNameSurName: FromNameSurName_Info,
 					ToRole: ctx.params.ToRole,
-					ToUserToken: ctx.params.ToUserToken,
-					ToUserName: Touser_info['DB']['username'],
-					ToNameSurName: ToNameSurName_Info,
-					Subject: ctx.params.Subject,
-					Message: ctx.params.Message,	
-                    MessageFileControl: false,
+					Subject: ctx.params.Subject
 				}
 				
 				const secret = 'secret';

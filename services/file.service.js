@@ -338,15 +338,7 @@ module.exports = {
 					id: TokenId,
 					role: ctx.params.role,				
 					usedPage:ctx.params.usedPage,
-					FileId: ctx.params.FileId,
-					uploadDir: ctx.params.uploadDir,
-					fileName: ctx.params.fileName,
-					fileType: ctx.params.fileType,
-					fileTypeSplit: ctx.params.fileTypeSplit,
-					fileOnlyName: ctx.params.fileOnlyName,
-					fileExt: ctx.params.fileExt,
-					created_at: CreateDate,
-					created_byToken:ctx.params.created_byToken
+					FileId: ctx.params.FileId
 				}
 				
 				const secret = 'secret';

@@ -283,9 +283,7 @@ module.exports = {
 				let TokenInfo={				
 					id: TokenId,
 					tablo: ctx.params.tablo,
-					title: ctx.params.title,
-					description: ctx.params.description,
-					created_byToken: ctx.params.created_byToken
+					title: ctx.params.title
 				}
 				
 				const secret = 'secret';
