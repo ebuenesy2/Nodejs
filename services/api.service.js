@@ -230,7 +230,9 @@ module.exports = {
 			fastify.post('/api/file/find_post', async	 (req, res) => this.broker.call("file.find_post",{...req.body})) //!  Search-Post
 			fastify.post('/api/file/find_token', async (req, res) => this.broker.call("file.find_token",{...req.body})) //!  Search-Token
 			fastify.post('/api/file/find_user', async (req, res) => this.broker.call("file.find_user", { ...req.body })) //! Search User	
-			fastify.post('/api/file/find_user_tablo', async (req, res) => this.broker.call("file.find_user_tablo",{...req.body})) //! Search User - Tablo	
+			fastify.post('/api/file/find_usedpage', async (req, res) => this.broker.call("file.find_usedpage", { ...req.body })) //! Search User	
+			fastify.post('/api/file/find_user_usedpage', async (req, res) => this.broker.call("file.find_user_usedpage", { ...req.body })) //! Search User - Tablo	
+			
 			fastify.post('/api/file/add', async (req, res) => this.broker.call("file.add",{...req.body})) //! CREATE
 			fastify.post('/api/file/update', async (req, res) => this.broker.call("file.update",{...req.body})) //! UPDATE		
 			fastify.post('/api/file/delete', async (req, res) => this.broker.call("file.delete", { ...req.body })) //! DELETE
