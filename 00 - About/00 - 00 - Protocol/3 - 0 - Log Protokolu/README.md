@@ -21,7 +21,20 @@ Bildirim verilerini tutuyor
 ## Serviceden Çağırma
  
  ```
-Protokol yazma 
+				//! ----------- Log ----------------------------- 	
+				 let logs_add = await ctx.call('logs.add', {
+				 	table: "file",
+				 	title: "file_add_successful",
+					description: "Dosya Ekleme Başarılı",
+					logStatus:"successful",
+					fromToken: jwt,
+					created_byToken: ctx.params.created_byToken
+				 })				
+
+				if(logs_add.status=="1") { 	console.log('\u001b[' + 32 + 'm' + '[File] [Logs] [Add] Bildirim Eklendi' + '\u001b[0m'); }
+				if(logs_add.status=="0") { 	console.log('\u001b[' + 31 + 'm' + '[File] [Logs] [Add] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
  ```
  
 ## Bulunan Bildirim Uyarıları
