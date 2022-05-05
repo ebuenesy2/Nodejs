@@ -43,8 +43,8 @@ Bildirim verilerini tutuyor
 * Dosya Güncelleme Başarılı : file_update_successful
 * Dosya Silme Başarılı : file_delete_successful
 * Dosya Geçisi Silme Başarılı : file_delete_update_successful
-
 * Dosya Yükleme Başarılı : file_upload_successful
+
  ```
   
 ## Planlanan Uyarılar
