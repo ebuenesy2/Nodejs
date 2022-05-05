@@ -40,7 +40,9 @@ Bildirim verilerini tutuyor
  
  ```
 * Dosya Ekleme Başarılı : file_add_successful
+* Dosya Ekleme Başarısız : file_add_error
 * Dosya Güncelleme Başarılı : file_update_successful
+* Dosya Güncelleme Başarısız : file_update_error
 * Dosya Silme Başarılı : file_delete_successful
 * Dosya Yükleme Başarılı : file_upload_successful
  ```
