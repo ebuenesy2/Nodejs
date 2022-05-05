@@ -36,15 +36,18 @@ Bildirim verilerini tutuyor
 
 				//! ----------- Log Son -----------------------------
  ```
- 
-## Bulunan Bildirim Uyarıları
+ ## Bulunan Bildirim Uyarıları
  
  ```
 * Dosya Ekleme Başarılı : file_add_successful
 * Dosya Güncelleme Başarılı : file_update_successful
 * Dosya Silme Başarılı : file_delete_successful
 * Dosya Yükleme Başarılı : file_upload_successful
-
+ ```
+  
+## Planlanan Uyarılar
+ 
+ ```
 * Başarılı Kullanıcı Kayıt Yapıldı : user_add_successful
 * Başarılı Kullanıcı Güncelleme Yapıldı : user_update_successful
 * Başarılı Kullanıcı işlemi Başarılı : user_delete_successful
