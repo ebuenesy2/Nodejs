@@ -235,7 +235,7 @@ module.exports = {
 			
 			fastify.post('/api/file/add', async (req, res) => this.broker.call("file.add",{...req.body})) //! CREATE
 			fastify.post('/api/file/update', async (req, res) => this.broker.call("file.update",{...req.body})) //! UPDATE		
-			fastify.post('/api/file/delete', async (req, res) => this.broker.call("file.delete", { ...req.body })) //! DELETE
+			fastify.post('/api/file/delete/:id', async (req, res) => this.broker.call("file.delete", { id: req.params.id,...req.body })) //! DELETE
 			fastify.post('/api/file/delete_update/:id', async (req, res) => this.broker.call("file.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
 					
 			fastify.post('/api/file/getFile',async (req,res)=> this.broker.call("file.getFile",{...req.body})) //! File Info
