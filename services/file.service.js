@@ -38,25 +38,35 @@ mkdir(adminUploadDirVideo);  //! Admin ->  Video
 mkdir(adminUploadDirDoc);  //! Admin ->  Belge
 
 
-//mesaj
-const mesajUploadDir = path.join(__dirname, "/../public/upload/message"); //! message ->  Upload Klasor
-const mesajUploadDirImage = path.join(__dirname, "/../public/upload/message/img");  //! message ->  Resim
-const mesajUploadDirVideo = path.join(__dirname, "/../public/upload/message/video");  //! message ->  Video
-const mesajUploadDirDoc = path.join(__dirname, "/../public/upload/message/doc");  //! message ->  Belge
-mkdir(mesajUploadDir); //! message ->  Upload Klasor
-mkdir(mesajUploadDirImage);  //! message ->  Resim
-mkdir(mesajUploadDirVideo);  //! message ->  Video
-mkdir(mesajUploadDirDoc);  //! message ->  Belge
+//message
+const messageUploadDir = path.join(__dirname, "/../public/upload/message"); //! message ->  Upload Klasor
+const messageUploadDirImage = path.join(__dirname, "/../public/upload/message/img");  //! message ->  Resim
+const messageUploadDirVideo = path.join(__dirname, "/../public/upload/message/video");  //! message ->  Video
+const messageUploadDirDoc = path.join(__dirname, "/../public/upload/message/doc");  //! message ->  Belge
+mkdir(messageUploadDir); //! message ->  Upload Klasor
+mkdir(messageUploadDirImage);  //! message ->  Resim
+mkdir(messageUploadDirVideo);  //! message ->  Video
+mkdir(messageUploadDirDoc);  //! message ->  Belge
 
-//ssk
-const sskUploadDir = path.join(__dirname, "/../public/upload/faq"); //! faq ->  Upload Klasor
-const sskUploadDirImage = path.join(__dirname, "/../public/upload/faq/img");  //! faq ->  Resim
-const sskUploadDirVideo = path.join(__dirname, "/../public/upload/faq/video");  //! faq ->  Video
-const sskUploadDirDoc = path.join(__dirname, "/../public/upload/faq/doc");  //! faq ->  Belge
-mkdir(sskUploadDir); //! faq ->  Upload Klasor
-mkdir(sskUploadDirImage);  //! faq ->  Resim
-mkdir(sskUploadDirVideo);  //! faq ->  Video
-mkdir(sskUploadDirDoc);  //! faq ->  Belge
+//faq
+const faqUploadDir = path.join(__dirname, "/../public/upload/faq"); //! faq ->  Upload Klasor
+const faqUploadDirImage = path.join(__dirname, "/../public/upload/faq/img");  //! faq ->  Resim
+const faqUploadDirVideo = path.join(__dirname, "/../public/upload/faq/video");  //! faq ->  Video
+const faqUploadDirDoc = path.join(__dirname, "/../public/upload/faq/doc");  //! faq ->  Belge
+mkdir(faqUploadDir); //! faq ->  Upload Klasor
+mkdir(faqUploadDirImage);  //! faq ->  Resim
+mkdir(faqUploadDirVideo);  //! faq ->  Video
+mkdir(faqUploadDirDoc);  //! faq ->  Belge
+
+//note
+const noteUploadDir = path.join(__dirname, "/../public/upload/note"); //! note ->  Upload Klasor
+const noteUploadDirImage = path.join(__dirname, "/../public/upload/note/img");  //! note ->  Resim
+const noteUploadDirVideo = path.join(__dirname, "/../public/upload/note/video");  //! note ->  Video
+const noteUploadDirDoc = path.join(__dirname, "/../public/upload/note/doc");  //! note ->  Belge
+mkdir(noteUploadDir); //! note ->  Upload Klasor
+mkdir(noteUploadDirImage);  //! note ->  Resim
+mkdir(noteUploadDirVideo);  //! note ->  Video
+mkdir(noteUploadDirDoc);  //! note ->  Belge
 
 
 //! -------  Yeni Klasor Son -------------------
