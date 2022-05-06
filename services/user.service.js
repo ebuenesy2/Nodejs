@@ -303,19 +303,22 @@ module.exports = {
 								//Console Yazma
 								console.log('\u001b[' + 32 + 'm' + '[User] [Json] [Add] Json Veri Kayıt Edildi [ user.json ] ' + '\u001b[0m');								
 								
-							});
-							
-							/*
+							});							
+
 							//! ----------- Log ----------------------------- 	
-							let logs_add = await ctx.call('logs.add', {					
-								userToken: jwt,
-								from: "user",
+							let logs_add = await ctx.call('logs.add', {
+								table: "user",
+								title: "user_add_successful",
+								description: "Kullanıcı Ekleme Başarılı",
+								logStatus: "successful",
 								fromToken: jwt,
-								name: "user_add_successful",
-								description: "Başarılı Kullanıcı Kayıt Yapıldı"
-							})			
-							//! ----------- Log Son ----------------------------- 
-							*/
+								created_byToken: ctx.params.created_byToken ? ctx.params.created_byToken : jwt
+							})
+
+							if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[User] [Logs] [Add] Bildirim Eklendi' + '\u001b[0m'); }
+							if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[User] [Logs] [Add] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+							//! ----------- Log Son -----------------------------
 
 							//! Return Api   
 							status = 1	
@@ -370,81 +373,72 @@ module.exports = {
 
 		    	// Kullanıcı Varsa
 			if (dbFind) {
-
-				//! Tanım
-				let file_upload=[]; 			
 				
 				//! Resim Yükleme Onay - Profil
 				if(ctx.params.profil_ImageUrl_File_Check=="0") { 	console.log('\u001b[' + 31 + 'm' + '[User] [Update] [Profile] Profil Resim Yükleme Onaylanmadı' + '\u001b[0m'); }
-				if(ctx.params.profil_ImageUrl_File_Check=="1") { 	
-				
-					console.log('\u001b[' + 32 + 'm' + '[User] [Update] [Profile] Profil Resim Yükleme Onaylandı' + '\u001b[0m');
+				if(ctx.params.profil_ImageUrl_File_Check=="1") {    console.log('\u001b[' + 32 + 'm' + '[User] [Update] [Profile] Profil Resim Yükleme Onaylandı' + '\u001b[0m');
 
 					//! -----------  File UPLOAD ----------------------------- 	
-					file_upload = await ctx.call('file.upload', {
+					let file_upload_profile = await ctx.call('file.upload', {
 						file: ctx.params.profil_ImageUrl_File,
 						role: ctx.params.role,
-						token: ctx.params.token,                  
-						usedPage: "user"
+						usedPage: "user",
+						created_byToken: ctx.params.updated_byToken
 					})
-					//! ----------- End File UPLOAD ----------------------------- 	
+					//! ----------- End File UPLOAD -----------------------------
 									
-					if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + '[User] [Update] Dosya Yüklenemedi' + '\u001b[0m'); }
-					if(file_upload.status==1) { 
+					if (file_upload_profile.status == 0) { console.log('\u001b[' + 31 + 'm' + '[User] [Update] [Profile] Profil Dosya Yüklenemedi' + '\u001b[0m'); }
+					if (file_upload_profile.status == 1) {
 
 						//! -----------  File Delete ----------------------------- 	
-						let file_delete = await ctx.call('file.fileDeleteUrl', {
-							token: ctx.params.token,
+						let file_delete_user = await ctx.call('file.fileDeleteUrl', {
+							created_byToken: ctx.params.updated_byToken,
 							fileUrl: dbFind.userImageUploadUrl               
 						})                
 						//! ----------- End File Delete -----------------------------
 
-					    if (file_delete.status==1)  { console.log('\u001b[' + 32 + 'm' + '[User] [Update] [Profile] Dosya Silindi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
-						if (file_delete.status==0)  { console.log('\u001b[' + 31 + 'm' + '[User] [Update] [Profile] Dosya Silinemedi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
+						if (file_delete_user.status==1)  { console.log('\u001b[' + 32 + 'm' + '[User] [Update] [Profile] Dosya Silindi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
+						if (file_delete_user.status==0)  { console.log('\u001b[' + 31 + 'm' + '[User] [Update] [Profile] Dosya Silinemedi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
 					
 						//! Güncelleme
-						dbFind["userImageUploadUrl"] = file_upload.DB["uploadDir"];                 
-						dbFind["userImageUrl"] = file_upload.DB["fileUrl"];	
+						dbFind["userImageUploadUrl"] = file_upload_profile.DB["uploadDir"];
+						dbFind["userImageUrl"] = file_upload_profile.DB["fileUrl"];
 					}
 				}
 
-				console.log(); //! Boşluk Ekleniliyor
-
 				//! Resim Yükleme Onay - Cover
 				if(ctx.params.cover_ImageUrl_File_Check=="0") { 	console.log('\u001b[' + 31 + 'm' + '[User] [Update] [Cover] Cover Resim Yükleme Onaylanmadı' + '\u001b[0m'); }
-				if(ctx.params.cover_ImageUrl_File_Check=="1") { 	
+				if (ctx.params.cover_ImageUrl_File_Check == "1") {
 				
 					console.log('\u001b[' + 32 + 'm' + '[User] [Update] [Cover] Cover Resim Yükleme Onaylandı' + '\u001b[0m');
 
 					//! -----------  File UPLOAD ----------------------------- 	
-					file_upload = await ctx.call('file.upload', {
+					let file_upload_cover = await ctx.call('file.upload', {
 						file: ctx.params.cover_ImageUrl_File,
 						role: ctx.params.role,
-						token: ctx.params.token,                  
+						created_byToken: ctx.params.updated_byToken,
 						usedPage: "user"
 					})
-					//! ----------- End File UPLOAD ----------------------------- 	
+					//! ----------- End File UPLOAD -----------------------------
 									
-					if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + '[User] [Update] Dosya Yüklenemedi' + '\u001b[0m'); }
-					if(file_upload.status==1) { 
+					if (file_upload_cover.status == 0) { console.log('\u001b[' + 31 + 'm' + '[User] [Update] [Cover] Cover Dosya Yüklenemedi' + '\u001b[0m'); }
+					if (file_upload_cover.status == 1) {						
 
 						//! -----------  File Delete ----------------------------- 	
-						let file_delete = await ctx.call('file.fileDeleteUrl', {
-							token: ctx.params.token,
+						let file_delete_cover = await ctx.call('file.fileDeleteUrl', {
+							created_byToken: ctx.params.updated_byToken,
 							fileUrl: dbFind.coverImageUploadUrl               
 						})                
 						//! ----------- End File Delete -----------------------------
 
-						if (file_delete.status==1)  { console.log('\u001b[' + 32 + 'm' + '[User] [Update] [Cover] Dosya Silindi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
-						if (file_delete.status==0)  { console.log('\u001b[' + 31 + 'm' + '[User] [Update] [Cover] Dosya Silinemedi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
+						if (file_delete_cover.status==1)  { console.log('\u001b[' + 32 + 'm' + '[User] [Update] [Cover] Dosya Silindi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
+						if (file_delete_cover.status==0)  { console.log('\u001b[' + 31 + 'm' + '[User] [Update] [Cover] Dosya Silinemedi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
 
 						//! Güncelleme
-						dbFind["coverImageUploadUrl"] = file_upload.DB["uploadDir"];                 
-						dbFind["coverImageUrl"] = file_upload.DB["fileUrl"];		
+						dbFind["coverImageUploadUrl"] = file_upload_cover.DB["uploadDir"];
+						dbFind["coverImageUrl"] = file_upload_cover.DB["fileUrl"];
 					}	
 				}
-
-				console.log(); //! Boşluk Ekleniliyor
 
 				//! Delete
 				delete ctx.params.profil_ImageUrl_File
@@ -475,18 +469,21 @@ module.exports = {
 					
 				});
 				// End Json içine Verileri Yazıyor -> db
-				
-	            /*
+
 				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {					
-					userToken: ctx.params.userToken,
-					from: "user",
-					fromToken: ctx.params.userToken,
-					name: "user_update_successful",
-					description: "Başarılı Kullanıcı Güncelleme Yapıldı"
-				})			
-				//! ----------- Log Son -----------------------------  
-				*/
+				let logs_add = await ctx.call('logs.add', {
+					table: "user",
+					title: "user_update_successful",
+					description: "Kullanıcı Güncelleme Başarılı",
+					logStatus: "successful",
+					fromToken: ctx.params.token,
+					created_byToken: ctx.params.updated_byToken
+				})
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[User] [Logs] [Update] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[User] [Logs] [Update] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
 
 				//! Return Api   
 				ctx.params.title = "user.service -> Veri Guncelleme"
@@ -538,10 +535,7 @@ module.exports = {
 			const dbFind = db.find(u => u.token == ctx.params.token);		
 
 			//! Veri Varsa 
-			if (dbFind) {
-
-	            //! Tanım
-				let file_upload=[]; 			
+			if (dbFind) {	         		
 				
 				//! Resim Yükleme Onay - Profil
 				if(ctx.params.profil_ImageUrl_File_Check=="0") { 	console.log('\u001b[' + 31 + 'm' + '[User] [Update] [Profile] Profil Resim Yükleme Onaylanmadı' + '\u001b[0m'); }
@@ -550,22 +544,22 @@ module.exports = {
 					console.log('\u001b[' + 32 + 'm' + '[User] [Update] [Profile] Profil Resim Yükleme Onaylandı' + '\u001b[0m');
 
 					//! -----------  File UPLOAD ----------------------------- 	
-					file_upload = await ctx.call('file.uploadUrl', {
+					let file_upload_profile = await ctx.call('file.uploadUrl', {
 						fileUrl: ctx.params.profil_ImageUrl_File,
 						role: ctx.params.role,
-						token: ctx.params.token,                  
-						usedPage: "user"
+						usedPage: "user",
+						created_byToken: ctx.params.updated_byToken
 					})
 					//! ----------- End File UPLOAD ----------------------------- 	
 									
-					if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + '[User] [Update] [Profile] Dosya Yüklenemedi' + '\u001b[0m'); }
-					if(file_upload.status==1) { 
+					if (file_upload_profile.status==0) { console.log('\u001b[' + 31 + 'm' + '[User] [Update] [Profile] Dosya Yüklenemedi' + '\u001b[0m'); }
+					if (file_upload_profile.status==1) {
 
 						console.log('\u001b[' + 32 + 'm' + '[User] [Update] [Profile] Dosya Yüklendi' + '\u001b[0m'); }
 
 						//! -----------  File Delete ----------------------------- 	
 						let file_delete = await ctx.call('file.fileDeleteUrl', {
-							token: ctx.params.token,
+							created_byToken: ctx.params.updated_byToken,
 							fileUrl: dbFind.userImageUploadUrl               
 						})                
 						//! ----------- End File Delete -----------------------------
@@ -574,12 +568,10 @@ module.exports = {
 						if (file_delete.status==0)  { console.log('\u001b[' + 31 + 'm' + '[User] [Update] [Profile] Dosya Silinemedi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
 
 						//! Güncelleme
-						dbFind["userImageUploadUrl"] = file_upload.DB["uploadDir"];                 
-						dbFind["userImageUrl"] = file_upload.DB["fileUrl"];	
+						dbFind["userImageUploadUrl"] = file_upload_profile.DB["uploadDir"];
+						dbFind["userImageUrl"] = file_upload_profile.DB["fileUrl"];
 					}
 				
-
-				console.log(); //! Boşluk Ekleniliyor
 
 				//! Resim Yükleme Onay - Cover
 				if(ctx.params.cover_ImageUrl_File_Check=="0") { 	console.log('\u001b[' + 31 + 'm' + '[User] [Update] [Cover] Cover Resim Yükleme Onaylanmadı' + '\u001b[0m'); }
@@ -588,22 +580,23 @@ module.exports = {
 					console.log('\u001b[' + 32 + 'm' + '[User] [Update] [Cover] Cover Resim Yükleme Onaylandı' + '\u001b[0m');
 
 					//! -----------  File UPLOAD ----------------------------- 	
-					file_upload = await ctx.call('file.uploadUrl', {
+					let file_upload_cover = await ctx.call('file.uploadUrl', {
 						fileUrl: ctx.params.cover_ImageUrl_File,
 						role: ctx.params.role,
 						token: ctx.params.token,                  
-						usedPage: "user"
+						usedPage: "user",
+						created_byToken: ctx.params.updated_byToken
 					})
 					//! ----------- End File UPLOAD ----------------------------- 	
 
 				
 									
-					if(file_upload.status==0) { console.log('\u001b[' + 31 + 'm' + '[User] [Update] Dosya Yüklenemedi' + '\u001b[0m'); }
-					if(file_upload.status==1) { 
+					if (file_upload_cover.status==0) { console.log('\u001b[' + 31 + 'm' + '[User] [Update] Dosya Yüklenemedi' + '\u001b[0m'); }
+					if (file_upload_cover.status==1) {
 
 						//! -----------  File Delete ----------------------------- 	
 						let file_delete = await ctx.call('file.fileDeleteUrl', {
-							userToken: ctx.params.userToken,
+							created_byToken: ctx.params.updated_byToken,
 							fileUrl: dbFind.coverImageUploadUrl               
 						})                
 						//! ----------- End File Delete -----------------------------
@@ -612,13 +605,12 @@ module.exports = {
 						if (file_delete.status==0)  { console.log('\u001b[' + 31 + 'm' + '[User] [Update] [Cover] Dosya Silinemedi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
 
 						//! Güncelleme
-						dbFind["coverImageUploadUrl"] = file_upload.DB["uploadDir"];                 
-						dbFind["coverImageUrl"] = file_upload.DB["fileUrl"];											
+						dbFind["coverImageUploadUrl"] = file_upload_cover.DB["uploadDir"];
+						dbFind["coverImageUrl"] = file_upload_cover.DB["fileUrl"];
 					}	
 				}
 
-				console.log(); //! Boşluk Ekleniliyor
-
+				
 				//! Delete
 				delete ctx.params.profil_ImageUrl_File
 				delete ctx.params.profil_ImageUrl_File_Check
@@ -647,19 +639,22 @@ module.exports = {
 					console.log('\u001b[' + 32 + 'm' + '[User] [Json] [Update] Json Veri Kayıt Edildi [ user.json ] ' + '\u001b[0m');								
 					
 				});
-				// End Json içine Verileri Yazıyor -> db
-				
-	            /*
+				// End Json içine Verileri Yazıyor -> db				
+
 				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {					
-					userToken: ctx.params.userToken,
-					from: "user",
-					fromToken: ctx.params.userToken,
-					name: "user_update_successful",
-					description: "Başarılı Kullanıcı Güncelleme Yapıldı"
-				})			
-				//! ----------- Log Son -----------------------------  
-				*/
+				let logs_add = await ctx.call('logs.add', {
+					table: "user",
+					title: "user_update_successful",
+					description: "Kullanıcı Güncelleme Başarılı",
+					logStatus: "successful",
+					fromToken: ctx.params.token,
+					created_byToken: ctx.params.updated_byToken
+				})
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[User] [Logs] [Update] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[User] [Logs] [Update] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
 
 				//! Return Api   
 				ctx.params.title = "user.service -> Veri Guncelleme"

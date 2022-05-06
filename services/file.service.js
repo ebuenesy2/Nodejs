@@ -581,7 +581,7 @@ module.exports = {
 
 				//! -----------  File Delete ----------------------------- 	
 				let file_delete = await ctx.call('file.fileDeleteUrl', {
-					userToken: ctx.params.userToken,
+					created_byToken: ctx.params.userToken,
 					fileUrl: dbFind.uploadDir                 
 				})                
 				//! ----------- End File Delete -----------------------------
@@ -1153,7 +1153,7 @@ module.exports = {
 							description: "Dosya Silme Başarılı",
 							logStatus: "successful",
 							fromToken: dbFind.token,
-							created_byToken: ctx.params.userToken
+							created_byToken: ctx.params.created_byToken
 						})
 
 						if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[File] [Logs] [Delete] Bildirim Eklendi' + '\u001b[0m'); }
@@ -1195,7 +1195,7 @@ module.exports = {
 			ctx.params.message = message
 
 			//! Return Delete
-			delete ctx.params.userToken
+			delete ctx.params.created_byToken
 			delete ctx.params.fileUrl
 
 			return ctx.params
@@ -1385,8 +1385,7 @@ module.exports = {
 						//! Eklenecek veriler
 						const willSaveData = {
 							id: TokenId,						
-							role: ctx.params.role,					
-							userToken: ctx.params.userToken,
+							role: ctx.params.role,							
 							usedPage:ctx.params.usedPage,
 							FileId: FileId,
 							uploadDir:filePath,
@@ -1504,10 +1503,9 @@ module.exports = {
 			
 			//! Return
 			delete ctx.params.created_byToken
-			delete ctx.params.fileUrl;
-			delete ctx.params.role;
-			delete ctx.params.userToken;
-			delete ctx.params.usedPage;
+			delete ctx.params.fileUrl
+			delete ctx.params.role
+			delete ctx.params.usedPage
 			
 		    return ctx.params
 
@@ -1518,7 +1516,6 @@ module.exports = {
 			let file_upload = await ctx.call('file.uploadUrl', {
 				fileUrl: ctx.params.fileUrl,
 				role: ctx.params.role,
-				userToken: ctx.params.userToken,                  
 				usedPage: ctx.params.usedPage,
 				created_byToken: ctx.params.created_byToken
 			})		
@@ -1528,7 +1525,7 @@ module.exports = {
 
 				//! -----------  File Delete ----------------------------- 	
 				let file_delete = await ctx.call('file.fileDeleteUrl', {
-					userToken: ctx.params.userToken,
+					created_byToken: ctx.params.userToken,
 					fileUrl: ctx.params.old_fileUrl                 
 				})                
 				//! ----------- End File Delete -----------------------------
