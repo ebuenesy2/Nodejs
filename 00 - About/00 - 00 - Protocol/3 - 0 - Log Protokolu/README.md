@@ -45,19 +45,19 @@ Bildirim verilerini tutuyor
 * Dosya Geçisi Silme Başarılı : file_delete_update_successful
 * Dosya Yükleme Başarılı : file_upload_successful
 
+* Kullanıcı Ekleme Başarılı : user_add_successful
+* Kullanıcı Güncelleme Başarılı : user_update_successful
+* Kullanıcı Silme Başarılı : user_delete_successful
+
+* Kullanıcı Login Başarılı  : user_login_successful
+* Kullanıcı Login Başarısız : user_login_error
+* Kullanıcı Çıkış Başarılı: user_loginout_successful
+
  ```
   
 ## Planlanan Uyarılar
  
  ```
-* Başarılı Kullanıcı Kayıt Yapıldı : user_add_successful
-* Başarılı Kullanıcı Güncelleme Yapıldı : user_update_successful
-* Başarılı Kullanıcı işlemi Başarılı : user_delete_successful
-
-* Başarılı Kullanıcı Giriş Yapıldı : user_login_successful
-* Hatalı  Kullanıcı Giriş Yapıldı : user_login_error
-* Başarılı Kullanıcı Çıkış Yapıldı : user_loginout_successful
-
 * Başarılı Admin Kayıt Yapıldı : admin_add_successful
 * Başarılı Admin Güncelleme Yapıldı : admin_update_successful
 * Başarılı Admin işlemi Başarılı : admin_delete_successful
