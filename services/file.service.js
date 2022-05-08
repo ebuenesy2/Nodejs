@@ -612,7 +612,7 @@ module.exports = {
 					title: "file_delete_successful",
 					description: "Dosya Silme Başarılı",
 					logStatus: "successful",
-					fromToken: ctx.params.token,
+					fromToken: dbFind["token"],
 					created_byToken: ctx.params.updated_byToken
 				})
 
@@ -701,7 +701,7 @@ module.exports = {
 					title: "file_delete_update_successful",
 					description: "Dosya Geçisi Silme Başarılı",
 					logStatus: "successful",
-					fromToken: ctx.params.token,
+					fromToken: dbFind["token"],
 					created_byToken: ctx.params.Deleted_byToken
 				})
 

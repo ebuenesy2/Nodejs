@@ -752,17 +752,20 @@ module.exports = {
 				if (file_delete_cover.status==0)  { console.log('\u001b[' + 31 + 'm' + '[User] [Delete] [Cover] Dosya Silinemedi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
 
 
-				/*
 				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {					
-					userToken: ctx.params.userToken,
-					from: "user",
-					fromToken: dbFind.token,
-					name: "user_delete_successful",
-					description: "Silme Kullanıcı işlemi Başarılı"
+				let logs_add = await ctx.call('logs.add', {
+					table: "user",
+					title: "user_delete_successful",
+					description: "Kullanıcı Silme Başarılı",
+					logStatus: "successful",
+					fromToken: dbFind["token"],
+					created_byToken: ctx.params.Deleted_byToken
 				})
-				//! ----------- Log Son ----------------------------- 
-				*/
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[User] [Logs] [Delete] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[User] [Logs] [Delete] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
 
 				//! Return Api
 				ctx.params.title = "user.service -> Veri Silme"
@@ -794,7 +797,7 @@ module.exports = {
 		async delete_update(ctx) {
 
 			// ! Arama
-			const dbFind = db.find(u => u.id == ctx.params.id);	
+			const dbFind = db.find(u => u.id == ctx.params.id);
 
 			//! Veri Varsa 
 			if (dbFind) {
@@ -820,16 +823,21 @@ module.exports = {
 				});
 				// End Json içine Verileri Yazıyor -> db	
 	
-				// //! ----------- Log ----------------------------- 	
-				// let logs_add = await ctx.call('logs.add', {					
-				// 	userToken: ctx.params.userToken,
-				// 	from: "ssk",
-				// 	fromToken: ctx.params.sskToken,
-				// 	name: "faq_update_successful",
-				// 	description: "SSK Güncelleme Başarılı"
-				// })			
-				// //! ----------- Log Son -----------------------------  
-				
+
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {
+					table: "user",
+					title: "user_delete_update_successful",
+					description: "Kullanıcı Geçisi Silme Başarılı",
+					logStatus: "successful",
+					fromToken: dbFind["token"],
+					created_byToken: ctx.params.Deleted_byToken
+				})
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[User] [Logs] [Delete_Updated] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[User] [Logs] [Delete_Updated] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
               
                 //! Return Api	
 				ctx.params.title = "user.service -> Veri Geçisi Silme"
@@ -867,90 +875,93 @@ module.exports = {
 		async loginOnline(ctx) {
 
 			// ! Arama
-			const user_email = db.filter(u => u.email == ctx.params.email);
+			const dbFind_email = db.filter(u => u.email == ctx.params.email);
 			const dbFind = db.filter(u => u.email == ctx.params.email && u.password == ctx.params.password);
-
 
 			// Giriş Başarılı ise
 			if (dbFind.length > 0) {
-				
+
 				//! -----------  User UPDATE ----------------------------- 	
 				let user_updateUrl = await ctx.call('user.updateUrl', {
-					token:dbFind[0].token,
-					updated_byToken:dbFind[0].token,
-					role: dbFind[0].role,					               
-					onlineStatus: true,                  
-					onlineLastLogin_At: new Date()					        
-				})		
+					token: dbFind[0]["token"],
+					updated_byToken: dbFind[0]["token"],
+					role: dbFind[0]["role"],
+					onlineStatus: true,
+					onlineLastLogin_At: new Date()
+				})
 				//! ----------- End User UPDATE -----------------------------
 
-			    //! Kullanıcı Güncelleme Yapıldı
-				if(user_updateUrl.status=="0") { 	console.log('\u001b[' + 31 + 'm' + '[User] [Login] Kullanıcı Güncelleme Yapılamadı' + '\u001b[0m'); }
-				if(user_updateUrl.status=="1") { 	
-				
+				//! Kullanıcı Güncelleme Yapıldı
+				if (user_updateUrl.status == "0") { console.log('\u001b[' + 31 + 'm' + '[User] [Login] Kullanıcı Güncelleme Yapılamadı' + '\u001b[0m'); }
+				if (user_updateUrl.status == "1") {
 					console.log('\u001b[' + 32 + 'm' + '[User] [Login] Kullanıcı Güncelleme Yapıldı' + '\u001b[0m');
 
-					/*
 					//! ----------- Log ----------------------------- 	
-					let logs_add = await ctx.call('logs.add', {					
-						userToken:dbFind[0].userToken,
-						from: "user",
-						fromToken:dbFind[0].userToken,						
-						name: "user_login_successful",
-						description: "Başarılı Kullanıcı Giriş Yapıldı"
+					let logs_add = await ctx.call('logs.add', {
+						table: "user",
+						title: 'user_login_successful',
+						description: "Kullanıcı Login Başarılı",
+						logStatus: "successful",
+						fromToken: dbFind[0]["token"],
+						created_byToken: dbFind[0]["token"]
 					})
-					//! ----------- Log Son -----------------------------
-					*/
 
-				}       				
+					if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[User] [Logs] [Login] Bildirim Eklendi' + '\u001b[0m'); }
+					if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[User] [Logs] [Login] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+					   //! ----------- Log Son -----------------------------
+
+				}
 
 				//! Return Api
-				ctx.params.title = "Kullanıcı Login"
+				ctx.params.title = "user.service -> Kullanıcı Login"
 				ctx.params.table = "user.json"
 				ctx.params.status = 1
 				ctx.params.message = "Başarılı Giriş  Oldu"
-				ctx.params.userInfo=dbFind[0]
+				ctx.params.userInfo = dbFind[0]
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[User] [Login] Kullanıcı Login Başarılı [ /api/user/loginOnline ]' + '\u001b[0m');	
+				console.log('\u001b[' + 32 + 'm' + '[User] [Login] Kullanıcı Login Başarılı [ /api/user/loginOnline ]' + '\u001b[0m');
 			}
 
 			//! Kullanıcı Yoksa
 			else {
-				
-				if (user_email.length <= 0)  {	console.log('\u001b[' + 31 + 'm' + '[User] [Login] Email Yok' + '\u001b[0m'); }
-				if (user_email.length > 0) { 	
-					console.log('\u001b[' + 32 + 'm' + '[User] [Login] Email Var' + '\u001b[0m');
 
-					/*
-					//! ----------- Log ----------------------------- 	
-					let logs_add = await ctx.call('logs.add', {					
-						userToken:user_email[0].userToken,
-						from: "user",
-						fromToken:user_email[0].userToken,						
-						name: "user_login_error",
-						description: "Hatalı  Kullanıcı Giriş Yapıldı"
-					})
-					//! ----------- Log Son -----------------------------
-					*/
+				if (dbFind_email.length <= 0) { console.log('\u001b[' + 31 + 'm' + '[User] [Login] Email Yok' + '\u001b[0m'); }
+				if (dbFind_email.length > 0) {
+					console.log('\u001b[' + 32 + 'm' + '[User] [Login] Email Var' + '\u001b[0m');					
+
+						//! ----------- Log ----------------------------- 	
+						let logs_add = await ctx.call('logs.add', {
+							table: "user",
+							title: 'user_login_error',
+							description: "Kullanıcı Login Başarısız",
+							logStatus: "error",
+							fromToken: dbFind_email[0]["token"],
+							created_byToken: dbFind_email[0]["token"]
+						})
+
+						if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[User] [Logs] [Login] Bildirim Eklendi' + '\u001b[0m'); }
+						if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[User] [Logs] [Login] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+					   //! ----------- Log Son -----------------------------
+
+				}
 
 
-				 }
-								
-			
 				//! Return Api
-				ctx.params.title = "Kullanıcı Login"
+				ctx.params.title = "user.service -> Kullanıcı Login"
 				ctx.params.table = "user.json"
 				ctx.params.status = 0
 				ctx.params.message = "Hatalı Giriş Oldu"
-				ctx.params.userInfo=null
+				ctx.params.userInfo = null
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[User] [Login] Kullanıcı Login Başarısız [ /api/user/loginOnline ] ' + '\u001b[0m');		
+				console.log('\u001b[' + 31 + 'm' + '[User] [Login] Kullanıcı Login Başarısız [ /api/user/loginOnline ] ' + '\u001b[0m');
 
-			}					
-           
-			
+			}
+
+	
 			//! Delete
 			delete ctx.params.email
 			delete ctx.params.password
@@ -960,90 +971,93 @@ module.exports = {
 		async loginOnlineUsername(ctx) {
 
 			// ! Arama
-			const user_email = db.filter(u => u.username == ctx.params.username);
-			const dbFind = db.filter(u => u.username == ctx.params.username && u.password == ctx.params.password);		
-              
+			const dbFind_username = db.filter(u => u.username == ctx.params.username);
+			const dbFind = db.filter(u => u.username == ctx.params.username && u.password == ctx.params.password);
+
 			// Giriş Başarılı ise
 			if (dbFind.length > 0) {
-				
+
 				//! -----------  User UPDATE ----------------------------- 	
 				let user_updateUrl = await ctx.call('user.updateUrl', {
-					token:dbFind[0].token,
-					updated_byToken:dbFind[0].token,
-					role: dbFind[0].role,					               
-					onlineStatus: true,                  
-					onlineLastLogin_At: new Date()					        
-				})		
+					token: dbFind[0]["token"],
+					updated_byToken: dbFind[0]["token"],
+					role: dbFind[0]["role"],
+					onlineStatus: true,
+					onlineLastLogin_At: new Date()
+				})
 				//! ----------- End User UPDATE -----------------------------
-				
 
-			    //! Kullanıcı Güncelleme Yapıldı
-				if(user_updateUrl.status=="0") { 	console.log('\u001b[' + 31 + 'm' + '[User] [Login] Kullanıcı Güncelleme Yapılmadı' + '\u001b[0m'); }
-				if(user_updateUrl.status=="1") { 	
-				
+				//! Kullanıcı Güncelleme Yapıldı
+				if (user_updateUrl.status == "0") { console.log('\u001b[' + 31 + 'm' + '[User] [Login] Kullanıcı Güncelleme Yapılamadı' + '\u001b[0m'); }
+				if (user_updateUrl.status == "1") {
 					console.log('\u001b[' + 32 + 'm' + '[User] [Login] Kullanıcı Güncelleme Yapıldı' + '\u001b[0m');
 
-					/*
 					//! ----------- Log ----------------------------- 	
-					let logs_add = await ctx.call('logs.add', {					
-						userToken:dbFind[0].userToken,
-						from: "user",
-						fromToken:dbFind[0].userToken,						
-						name: "user_login_successful",
-						description: "Başarılı Kullanıcı Giriş Yapıldı"
+					let logs_add = await ctx.call('logs.add', {
+						table: "user",
+						title: 'user_login_successful',
+						description: "Kullanıcı Login Başarılı",
+						logStatus: "successful",
+						fromToken: dbFind[0]["token"],
+						created_byToken: dbFind[0]["token"]
 					})
-					//! ----------- Log Son -----------------------------
-					*/
 
-				}       				
+					if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[User] [Logs] [Login] Bildirim Eklendi' + '\u001b[0m'); }
+					if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[User] [Logs] [Login] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+					//! ----------- Log Son -----------------------------
+
+				}
 
 				//! Return Api
-				ctx.params.title = "Kullanıcı Username Login"
+				ctx.params.title = "user.service -> Kullanıcı Login"
 				ctx.params.table = "user.json"
 				ctx.params.status = 1
 				ctx.params.message = "Başarılı Giriş  Oldu"
-				ctx.params.userInfo=dbFind[0]
+				ctx.params.userInfo = dbFind[0]
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[User] [Login] Kullanıcı Login Başarılı [ /api/user/loginOnline ]' + '\u001b[0m');	
+				console.log('\u001b[' + 32 + 'm' + '[User] [Login] Kullanıcı Login Başarılı [ /api/user/loginOnlineUsername ]' + '\u001b[0m');
 			}
 
 			//! Kullanıcı Yoksa
 			else {
-				
-				if (user_email.length <= 0)  {	console.log('\u001b[' + 31 + 'm' + '[User] [Login] Email Yok' + '\u001b[0m'); }
-				if (user_email.length > 0) { 	
+
+				if (dbFind_username.length <= 0) { console.log('\u001b[' + 31 + 'm' + '[User] [Login] UserName Yok' + '\u001b[0m'); }
+				if (dbFind_username.length > 0) {
 					console.log('\u001b[' + 32 + 'm' + '[User] [Login] Email Var' + '\u001b[0m');
 
-					/*
 					//! ----------- Log ----------------------------- 	
-					let logs_add = await ctx.call('logs.add', {					
-						userToken:user_email[0].userToken,
-						from: "user",
-						fromToken:user_email[0].userToken,						
-						name: "user_login_error",
-						description: "Hatalı  Kullanıcı Giriş Yapıldı"
+					let logs_add = await ctx.call('logs.add', {
+						table: "user",
+						title: 'user_login_error',
+						description: "Kullanıcı Login Başarısız",
+						logStatus: "error",
+						fromToken: dbFind_username[0]["token"],
+						created_byToken: dbFind_username[0]["token"]
 					})
+
+					if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[User] [Logs] [Login] Bildirim Eklendi' + '\u001b[0m'); }
+					if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[User] [Logs] [Login] Bildirim Eklenemedi' + '\u001b[0m'); }
+
 					//! ----------- Log Son -----------------------------
-					*/
+
+				}
 
 
-				 }
-								
-			
 				//! Return Api
-				ctx.params.title = "Kullanıcı Username Login"
+				ctx.params.title = "user.service -> Kullanıcı Login"
 				ctx.params.table = "user.json"
 				ctx.params.status = 0
 				ctx.params.message = "Hatalı Giriş Oldu"
-				ctx.params.userInfo=null
+				ctx.params.userInfo = null
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[User] [Login] Kullanıcı Login Başarısız [ /api/user/loginOnline ]' + '\u001b[0m');		
+				console.log('\u001b[' + 31 + 'm' + '[User] [Login] Kullanıcı Login Başarısız [ /api/user/loginOnlineUsername ] ' + '\u001b[0m');
 
-			}					
-           
-			
+			}
+		    
+
 			//! Delete
 			delete ctx.params.username
 			delete ctx.params.password
@@ -1076,22 +1090,25 @@ module.exports = {
 				
 					console.log('\u001b[' + 32 + 'm' + '[User] [Loginout] Kullanıcı Güncelleme Yapıldı' + '\u001b[0m');
 
-					/*
 					//! ----------- Log ----------------------------- 	
-					let logs_add = await ctx.call('logs.add', {					
-						userToken:dbFind[0].userToken,
-						from: "user",
-						fromToken:dbFind[0].userToken,						
-						name: "user_login_successful",
-						description: "Başarılı Kullanıcı Giriş Yapıldı"
+					let logs_add = await ctx.call('logs.add', {
+						table: "user",
+						title: 'user_loginout_successful',
+						description: "Kullanıcı Çıkış Başarılı",
+						logStatus: "successful",
+						fromToken: dbFind[0]["token"],
+						created_byToken: dbFind[0]["token"]
 					})
+
+					if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[User] [Logs] [Login] Bildirim Eklendi' + '\u001b[0m'); }
+					if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[User] [Logs] [Login] Bildirim Eklenemedi' + '\u001b[0m'); }
+
 					//! ----------- Log Son -----------------------------
-					*/
 
 				}       		
 
 				//! Return Api
-				ctx.params.title = "Kullanıcı Loginout"
+				ctx.params.title = "user.service -> Kullanıcı Loginout"
 				ctx.params.table = "user.json"
 				ctx.params.status = 1
 				ctx.params.message = "Başarılı Çıkış  Yapıldı"
@@ -1105,10 +1122,10 @@ module.exports = {
 			else {
 
 				//! Return Api
-				ctx.params.title = "Kullanıcı Loginout"
+				ctx.params.title = "user.service -> Kullanıcı Loginout"
 				ctx.params.table = "user.json"
 				ctx.params.status = 0
-				ctx.params.message = "Hatalı Giriş Oldu"
+				ctx.params.message = "Hatalı Çıkış Oldu"
 				ctx.params.userInfo=null
 
 				//Console Yazma
