@@ -48,6 +48,7 @@ Bildirim verilerini tutuyor
 * Kullanıcı Ekleme Başarılı : user_add_successful
 * Kullanıcı Güncelleme Başarılı : user_update_successful
 * Kullanıcı Silme Başarılı : user_delete_successful
+* Kullanıcı Geçisi Silme Başarılı : user_delete_update_successful
 
 * Kullanıcı Login Başarılı  : user_login_successful
 * Kullanıcı Login Başarısız : user_login_error
