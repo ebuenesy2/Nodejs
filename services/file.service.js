@@ -1516,6 +1516,7 @@ module.exports = {
 			let file_upload = await ctx.call('file.uploadUrl', {
 				fileUrl: ctx.params.fileUrl,
 				role: ctx.params.role,
+			           
 				usedPage: ctx.params.usedPage,
 				created_byToken: ctx.params.created_byToken
 			})		
