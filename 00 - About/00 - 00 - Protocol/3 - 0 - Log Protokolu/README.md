@@ -54,19 +54,21 @@ Bildirim verilerini tutuyor
 * Kullanıcı Login Başarısız : user_login_error
 * Kullanıcı Çıkış Başarılı: user_loginout_successful
 
+
+* Admin Ekleme Başarılı : admin_add_successful
+* Admin Güncelleme Başarılı : admin_update_successful
+* Admin Silme Başarılı : admin_delete_successful
+* Admin Geçisi Silme Başarılı : admin_delete_update_successful
+
+* Admin Login Başarılı  : admin_login_successful
+* Admin Login Başarısız : admin_login_error
+* Admin Çıkış Başarılı: admin_loginout_successful
+
  ```
   
 ## Planlanan Uyarılar
  
  ```
-* Başarılı Admin Kayıt Yapıldı : admin_add_successful
-* Başarılı Admin Güncelleme Yapıldı : admin_update_successful
-* Başarılı Admin işlemi Başarılı : admin_delete_successful
-
-* Başarılı Admin Giriş Yapıldı : admin_login_successful
-* Hatalı Admin Giriş Yapıldı : admin_login_error
-* Başarılı Admin Çıkış Yapıldı : admin_loginout_successful
-
 * Mesaj Yazma Başarılı : message_add_successful
 * Mesaj Güncelleme Başarılı : message_update_successful
 * Mesaj Silme Başarılı : message_delete_successful
