@@ -304,22 +304,25 @@ module.exports = {
 								console.log('\u001b[' + 32 + 'm' + '[Admin] [Json] [Add] Json Veri Kayıt Edildi [ admin.json ] ' + '\u001b[0m');								
 								
 							});
-							
-							/*
+
 							//! ----------- Log ----------------------------- 	
-							let logs_add = await ctx.call('logs.add', {					
-								userToken: jwt,
-								from: "user",
+							let logs_add = await ctx.call('logs.add', {
+								table: "admin",
+								title: "admin_add_successful",
+								description: "Admin Ekleme Başarılı",
+								logStatus: "successful",
 								fromToken: jwt,
-								name: "user_add_successful",
-								description: "Başarılı Kullanıcı Kayıt Yapıldı"
-							})			
-							//! ----------- Log Son ----------------------------- 
-							*/
+								created_byToken: ctx.params.created_byToken ? ctx.params.created_byToken : jwt
+							})
+
+							if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Admin] [Logs] [Add] Bildirim Eklendi' + '\u001b[0m'); }
+							if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Admin] [Logs] [Add] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+							//! ----------- Log Son -----------------------------
 
 							//! Return Api   
 							status = 1	
-							message="Kullanıcı Eklendi"	
+							message="Veri Eklendi"	
 					}
 
 					//! Return Api   
@@ -329,9 +332,9 @@ module.exports = {
 					ctx.params.message = message	
 
 					//Console Yazma
-					if(status==1) { console.log('\u001b[' + 32 + 'm' + '[Admin] [Add] Kullanıcı Veri Eklendi [ /api/admin/add ]' + '\u001b[0m'); }
+					if(status==1) { console.log('\u001b[' + 32 + 'm' + '[Admin] [Add] Admin Veri Eklendi [ /api/admin/add ]' + '\u001b[0m'); }
 					if (status == 0) {
-						console.log('\u001b[' + 31 + 'm' + '[Admin] [Add] Kullanıcı Veri Eklenemedi [ /api/admin/add ]' + '\u001b[0m');
+						console.log('\u001b[' + 31 + 'm' + '[Admin] [Add] Admin Veri Eklenemedi [ /api/admin/add ]' + '\u001b[0m');
 						console.log('\u001b[' + 31 + 'm' + '[Admin] [Add] Error: '+message + '\u001b[0m');
 					}
 										
@@ -342,10 +345,10 @@ module.exports = {
 					ctx.params.title = "admin.service -> Veri Ekleme"
 					ctx.params.table = "admin.json"			
 					ctx.params.status = 0
-					ctx.params.message = "Kullanıcı Eklenemedi"			
+					ctx.params.message = "Veri Eklenemedi"			
 
 					//Console Yazma
-					console.log('\u001b[' + 31 + 'm' + '[Admin] [Add] Kullanıcı Veri Eklenemedi [ /api/admin/add ]' + '\u001b[0m');
+					console.log('\u001b[' + 31 + 'm' + '[Admin] [Add] Admin Veri Eklenemedi [ /api/admin/add ]' + '\u001b[0m');
 
 				}
 
@@ -408,8 +411,6 @@ module.exports = {
 					}
 				}
 
-				console.log(); //! Boşluk Ekleniliyor
-
 				//! Resim Yükleme Onay - Cover
 				if(ctx.params.cover_ImageUrl_File_Check=="0") { 	console.log('\u001b[' + 31 + 'm' + '[Admin] [Update] [Cover] Cover Resim Yükleme Onaylanmadı' + '\u001b[0m'); }
 				if(ctx.params.cover_ImageUrl_File_Check=="1") { 	
@@ -445,8 +446,6 @@ module.exports = {
 					}	
 				}
 
-				console.log(); //! Boşluk Ekleniliyor
-
 				//! Delete
 				delete ctx.params.profil_ImageUrl_File
 				delete ctx.params.profil_ImageUrl_File_Check
@@ -475,27 +474,29 @@ module.exports = {
 					console.log('\u001b[' + 32 + 'm' + '[Admin] [Json] [Update] Json Veri Kayıt Edildi [ user.json ] ' + '\u001b[0m');	
 				});	
 				// End Json içine Verileri Yazıyor -> db
-				
-	            /*
+
 				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {					
-					userToken: ctx.params.userToken,
-					from: "admin",
-					fromToken: ctx.params.userToken,
-					name: "user_update_successful",
-					description: "Başarılı Kullanıcı Güncelleme Yapıldı"
-				})			
-				//! ----------- Log Son -----------------------------  
-				*/
+				let logs_add = await ctx.call('logs.add', {
+					table: "admin",
+					title: "admin_update_successful",
+					description: "Admin Güncelleme Başarılı",
+					logStatus: "successful",
+					fromToken: ctx.params.token,
+					created_byToken: ctx.params.updated_byToken
+				})
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Admin] [Logs] [Update] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Admin] [Logs] [Update] Bildirim Eklenemedi' + '\u001b[0m'); }				
+				//! ----------- Log Son -----------------------------
 
 				//! Return Api   
 				ctx.params.title = "admin.service -> Veri Guncelleme"
 				ctx.params.table = "admin.json"			
 				ctx.params.status = 1
-				ctx.params.message = "Kullanıcı Kayıt Güncellendi"	
+				ctx.params.message = "Veri Güncellendi"	
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[Admin] [Update] Kullanıcı Kayıt Güncellendi [ /api/admin/update ] ' + '\u001b[0m');			         
+				console.log('\u001b[' + 32 + 'm' + '[Admin] [Update] Admin Kayıt Güncellendi [ /api/admin/update ] ' + '\u001b[0m');			         
 
 			}
 
@@ -506,10 +507,10 @@ module.exports = {
 				ctx.params.title = "admin.service -> Veri Guncelleme"
 				ctx.params.table = "admin.json"			
 				ctx.params.status = 0
-				ctx.params.message = "Kullanıcı Guncellenemedi"			
+				ctx.params.message = "Veri Guncellenemedi"			
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[Admin] [Update] Kullanıcı Kayıt Guncellenemedi [ /api/admin/update ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[Admin] [Update] Admin Kayıt Guncellenemedi [ /api/admin/update ] ' + '\u001b[0m');
 
 			}
 
@@ -579,8 +580,6 @@ module.exports = {
 					}
 				
 
-				console.log(); //! Boşluk Ekleniliyor
-
 				//! Resim Yükleme Onay - Cover
 				if(ctx.params.cover_ImageUrl_File_Check=="0") { 	console.log('\u001b[' + 31 + 'm' + '[Admin] [Update] [Cover] Cover Resim Yükleme Onaylanmadı' + '\u001b[0m'); }
 				if(ctx.params.cover_ImageUrl_File_Check=="1") { 	
@@ -617,8 +616,6 @@ module.exports = {
 					}	
 				}
 
-				console.log(); //! Boşluk Ekleniliyor
-
 				//! Delete
 				delete ctx.params.profil_ImageUrl_File
 				delete ctx.params.profil_ImageUrl_File_Check
@@ -649,26 +646,29 @@ module.exports = {
 				});
 				// End Json içine Verileri Yazıyor -> db
 				
-	            /*
+
 				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {					
-					userToken: ctx.params.userToken,
-					from: "user",
-					fromToken: ctx.params.userToken,
-					name: "user_update_successful",
-					description: "Başarılı Kullanıcı Güncelleme Yapıldı"
-				})			
-				//! ----------- Log Son -----------------------------  
-				*/
+				let logs_add = await ctx.call('logs.add', {
+					table: "admin",
+					title: "admin_update_successful",
+					description: "Admin Güncelleme Başarılı",
+					logStatus: "successful",
+					fromToken: ctx.params.token,
+					created_byToken: ctx.params.updated_byToken
+				})
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Admin] [Logs] [Update] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Admin] [Logs] [Update] Bildirim Eklenemedi' + '\u001b[0m'); }				
+				//! ----------- Log Son -----------------------------
 
 				//! Return Api   
 				ctx.params.title = "admin.service -> Veri Guncelleme"
 				ctx.params.table = "admin.json"			
 				ctx.params.status = 1
-				ctx.params.message = "Kullanıcı Kayıt Güncellendi"	
+				ctx.params.message = "Veri Güncellendi"	
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[Admin] [Update] Kullanıcı Kayıt Güncellendi [ /api/admin/updateUrl ] ' + '\u001b[0m');		
+				console.log('\u001b[' + 32 + 'm' + '[Admin] [Update] Admin Veri Güncellendi [ /api/admin/updateUrl ] ' + '\u001b[0m');		
 
 			}
 
@@ -679,10 +679,10 @@ module.exports = {
 				ctx.params.title = "admin.service -> Veri Guncelleme"
 				ctx.params.table = "admin.json"			
 				ctx.params.status = 0
-				ctx.params.message = "Kullanıcı Guncellenemedi"			
+				ctx.params.message = "Veri Guncellenemedi"			
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[Admin] [Update] Kullanıcı Kayıt Guncellenemedi [ /api/admin/updateUrl ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[Admin] [Update] Admin  Veri Guncellenemedi [ /api/admin/updateUrl ] ' + '\u001b[0m');
 
 			}
 
@@ -758,26 +758,29 @@ module.exports = {
 				if (file_delete_cover.status==0)  { console.log('\u001b[' + 31 + 'm' + '[Admin] [Delete] [Cover] Dosya Silinemedi [ /api/file/fileDeleteUrl ]' + '\u001b[0m');  }
 
 
-				/*
 				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {					
-					userToken: ctx.params.userToken,
-					from: "user",
-					fromToken: dbFind.token,
-					name: "user_delete_successful",
-					description: "Silme Kullanıcı işlemi Başarılı"
+				let logs_add = await ctx.call('logs.add', {
+					table: "admin",
+					title: "admin_delete_successful",
+					description: "Admin Silme Başarılı",
+					logStatus: "successful",
+					fromToken: dbFind["token"],
+					created_byToken: ctx.params.Deleted_byToken
 				})
-				//! ----------- Log Son ----------------------------- 
-				*/
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Admin] [Logs] [Delete] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Admin] [Logs] [Delete] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
 				
 				//! Return Api
 				ctx.params.title = "admin.service -> Veri Silme"
 				ctx.params.table = "admin.json"
 				ctx.params.status = 1
-				ctx.params.message = "Kullanıcı Silindi"
+				ctx.params.message = "Veri Silindi"
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[Admin] [Delete] Kullanıcı Silindi [ /api/admin/delete ]' + '\u001b[0m');	
+				console.log('\u001b[' + 32 + 'm' + '[Admin] [Delete] Veri Silindi [ /api/admin/delete ]' + '\u001b[0m');	
 	        	
 			} else {
 				
@@ -785,10 +788,10 @@ module.exports = {
 				ctx.params.title = "admin.service -> Veri Silme"
 				ctx.params.table = "admin.json"
 				ctx.params.status = 0
-				ctx.params.message = "Kullanıcı Silinemedi"
+				ctx.params.message = "Veri Silinemedi"
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[Admin] [Delete] Kullanıcı Silinemedi [ /api/admin/delete ]' + '\u001b[0m');	
+				console.log('\u001b[' + 31 + 'm' + '[Admin] [Delete] Veri Silinemedi [ /api/admin/delete ]' + '\u001b[0m');	
 			}
 
 			//! Return Delete			
@@ -826,16 +829,21 @@ module.exports = {
 				});
 				// End Json içine Verileri Yazıyor -> db	
 	
-				// //! ----------- Log ----------------------------- 	
-				// let logs_add = await ctx.call('logs.add', {					
-				// 	userToken: ctx.params.userToken,
-				// 	from: "ssk",
-				// 	fromToken: ctx.params.sskToken,
-				// 	name: "faq_update_successful",
-				// 	description: "SSK Güncelleme Başarılı"
-				// })			
-				// //! ----------- Log Son -----------------------------  
-				
+
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {
+					table: "admin",
+					title: "admin_delete_update_successful",
+					description: "Admin Geçisi Silme Başarılı",
+					logStatus: "successful",
+					fromToken: dbFind["token"],
+					created_byToken: ctx.params.Deleted_byToken
+				})
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Admin] [Logs] [Delete_Updated] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Admin] [Logs] [Delete_Updated] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
               
                 //! Return Api	
 				ctx.params.title = "admin.service -> Veri Geçisi Silme"
@@ -873,7 +881,7 @@ module.exports = {
 		async loginOnline(ctx) {
 
 			// ! Arama
-			const user_email = db.filter(u => u.email == ctx.params.email);
+			const dbFind_email = db.filter(u => u.email == ctx.params.email);
 			const dbFind = db.filter(u => u.email == ctx.params.email && u.password == ctx.params.password);
 
 
@@ -894,58 +902,66 @@ module.exports = {
 				if(user_updateUrl.status=="0") { 	console.log('\u001b[' + 31 + 'm' + '[Admin] [Login] Kullanıcı Güncelleme Yapılamadı' + '\u001b[0m'); }
 				if(user_updateUrl.status=="1") { 	
 				
-					console.log('\u001b[' + 32 + 'm' + '[Admin] [Login] Kullanıcı Güncelleme Yapıldı' + '\u001b[0m');
+					console.log('\u001b[' + 32 + 'm' + '[Admin] [Login] Veri Güncelleme Yapıldı' + '\u001b[0m');
 
-					/*
+
 					//! ----------- Log ----------------------------- 	
-					let logs_add = await ctx.call('logs.add', {					
-						userToken:dbFind[0].userToken,
-						from: "user",
-						fromToken:dbFind[0].userToken,						
-						name: "user_login_successful",
-						description: "Başarılı Kullanıcı Giriş Yapıldı"
+					let logs_add = await ctx.call('logs.add', {
+						table: "admin",
+						title: 'admin_login_successful',
+						description: "Admin Login Başarılı",
+						logStatus: "successful",
+						fromToken: dbFind[0]["token"],
+						created_byToken: dbFind[0]["token"]
 					})
+
+					if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Admin] [Logs] [Login] Bildirim Eklendi' + '\u001b[0m'); }
+					if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Admin] [Logs] [Login] Bildirim Eklenemedi' + '\u001b[0m'); }
+
 					//! ----------- Log Son -----------------------------
-					*/
 
 				}       				
 
 				//! Return Api
-				ctx.params.title = "Kullanıcı Login"
+				ctx.params.title = "admin.service -> Kullanıcı Login"
 				ctx.params.table = "admin.json"
 				ctx.params.status = 1
 				ctx.params.message = "Başarılı Giriş  Oldu"
 				ctx.params.userInfo=dbFind[0]
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[Admin] [Login] Kullanıcı Login Başarılı [ /api/admin/loginOnline ]' + '\u001b[0m');	
+				console.log('\u001b[' + 32 + 'm' + '[Admin] [Login] Admin Login Başarılı [ /api/admin/loginOnline ]' + '\u001b[0m');	
 			}
 
 			//! Kullanıcı Yoksa
 			else {
 				
-				if (user_email.length <= 0)  {	console.log('\u001b[' + 31 + 'm' + '[Admin] [Login] Email Yok' + '\u001b[0m'); }
-				if (user_email.length > 0) { 	
+				if (dbFind_email.length <= 0)  {	console.log('\u001b[' + 31 + 'm' + '[Admin] [Login] Email Yok' + '\u001b[0m'); }
+				if (dbFind_email.length > 0) { 	
 					console.log('\u001b[' + 32 + 'm' + '[Admin] [Login] Email Var' + '\u001b[0m');
 
-					/*
+
 					//! ----------- Log ----------------------------- 	
-					let logs_add = await ctx.call('logs.add', {					
-						userToken:user_email[0].userToken,
-						from: "user",
-						fromToken:user_email[0].userToken,						
-						name: "user_login_error",
-						description: "Hatalı  Kullanıcı Giriş Yapıldı"
+					let logs_add = await ctx.call('logs.add', {
+						table: "admin",
+						title: 'admin_login_error',
+						description: "Admin Login Başarısız",
+						logStatus: "error",
+						fromToken: dbFind_email[0]["token"],
+						created_byToken: dbFind_email[0]["token"]
 					})
+
+					if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Admin] [Logs] [Login] Bildirim Eklendi' + '\u001b[0m'); }
+					if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Admin] [Logs] [Login] Bildirim Eklenemedi' + '\u001b[0m'); }
+
 					//! ----------- Log Son -----------------------------
-					*/
 
 
 				 }
 								
 			
 				//! Return Api
-				ctx.params.title = "Kullanıcı Login"
+				ctx.params.title = "admin.service -> Kullanıcı Login"
 				ctx.params.table = "admin.json"
 				ctx.params.status = 0
 				ctx.params.message = "Hatalı Giriş Oldu"
@@ -966,45 +982,50 @@ module.exports = {
 		async loginOnlineUsername(ctx) {
 
 			// ! Arama
-			const user_email = db.filter(u => u.username == ctx.params.username);
+			const dbFind_username = db.filter(u => u.username == ctx.params.username);
 			const dbFind = db.filter(u => u.username == ctx.params.username && u.password == ctx.params.password);		
               
 			// Giriş Başarılı ise
 			if (dbFind.length > 0) {
-				
+
 				//! -----------  User UPDATE ----------------------------- 	
 				let user_updateUrl = await ctx.call('admin.updateUrl', {
-					token:dbFind[0].token,
-					updated_byToken:dbFind[0].token,
-					role: dbFind[0].role,					               
-					onlineStatus: true,                  
-					onlineLastLogin_At: new Date()					        
-				})		
+					token: dbFind[0]["token"],
+					updated_byToken: dbFind[0]["token"],
+					role: dbFind[0]["role"],
+					onlineStatus: true,
+					onlineLastLogin_At: new Date()
+				})
 				//! ----------- End User UPDATE -----------------------------
+
 				
 
 			    //! Kullanıcı Güncelleme Yapıldı
-				if(user_updateUrl.status=="0") { 	console.log('\u001b[' + 31 + 'm' + '[Admin] [Login] Kullanıcı Güncelleme Yapılmadı' + '\u001b[0m'); }
+				if(user_updateUrl.status=="0") { 	console.log('\u001b[' + 31 + 'm' + '[Admin] [Login] Admin Güncelleme Yapılmadı' + '\u001b[0m'); }
 				if(user_updateUrl.status=="1") { 	
 				
-					console.log('\u001b[' + 32 + 'm' + '[Admin] [Login] Kullanıcı Güncelleme Yapıldı' + '\u001b[0m');
+					console.log('\u001b[' + 32 + 'm' + '[Admin] [Login] Admin Güncelleme Yapıldı' + '\u001b[0m');
 
-					/*
 					//! ----------- Log ----------------------------- 	
-					let logs_add = await ctx.call('logs.add', {					
-						userToken:dbFind[0].userToken,
-						from: "user",
-						fromToken:dbFind[0].userToken,						
-						name: "user_login_successful",
-						description: "Başarılı Kullanıcı Giriş Yapıldı"
+					let logs_add = await ctx.call('logs.add', {
+						table: "admin",
+						title: 'admin_login_successful',
+						description: "Admin Login Başarılı",
+						logStatus: "successful",
+						fromToken: dbFind[0]["token"],
+						created_byToken: dbFind[0]["token"]
 					})
+
+					if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Admin] [Logs] [Login] Bildirim Eklendi' + '\u001b[0m'); }
+					if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Admin] [Logs] [Login] Bildirim Eklenemedi' + '\u001b[0m'); }
+
 					//! ----------- Log Son -----------------------------
-					*/
+
 
 				}       				
 
 				//! Return Api
-				ctx.params.title = "Kullanıcı Username Login"
+				ctx.params.title = "admin.service -> Kullanıcı Login"
 				ctx.params.table = "admin.json"
 				ctx.params.status = 1
 				ctx.params.message = "Başarılı Giriş  Oldu"
@@ -1019,33 +1040,22 @@ module.exports = {
 				
 				if (user_email.length <= 0)  {	console.log('\u001b[' + 31 + 'm' + '[Admin] [Login] Email Yok' + '\u001b[0m'); }
 				if (user_email.length > 0) { 	
+					
+					//Console Yazma
 					console.log('\u001b[' + 32 + 'm' + '[Admin] [Login] Email Var' + '\u001b[0m');
-
-					/*
-					//! ----------- Log ----------------------------- 	
-					let logs_add = await ctx.call('logs.add', {					
-						userToken:user_email[0].userToken,
-						from: "user",
-						fromToken:user_email[0].userToken,						
-						name: "user_login_error",
-						description: "Hatalı  Kullanıcı Giriş Yapıldı"
-					})
-					//! ----------- Log Son -----------------------------
-					*/
-
 
 				 }
 								
 			
 				//! Return Api
-				ctx.params.title = "Kullanıcı Username Login"
+				ctx.params.title = "admin.service -> Kullanıcı Login"
 				ctx.params.table = "admin.json"
 				ctx.params.status = 0
 				ctx.params.message = "Hatalı Giriş Oldu"
 				ctx.params.userInfo=null
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[Admin] [Login] Kullanıcı Login Başarısız [ /api/admin/loginOnline ]' + '\u001b[0m');		
+				console.log('\u001b[' + 31 + 'm' + '[Admin] [Login] Admin Login Başarısız [ /api/admin/loginOnline ]' + '\u001b[0m');		
 
 			}					
            
@@ -1082,22 +1092,26 @@ module.exports = {
 				
 					console.log('\u001b[' + 32 + 'm' + '[Admin] [Loginout] Kullanıcı Güncelleme Yapıldı' + '\u001b[0m');
 
-					/*
+
 					//! ----------- Log ----------------------------- 	
-					let logs_add = await ctx.call('logs.add', {					
-						userToken:dbFind[0].userToken,
-						from: "user",
-						fromToken:dbFind[0].userToken,						
-						name: "user_login_successful",
-						description: "Başarılı Kullanıcı Giriş Yapıldı"
+					let logs_add = await ctx.call('logs.add', {
+						table: "admin",
+						title: 'admin_loginout_successful',
+						description: "Admin Çıkış Başarılı",
+						logStatus: "successful",
+						fromToken: dbFind[0]["token"],
+						created_byToken: dbFind[0]["token"]
 					})
+
+					if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Admin] [Logs] [Login] Bildirim Eklendi' + '\u001b[0m'); }
+					if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Admin] [Logs] [Login] Bildirim Eklenemedi' + '\u001b[0m'); }
+
 					//! ----------- Log Son -----------------------------
-					*/
 
 				}       		
 
 				//! Return Api
-				ctx.params.title = "Kullanıcı Loginout"
+				ctx.params.title = "admin.service -> Kullanıcı Loginout"
 				ctx.params.table = "admin.json"
 				ctx.params.status = 1
 				ctx.params.message = "Başarılı Çıkış  Yapıldı"
@@ -1111,7 +1125,7 @@ module.exports = {
 			else {
 
 				//! Return Api
-				ctx.params.title = "Kullanıcı Loginout"
+				ctx.params.title = "admin.service -> Kullanıcı Loginout"
 				ctx.params.table = "admin.json"
 				ctx.params.status = 0
 				ctx.params.message = "Hatalı Giriş Oldu"

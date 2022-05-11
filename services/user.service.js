@@ -322,7 +322,7 @@ module.exports = {
 
 							//! Return Api   
 							status = 1	
-							message="Kullanıcı Eklendi"	
+							message="Veri Eklendi"	
 					}
 
 					//! Return Api   
@@ -345,7 +345,7 @@ module.exports = {
 					ctx.params.title = "user.service -> Veri Ekleme"
 					ctx.params.table = "user.json"			
 					ctx.params.status = 0
-					ctx.params.message = "Kullanıcı Eklenemedi"			
+					ctx.params.message = "Veri Eklenemedi"			
 
 					//Console Yazma
 					console.log('\u001b[' + 31 + 'm' + '[User] [Add] Kullanıcı Veri Eklenemedi [ /api/user/add ] ' + '\u001b[0m');
@@ -489,7 +489,7 @@ module.exports = {
 				ctx.params.title = "user.service -> Veri Guncelleme"
 				ctx.params.table = "user.json"			
 				ctx.params.status = 1
-				ctx.params.message = "Kullanıcı Kayıt Güncellendi"	
+				ctx.params.message = "Veri Kayıt Güncellendi"	
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[User] [Update] Kullanıcı Kayıt Güncellendi [ /api/user/update ] ' + '\u001b[0m');			         
@@ -503,7 +503,7 @@ module.exports = {
 				ctx.params.title = "user.service -> Veri Guncelleme"
 				ctx.params.table = "user.json"			
 				ctx.params.status = 0
-				ctx.params.message = "Kullanıcı Guncellenemedi"			
+				ctx.params.message = "Veri Guncellenemedi"			
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[User] [Update] Kullanıcı Kayıt Guncellenemedi [ /api/user/update ] ' + '\u001b[0m');
@@ -660,7 +660,7 @@ module.exports = {
 				ctx.params.title = "user.service -> Veri Guncelleme"
 				ctx.params.table = "user.json"			
 				ctx.params.status = 1
-				ctx.params.message = "Kullanıcı Kayıt Güncellendi"	
+				ctx.params.message = "Veri Kayıt Güncellendi"	
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[User] [Update] Kullanıcı Kayıt Güncellendi [ /api/user/updateUrl ] ' + '\u001b[0m');		
@@ -674,7 +674,7 @@ module.exports = {
 				ctx.params.title = "user.service -> Veri Guncelleme"
 				ctx.params.table = "user.json"			
 				ctx.params.status = 0
-				ctx.params.message = "Kullanıcı Guncellenemedi"			
+				ctx.params.message = "Veri Guncellenemedi"			
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[User] [Update] Kullanıcı Kayıt Guncellenemedi [ /api/user/updateUrl ] ' + '\u001b[0m');
@@ -771,7 +771,7 @@ module.exports = {
 				ctx.params.title = "user.service -> Veri Silme"
 				ctx.params.table = "user.json"
 				ctx.params.status = 1
-				ctx.params.message = "Kullanıcı Silindi"
+				ctx.params.message = "Veri Silindi"
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[User] [Delete] Kullanıcı Silindi [ /api/user/delete ]' + '\u001b[0m');	
@@ -782,7 +782,7 @@ module.exports = {
 				ctx.params.title = "user.service -> Veri Silme"
 				ctx.params.table = "user.json"
 				ctx.params.status = 0
-				ctx.params.message = "Kullanıcı Silinemedi"
+				ctx.params.message = "Veri Silinemedi"
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[User] [Delete] Kullanıcı Silinemedi [ /api/user/delete ]' + '\u001b[0m');	
@@ -909,7 +909,7 @@ module.exports = {
 					if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[User] [Logs] [Login] Bildirim Eklendi' + '\u001b[0m'); }
 					if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[User] [Logs] [Login] Bildirim Eklenemedi' + '\u001b[0m'); }
 
-					   //! ----------- Log Son -----------------------------
+					//! ----------- Log Son -----------------------------
 
 				}
 
