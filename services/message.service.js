@@ -274,17 +274,20 @@ module.exports = {
 				});
 				// End Json içine Verileri Yazıyor -> db	
 
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {
+					table: "message",
+					title: "message_add_successful",
+					description: "Message Yazma Başarılı",
+					logStatus: "successful",
+					fromToken: jwt,
+					created_byToken: ctx.params.created_byToken ? ctx.params.created_byToken : ctx.params.FromUserToken
+				})
 
-				// //! ----------- Log ----------------------------- 	
-				// let logs_add = await ctx.call('logs.add', {					
-				// 	userToken: ctx.params.FromUserToken,
-				// 	from: "mesaj",
-				// 	fromToken: jwt,
-				// 	name: "message_add_successful",
-				// 	description: "Mesaj Yazma Başarılı"
-				// })			
-				// //! ----------- Log Son ----------------------------- 
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Message] [Logs] [Add] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Message] [Logs] [Add] Bildirim Eklenemedi' + '\u001b[0m'); }
 
+				//! ----------- Log Son -----------------------------
 
 				//! Return Api   
 				ctx.params.title = "message.service -> Veri Ekleme"
@@ -357,15 +360,21 @@ module.exports = {
 				});
 				// End Json içine Verileri Yazıyor -> db	
 	
-				// //! ----------- Log ----------------------------- 	
-				// let logs_add = await ctx.call('logs.add', {					
-				// 	userToken: ctx.params.userToken,
-				// 	from: "ssk",
-				// 	fromToken: ctx.params.sskToken,
-				// 	name: "faq_update_successful",
-				// 	description: "SSK Güncelleme Başarılı"
-				// })			
-				// //! ----------- Log Son -----------------------------  
+
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {
+					table: "message",
+					title: "message_update_successful",
+					description: "Message Güncelleme Başarılı",
+					logStatus: "successful",
+					fromToken: ctx.params.token,
+					created_byToken: ctx.params.updated_byToken
+				})
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Message] [Logs] [Update] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Message] [Logs] [Update] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
 				
               
                 //! Return Api	
@@ -434,16 +443,21 @@ module.exports = {
 				});
 				// End Json içine Verileri Yazıyor -> db	
 				
-				// //! ----------- Log ----------------------------- 	
-				// let logs_add = await ctx.call('logs.add', {					
-				// 	userToken: ctx.params.userToken,
-				// 	from: "ssk",
-				// 	fromToken: dbFind.sskToken,
-				// 	name: "faq_delete_successful",
-                //     description: "SSK Silme Başarılı"
-				// })	
-				// delete ctx.params.userToken 		
-				// //! ----------- Log Son -----------------------------  
+
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {
+					table: "message",
+					title: "message_delete_successful",
+					description: "Message Silme Başarılı",
+					logStatus: "successful",
+					fromToken: dbFind["token"],
+					created_byToken: ctx.params.Deleted_byToken
+				})
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Message] [Logs] [Delete] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Message] [Logs] [Delete] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
 				
                 //! Return Api   
 				ctx.params.title = "message.service -> Veri Silme"
@@ -505,16 +519,21 @@ module.exports = {
 			});
 			// End Json içine Verileri Yazıyor -> db	
 
+			
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {
+					table: "message",
+					title: "message_deleted_update_successful",
+					description: "Message Geçisi Silme Başarılı",
+					logStatus: "successful",
+					fromToken: dbFind["token"],
+					created_byToken: ctx.params.Deleted_byToken
+				})
 
-			// //! ----------- Log ----------------------------- 	
-			// let logs_add = await ctx.call('logs.add', {					
-			// 	userToken: ctx.params.userToken,
-			// 	from: "mesaj",
-			// 	fromToken: dbFind.MessageToken,
-			// 	name: "message_deleted_update_successful",
-			// 	description: "Mesaj Silme Kutusu Başarılı"
-			// })			
-			// //! ----------- Log Son -----------------------------  
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Message] [Logs] [Delete_Updated] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Message] [Logs] [Delete_Updated] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
 
 
                 //! Return Api	
@@ -593,16 +612,22 @@ module.exports = {
 				});
 				// End Json içine Verileri Yazıyor -> db
 
+			
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {
+					table: "message",
+					title: "message_view_successful",
+					description: "Mesaj Görüntüleme Başarılı",
+					logStatus: "successful",
+					fromToken: dbFind["token"],
+					created_byToken: ctx.params.readed_byToken
+				})
 
-				// //! ----------- Log ----------------------------- 	
-				// let logs_add = await ctx.call('logs.add', {					
-				// 	userToken: ctx.params.userToken,
-				// 	from: "mesaj",
-				// 	fromToken: dbFind.MessageToken,
-				// 	name: "message_read_successful",
-				// 	description: "Mesaj Görüntüleme Başarılı"
-				// })			
-				// //! ----------- Log Son -----------------------------  
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Message] [Logs] [View] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Message] [Logs] [View] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
+
 
 
 				//! Return Api	
