@@ -1,1 +1,47 @@
-[{"id":1,"title":"title","content":"content","token":"token","created_at":"2022-03-06T13:14:43.211Z","created_byToken":"created_byToken","isUpdated":false,"updated_at":"2022-03-06T13:14:43.211Z","updated_byToken":"updated_byToken","isActive":true,"isDeleted":false,"Deleted_at":"2022-03-06T13:14:43.211Z","Deleted_byToken":"isDeleted_byToken"},{"id":2,"title":"title güncelleme","content":"content güncelleme","token":"token2","created_at":"2022-03-06T13:14:43.211Z","created_byToken":"created_byToken2","isUpdated":true,"updated_at":"2022-05-13T01:43:11.512Z","updated_byToken":"updated_byToken1","isActive":false,"isDeleted":true,"Deleted_at":"2022-05-13T01:52:02.134Z","Deleted_byToken":"Deleted_byToken post"},{"id":3,"title":"title 3","content":"content 3","token":"token3","created_at":"2022-03-06T13:14:43.211Z","created_byToken":"created_byToken3","isUpdated":false,"updated_at":"2022-03-06T13:14:43.211Z","updated_byToken":"updated_byToken","isActive":true,"isDeleted":false,"Deleted_at":"2022-03-06T13:14:43.211Z","Deleted_byToken":"isDeleted_byToken"}]
+[
+    {
+        "id": 1,
+        "title":"title",
+        "content":"content",
+        "token":"token",
+        "created_at": "2022-03-06T13:14:43.211Z",
+        "created_byToken":"created_byToken",
+        "isUpdated":false,
+        "updated_at": "2022-03-06T13:14:43.211Z",
+        "updated_byToken" : "updated_byToken",
+        "isActive": true,
+        "isDeleted":false,
+        "Deleted_at": "2022-03-06T13:14:43.211Z",
+        "Deleted_byToken":"isDeleted_byToken"
+    },
+    {
+        "id": 2,
+        "title":"title 2",
+        "content":"content 2",
+        "token":"token2",
+        "created_at": "2022-03-06T13:14:43.211Z",
+        "created_byToken":"created_byToken2",
+       "isUpdated":false,
+        "updated_at": "2022-03-06T13:14:43.211Z",
+        "updated_byToken" : "updated_byToken",
+        "isActive": true,
+        "isDeleted":false,
+        "Deleted_at": "2022-03-06T13:14:43.211Z",
+        "Deleted_byToken":"isDeleted_byToken"
+    },
+    {
+        "id": 3,
+        "title":"title 3",
+        "content":"content 3",
+        "token":"token3",
+        "created_at": "2022-03-06T13:14:43.211Z",
+        "created_byToken":"created_byToken3",
+       "isUpdated":false,
+        "updated_at": "2022-03-06T13:14:43.211Z",
+        "updated_byToken" : "updated_byToken",
+        "isActive": true,
+        "isDeleted":false,
+        "Deleted_at": "2022-03-06T13:14:43.211Z",
+        "Deleted_byToken":"isDeleted_byToken"
+    }
+]
