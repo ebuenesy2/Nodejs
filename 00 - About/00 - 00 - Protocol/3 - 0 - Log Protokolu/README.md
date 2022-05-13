@@ -64,16 +64,18 @@ Bildirim verilerini tutuyor
 * Admin Login Başarısız : admin_login_error
 * Admin Çıkış Başarılı: admin_loginout_successful
 
- ```
-  
-## Planlanan Uyarılar
- 
- ```
 * Mesaj Yazma Başarılı : message_add_successful
 * Mesaj Güncelleme Başarılı : message_update_successful
 * Mesaj Silme Başarılı : message_delete_successful
 * Mesaj Silme Kutusu Başarılı : message_deleted_update_successful
 * Mesaj Görüntüleme Başarılı : message_view_successful
+
+ ```
+  
+## Planlanan Uyarılar
+ 
+ ```
+
 
 * SSK Ekleme Başarılı : faq_add_successful
 * SSK Güncelleme Başarılı : faq_update_successful
