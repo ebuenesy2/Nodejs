@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket Description </title>
+</head>
+<body>
+    
+    
+    <div class="connectUserInfo">
+        <div>  User: </div>
+        <div>  3 </div>
+    </div>
+
+
+   <div class="connectGenelPanel">
+        <div class="connectPanel">  
+            <div>  Client1 </div>
+            <div>  <button onclick="sendMessage()">Send Msg</button> </div>
+        </div>
+        
+        <div id="connectStatus" >  DisConnect  </div>
+        <div id="connectCount" >  0  </div>
+        
+   </div>
+
+   <div class="messagePanel">
+     <div id="PanelDescription" >  <p id="PanelName"> FromId: </p> <p id="FromId"> 0 </p>  </div>
+     <div id="PanelDescription" >  <p id="PanelName"> ToId: </p> <p id="ToId"> 0 </p>  </div>
+     <div id="PanelDescription" >  <p id="PanelName"> MessageType: </p> <p id="MessageType"> messageType </p>  </div>
+     <div id="PanelDescription" >  <p id="PanelName"> Message: </p> <p id="MessageData"> message </p>  </div>
+   </div>
+   
+   
+   
+</body>
+
+<!--- Socket -->
+<script type="text/javascript">
+
+    const userId=3;
+    const socket = new WebSocket('ws://localhost:3001/socket/'+userId);  // Url
+
+
+    //! Gelen Mesaj
+    socket.addEventListener('message', function (event) {
+
+        //! Veri Alma
+        let geleData = event.data;
+        const obj = JSON.parse(geleData);
+        const objDataType = obj.dataType; // "Connect" - 
+        const objDataTypeDescription = obj.dataTypeDescription; // "Connected"
+        const objConnectCount = obj.count; // 2
+        const objToAll = obj.toAll; // 1
+        const objFromUserID = obj.fromUserID; // 1
+        const objToUserID = obj.toUserID; // 12
+        const objData = obj.data; // 12
+        let objMesajType = "-"; // send | incoming
+
+        
+              
+
+         //! console yazma
+        console.log("Gelen Bilgi:",geleData);    
+        console.log("Gelen Bilgi Json:",obj);
+        console.log("DataType:",objDataType);
+        console.log("DataTypeDescription:",objDataTypeDescription);
+        console.log("ToAll:",objToAll);
+        console.log("FromUserID:",objFromUserID);
+        console.log("ToUserID:",objToUserID);
+        console.log("Data:",objData);
+        console.log("MesajType:",objMesajType);
+
+        
+        // Bağlantı Bilgileri
+        if(objDataType == "Connect" && objFromUserID == userId ) { document.getElementById("connectStatus").innerText = objDataTypeDescription; }
+        if(objDataType == "Connect") { document.getElementById("connectCount").innerText = objConnectCount; }
+         // Bağlantı Bilgileri Son
+
+        //Mesaj Bilgileri
+        if(objDataType == "Message" && objDataTypeDescription == "SendMessage") { alert("mesaj geldi");
+            
+            if(objToAll) { alert("public") 
+                if(objFromUserID == userId) { objMesajType = "send"; alert("gönderilen"); }
+                else { objMesajType = "incoming"; alert("gelen"); }
+            }
+            else if(!objToAll) { alert("private")
+                if(objFromUserID == userId) { objMesajType = "send"; alert("gönderilen"); }
+                else if(objToUserID == userId) { objMesajType = "incoming"; alert("gelen"); }
+            }
+
+            
+            document.getElementById("FromId").innerText = objFromUserID;
+            document.getElementById("ToId").innerText = objToUserID;
+            document.getElementById("MessageType").innerText = objMesajType;
+            document.getElementById("MessageData").innerText = objData;
+
+        }  //Mesaj Bilgileri Son
+
+
+
+        session_start();
+        console.log('test2: '.session_id());
+
+
+    });
+    //! Gelen Mesaj Son
+
+    //! Mesaj Gönderme
+    const sendMessage = () => {
+
+        const jsonVeri = JSON.stringify({
+
+            toAll:true,
+            toUserId:"id",
+            dataType: "Message",
+            dataTypeDescription:"SendMessage",
+            data:"Html den merhaba"
+        })
+
+        socket.send(jsonVeri);      
+    }
+    //! Mesaj Gönderme Son
+
+
+      //! Başlangıç
+      const init = () => {
+
+           //alert("Başlangıç") 
+      }
+      //! Başlangıç Son
+
+      init();
+
+</script>
+<!--- Socket Son -->
+
+
+</html>
+
+<style>
+
+    .connectUserInfo {  
+        display: flex;
+        width: 165px;
+        flex-direction: row;
+        justify-content: space-between;
+        border: 1px solid black;
+        padding: 4px;
+        margin-bottom: 6px;
+    }
+
+    .connectGenelPanel { display: flex; }
+
+    .connectPanel {
+        display: flex;
+        width: 165px;
+        flex-direction: row;
+        justify-content: space-between;
+        border: 1px solid black;
+        padding: 4px;
+    }
+
+    #connectStatus { margin-left: 10px; margin-right: 10px;}
+
+
+    .messagePanel { 
+        display: flex;
+        width: 250px;
+        border: 1px solid black;
+        height: 130px;
+        margin-top: 10px;
+        flex-direction: column;
+    }
+
+    #PanelDescription { 
+        display: flex; 
+        margin-top: -10px;
+        margin-bottom: -10px;
+    } 
+    #PanelName { margin-left: 10px; }
+    #FromId { margin-left: 2px; }
+    #ToId { margin-left: 2px; }
+    #MessageType { margin-left: 2px; }
+    #MessageData { margin-left: 2px; }
+
+    
+
+</style>

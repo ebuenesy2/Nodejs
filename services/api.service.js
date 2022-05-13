@@ -18,6 +18,148 @@ fastify.register(require('fastify-cors'), { })  // ! Fastify-cors
 
 
 
+/*************   Socket  Tanım *********** */
+const fastifySession = require('fastify-session'); // ! Fastify Session
+const fastifyCookie = require('fastify-cookie'); // ! Fastify Cookie
+fastify.register(fastifyCookie); // ! Fastify Cookie
+fastify.register(fastifySession, {secret: 'a secret with minimum length of 32 characters'}); ; // ! Fastify Session
+/*************   Socket  Tanım Son *********** */
+
+
+/*************   Socket  *********** */
+fastify.register(require('fastify-websocket'), { options: { maxPayload: 1048576 } })  // ! Fastify Web Socket
+
+let OnlineSayisi=0; //! Online Sayısı
+
+fastify.route({
+    method: 'GET',
+    url: '/socket/:userId',
+    handler: (req, res) => {      
+
+     const zaman=dayjs().toDate(); //! Zaman
+
+     console.log("reqParams:",req.params);
+
+      //! Return
+      res.send({ 
+          dataType:"Socket",
+          dataTypeDescription:"Socket Bilgileri",
+          mesaj:"Kullanıcı Bağlandı",
+          count:OnlineSayisi,
+          userId:req.session.sessionId,
+          time:zaman          
+         }) 
+    
+    },
+    wsHandler: (connection, req) => {
+        
+            OnlineSayisi++; //! Sayac Artıyor
+
+            const sessionId = req.session.sessionId; //! Session ID
+            //console.log("Session sessionId: "+sessionId); //! Session ID      
+            console.log('\u001b[' + 32 + 'm' + "Bir Kullanıcı Bağlandı SessionId: "+sessionId + '\u001b[0m')                  
+        
+            //! Return All Clients
+            fastify.websocketServer.clients.forEach(function each(client) {
+                
+                if (client.readyState === 1) {            
+                
+                //! Return Send
+                client.send(JSON.stringify({
+                    
+                    dataType:"Connect",
+                    dataTypeDescription:"Connected",
+                    fromUserID:Number(req.params.userId),
+                    fromUserToken:sessionId,
+                    toUserID:"all",
+                    data:"Bir Kullanıcı Bağlandı",
+                    count:OnlineSayisi,
+                    date:dayjs().toDate()
+
+                }));
+                //! Return Send Son
+
+                }
+            })
+            //! Return All Clients
+            
+        //! -- Çıkış Yapıldı ise
+        connection.socket.on("close", () => {
+         
+            OnlineSayisi--; //! Sayac Azalıyor
+            //console.log("Kullanıcı Çıkış Yaptı sessionId: "+sessionId);   //! Kullanıcı Çıkış Yapma   
+            console.log('\u001b[' + 31 + 'm' + "Bir Kullanıcı Çıkış Yaptı SessionId: "+sessionId + '\u001b[0m')           
+
+            //! Return All Clients
+            fastify.websocketServer.clients.forEach(function each(client) {
+                if (client.readyState === 1) {            
+                
+                    //! Return Send
+                    client.send(JSON.stringify({
+                        
+                        dataType:"Connect",
+                        dataTypeDescription:"disConnect",
+                        fromUserID:sessionId,
+                        toUserID:"all",
+                        data:"Bir Kullanıcı Çıkış Yaptı",
+                        date:dayjs().toDate(),
+                        count:OnlineSayisi
+
+                    }));
+                    //! Return Send Son
+
+                }
+            })
+            //! Return All Clients
+
+
+        }) 
+        //! -- Çıkış Yapıldı ise Son
+
+        
+        //! -- Mesaj Alma
+        connection.socket.on('message', message => {
+
+            const obj = JSON.parse(message); 
+            //console.log("Kimden:",sessionId," - Gelen Mesaj Json:",obj);
+            
+            
+            //! Return All Clients
+            fastify.websocketServer.clients.forEach(function each(client) { 
+                if (client.readyState === 1) {  
+                
+                    //! Return Send
+                    client.send(JSON.stringify({
+                        
+                        dataType:"Message",
+                        dataTypeDescription:"SendMessage",
+                        fromUserID: Number(req.params.userId),
+                        fromUserToken:sessionId,
+                        toAll: obj.toAll,
+                        toUserID:obj.toAll? "all" : obj.toUserId,
+                        data: obj.data,
+                        date:dayjs().toDate()
+
+                    }));
+                    //! Return Send Son
+
+                }
+            })
+            //! End Return All Clients
+                     
+
+        }) 
+        //! -- Mesaj Alma Son   
+
+        
+    }
+
+  })
+
+/*************   Socket Son  *********** */
+
+
+
 //! File
 fastify.register(require('fastify-multipart'), {
 	addToBody: true,
