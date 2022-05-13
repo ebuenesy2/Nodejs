@@ -75,6 +75,11 @@ Bildirim verilerini tutuyor
 * SSK Silme Başarılı : faq_delete_successful
 * SSK Geçisi Silme Başarılı : faq_deleted_update_successful
 
+* Not Ekleme Başarılı : note_add_successful
+* Not Güncelleme Başarılı : note_update_successful
+* Not Silme Başarılı : note_delete_successful
+* Not Geçisi Silme Başarılı : note_deleted_update_successful
+
  ```
   
 ## Planlanan Uyarılar
