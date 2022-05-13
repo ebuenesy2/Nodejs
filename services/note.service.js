@@ -281,18 +281,23 @@ module.exports = {
 					console.log('\u001b[' + 32 + 'm' + '[Note] [Json] [Add] Json Veri Kayıt Edildi [ note.json ] ' + '\u001b[0m');								
 					
 				});
-				// End Json içine Verileri Yazıyor -> db					
+				// End Json içine Verileri Yazıyor -> db	
 
 
-				// //! ----------- Log ----------------------------- 	
-				// let logs_add = await ctx.call('logs.add', {					
-				// 	userToken: ctx.params.FromUserToken,
-				// 	from: "mesaj",
-				// 	fromToken: jwt,
-				// 	name: "message_add_successful",
-				// 	description: "Mesaj Yazma Başarılı"
-				// })			
-				// //! ----------- Log Son ----------------------------- 
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {
+					table: "note",
+					title: "note_add_successful",
+					description: "Not Ekleme Başarılı",
+					logStatus: "successful",
+					fromToken: jwt,
+					created_byToken: ctx.params.created_byToken
+				})
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Note] [Logs] [Add] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Note] [Logs] [Add] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
 
 
 				//! Return Api   
@@ -355,16 +360,21 @@ module.exports = {
 				});
 				// End Json içine Verileri Yazıyor -> db	
 	
-				// //! ----------- Log ----------------------------- 	
-				// let logs_add = await ctx.call('logs.add', {					
-				// 	userToken: ctx.params.userToken,
-				// 	from: "ssk",
-				// 	fromToken: ctx.params.sskToken,
-				// 	name: "faq_update_successful",
-				// 	description: "SSK Güncelleme Başarılı"
-				// })			
-				// //! ----------- Log Son -----------------------------  
-				
+
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {
+					table: "note",
+					title: "note_update_successful",
+					description: "Not Güncelleme Başarılı",
+					logStatus: "successful",
+					fromToken: ctx.params.token,
+					created_byToken: ctx.params.updated_byToken
+				})
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Note] [Logs] [Update] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Note] [Logs] [Update] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
               
                 //! Return Api	
 				ctx.params.title = "note.service -> Veri Güncelleme"
@@ -423,16 +433,20 @@ module.exports = {
 				});
 				// End Json içine Verileri Yazıyor -> db	
 				
-				// //! ----------- Log ----------------------------- 	
-				// let logs_add = await ctx.call('logs.add', {					
-				// 	userToken: ctx.params.userToken,
-				// 	from: "ssk",
-				// 	fromToken: dbFind.sskToken,
-				// 	name: "faq_delete_successful",
-                //     description: "SSK Silme Başarılı"
-				// })	
-				// delete ctx.params.userToken 		
-				// //! ----------- Log Son -----------------------------  
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {
+					table: "note",
+					title: "note_delete_successful",
+					description: "Not Silme Başarılı",
+					logStatus: "successful",
+					fromToken: dbFind["token"],
+					created_byToken: ctx.params.Deleted_byToken
+				})
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Note] [Logs] [Delete] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Note] [Logs] [Delete] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
 				
                 //! Return Api   
 				ctx.params.title = "note.service -> Veri Silme"
@@ -494,15 +508,21 @@ module.exports = {
 				});
 				// End Json içine Verileri Yazıyor -> db	
 	
-				// //! ----------- Log ----------------------------- 	
-				// let logs_add = await ctx.call('logs.add', {					
-				// 	userToken: ctx.params.userToken,
-				// 	from: "ssk",
-				// 	fromToken: ctx.params.sskToken,
-				// 	name: "faq_update_successful",
-				// 	description: "SSK Güncelleme Başarılı"
-				// })			
-				// //! ----------- Log Son -----------------------------  
+				
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {
+					table: "note",
+					title: "note_deleted_update_successful",
+					description: "Not Geçisi Silme Başarılı",
+					logStatus: "successful",
+					fromToken: dbFind["token"],
+					created_byToken: ctx.params.Deleted_byToken
+				})
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Note] [Logs] [Delete_Updated] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Note] [Logs] [Delete_Updated] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son ----------------------------- 
 				
               
                 //! Return Api	
