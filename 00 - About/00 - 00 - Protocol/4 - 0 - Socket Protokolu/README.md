@@ -38,4 +38,19 @@ ws://localhost:3001/socket/12
     "date": "2022-05-14T18:18:15.350Z"
 }
  ```
+ 
+ ## Bulunan Bildirim Uyarıları
+ 
+ ```
+  * Bağlantı Başarılı : [dataType:"Connect"] [dataTypeDescription: "Connected"] [ dataId: 0 ]
+  * Mesaj Gönderme Başarılı : [dataType:"mesaj"] [dataTypeTitle: "mesaj_send_successful"] [dataTypeDescription: "Mesaj Gönderme Başarılı"] [dataId:0] [data: "merhaba"]
+  
+
+ ```
+
+ ## Planlanan Uyarılar
+ 
+ ```
+ Service Kullanımları
+ ```
 
