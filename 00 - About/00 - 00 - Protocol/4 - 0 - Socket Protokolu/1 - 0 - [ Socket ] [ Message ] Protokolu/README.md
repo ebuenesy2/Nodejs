@@ -1,6 +1,87 @@
 
 # Socket Protokolu - Mesaj Gönderme
  
+ ## Html - Tasarım
+ 
+ ```
+      <div class="connectUserInfo">
+        <div>  User: </div>
+        <div id="connectUserId" >  0  </div>
+    </div>
+
+
+   <div class="connectGenelPanel">
+        <div class="connectPanel">  
+            <div>  Client1 </div>
+            <div>  <button onclick="sendMessage()">Send Msg</button> </div>
+        </div>
+        
+        <div id="connectStatus" >  DisConnect  </div>
+        <div id="connectCount" >  0  </div>
+   </div>
+
+   <div class="messagePanel">
+    <div id="PanelDescription" >  <p id="PanelName"> FromId: </p> <p id="FromId"> 0 </p>  </div>
+    <div id="PanelDescription" >  <p id="PanelName"> ToAll: </p> <p id="ToAll"> 0 </p>  </div>
+    <div id="PanelDescription" >  <p id="PanelName"> ToUserID: </p> <p id="ToUserID"> 0 </p>  </div>
+    <div id="PanelDescription" >  <p id="PanelName"> DataType: </p> <p id="DataType"> DataType </p>  </div>
+    <div id="PanelDescription" >  <p id="PanelName"> DataTypeTitle: </p> <p id="DataTypeTitle"> DataTypeTitle </p>  </div>
+    <div id="PanelDescription" >  <p id="PanelName"> DataTypeDescription: </p> <p id="DataTypeDescription"> DataTypeDescription </p>  </div>
+    <div id="PanelDescription" >  <p id="PanelName"> DataId: </p> <p id="DataId"> DataId </p>  </div>
+    <div id="PanelDescription" >  <p id="PanelName"> Data: </p> <p id="ComingData"> Data </p>  </div>
+  </div>
+  
+ ```
+ 
+## Html - Css
+ 
+ ```
+     .connectUserInfo {  
+        display: flex;
+        width: 165px;
+        flex-direction: row;
+        justify-content: space-between;
+        border: 1px solid black;
+        padding: 4px;
+        margin-bottom: 6px;
+    }
+
+    .connectGenelPanel { display: flex; }
+
+    .connectPanel {
+        display: flex;
+        width: 165px;
+        flex-direction: row;
+        justify-content: space-between;
+        border: 1px solid black;
+        padding: 4px;
+    }
+
+    #connectStatus { margin-left: 10px; margin-right: 10px;}
+
+
+    .messagePanel { 
+        display: flex;
+        width: 345px;
+        border: 1px solid black;
+        height: 100%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        flex-direction: column;
+    }
+
+    #PanelDescription { 
+        display: flex; 
+        margin-top: -10px;
+        margin-bottom: -10px;
+    } 
+    #PanelName { margin-left: 10px; }
+    #FromId { margin-left: 2px; }
+    #ToId { margin-left: 2px; }
+    #MessageType { margin-left: 2px; }
+    #MessageData { margin-left: 2px; }
+ ```
+ 
  ## Html - Bildirim Alma
  
  ```
@@ -20,6 +101,7 @@
         document.getElementById("DataType").innerText = obj.dataType;
         document.getElementById("DataTypeTitle").innerText = obj.dataTypeTitle;
         document.getElementById("DataTypeDescription").innerText = obj.dataTypeDescription;
+        document.getElementById("DataId").innerText = obj.dataId;
         document.getElementById("ComingData").innerText = obj.data;
         
 
