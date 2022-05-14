@@ -15,6 +15,14 @@
         const obj = JSON.parse(geleData);
         const objDataType = obj.dataType; // "Connect" 
 
+        document.getElementById("FromId").innerText = obj.fromUserID;
+        document.getElementById("ToId").innerText = obj.toUserID;
+        document.getElementById("DataType").innerText = obj.dataType;
+        document.getElementById("DataTypeTitle").innerText = obj.dataTypeTitle;
+        document.getElementById("DataTypeDescription").innerText = obj.dataTypeDescription;
+        document.getElementById("ComingData").innerText = obj.data;
+        
+
         //--- Sil
         const objDataTypeDescription = obj.dataTypeDescription; // "Connected"
         const objConnectCount = obj.count; // 2
@@ -49,16 +57,18 @@
 
           //! Gelen Mesaj
         if(obj.dataType == "Message" && obj.dataTypeTitle == "mesaj_send_successful") { 
-            if(obj.toAll==true) { alert("Herkese mesaj geldi"); }
+            if(obj.toAll==true && obj.fromUserID != userId) { alert("Herkese mesaj geldi"); }
             if(obj.toAll==false && obj.toUserID == userId ) { alert("Özel mesaj geldi"); }
         }
+
+
 
 
          //***** Mesaj Bilgileri Son *****
 
     });
     //! Gelen Bildirim Son
-    
+  
  ```
  
  ## Html - Bildirim Gönderme 
