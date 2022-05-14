@@ -10,6 +10,7 @@ ws://localhost:3001/socket/:userId
  ```
 ws://localhost:3001/socket/12
  ```
+ 
  ## Bağlantı Html
  ```
 <!--- Socket -->
@@ -21,6 +22,33 @@ ws://localhost:3001/socket/12
 
  ```
  
+## Html - Bildirim Alma
+ 
+ ```
+    //! Gelen Bildirim
+    socket.addEventListener('message', function (event) {
+        console.log('Message from server ', event.data);
+
+        //! Veri Alma
+        let geleData = event.data;
+        const obj = JSON.parse(geleData);
+        const objDataType = obj.dataType; // "Connect" - 
+        const objDataTypeDescription = obj.dataTypeDescription; // "Connected"
+        const objConnectCount = obj.count; // 2
+        const objToAll = obj.toAll; // 1
+        const objFromUserID = obj.fromUserID; // 1
+        const objToUserID = obj.toUserID; // 12
+        const objData = obj.data; // 12
+        let objMesajType = "-"; // send | incoming
+
+       // Bağlantı Bilgileri
+        if(obj.dataType == "Connect" && objFromUserID == userId ) { document.getElementById("connectStatus").innerText = obj.dataTypeDescription; }
+        if(obj.dataType == "Connect") { document.getElementById("connectCount").innerText = objConnectCount; }
+         // Bağlantı Bilgileri Son
+
+    });
+    //! Gelen Bildirim Son
+ ```
  
  ## Bağlantı Return
  
