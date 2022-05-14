@@ -68,9 +68,12 @@ fastify.route({
 						
 						fromUserID:Number(req.params.userId),
 						fromUserToken:sessionId,
+						toAll:"all",
 						toUserID:"all",
 						dataType:"Connect",
-						dataTypeDescription:"Connected",
+						dataTypeTitle:"Connected",
+						dataTypeDescription:"Bir Kullanıcı Bağlandı",
+						dataId: 0,
 						data:"Bir Kullanıcı Bağlandı",
 						count:OnlineCount,
 						date:dayjs().toDate()
@@ -95,14 +98,18 @@ fastify.route({
                 
                     //! Return Send
                     client.send(JSON.stringify({
-                        
-                        dataType:"Connect",
-                        dataTypeDescription:"disConnect",
-                        fromUserID:sessionId,
-                        toUserID:"all",
-                        data:"Bir Kullanıcı Çıkış Yaptı",
-                        date:dayjs().toDate(),
-                        count:OnlineCount
+
+						fromUserID:Number(req.params.userId),
+						fromUserToken:sessionId,
+						toAll:"all",
+						toUserID:"all",
+						dataType:"Connect",
+						dataTypeTitle:"disConnect",
+						dataTypeDescription:"Bir Kullanıcı Çıkış Yaptı",
+						dataId: 0,
+						data:"Bir Kullanıcı Çıkış Yaptı",
+						count:OnlineCount,
+						date:dayjs().toDate()
 
                     }));
                     //! Return Send Son
@@ -141,6 +148,7 @@ fastify.route({
                         dataTypeDescription: obj.dataTypeDescription,
 						dataId: obj.dataId,
                         data: obj.data,
+						count:OnlineCount,
                         date:dayjs().toDate()
 
                     }));
