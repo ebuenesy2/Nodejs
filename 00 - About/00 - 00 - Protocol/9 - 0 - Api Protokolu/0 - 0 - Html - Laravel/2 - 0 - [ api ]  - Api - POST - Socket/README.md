@@ -187,7 +187,7 @@ alert(userIdLocal);
   
  ## AJax -  Sayfa Yönlendirme
  ```
- <button onclick="window.location.href='./blog.html'">Continue</button> 
+ <button onclick="window.location.href='./blog.html'"> Blog </button> 
  ```
 
 
