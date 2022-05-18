@@ -14,8 +14,9 @@ ws://localhost:3001/socket/12
  ```
 <!--- Socket -->
 <script>
-    const userId=3;
-    const socket = new WebSocket('ws://localhost:3001/socket/'+userId);  // Url
+     const userId= new Date().getTime();
+     const socket = new WebSocket('ws://localhost:3001/socket/'+userId);  // Url
+     document.getElementById("connectUserId").innerText = userId;
 </script>
 <!--- Socket Son -->
 
