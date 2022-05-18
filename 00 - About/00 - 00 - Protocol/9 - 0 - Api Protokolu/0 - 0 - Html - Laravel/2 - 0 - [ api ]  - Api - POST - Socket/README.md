@@ -150,3 +150,9 @@ Ajax Dersi
 <!------  End script   -->
 
  ```
+
+ ## Sayfa Yönlendirme
+ ```
+    //! Sayfa Yönlendirme
+    window.location='./home.html';
+ ```
