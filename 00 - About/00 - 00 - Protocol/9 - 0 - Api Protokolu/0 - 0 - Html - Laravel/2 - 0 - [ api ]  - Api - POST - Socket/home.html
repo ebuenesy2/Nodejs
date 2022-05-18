@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Api Dersleri | Post </title>
+    <title>Ajax Dersleri | Post  - Socket</title>
 
     <!---- Jquery dosyası çekme--->
     <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
@@ -14,15 +14,13 @@
 
 <body>
 
-   <div class="apiButtonPanel">
-       <div class="apiButtonPanelText" >   <p> Table: </p>   <input type="text" class="table" id="tablePost" >  </div>
-       <div class="apiButtonPanelText" >   <p> Title: </p>   <input type="text" class="table" id="titlePost" > </div>
-       <div class="apiButtonPanelText" >   <p> Description: </p>   <input type="text" class="table" id="descriptionPost" >  </div>
-       <div class="apiButtonPanelText" >   <p> LogStatus: </p>   <input type="text" class="table" id="logStatusPost" >  </div>
-       <div class="apiButtonPanelText" >   <p> FromToken: </p>   <input type="text" class="table" id="fromTokenPost" >  </div>
-       <div class="apiButtonPanelText" >   <p> Created_byToken: </p>   <input type="text" class="table" id="created_byTokenPost" >  </div>
+    <h1>  Login Sayfası </h1>
 
-       <div class="apiButtonPanelButton" > <button type="submit" title="Gonder	" id="sendPost"> Api Post</button>  </div>
+   <div class="apiButtonPanel">
+       <div class="apiButtonPanelText" >   <p> Email: </p>   <input type="text" class="table" id="emailPost" >  </div>
+       <div class="apiButtonPanelText" >   <p> Password: </p>   <input type="text" class="table" id="passwordPost" > </div>
+
+       <div class="apiButtonPanelButton" > <button type="submit" title="Gonder	" id="sendPost"> Login</button>  </div>
    </div>
  
     
@@ -37,6 +35,8 @@
 
 <!------  script   -->
 <script type="text/javascript">
+
+
     $('document').ready(function () {
 
         //Gönderme
@@ -44,18 +44,14 @@
 
             //! ---- Gönderilen Veriler --------
             var postData = {
-                table: $('#tablePost').val(),
-                title: $('#titlePost').val(),
-                description: $('#descriptionPost').val(),
-                logStatus: $('#logStatusPost').val(),
-                fromToken:  $('#fromTokenPost').val(),
-                created_byToken: $('#created_byTokenPost').val()
+                email: $('#emailPost').val(),
+                password: $('#passwordPost').val(),
             }
             //! ---- Son  Gönderilen Veriler --------
 
             //! **** Ajax ***********
             $.ajax({
-                url: "http://localhost:3002/api/logs/add",
+                url: "http://localhost:3002/api/user/loginOnline",
                 type: "POST",
                 data: postData,
                 success: function (response) {
@@ -68,6 +64,9 @@
                     //! Html
                     $('#apiSonucTitle').html(response.title);
                     $('#apiSonucStatus').html(response.status);
+
+                    alert("Giriş Başarılı");
+
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log(textStatus, errorThrown);
