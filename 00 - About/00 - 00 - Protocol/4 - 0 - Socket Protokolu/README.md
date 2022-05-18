@@ -4,11 +4,11 @@
 ## Web Socket Url
  
  ```
-ws://localhost:3001/socket/:userId
+ws://localhost:3002/socket/:userId
  ```
  
  ```
-ws://localhost:3001/socket/12
+ws://localhost:3002/socket/12
  ```
  ## Bağlantı Html
  ```
