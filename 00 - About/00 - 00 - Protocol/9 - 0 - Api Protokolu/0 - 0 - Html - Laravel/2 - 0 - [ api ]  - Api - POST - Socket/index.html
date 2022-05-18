@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Post  </title>
+    <title> Api | Login </title>
 
     <!---- Jquery dosyası çekme--->
     <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
@@ -57,15 +57,25 @@
                 success: function (response) {
                     //! Console
                     console.log("Api:",response);
-                    //console.log("DB:",response.DB);
-                    //console.log("title:",response.title);
-                    
+                    console.log("Title:",response.title);
+                    console.log("Status:",response.status);
+                    console.log("UserInfo:",response.userInfo);                  
 
                     //! Html
                     $('#apiSonucTitle').html(response.title);
                     $('#apiSonucStatus').html(response.status);
 
-                    alert("Giriş Başarılı");
+                    if(response.status==0) { alert(response.message) } 
+                    if(response.status==1) { alert(response.message)
+                          
+                        console.log("Login Başarılı");
+                         
+
+                    } 
+
+
+                    //! Sayfa Yönlendirme
+                    //window.location='./home.html';
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
