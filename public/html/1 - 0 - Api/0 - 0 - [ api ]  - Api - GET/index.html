@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax Dersleri | Konu </title>
+
+    <!---- Jquery dosyası çekme--->
+    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+    <div class="apiButton">
+        <button type="submit" title="Gonder	" id="send"> Api Get</button>
+   </div>
+ 
+    
+    <div class="apiPanel">
+          <div class="apiPanelText" >   <p> Title: </p>  <p id="apiSonucTitle"> Sonuc </p>  </div>
+          <div class="apiPanelText" >   <p> Size: </p>   <p id="apiSonucSize"> Sonuc </p>  </div>
+    </div>
+
+</body>
+
+</html>
+
+<!------  script   -->
+<script type="text/javascript">
+    $('document').ready(function () {
+
+        //Gönderme
+        $('#send').click(function () {
+            //alert('Tıklandı');
+
+            //! **** Ajax ***********
+            $.ajax({
+                url: "http://localhost:3002/api/logs/all",
+                type: "GET",
+                success: function (response) {
+                    
+                    //! Console
+                    console.log("Api:",response);
+                    console.log("DB:",response.DB);
+                    console.log("title:",response.title);
+                    
+
+                    //! Html
+                    $('#apiSonucTitle').html(response.title);
+                    $('#apiSonucSize').html(response.size);
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            })
+            //! **** Ajax Son *********
+
+        }); //Gönderme son
+
+    });
+</script>
+<!------  End script   -->
+
+<!------  Css   -->
+<style>
+ 
+ #send {
+    background-color: green;
+    color: aliceblue;
+    width: 100%;
+ }
+
+ .apiButton {
+    display: flex;
+    width: 165px;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 4px;
+    margin-bottom: 6px;
+ }
+
+ .apiPanel {
+    display: flex;
+    width: 300px;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 4px;
+   
+   
+ }
+
+ .apiPanelText {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    
+ }
+
+</style>
+<!------  End Css   -->

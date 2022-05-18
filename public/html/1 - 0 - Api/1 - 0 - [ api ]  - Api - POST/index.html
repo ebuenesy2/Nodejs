@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax Dersleri | Konu </title>
+
+    <!---- Jquery dosyası çekme--->
+    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+    <button type="submit" title="Gonder	" id="send"> Gonder</button>
+    <div id="sonuc"> Sonuc </div>
+
+</body>
+
+</html>
+
+<!------  script   -->
+<script type="text/javascript">
+    $('document').ready(function () {
+
+        //Gönderme
+        $('#send').click(function () {
+
+            //! ---- Gönderilen Veriler --------
+            var postData = {
+                userId: "126",
+                title: "title",
+                mesaj: "mesaj yazi"
+            }
+            //! ---- Son  Gönderilen Veriler --------
+
+            //! **** Ajax ***********
+            $.ajax({
+                url: "https://jsonplaceholder.typicode.com/posts",
+                type: "POST",
+                data: postData,
+                success: function (response) {
+                    console.log(response);
+                    //console.log(response[0]);
+                    //console.log(response[0].userId);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            })
+            //! **** Ajax Son *********
+
+        }); //Gönderme son
+
+    });
+</script>
+<!------  End script   -->
