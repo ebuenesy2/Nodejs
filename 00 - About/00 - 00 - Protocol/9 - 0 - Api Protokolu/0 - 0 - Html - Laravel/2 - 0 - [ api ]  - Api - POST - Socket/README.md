@@ -173,13 +173,13 @@ Ajax Dersi
  
  ## AJax - localStorage - Veri Çekme
  ```
-var langJson = JSON.parse(localStorage.getItem('dil')); //! Veri Çekme
-alert(langJson);
+var userIdLocal = JSON.parse(localStorage.getItem('userId')); //! Veri Çekme
+alert(userIdLocal);
  ```
 # AJax - localStorage - Login Durumları
  
   ## AJax - localStorage -  Login Kontrolu
  ```
-    var userIdLang = JSON.parse(localStorage.getItem('userId')); //! Veri Çekme
-    if(userIdLang) { window.location='./home.html'; }    //! Sayfa Yönlendirme    
+    var userIdLocal = JSON.parse(localStorage.getItem('userId')); //! Veri Çekme
+    if(userIdLocal) { window.location='./home.html'; }    //! Sayfa Yönlendirme    
  ```
