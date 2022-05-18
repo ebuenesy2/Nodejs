@@ -53,6 +53,7 @@ Bildirim verilerini tutuyor
 * Kullanıcı Login Başarılı  : user_login_successful
 * Kullanıcı Login Başarısız : user_login_error
 * Kullanıcı Çıkış Başarılı: user_loginout_successful
+* Kullanıcı Görüntüleme Başarılı : user_view_successful
 
 
 * Admin Ekleme Başarılı : admin_add_successful
@@ -63,6 +64,7 @@ Bildirim verilerini tutuyor
 * Admin Login Başarılı  : admin_login_successful
 * Admin Login Başarısız : admin_login_error
 * Admin Çıkış Başarılı: admin_loginout_successful
+* Admin Görüntüleme Başarılı : admin_view_successful
 
 * Mesaj Yazma Başarılı : message_add_successful
 * Mesaj Güncelleme Başarılı : message_update_successful
@@ -74,11 +76,13 @@ Bildirim verilerini tutuyor
 * SSK Güncelleme Başarılı : faq_update_successful
 * SSK Silme Başarılı : faq_delete_successful
 * SSK Geçisi Silme Başarılı : faq_deleted_update_successful
+* SSK Görüntüleme Başarılı : faq_view_successful
 
 * Not Ekleme Başarılı : note_add_successful
 * Not Güncelleme Başarılı : note_update_successful
 * Not Silme Başarılı : note_delete_successful
 * Not Geçisi Silme Başarılı : note_deleted_update_successful
+* Not Görüntüleme Başarılı : note_view_successful
 
  ```
   
