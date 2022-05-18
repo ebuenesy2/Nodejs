@@ -562,5 +562,45 @@ module.exports = {
 			return ctx.params
 
 		},
+		async view (ctx) {
+			
+			//! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);	
+
+			//! Veri Varsa 
+			if (dbFind) {     
+				
+				//! Return Api	
+				ctx.params.title = "faq.service -> Veri Görüntüleme"
+				ctx.params.table = "faq.json"
+				ctx.params.status = 1
+				ctx.params.DB = dbFind
+				ctx.params.message = "Veri Görüntülendi"
+			
+
+				//Console Yazma	
+				console.log('\u001b[' + 32 + 'm' + '[Faq] [View] Veri Görüntülendi [ /api/faq/view/:id ]' + '\u001b[0m');
+
+			}
+
+			//! Veri Yoksa
+			else {
+
+				//! Return Api	
+				ctx.params.title = "faq.service -> Veri Görüntüleme"
+				ctx.params.table = "faq.json"        
+				ctx.params.status = 0		
+				ctx.params.DB = "Veri  Bulunmadı"	
+				ctx.params.message="Veri Görüntülenemedi"
+
+				//Console Yazma	
+				console.log('\u001b[' + 31 + 'm' + '[Faq] [View] Veri Görüntülenemedi [ /api/faq/view/:id ] ' + '\u001b[0m');
+
+			}
+						
+
+
+			return ctx.params
+		}
 	}
 }

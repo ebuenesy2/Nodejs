@@ -582,99 +582,102 @@ module.exports = {
 		},
 		async view(ctx) {
 		
-		//! Arama
-		const dbFind = db.find(u => u.id == ctx.params.id);			
+			//! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);			
 
-		//! Veri Varsa 
-		if (dbFind) {     
+			//! Veri Varsa 
+			if (dbFind) {     
 
-			//! Aynı Kişi ise
-			if (dbFind["ToUserToken"] == ctx.params.readed_byToken) {
-								
-				//! Güncelleme
-				dbFind["isReaded"] = true
-				dbFind["readed_at"] = new Date()
-				dbFind["readed_byToken"] = ctx.params.readed_byToken
+				//! Aynı Kişi ise
+				if (dbFind["ToUserToken"] == ctx.params.readed_byToken) {
+									
+					//! Güncelleme
+					dbFind["isReaded"] = true
+					dbFind["readed_at"] = new Date()
+					dbFind["readed_byToken"] = ctx.params.readed_byToken
+				
+
+					//Json içine Verileri Yazıyor -> db
+					fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
+
+						// Hata varsa
+						if (err) {
+							console.log('\u001b[' + 31 + 'm' + '[Message] [Json] [View] Json Veri Kayıt Edilemedi [ message.json ] ' + '\u001b[0m');
+							console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
+						}
+
+						//Console Yazma
+						console.log('\u001b[' + 32 + 'm' + '[Message] [Json] [View] Json Veri Kayıt Edildi [ message.json ] ' + '\u001b[0m');
+						
+					});
+					// End Json içine Verileri Yazıyor -> db
+
+				
+					//! ----------- Log ----------------------------- 	
+					let logs_add = await ctx.call('logs.add', {
+						table: "message",
+						title: "message_view_successful",
+						description: "Mesaj Görüntüleme Başarılı",
+						logStatus: "successful",
+						fromToken: dbFind["token"],
+						created_byToken: ctx.params.readed_byToken
+					})
+
+					if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Message] [Logs] [View] Bildirim Eklendi' + '\u001b[0m'); }
+					if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Message] [Logs] [View] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+					//! ----------- Log Son -----------------------------
+
+
+
+					//! Return Api	
+					ctx.params.title = "message.service -> Veri Görüntüleme"
+					ctx.params.table = "message.json"
+					ctx.params.status = 1
+					ctx.params.DB = dbFind
+					ctx.params.message = "Veri Görüntülendi"
+
+					//Console Yazma	
+					console.log('\u001b[' + 32 + 'm' + '[Message] [View] Veri Görüntülendi [ /api/message/view/:id ]' + '\u001b[0m');
+				}
+
+				//! Aynı Kişi Değilse
+				else {
+
+					//! Return Api	
+					ctx.params.title = "message.service -> Veri Görüntüleme"
+					ctx.params.table = "message.json"        
+					ctx.params.status = 0	
+					ctx.params.DB = "Veri Görüntülenemedi -> Farklı Kişi"		
+					ctx.params.message="Veri Görüntülenemedi -> Farklı Kişi"
+
+					//Console Yazma	
+					console.log('\u001b[' + 31 + 'm' + '[Message] [View] Veri Görüntülenemedi [ /api/message/view/:id ] ' + '\u001b[0m');
+
+				}
 			
-
-				//Json içine Verileri Yazıyor -> db
-				fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
-
-					// Hata varsa
-					if (err) {
-						console.log('\u001b[' + 31 + 'm' + '[Message] [Json] [View] Json Veri Kayıt Edilemedi [ message.json ] ' + '\u001b[0m');
-						console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
-					}
-
-					//Console Yazma
-					console.log('\u001b[' + 32 + 'm' + '[Message] [Json] [View] Json Veri Kayıt Edildi [ message.json ] ' + '\u001b[0m');
-					
-				});
-				// End Json içine Verileri Yazıyor -> db
-
-			
-				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {
-					table: "message",
-					title: "message_view_successful",
-					description: "Mesaj Görüntüleme Başarılı",
-					logStatus: "successful",
-					fromToken: dbFind["token"],
-					created_byToken: ctx.params.readed_byToken
-				})
-
-				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Message] [Logs] [View] Bildirim Eklendi' + '\u001b[0m'); }
-				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Message] [Logs] [View] Bildirim Eklenemedi' + '\u001b[0m'); }
-
-				//! ----------- Log Son -----------------------------
-
-
-
-				//! Return Api	
-				ctx.params.title = "message.service -> Veri Görüntüleme"
-				ctx.params.table = "message.json"
-				ctx.params.status = 1
-				ctx.params.message = "Veri Görüntülendi"
-
-				//Console Yazma	
-				console.log('\u001b[' + 32 + 'm' + '[Message] [View] Veri Görüntülendi [ /api/message/view/:id ]' + '\u001b[0m');
 			}
 
-			//! Aynı Kişi Değilse
+			//! Veri Yoksa
 			else {
 
 				//! Return Api	
 				ctx.params.title = "message.service -> Veri Görüntüleme"
 				ctx.params.table = "message.json"        
-				ctx.params.status = 0			
-				ctx.params.message="Veri Görüntülenemedi -> Farklı Kişi"
+				ctx.params.status = 0		
+				ctx.params.DB = "Veri  Bulunmadı"	
+				ctx.params.message="Veri Görüntülenemedi"
 
 				//Console Yazma	
 				console.log('\u001b[' + 31 + 'm' + '[Message] [View] Veri Görüntülenemedi [ /api/message/view/:id ] ' + '\u001b[0m');
 
 			}
-		
-		}
-
-	    //! Veri Yoksa
-		else {
-
-               //! Return Api	
-			   ctx.params.title = "message.service -> Veri Görüntüleme"
-			   ctx.params.table = "message.json"        
-			   ctx.params.status = 0			
-			   ctx.params.message="Veri Görüntülenemedi"
-
-			   //Console Yazma	
-			   console.log('\u001b[' + 31 + 'm' + '[Message] [View] Veri Görüntülenemedi [ /api/message/view/:id ] ' + '\u001b[0m');
-
-		}
-		
-		//! Delete
-		delete ctx.params.id          
-		delete ctx.params.readed_byToken        
-				
-		return ctx.params
+			
+			//! Delete
+			delete ctx.params.id          
+			delete ctx.params.readed_byToken        
+					
+			return ctx.params
 
       
 		},

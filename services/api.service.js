@@ -191,7 +191,6 @@ fastify.register(fastifyStatic, {
 
 
 
-// dev test 7
 module.exports = {
 	name: 'api',
 
@@ -481,6 +480,7 @@ module.exports = {
 			fastify.post('/api/faq/update', async (req, res) => this.broker.call("faq.update",{...req.body})) //! UPDATE
 			fastify.post('/api/faq/delete/:id', async (req, res) => this.broker.call("faq.delete", { id: req.params.id, ...req.body })) //! DELETE
 			fastify.post('/api/faq/delete_update/:id', async (req, res) => this.broker.call("faq.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
+			fastify.post('/api/faq/view/:id', async (req, res) => this.broker.call("faq.view",{id: req.params.id,...req.body})) //!Search - View
 			
 	    //!---------------- faq son ----------------------------------------------------------------------------------------------
 
