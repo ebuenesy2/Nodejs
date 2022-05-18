@@ -59,7 +59,11 @@
                     console.log("Api:",response);
                     console.log("Title:",response.title);
                     console.log("Status:",response.status);
-                    console.log("UserInfo:",response.userInfo);                  
+                    console.log("UserId:",response.userId);      
+                    console.log("UserToken:",response.userToken);      
+                    console.log("UserInfo:",response.userInfo);      
+                    
+                  
 
                     //! Html
                     $('#apiSonucTitle').html(response.title);
@@ -69,13 +73,17 @@
                     if(response.status==1) { alert(response.message)
                           
                         console.log("Login Başarılı");
-                         
 
+                        localStorage.setItem('userId', JSON.stringify(response.userId)); //! LocalStorage Kaydetme
+                        localStorage.setItem('userToken', JSON.stringify(response.userToken)); //! LocalStorage Kaydetme
+
+                        //! Sayfa Yönlendirme
+                         window.location='./home.html';
                     } 
 
 
                     //! Sayfa Yönlendirme
-                    //window.location='./home.html';
+                    window.location='./home.html';
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {

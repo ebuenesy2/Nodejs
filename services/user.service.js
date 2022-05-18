@@ -918,6 +918,8 @@ module.exports = {
 				ctx.params.table = "user.json"
 				ctx.params.status = 1
 				ctx.params.message = "Başarılı Giriş  Oldu"
+				ctx.params.userId= dbFind[0].id
+				ctx.params.userToken= dbFind[0].token
 				ctx.params.userInfo = dbFind[0]
 
 				//Console Yazma
@@ -954,6 +956,8 @@ module.exports = {
 				ctx.params.table = "user.json"
 				ctx.params.status = 0
 				ctx.params.message = "Hatalı Giriş Oldu"
+				ctx.params.userId= 0
+				ctx.params.userToken= null
 				ctx.params.userInfo = null
 
 				//Console Yazma
@@ -1014,6 +1018,8 @@ module.exports = {
 				ctx.params.table = "user.json"
 				ctx.params.status = 1
 				ctx.params.message = "Başarılı Giriş  Oldu"
+				ctx.params.userId= dbFind[0].id
+				ctx.params.userToken= dbFind[0].token
 				ctx.params.userInfo = dbFind[0]
 
 				//Console Yazma
@@ -1050,6 +1056,8 @@ module.exports = {
 				ctx.params.table = "user.json"
 				ctx.params.status = 0
 				ctx.params.message = "Hatalı Giriş Oldu"
+				ctx.params.userId= null
+				ctx.params.userToken= null
 				ctx.params.userInfo = null
 
 				//Console Yazma
