@@ -178,8 +178,16 @@ alert(userIdLocal);
  ```
 # AJax - localStorage - Login Durumları
  
-  ## AJax - localStorage -  Login Kontrolu
+ ## AJax - localStorage -  Login Kontrolu
  ```
     var userIdLocal = JSON.parse(localStorage.getItem('userId')); //! Veri Çekme
     if(userIdLocal) { window.location='./home.html'; }    //! Sayfa Yönlendirme    
  ```
+ 
+  
+ ## AJax -  Sayfa Yönlendirme
+ ```
+ <button onclick="window.location.href='./blog.html'">Continue</button> 
+ ```
+
+
