@@ -129,6 +129,8 @@ Ajax Dersi
                     console.log("Api:",response);
                     console.log("Title:",response.title);
                     console.log("Status:",response.status);
+                    console.log("UserId:",response.userId);      
+                    console.log("UserToken:",response.userToken);      
                     console.log("UserInfo:",response.userInfo);                  
 
                     //! Html
