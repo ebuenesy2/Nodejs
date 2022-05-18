@@ -404,6 +404,92 @@ module.exports = {
 
 			return ctx.params
 		},
+		async find_title_fromToken(ctx) {
+
+			// ! Arama
+			const dbFind = db.filter(u => u.title == ctx.params.title && u.fromToken == ctx.params.fromToken);
+
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "logs.service -> Veri Arama"
+				ctx.params.table = "logs.json"
+				ctx.params.status = 1
+				ctx.params.size=dbFind.length
+				ctx.params.DB = dbFind
+			
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[Logs] [Find] Veri Arama [ /api/logs/find_title_fromToken ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "logs.service -> Veri Arama"
+				ctx.params.table = "logs.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.DB = "Logs  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[Logs] [Find] Veri Bulunamadı [ /api/logs/find_title_fromToken ] ' + '\u001b[0m');	
+
+			}
+
+            //! Return
+			delete ctx.params.token
+			delete ctx.params.created_byToken
+			delete ctx.params.fromToken
+
+			return ctx.params
+		},
+		async find_user_title_fromToken(ctx) {
+
+			// ! Arama
+			const dbFind = db.filter(u =>  u.created_byToken == ctx.params.created_byToken && u.title == ctx.params.title && u.fromToken == ctx.params.fromToken);
+
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "logs.service -> Veri Arama"
+				ctx.params.table = "logs.json"
+				ctx.params.status = 1
+				ctx.params.size=dbFind.length
+				ctx.params.DB = dbFind
+			
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[Logs] [Find] Veri Arama [ /api/logs/find_title_fromToken ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "logs.service -> Veri Arama"
+				ctx.params.table = "logs.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.DB = "Logs  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[Logs] [Find] Veri Bulunamadı [ /api/logs/find_title_fromToken ] ' + '\u001b[0m');	
+
+			}
+
+            //! Return
+			delete ctx.params.token
+			delete ctx.params.created_byToken
+			delete ctx.params.fromToken
+
+			return ctx.params
+		},
 		async add(ctx) {  
 
 			try {
