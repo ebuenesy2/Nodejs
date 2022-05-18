@@ -164,3 +164,22 @@ Ajax Dersi
     //! Sayfa Yönlendirme
     window.location='./home.html';
  ```
+ 
+ ## AJax - localStorage - Veri Kaydetme
+ ```
+ localStorage.setItem('userId', JSON.stringify(response.userId)); //! LocalStorage Kaydetme
+ localStorage.setItem('userToken', JSON.stringify(response.userToken)); //! LocalStorage Kaydetme
+ ```
+ 
+ ## AJax - localStorage - Veri Çekme
+ ```
+var langJson = JSON.parse(localStorage.getItem('dil')); //! Veri Çekme
+alert(langJson);
+ ```
+# AJax - localStorage - Login Durumları
+ 
+  ## AJax - localStorage -  Login Kontrolu
+ ```
+    var userIdLang = JSON.parse(localStorage.getItem('userId')); //! Veri Çekme
+    if(userIdLang) { window.location='./home.html'; }    //! Sayfa Yönlendirme    
+ ```
