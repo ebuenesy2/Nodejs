@@ -420,6 +420,7 @@ module.exports = {
 			fastify.post('/api/user/loginOnline', async (req, res) => this.broker.call("user.loginOnline",{...req.body})) //! Login
 			fastify.post('/api/user/loginOnlineUsername', async (req, res) => this.broker.call("user.loginOnlineUsername",{...req.body})) //! Login User
 			fastify.post('/api/user/loginOut', async (req, res) => this.broker.call("user.loginOut",{...req.body})) //! Loginout
+			fastify.post('/api/user/view/:id', async (req, res) => this.broker.call("user.view",{id: req.params.id,...req.body})) //!Search - View
 
 		//!---------------- user son ----------------------------------------------------------------------------------------------
 
@@ -442,6 +443,7 @@ module.exports = {
 			fastify.post('/api/admin/loginOnline', async (req, res) => this.broker.call("admin.loginOnline",{...req.body})) //! Login
 			fastify.post('/api/admin/loginOnlineUsername', async (req, res) => this.broker.call("admin.loginOnlineUsername",{...req.body})) //! Login
 			fastify.post('/api/admin/loginOut', async (req, res) => this.broker.call("admin.loginOut",{...req.body})) //! Loginout
+			fastify.post('/api/admin/view/:id', async (req, res) => this.broker.call("admin.view",{id: req.params.id,...req.body})) //!Search - View
 
 		//!---------------- admin son ----------------------------------------------------------------------------------------------
 
@@ -501,6 +503,7 @@ module.exports = {
 			fastify.post('/api/note/updated_delete/:id', async (req, res) => this.broker.call("note.updated_delete",{id:req.params.id,...req.body})) //! UPDATE DELETE
 			fastify.post('/api/note/delete/:id', async (req, res) => this.broker.call("note.delete", { id: req.params.id, ...req.body })) //! DELETE
 			fastify.post('/api/note/delete_update/:id', async (req, res) => this.broker.call("note.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
+			fastify.post('/api/note/view/:id', async (req, res) => this.broker.call("note.view",{id: req.params.id,...req.body})) //!Search - View
 		
 	    //!---------------- note son ----------------------------------------------------------------------------------------------
 

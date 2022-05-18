@@ -1139,6 +1139,66 @@ module.exports = {
 			delete ctx.params.token
 
 			return ctx.params
-		}	
+		},
+		async view (ctx) {
+			
+			//! Arama
+			const dbFind = db.find(u => u.id == ctx.params.id);	
+
+			//! Veri Varsa 
+			if (dbFind) {     
+
+							
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {
+					table: "admin",
+					title: "admin_view_successful",
+					description: "Admin Görüntüleme Başarılı",
+					logStatus: "successful",
+					fromToken: dbFind["token"],
+					created_byToken: ctx.params.readed_byToken
+				})
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Admin] [Logs] [View] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Admin] [Logs] [View] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
+
+                
+				
+				//! Return Api	
+				ctx.params.title = "admin.service -> Veri Görüntüleme"
+				ctx.params.table = "admin.json"
+				ctx.params.status = 1
+				ctx.params.DB = dbFind
+				ctx.params.message = "Veri Görüntülendi"
+			
+
+				//Console Yazma	
+				console.log('\u001b[' + 32 + 'm' + '[Admin] [View] Veri Görüntülendi [ /api/admin/view/:id ]' + '\u001b[0m');
+
+			}
+
+			//! Veri Yoksa
+			else {
+
+				//! Return Api	
+				ctx.params.title = "admin.service -> Veri Görüntüleme"
+				ctx.params.table = "admin.json"        
+				ctx.params.status = 0		
+				ctx.params.DB = "Veri  Bulunmadı"	
+				ctx.params.message="Veri Görüntülenemedi"
+
+				//Console Yazma	
+				console.log('\u001b[' + 31 + 'm' + '[Admin] [View] Veri Görüntülenemedi [ /api/admin/view/:id ] ' + '\u001b[0m');
+
+			}
+						
+			//! Return
+			delete ctx.params.id
+			delete ctx.params.readed_byToken 
+
+			return ctx.params
+		}
 	}
 }

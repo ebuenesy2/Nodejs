@@ -569,6 +569,24 @@ module.exports = {
 
 			//! Veri Varsa 
 			if (dbFind) {     
+
+							
+				//! ----------- Log ----------------------------- 	
+				let logs_add = await ctx.call('logs.add', {
+					table: "faq",
+					title: "faq_view_successful",
+					description: "SSK Görüntüleme Başarılı",
+					logStatus: "successful",
+					fromToken: dbFind["token"],
+					created_byToken: ctx.params.readed_byToken
+				})
+
+				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Faq] [Logs] [View] Bildirim Eklendi' + '\u001b[0m'); }
+				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Faq] [Logs] [View] Bildirim Eklenemedi' + '\u001b[0m'); }
+
+				//! ----------- Log Son -----------------------------
+
+
 				
 				//! Return Api	
 				ctx.params.title = "faq.service -> Veri Görüntüleme"
@@ -596,9 +614,11 @@ module.exports = {
 				//Console Yazma	
 				console.log('\u001b[' + 31 + 'm' + '[Faq] [View] Veri Görüntülenemedi [ /api/faq/view/:id ] ' + '\u001b[0m');
 
-			}
+			}					
 						
-
+			//! Return
+			delete ctx.params.id
+			delete ctx.params.readed_byToken 
 
 			return ctx.params
 		}
