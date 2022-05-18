@@ -102,6 +102,7 @@ Ajax Dersi
 
 ## AJax
  ```
+
 <!------  script   -->
 <script type="text/javascript">
 
@@ -126,15 +127,20 @@ Ajax Dersi
                 success: function (response) {
                     //! Console
                     console.log("Api:",response);
-                    //console.log("DB:",response.DB);
-                    //console.log("title:",response.title);
-                    
+                    console.log("Title:",response.title);
+                    console.log("Status:",response.status);
+                    console.log("UserInfo:",response.userInfo);                  
 
                     //! Html
                     $('#apiSonucTitle').html(response.title);
                     $('#apiSonucStatus').html(response.status);
 
-                    alert("Giriş Başarılı");
+                    if(response.status==0) { alert(response.message) } 
+                    if(response.status==1) { alert(response.message) } 
+
+
+                    //! Sayfa Yönlendirme
+                    //window.location='./home.html';
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
