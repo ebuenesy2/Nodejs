@@ -17,8 +17,7 @@
 		    //! ----------- File Son ----------------------------- 
  ```
 
-## Service Post
- 
+## Service Post 
  ```
    			   			
       			
@@ -38,4 +37,18 @@
 				console.log('\u001b[' + 32 + 'm' + '---------- File Son -------' + '\u001b[0m')  
 		   //! ----------- File Son --------------------------------------------------------------
            
+ ```
+ 
+ ## Service Post - User Update 
+ ```
+ 
+                //! -----------  User UPDATE ----------------------------- 	
+				let user_updateUrl = await ctx.call('user.updateUrl', {
+					token:user_find.DB.token,
+					updated_byToken: user_find.DB.token,
+					onlineStatus: true,                  
+					onlineLastLogin_At: new Date()					        
+				})		
+				//! ----------- End User UPDATE ----------------------------
+ 
  ```
