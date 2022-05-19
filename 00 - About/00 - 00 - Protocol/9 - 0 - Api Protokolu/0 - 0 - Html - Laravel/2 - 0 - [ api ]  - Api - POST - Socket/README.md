@@ -1,4 +1,4 @@
-# Ajax Dersleri - Api - POST
+# Ajax Dersleri - Api - POST - Socket
 
 ## Açıklama
  ```
@@ -164,3 +164,87 @@ Ajax Dersi
     //! Sayfa Yönlendirme
     window.location='./home.html';
  ```
+ 
+ ## AJax - localStorage - Veri Kaydetme
+ ```
+ localStorage.setItem('userId', JSON.stringify(response.userId)); //! LocalStorage Kaydetme
+ localStorage.setItem('userToken', JSON.stringify(response.userToken)); //! LocalStorage Kaydetme
+ ```
+ 
+ ## AJax - localStorage - Veri Çekme
+ ```
+var userIdLocal = JSON.parse(localStorage.getItem('userId')); //! Veri Çekme
+alert(userIdLocal);
+ ```
+# AJax - localStorage - Login Durumları
+ 
+ ## AJax - localStorage -  Login Kontrolu
+ ```
+    var userIdLocal = JSON.parse(localStorage.getItem('userId')); //! Veri Çekme
+    if(userIdLocal) { window.location='./home.html'; }    //! Sayfa Yönlendirme    
+ ```
+ 
+  
+ ## AJax -  Sayfa Yönlendirme
+ ```
+ <button onclick="window.location.href='./blog.html'"> Blog </button> 
+ ```
+
+
+# Socket
+
+ ## Html
+ ```
+<div style="width: 175px;  display: flex ; gap : 5px; border: 1px solid black; padding: 2px; margin-bottom: 5px; " > 
+    <div id="connectStatus"  class="connectStatus">  DisConnect  </div>
+    <div id="connectCount" >  0  </div>
+</div>
+ ```
+ 
+ ## Css
+ ```
+.connectStatus { color: red;}
+.connectStatus.active { color: green; }
+.connectCount { 
+    color: black;
+    font-size: 15px;
+    font-weight: 900;
+}
+ ```
+ 
+ 
+ ## Socket Bağlama
+ ```
+    var userIdLocal = JSON.parse(localStorage.getItem('userId')); //! Veri Çekme
+    const socket = new WebSocket('ws://localhost:3002/socket/'+userIdLocal);  // Url
+ ```
+ 
+ 
+## Socket Veri Gelmesi
+ ```
+  
+   //! Gelen Bildirim
+   socket.addEventListener('message', function (event) {
+       console.log('Message from server ', event.data);
+
+       //! Veri Alma
+       let geleData = event.data;
+       const obj = JSON.parse(geleData);
+       const objDataType = obj.dataType; // "Connect" - 
+       const objDataTypeDescription = obj.dataTypeDescription; // "Connected"
+       const objConnectCount = obj.count; // 2
+       const objToAll = obj.toAll; // 1
+       const objFromUserID = obj.fromUserID; // 1
+       const objToUserID = obj.toUserID; // 12
+       const objData = obj.data; // 12
+       let objMesajType = "-"; // send | incoming
+
+      // Bağlantı Bilgileri
+       if(obj.dataType == "Connect" && objFromUserID == userIdLocal ) { document.getElementById("connectStatus").innerText = obj.dataTypeDescription; document.querySelector('.connectStatus').classList.toggle('active'); /* active class ekliyor */  }
+       if(obj.dataType == "Connect") { document.getElementById("connectCount").innerText = objConnectCount;   }
+        // Bağlantı Bilgileri Son
+
+   });
+   //! Gelen Bildirim Son
+ ```
+
