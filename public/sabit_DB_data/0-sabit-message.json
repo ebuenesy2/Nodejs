@@ -1,13 +1,7 @@
 [{
 	"id": 1,
-	"FromRole": "Admin",
 	"FromUserToken": "FromUserToken1",
-	"FromUserName": "FromUserName1",
-	"FromNameSurName": "FromNameSurName1",
-	"ToRole": "User",
 	"ToUserToken": "ToUserToken1",
-	"ToUserName": "ToUserName1",
-	"ToNameSurName": "ToNameSurName1",
 	"Subject": "Subject1",
 	"Message": "Message1",
 	"MessageFileControl": "0",	
@@ -26,14 +20,8 @@
 	"Deleted_byToken":"Deleted_byToken"
 }, {
 	"id": 2,
-	"FromRole": "User",
 	"FromUserToken": "FromUserToken2",
-	"FromUserName": "FromUserName1",
-	"FromNameSurName": "FromNameSurName1",
-	"ToRole": "User",
 	"ToUserToken": "ToUserToken2",
-	"ToUserName": "ToUserName2",
-	"ToNameSurName": "ToNameSurName1",
 	"Subject": "Subject2",
 	"Message": "Message2",
 	"MessageFileControl": "0",	
@@ -52,14 +40,8 @@
 	"Deleted_byToken":"Deleted_byToken"
 }, {
 	"id": 3,
-	"FromRole": "User",
 	"FromUserToken": "FromUserToken3",
-	"FromUserName": "FromUserName1",
-	"FromNameSurName": "FromNameSurName1",
-	"ToRole": "User",
 	"ToUserToken": "ToUserToken3",
-	"ToUserName": "ToUserName3",
-	"ToNameSurName": "ToNameSurName1",
 	"Subject": "Subject3",
 	"Message": "Message3",
 	"MessageFileControl": "0",	

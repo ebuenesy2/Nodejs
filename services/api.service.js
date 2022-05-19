@@ -429,28 +429,6 @@ module.exports = {
 
 		//!---------------- user son ----------------------------------------------------------------------------------------------
 
-		//!-------------  admin --------------------------------------------------------------------------------------------------
-
-			fastify.get('/api/admin/info',async (req,res)=> this.broker.call("admin.info")) //! İnfo
-			fastify.post('/api/admin/post', async (req, res) => this.broker.call("admin.post",{...req.body})) //! POST
-			fastify.get('/api/admin/html',async (req,res)=> this.broker.call("admin.html")) //! Html
-			fastify.get('/api/admin/all', async (req, res) => this.broker.call("admin.all")) //! All
-			fastify.get('/api/admin/:id', async (req, res) => this.broker.call("admin.find",{id: req.params.id})) //! Search
-
-			fastify.post('/api/admin/find_post', async (req, res) => this.broker.call("admin.find_post",{...req.body})) //!  Search-Post
-			fastify.post('/api/admin/find_token', async (req, res) => this.broker.call("admin.find_token",{...req.body})) //!  Search-Token
-			fastify.post('/api/admin/add', async (req, res) => this.broker.call("admin.add",{...req.body})) //! CREATE
-			fastify.post('/api/admin/update', async (req, res) => this.broker.call("admin.update",{...req.body})) //! UPDATE
-			fastify.post('/api/admin/updateUrl', async (req, res) => this.broker.call("admin.updateUrl",{...req.body})) //! UPDATE - URL
-			fastify.post('/api/admin/delete/:id', async (req, res) => this.broker.call("admin.delete", { id: req.params.id, ...req.body })) //! DELETE
-			fastify.post('/api/admin/delete_update/:id', async (req, res) => this.broker.call("admin.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
-			
-			fastify.post('/api/admin/loginOnline', async (req, res) => this.broker.call("admin.loginOnline",{...req.body})) //! Login
-			fastify.post('/api/admin/loginOnlineUsername', async (req, res) => this.broker.call("admin.loginOnlineUsername",{...req.body})) //! Login
-			fastify.post('/api/admin/loginOut', async (req, res) => this.broker.call("admin.loginOut",{...req.body})) //! Loginout
-			fastify.post('/api/admin/view/:id', async (req, res) => this.broker.call("admin.view",{id: req.params.id,...req.body})) //!Search - View
-
-		//!---------------- admin son ----------------------------------------------------------------------------------------------
 
 		//!------------- message  --------------------------------------------------------------------------------------------------
 

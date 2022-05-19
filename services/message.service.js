@@ -191,24 +191,6 @@ module.exports = {
 			return ctx.params
 		},   
 		async add(ctx) {
-			
-            //! ----------- UserInfo ----------------------------- 
-
-			let FromUserToken_Info=ctx.params.FromUserToken;             
-            let FromRole_Info=ctx.params.FromRole;   
-            let Fromuser_info;
-            if(FromRole_Info=="User") { Fromuser_info = await ctx.call('user.find_token', {"token":FromUserToken_Info})}
-            if(FromRole_Info=="Admin") { Fromuser_info = await ctx.call('admin.find_token', {"token":FromUserToken_Info})}            
-            let FromNameSurName_Info=Fromuser_info['DB']['name']+" "+Fromuser_info['DB']['surname']; 
-
-            let ToUserToken_Info=ctx.params.ToUserToken;             
-            let ToRole_Info=ctx.params.ToRole;   
-            let Touser_info;
-            if(ToRole_Info=="User") { Touser_info = await ctx.call('user.find_token', {"token":ToUserToken_Info})}
-            if(ToRole_Info=="Admin") { Touser_info = await ctx.call('admin.find_token', {"token":ToUserToken_Info})}            
-            let ToNameSurName_Info=Touser_info['DB']['name']+" "+Touser_info['DB']['surname']; 
-                 
-            //! ----------- UserInfo Son ----------------------------- 			
                     
 			try {
 
@@ -230,14 +212,8 @@ module.exports = {
 				//! Eklenecek veriler
 				const willSaveData = {
 					id:TokenId,		
-					FromRole: ctx.params.FromRole,
 					FromUserToken: ctx.params.FromUserToken,
-                    FromUserName: Fromuser_info['DB']['username'],
-					FromNameSurName: FromNameSurName_Info,
-					ToRole: ctx.params.ToRole,
 					ToUserToken: ctx.params.ToUserToken,
-					ToUserName: Touser_info['DB']['username'],
-					ToNameSurName: ToNameSurName_Info,
 					Subject: ctx.params.Subject,
 					Message: ctx.params.Message,
                     MessageFileControl: false,
