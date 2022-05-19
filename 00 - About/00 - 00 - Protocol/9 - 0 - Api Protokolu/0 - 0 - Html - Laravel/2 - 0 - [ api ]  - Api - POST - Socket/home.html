@@ -15,19 +15,28 @@
 <body>
 
     <h1>  Home Sayfası </h1>
+    
+    <div style="width: 175px;  display: flex ; gap : 5px; border: 1px solid black; padding: 2px; margin-bottom: 5px; " > 
+        <div id="connectStatus"  class="connectStatus">  DisConnect  </div>
+        <div id="connectCount" >  0  </div>
+    </div>
 
    <div class="apiButtonPanel">
-       <div class="apiButtonPanelText" >   <p> Email: </p>   <input type="text" class="table" id="emailPost" >  </div>
-       <div class="apiButtonPanelText" >   <p> Password: </p>   <input type="text" class="table" id="passwordPost" > </div>
+       <div class="apiButtonPanelText" >   <p> Kime: </p>   <input type="text" class="table" id="ToUserTokenPost" >  </div>
+       <div class="apiButtonPanelText" >   <p> Message: </p>   <input type="text" class="table" id="MessagePost" > </div>
 
        <div class="apiButtonPanelButton" > <button type="submit" title="Gonder	" id="sendPost"> Login</button>  </div>
    </div>
  
     
     <div class="apiPanel">
+          <div class="apiPanelText" >   <p style="font-weight: 900 ; color: red; "> Api Paneli </p> </div>
           <div class="apiPanelText" >   <p> Title: </p>  <p id="apiSonucTitle"> Sonuc </p>  </div>
           <div class="apiPanelText" >   <p> Status: </p>   <p id="apiSonucStatus"> Sonuc </p>  </div>
     </div>
+
+
+   
 
 </body>
 
@@ -37,6 +46,49 @@
 <script type="text/javascript">
 
 
+    var userIdLocal = JSON.parse(localStorage.getItem('userId')); //! Veri Çekme
+    const socket = new WebSocket('ws://localhost:3002/socket/'+userIdLocal);  // Url
+
+   //! Gelen Bildirim
+   socket.addEventListener('message', function (event) {
+       console.log('Message from server ', event.data);
+
+       //! Veri Alma
+       let geleData = event.data;
+       const obj = JSON.parse(geleData);
+       const objDataType = obj.dataType; // "Connect" - 
+       const objDataTypeDescription = obj.dataTypeDescription; // "Connected"
+       const objConnectCount = obj.count; // 2
+       const objToAll = obj.toAll; // 1
+       const objFromUserID = obj.fromUserID; // 1
+       const objToUserID = obj.toUserID; // 12
+       const objData = obj.data; // 12
+       let objMesajType = "-"; // send | incoming
+
+      // Bağlantı Bilgileri
+       if(obj.dataType == "Connect" && objFromUserID == userIdLocal ) { document.getElementById("connectStatus").innerText = obj.dataTypeDescription; document.querySelector('.connectStatus').classList.toggle('active'); /* active class ekliyor */  }
+       if(obj.dataType == "Connect") { document.getElementById("connectCount").innerText = objConnectCount;   }
+        // Bağlantı Bilgileri Son
+
+         //***** Mesaj Bilgileri *****
+
+        //! Gönderildi Mesaj
+        if(obj.dataType == "Message" && obj.dataTypeTitle == "mesaj_send_successful" && obj.fromUserID == userIdLocal ) { alert("mesaj gönderildi"); }
+
+          //! Gelen Mesaj
+        if(obj.dataType == "Message" && obj.dataTypeTitle == "mesaj_send_successful") { 
+            if(obj.toAll==true && obj.fromUserID != userIdLocal) { alert("Herkese mesaj geldi"); }
+            if(obj.toAll==false && obj.toUserID == userIdLocal ) { alert("Özel mesaj geldi"); }
+        }
+         //***** Mesaj Bilgileri Son *****
+
+   });
+   //! Gelen Bildirim Son
+
+   
+    
+
+    /* Ajax */
     $('document').ready(function () {
 
         //Gönderme
@@ -44,14 +96,19 @@
 
             //! ---- Gönderilen Veriler --------
             var postData = {
-                email: $('#emailPost').val(),
-                password: $('#passwordPost').val(),
+                FromRole:"User",
+                FromUserToken: JSON.parse(localStorage.getItem('userToken')),
+                ToRole: "Admin",   
+                ToUserToken: $('#ToUserTokenPost').val(),
+                Subject: "Subject",
+                Message: $('#MessagePost').val(),
+                created_byToken: JSON.parse(localStorage.getItem('userToken'))
             }
             //! ---- Son  Gönderilen Veriler --------
 
             //! **** Ajax ***********
             $.ajax({
-                url: "http://localhost:3002/api/user/loginOnline",
+                url: "http://localhost:3002/api/message/add",
                 type: "POST",
                 data: postData,
                 success: function (response) {
@@ -65,7 +122,20 @@
                     $('#apiSonucTitle').html(response.title);
                     $('#apiSonucStatus').html(response.status);
 
-                    alert("Giriş Başarılı");
+                    //! Socket Bildirim Gönder
+                    const jsonVeri = JSON.stringify({
+                        fromApiUserToken: JSON.parse(localStorage.getItem('userToken')),
+                        toAll:false,
+                        toUserId:  $('#ToUserTokenPost').val(),
+                        dataType: "Message",
+                        dataTypeTitle: "mesaj_send_successful",
+                        dataTypeDescription:"Mesaj Gönderme Başarılı",
+                        dataId: 0,
+                        data: $('#MessagePost').val()
+                    })
+
+                    socket.send(jsonVeri);    
+
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -77,12 +147,22 @@
         }); //Gönderme son
 
     });
+    /* Ajax Son */
+
 </script>
 <!------  End script   -->
 
 
 <!------  Css   -->
 <style>
+
+    .connectStatus { color: red;}
+    .connectStatus.active { color: green; }
+    .connectCount { 
+        color: black;
+        font-size: 15px;
+        font-weight: 900;
+    }
  
     .apiButtonPanel {
        display: flex;

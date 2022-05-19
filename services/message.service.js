@@ -217,8 +217,8 @@ module.exports = {
 
 				let TokenInfo={				
 					id: TokenId,	
-					FromRole: ctx.params.FromRole,
-					ToRole: ctx.params.ToRole,
+					FromUserToken: ctx.params.FromUserToken,
+					ToUserToken: ctx.params.ToUserToken,
 					Subject: ctx.params.Subject
 				}
 				

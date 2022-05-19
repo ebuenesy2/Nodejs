@@ -68,6 +68,7 @@ fastify.route({
 						
 						fromUserID:Number(req.params.userId),
 						fromUserToken:sessionId,
+						fromApiUserToken: Number(req.params.userId),
 						toAll:"all",
 						toUserID:"all",
 						dataType:"Connect",
@@ -101,6 +102,7 @@ fastify.route({
 
 						fromUserID:Number(req.params.userId),
 						fromUserToken:sessionId,
+						fromApiUserToken: Number(req.params.userId),
 						toAll:"all",
 						toUserID:"all",
 						dataType:"Connect",
@@ -141,8 +143,9 @@ fastify.route({
                        
                         fromUserID: Number(req.params.userId),
                         fromUserToken:sessionId,
+                        fromApiUserToken:obj.fromApiUserToken,
                         toAll: obj.toAll,
-                        toUserID:obj.toAll? "all" : obj.toUserId,
+                        toUserID:obj.toAll? "all" : Number(obj.toUserId),
 						dataType: obj.dataType,
                         dataTypeTitle: obj.dataTypeTitle,
                         dataTypeDescription: obj.dataTypeDescription,

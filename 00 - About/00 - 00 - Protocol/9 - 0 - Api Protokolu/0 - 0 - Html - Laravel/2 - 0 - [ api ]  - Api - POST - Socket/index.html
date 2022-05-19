@@ -39,6 +39,9 @@
 
     $('document').ready(function () {
 
+        var userIdLocal = JSON.parse(localStorage.getItem('userId')); //! Veri Çekme
+        if(userIdLocal) { window.location='./home.html'; }    //! Sayfa Yönlendirme
+
         //Gönderme
         $('#sendPost').click(function () {
 
@@ -80,11 +83,6 @@
                         //! Sayfa Yönlendirme
                          window.location='./home.html';
                     } 
-
-
-                    //! Sayfa Yönlendirme
-                    window.location='./home.html';
-
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log(textStatus, errorThrown);
