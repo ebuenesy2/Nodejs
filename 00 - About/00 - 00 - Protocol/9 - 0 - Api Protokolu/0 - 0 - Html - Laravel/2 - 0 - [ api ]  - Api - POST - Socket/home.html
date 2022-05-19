@@ -25,7 +25,7 @@
        <div class="apiButtonPanelText" >   <p> Kime: </p>   <input type="text" class="table" id="ToUserTokenPost" >  </div>
        <div class="apiButtonPanelText" >   <p> Message: </p>   <input type="text" class="table" id="MessagePost" > </div>
 
-       <div class="apiButtonPanelButton" > <button type="submit" title="Gonder	" id="sendPost"> Login</button>  </div>
+       <div class="apiButtonPanelButton" > <button type="submit" title="Gonder	" id="sendPost"> Mesaj Gönder </button>  </div>
    </div>
  
     
@@ -96,13 +96,11 @@
 
             //! ---- Gönderilen Veriler --------
             var postData = {
-                FromRole:"User",
                 FromUserToken: JSON.parse(localStorage.getItem('userToken')),
-                ToRole: "Admin",   
                 ToUserToken: $('#ToUserTokenPost').val(),
                 Subject: "Subject",
                 Message: $('#MessagePost').val(),
-                created_byToken: JSON.parse(localStorage.getItem('userToken'))
+                Created_byToken: JSON.parse(localStorage.getItem('userToken'))
             }
             //! ---- Son  Gönderilen Veriler --------
 
@@ -124,7 +122,6 @@
 
                     //! Socket Bildirim Gönder
                     const jsonVeri = JSON.stringify({
-                        fromApiUserToken: JSON.parse(localStorage.getItem('userToken')),
                         toAll:false,
                         toUserId:  $('#ToUserTokenPost').val(),
                         dataType: "Message",

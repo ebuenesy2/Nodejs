@@ -219,7 +219,7 @@ module.exports = {
                     MessageFileControl: false,
 					token:jwt,				
 					created_at: new Date(),
-					created_byToken: ctx.params.created_byToken,
+					created_byToken: ctx.params.Created_byToken,
 					isUpdated: false,
 					updated_at: null,
 					updated_byToken : null,
@@ -257,7 +257,7 @@ module.exports = {
 					description: "Message Yazma Başarılı",
 					logStatus: "successful",
 					fromToken: jwt,
-					created_byToken: ctx.params.created_byToken ? ctx.params.created_byToken : ctx.params.FromUserToken
+					created_byToken: ctx.params.Created_byToken ? ctx.params.Created_byToken : ctx.params.FromUserToken
 				})
 
 				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Message] [Logs] [Add] Bildirim Eklendi' + '\u001b[0m'); }
