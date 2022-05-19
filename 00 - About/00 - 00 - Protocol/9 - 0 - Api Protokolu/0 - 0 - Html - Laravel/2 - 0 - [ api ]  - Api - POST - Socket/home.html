@@ -16,23 +16,30 @@
 
     <h1>  Home Sayfası </h1>
     
-    <div style="width: 175px;  display: flex ; gap : 5px; border: 1px solid black; padding: 2px; margin-bottom: 5px; " > 
-        <div id="connectStatus"  class="connectStatus">  DisConnect  </div>
-        <div id="connectCount" >  0  </div>
-    </div>
-
-   <div class="apiButtonPanel">
-       <div class="apiButtonPanelText" >   <p> Kime: </p>   <input type="text" class="table" id="ToUserTokenPost" >  </div>
-       <div class="apiButtonPanelText" >   <p> Message: </p>   <input type="text" class="table" id="MessagePost" > </div>
-
-       <div class="apiButtonPanelButton" > <button type="submit" title="Gonder	" id="sendPost"> Mesaj Gönder </button>  </div>
-   </div>
- 
+     <div class="home">
+         <div class="leftPanel">
+            <div style="width: 175px;  display: flex ; gap : 5px; border: 1px solid black; padding: 2px; margin-bottom: 5px; " > 
+                <div id="connectStatus"  class="connectStatus">  DisConnect  </div>
+                <div id="connectCount" >  0  </div>
+            </div>
     
-    <div class="apiPanel">
-          <div class="apiPanelText" >   <p style="font-weight: 900 ; color: red; "> Api Paneli </p> </div>
-          <div class="apiPanelText" >   <p> Title: </p>  <p id="apiSonucTitle"> Sonuc </p>  </div>
-          <div class="apiPanelText" >   <p> Status: </p>   <p id="apiSonucStatus"> Sonuc </p>  </div>
+            <div class="apiButtonPanel">
+                <div class="apiButtonPanelText" >   <p> Kime: </p>   <input type="text" class="table" id="ToUserTokenPost" >  </div>
+                <div class="apiButtonPanelText" >   <p> Message: </p>   <input type="text" class="table" id="MessagePost" > </div>
+    
+                <div class="apiButtonPanelButton" > <button type="submit" title="Gonder	" id="sendPost"> Mesaj Gönder </button>  </div>
+            </div>
+        
+            
+            <div class="apiPanel">
+                <div class="apiPanelText" >   <p style="font-weight: 900 ; color: red; "> Api Paneli </p> </div>
+                <div class="apiPanelText" >   <p> Title: </p>  <p id="apiSonucTitle"> Sonuc </p>  </div>
+                <div class="apiPanelText" >   <p> Status: </p>   <p id="apiSonucStatus"> Sonuc </p>  </div>
+            </div>
+         </div>
+
+
+        <div class="userTable"> User Table </div>
     </div>
 
 
@@ -153,6 +160,13 @@
 <!------  Css   -->
 <style>
 
+    .home {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        padding-left: 15px;
+    }
+
     .connectStatus { color: red;}
     .connectStatus.active { color: green; }
     .connectCount { 
@@ -169,7 +183,7 @@
        border: 1px solid black;
        padding: 4px;
        margin-bottom: 20px;
-       height: 100%;
+       height: 140px;
        border-radius: 14px;
     }
 
@@ -215,6 +229,13 @@
        display: flex;
        flex-direction: row;
        gap: 5px;
+    }
+
+    .userTable {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+        margin-right: 25px;
     }
    
 </style>
