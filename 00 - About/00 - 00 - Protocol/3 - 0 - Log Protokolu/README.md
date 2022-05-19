@@ -72,6 +72,12 @@ Bildirim verilerini tutuyor
 * Mesaj Geçisi Silme Başarılı : message_deleted_update_successful
 * Mesaj Görüntüleme Başarılı : message_view_successful
 
+* Time Ekleme Başarılı : time_add_successful
+* Time Güncelleme Başarılı : time_update_successful
+* Time Silme Başarılı : time_delete_successful
+* Time Geçisi Silme Başarılı : time_deleted_update_successful
+* Time Görüntüleme Başarılı : time_view_successful
+
 * SSK Ekleme Başarılı : faq_add_successful
 * SSK Güncelleme Başarılı : faq_update_successful
 * SSK Silme Başarılı : faq_delete_successful
