@@ -45,6 +45,12 @@ Bildirim verilerini tutuyor
 * Dosya Geçisi Silme Başarılı : file_delete_update_successful
 * Dosya Yükleme Başarılı : file_upload_successful
 
+* Time Ekleme Başarılı : time_add_successful
+* Time Güncelleme Başarılı : time_update_successful
+* Time Silme Başarılı : time_delete_successful
+* Time Geçisi Silme Başarılı : time_deleted_update_successful
+* Time Görüntüleme Başarılı : time_view_successful
+
 * Kullanıcı Ekleme Başarılı : user_add_successful
 * Kullanıcı Güncelleme Başarılı : user_update_successful
 * Kullanıcı Silme Başarılı : user_delete_successful
