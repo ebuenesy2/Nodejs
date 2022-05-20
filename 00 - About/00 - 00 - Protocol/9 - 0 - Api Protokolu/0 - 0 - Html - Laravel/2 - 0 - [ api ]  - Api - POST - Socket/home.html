@@ -64,9 +64,10 @@
             toUserId:null,
             dataType: "Time",
             dataTypeTitle: "time_add_successful",
-            dataTypeDescription: "Zaman Görüntüleme Başladı",
+            dataTypeDescription: "Zaman Görüntüleme Login",
             dataId: 0,
             data:null,
+            pageTable:"home",
             pageToken: "homeToken"
         })
 
@@ -150,7 +151,9 @@
                         dataTypeTitle: "mesaj_send_successful",
                         dataTypeDescription:"Mesaj Gönderme Başarılı",
                         dataId: 0,
-                        data: $('#MessagePost').val()
+                        data: $('#MessagePost').val(),
+                        pageTable:"home",
+                        pageToken: "homeToken"
                     })
 
                     socket.send(jsonVeri);    

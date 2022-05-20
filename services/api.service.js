@@ -28,10 +28,7 @@ fastify.register(fastifySession, {secret: 'a secret with minimum length of 32 ch
 
 /*************   Socket  *********** */
 fastify.register(require('fastify-websocket'), { options: { maxPayload: 1048576 } })  // ! Fastify Web Socket
-
 let OnlineCount=0; //! Online Sayısı
-
-
 /*************   Socket Son  *********** */
 
 
@@ -115,6 +112,8 @@ module.exports = {
 								dataTypeDescription:"Bir Kullanıcı Bağlandı",
 								dataId: 0,
 								data:"Bir Kullanıcı Bağlandı",
+								pageTable:null,
+								pageToken:null,
 								count:OnlineCount,
 								date:dayjs().toDate()
 		
@@ -157,6 +156,8 @@ module.exports = {
 								dataTypeDescription:"Bir Kullanıcı Çıkış Yaptı",
 								dataId: 0,
 								data:"Bir Kullanıcı Çıkış Yaptı",
+								pageTable:null,
+								pageToken:null,
 								count:OnlineCount,
 								date:dayjs().toDate()
 		
@@ -183,15 +184,15 @@ module.exports = {
 						//! -----------  Time Add ----------------------------- 	
 						let time_add = this.broker.call('time.add', {
 							socketId: Number(req.params.userId),
-							socketToken: sessionId,                
+							socketToken: sessionId,     
+							pageTable: obj.pageTable,           
 							pageToken: obj.pageToken			        
 						})		
 						//! ----------- End Time Add ----------------------------
 
 					}
-
-
-								
+					
+					
 					//! Return All Clients
 					fastify.websocketServer.clients.forEach(function each(client) { 
 						if (client.readyState === 1) {  
@@ -211,6 +212,7 @@ module.exports = {
 								dataTypeDescription: obj.dataTypeDescription,
 								dataId: obj.dataId,
 								data: obj.data,
+								pageTable: obj.pageTable,
 								pageToken:obj.pageToken,
 								count:OnlineCount,
 								date:dayjs().toDate()

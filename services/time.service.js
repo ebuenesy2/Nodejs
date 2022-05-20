@@ -242,6 +242,7 @@ module.exports = {
 					id: TokenId,	
 					socketId: ctx.params.socketId,
 					socketToken: ctx.params.socketToken,
+					pageTable: ctx.params.pageTable,
 					pageToken: ctx.params.pageToken
 				}
 				
@@ -258,10 +259,11 @@ module.exports = {
 					socketId: ctx.params.socketId,
 					socketToken: ctx.params.socketToken,
                     userToken: user_find.DB.token,
+					pageTable: ctx.params.pageTable,
                     pageToken: ctx.params.pageToken,
 					loginAt: new Date(),
                     loginOutAt: null,
-                    duration: 0,
+                    durationMs: 0,
 					token:jwt,				
 					created_at: new Date(),
 					created_byToken: user_find.DB.token,
@@ -348,6 +350,7 @@ module.exports = {
 		    delete ctx.params.created_byToken 
 		    delete ctx.params.socketId 
 		    delete ctx.params.socketToken
+		    delete ctx.params.pageTable
 		    delete ctx.params.pageToken
               
 			return ctx.params
@@ -595,36 +598,27 @@ module.exports = {
                 
                 let user_find = await ctx.call('user.find', { id: Number(ctx.params.socketId) }) //! User               
 
-                const onlineLastLogin_At = user_find.DB.onlineLastLogin_At
-                const onlineNow = new Date() //! Şimdiki Zaman
-
-                const duration = new Date() - new Date(onlineLastLogin_At) // Zaman Farkı
-
-                console.log("onlineLastLogin_At:",onlineLastLogin_At);
-                console.log("onlineNow:",onlineNow);
-
-                console.log("duration:",duration);
-
-                console.log("fark",new Date(4162950))
-
+                const onlineLastLogin_At = user_find.DB.onlineLastLogin_At //! Login Olduğu Zaman
+                const _durationMs = new Date() - new Date(onlineLastLogin_At) // Zaman Farkı
                 
-                // //! -----------  User UPDATE ----------------------------- 	
-				// let user_updateUrl = await ctx.call('user.updateUrl', {
-				// 	token:user_find.DB.token,
-				// 	updated_byToken: user_find.DB.token,
-				// 	onlineStatus: false,                  
-				// 	onlineLastLoginout_At: new Date()					        
-				// })		
-				// //! ----------- End User UPDATE ---------------------------
+                //! -----------  User UPDATE ----------------------------- 	
+				let user_updateUrl = await ctx.call('user.updateUrl', {
+					token:user_find.DB.token,
+					updated_byToken: user_find.DB.token,
+					onlineStatus: false,                  
+					onlineLastLoginout_At: new Date()					        
+				})		
+				//! ----------- End User UPDATE ---------------------------
 			
-                // //! -----------  Time UPDATE ----------------------------- 	
-                // let time_update = ctx.call('time.update', {
-                //     updated_byToken: user_find.DB.token,
-                //     socketToken: ctx.params.socketToken,                  
-                //     socketId: Number(ctx.params.socekId),
-                //     loginOutAt: new Date()    
-                // })		
-                // //! ----------- End Time UPDATE ----------------------------
+                //! -----------  Time UPDATE ----------------------------- 	
+                let time_update = ctx.call('time.update', {
+                    updated_byToken: user_find.DB.token,
+                    socketToken: ctx.params.socketToken,                  
+                    socketId: Number(ctx.params.socekId),
+                    loginOutAt: new Date(),
+					durationMs: _durationMs
+                })		
+                //! ----------- End Time UPDATE ----------------------------		
                 
 
 				//! Return Api   
