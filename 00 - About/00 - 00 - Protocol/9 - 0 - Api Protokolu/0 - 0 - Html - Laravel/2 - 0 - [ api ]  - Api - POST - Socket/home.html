@@ -56,44 +56,59 @@
     var userIdLocal = JSON.parse(localStorage.getItem('userId')); //! Veri Çekme
     const socket = new WebSocket('ws://localhost:3002/socket/'+userIdLocal);  // Url
 
-   //! Gelen Bildirim
-   socket.addEventListener('message', function (event) {
-       console.log('Message from server ', event.data);
+    /* Başlangıc */
+    socket.onopen = function () {
 
-       //! Veri Alma
-       let geleData = event.data;
-       const obj = JSON.parse(geleData);
-       const objDataType = obj.dataType; // "Connect" - 
-       const objDataTypeDescription = obj.dataTypeDescription; // "Connected"
-       const objConnectCount = obj.count; // 2
-       const objToAll = obj.toAll; // 1
-       const objFromUserID = obj.fromUserID; // 1
-       const objToUserID = obj.toUserID; // 12
-       const objData = obj.data; // 12
-       let objMesajType = "-"; // send | incoming
+        const jsonVeri = JSON.stringify({
+            toAll:true,
+            toUserId:null,
+            dataType: "Time",
+            dataTypeTitle: "time_add_successful",
+            dataTypeDescription: "Zaman Görüntüleme Başladı",
+            dataId: 0,
+            data:null,
+            pageToken: "homeToken"
+        })
 
-      // Bağlantı Bilgileri
-       if(obj.dataType == "Connect" && objFromUserID == userIdLocal ) { document.getElementById("connectStatus").innerText = obj.dataTypeDescription; document.querySelector('.connectStatus').classList.toggle('active'); /* active class ekliyor */  }
-       if(obj.dataType == "Connect") { document.getElementById("connectCount").innerText = objConnectCount;   }
-        // Bağlantı Bilgileri Son
+        socket.send(jsonVeri);   
+    };
+    /* Başlangıc Son*/
 
-         //***** Mesaj Bilgileri *****
+    //! Gelen Bildirim
+    socket.addEventListener('message', function (event) {
+        console.log('Message from server ', event.data);
 
-        //! Gönderildi Mesaj
-        if(obj.dataType == "Message" && obj.dataTypeTitle == "mesaj_send_successful" && obj.fromUserID == userIdLocal ) { alert("mesaj gönderildi"); }
+        //! Veri Alma
+        let geleData = event.data;
+        const obj = JSON.parse(geleData);
+        const objDataType = obj.dataType; // "Connect" - 
+        const objDataTypeDescription = obj.dataTypeDescription; // "Connected"
+        const objConnectCount = obj.count; // 2
+        const objToAll = obj.toAll; // 1
+        const objFromUserID = obj.fromUserID; // 1
+        const objToUserID = obj.toUserID; // 12
+        const objData = obj.data; // 12
+        let objMesajType = "-"; // send | incoming
 
-          //! Gelen Mesaj
-        if(obj.dataType == "Message" && obj.dataTypeTitle == "mesaj_send_successful") { 
-            if(obj.toAll==true && obj.fromUserID != userIdLocal) { alert("Herkese mesaj geldi"); }
-            if(obj.toAll==false && obj.toUserID == userIdLocal ) { alert("Özel mesaj geldi"); }
-        }
-         //***** Mesaj Bilgileri Son *****
+        // Bağlantı Bilgileri
+        if(obj.dataType == "Connect" && objFromUserID == userIdLocal ) { document.getElementById("connectStatus").innerText = obj.dataTypeDescription; document.querySelector('.connectStatus').classList.toggle('active'); /* active class ekliyor */  }
+        if(obj.dataType == "Connect") { document.getElementById("connectCount").innerText = objConnectCount;   }
+            // Bağlantı Bilgileri Son
 
-   });
-   //! Gelen Bildirim Son
+            //***** Mesaj Bilgileri *****
 
-   
-    
+            //! Gönderildi Mesaj
+            if(obj.dataType == "Message" && obj.dataTypeTitle == "mesaj_send_successful" && obj.fromUserID == userIdLocal ) { alert("mesaj gönderildi"); }
+
+            //! Gelen Mesaj
+            if(obj.dataType == "Message" && obj.dataTypeTitle == "mesaj_send_successful") { 
+                if(obj.toAll==true && obj.fromUserID != userIdLocal) { alert("Herkese mesaj geldi"); }
+                if(obj.toAll==false && obj.toUserID == userIdLocal ) { alert("Özel mesaj geldi"); }
+            }
+            //***** Mesaj Bilgileri Son *****
+
+    });
+    //! Gelen Bildirim Son     
 
     /* Ajax */
     $('document').ready(function () {

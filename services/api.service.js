@@ -31,144 +31,6 @@ fastify.register(require('fastify-websocket'), { options: { maxPayload: 1048576 
 
 let OnlineCount=0; //! Online Sayısı
 
-fastify.route({
-    method: 'GET',
-    url: '/socket/:userId',
-    handler: (req, res) => {      
-
-     const zaman=dayjs().toDate(); //! Zaman
-	 console.log('\u001b[' + 32 + 'm' + '[Socket] [Get] Socket Durum [ /socket/:userId ] :' + '\u001b[0m',req.params);
-
-		//! Return
-		res.send({ 
-			dataType:"Socket",
-			dataTypeDescription:"Socket Bilgileri",
-			message:"Kullanıcı Bağlandı",
-			count:OnlineCount,
-			userId:req.session.sessionId,
-			time:zaman          
-		}) 
-		
-    },
-    wsHandler: (connection, req) => {
-        
-            OnlineCount++; //! Sayac Artıyor
-
-            const sessionId = req.session.sessionId; //! Session ID
-            //console.log("Session sessionId: "+sessionId); //! Session ID      
-            console.log('\u001b[' + 32 + 'm' + "Bir Kullanıcı Bağlandı SessionId: "+sessionId + '\u001b[0m')                  
-        
-            //! Return Clients
-            fastify.websocketServer.clients.forEach(function each(client) {
-                
-                if (client.readyState === 1) {            
-                
-					//! Return Send
-					client.send(JSON.stringify({
-						
-						fromUserID:Number(req.params.userId),
-						fromUserToken:sessionId,
-						fromApiUserToken: Number(req.params.userId),
-						toAll:"all",
-						toUserID:"all",
-						dataType:"Connect",
-						dataTypeTitle:"Connected",
-						dataTypeDescription:"Bir Kullanıcı Bağlandı",
-						dataId: 0,
-						data:"Bir Kullanıcı Bağlandı",
-						count:OnlineCount,
-						date:dayjs().toDate()
-
-					}));
-					//! Return Send Son
-
-                }
-            })
-            //! Return Clients
-            
-        //! -- Çıkış Yapıldı ise
-        connection.socket.on("close", () => {
-         
-            OnlineCount--; //! Sayac Azalıyor
-            //console.log("Kullanıcı Çıkış Yaptı sessionId: "+sessionId);   //! Kullanıcı Çıkış Yapma   
-            console.log('\u001b[' + 31 + 'm' + "Bir Kullanıcı Çıkış Yaptı SessionId: "+sessionId + '\u001b[0m')           
-
-            //! Return All Clients
-            fastify.websocketServer.clients.forEach(function each(client) {
-                if (client.readyState === 1) {            
-                
-                    //! Return Send
-                    client.send(JSON.stringify({
-
-						fromUserID:Number(req.params.userId),
-						fromUserToken:sessionId,
-						fromApiUserToken: Number(req.params.userId),
-						toAll:"all",
-						toUserID:"all",
-						dataType:"Connect",
-						dataTypeTitle:"disConnect",
-						dataTypeDescription:"Bir Kullanıcı Çıkış Yaptı",
-						dataId: 0,
-						data:"Bir Kullanıcı Çıkış Yaptı",
-						count:OnlineCount,
-						date:dayjs().toDate()
-
-                    }));
-                    //! Return Send Son
-
-                }
-            })
-            //! Return All Clients
-
-
-        }) 
-        //! -- Çıkış Yapıldı ise Son
-
-        
-        //! -- Mesaj Alma
-        connection.socket.on('message', message => {
-
-            const obj = JSON.parse(message); 
-            //console.log("Kimden:",sessionId," - Gelen Mesaj Json:",obj);
-                        
-            //! Return All Clients
-            fastify.websocketServer.clients.forEach(function each(client) { 
-                if (client.readyState === 1) {  
-
-
-					//console.log("gelen Veri:",req.params);
-                
-                    //! Return Send
-                    client.send(JSON.stringify({
-                       
-                        fromUserID: Number(req.params.userId),
-                        fromUserToken:sessionId,
-                        fromApiUserToken:obj.fromApiUserToken,
-                        toAll: obj.toAll,
-                        toUserID:obj.toAll? "all" : Number(obj.toUserId),
-						dataType: obj.dataType,
-                        dataTypeTitle: obj.dataTypeTitle,
-                        dataTypeDescription: obj.dataTypeDescription,
-						dataId: obj.dataId,
-                        data: obj.data,
-						count:OnlineCount,
-                        date:dayjs().toDate()
-
-                    }));
-                    //! Return Send Son
-
-                }
-            })
-            //! End Return All Clients
-                     
-
-        }) 
-        //! -- Mesaj Alma Son   
-
-        
-    }
-
-  })
 
 /*************   Socket Son  *********** */
 
@@ -200,16 +62,176 @@ module.exports = {
 	settings: {
 		port: process.env.PORT || 3001
 	},
-	
-
-		// ! ------ Socket -------------------------------
-	
-
-	   // ! ------ Socket Son -------------------------------
 
 	created() {
 
 		try {
+
+
+	    // ! ------ Socket -------------------------------
+		fastify.route({
+			method: 'GET',
+			url: '/socket/:userId',
+			handler: (req, res) => {      
+		
+				const zaman=dayjs().toDate(); //! Zaman
+				console.log('\u001b[' + 32 + 'm' + '[Socket] [Get] Socket Durum [ /socket/:userId ] :' + '\u001b[0m',req.params);
+		
+				//! Return
+				res.send({ 
+					dataType:"Socket",
+					dataTypeDescription:"Socket Bilgileri",
+					message:"Kullanıcı Bağlandı",
+					count:OnlineCount,
+					userId:req.session.sessionId,
+					time:zaman          
+				}) 
+				
+			},
+			wsHandler: (connection, req) => {
+				
+					OnlineCount++; //! Sayac Artıyor
+		
+					const sessionId = req.session.sessionId; //! Session ID
+					//console.log("Session sessionId: "+sessionId); //! Session ID      
+					console.log('\u001b[' + 32 + 'm' + "Bir Kullanıcı Bağlandı SessionId: "+sessionId + '\u001b[0m') 	
+				
+
+					//! Herkese Dönüş Yapıyor
+					fastify.websocketServer.clients.forEach(function each(client) {
+						
+						if (client.readyState === 1) {  
+		
+							//! Return Send
+							client.send(JSON.stringify({
+								
+								fromUserID:Number(req.params.userId),
+								fromUserToken:sessionId,
+								fromApiUserToken: Number(req.params.userId),
+								toAll:"all",
+								toUserID:"all",
+								dataType:"Connect",
+								dataTypeTitle:"Connected",
+								dataTypeDescription:"Bir Kullanıcı Bağlandı",
+								dataId: 0,
+								data:"Bir Kullanıcı Bağlandı",
+								count:OnlineCount,
+								date:dayjs().toDate()
+		
+							}));
+							//! Return Send Son
+		
+						}
+					})
+					//! Herkese Dönüş Yapıyor Son
+					
+				//! -- Çıkış Yapıldı ise
+				connection.socket.on("close", () => {
+					
+					OnlineCount--; //! Sayac Azalıyor
+					//console.log("Kullanıcı Çıkış Yaptı sessionId: "+sessionId);   //! Kullanıcı Çıkış Yapma   
+					console.log('\u001b[' + 31 + 'm' + "Bir Kullanıcı Çıkış Yaptı SessionId: "+sessionId + '\u001b[0m')       
+					
+					//! -----------  Time Update ----------------------------- 	
+					let time_update = this.broker.call('time.loginOut', {
+						socketId: Number(req.params.userId),
+						socketToken: sessionId
+					})		
+					//! ----------- End Time Update ----------------------------
+
+		
+					//! Return All Clients
+					fastify.websocketServer.clients.forEach(function each(client) {
+						if (client.readyState === 1) {            
+						
+							//! Return Send
+							client.send(JSON.stringify({
+		
+								fromUserID:Number(req.params.userId),
+								fromUserToken:sessionId,
+								fromApiUserToken: Number(req.params.userId),
+								toAll:"all",
+								toUserID:"all",
+								dataType:"Connect",
+								dataTypeTitle:"disConnect",
+								dataTypeDescription:"Bir Kullanıcı Çıkış Yaptı",
+								dataId: 0,
+								data:"Bir Kullanıcı Çıkış Yaptı",
+								count:OnlineCount,
+								date:dayjs().toDate()
+		
+							}));
+							//! Return Send Son
+		
+						}
+					})
+					//! Return All Clients
+		
+				}) 
+				//! -- Çıkış Yapıldı ise Son
+		
+				
+				//! -- Mesaj Alma
+				connection.socket.on('message', message => {
+		
+					const obj = JSON.parse(message); 
+					//console.log("Kimden:",sessionId," - Gelen Mesaj Json:",obj);
+
+					
+					if(obj.dataType=="Time") {
+											
+						//! -----------  Time Add ----------------------------- 	
+						let time_add = this.broker.call('time.add', {
+							socketId: Number(req.params.userId),
+							socketToken: sessionId,                
+							pageToken: obj.pageToken			        
+						})		
+						//! ----------- End Time Add ----------------------------
+
+					}
+
+
+								
+					//! Return All Clients
+					fastify.websocketServer.clients.forEach(function each(client) { 
+						if (client.readyState === 1) {  
+		
+							//console.log("gelen Veri:",req.params);
+						
+							//! Return Send
+							client.send(JSON.stringify({
+								
+								fromUserID: Number(req.params.userId),
+								fromUserToken:sessionId,
+								fromApiUserToken:obj.fromApiUserToken,
+								toAll: obj.toAll,
+								toUserID:obj.toAll? "all" : Number(obj.toUserId),
+								dataType: obj.dataType,
+								dataTypeTitle: obj.dataTypeTitle,
+								dataTypeDescription: obj.dataTypeDescription,
+								dataId: obj.dataId,
+								data: obj.data,
+								pageToken:obj.pageToken,
+								count:OnlineCount,
+								date:dayjs().toDate()
+		
+							}));
+							//! Return Send Son
+		
+						}
+					})
+					//! End Return All Clients
+								
+		
+				}) 
+				//! -- Mesaj Alma Son   
+		
+				
+			}
+		
+		})
+		// ! ------ Socket Son -------------------------------
+			
 
 		// ! ------ Get -------------------------------
 
@@ -375,7 +397,29 @@ module.exports = {
 			fastify.post('/api/logs/delete_update/:id', async (req, res) => this.broker.call("logs.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
 
 		//!---------------- Logs son --------------------------------------------------------------------------------------------
+
+						   		   			
+		//!------------- time  --------------------------------------------------------------------------------------------------
+
+			fastify.get('/api/time/info',async (req,res)=> this.broker.call("time.info")) //! İnfo
+			fastify.post('/api/time/post', async (req, res) => this.broker.call("time.post",{...req.body})) //! POST
+			fastify.get('/api/time/html',async (req,res)=> this.broker.call("time.html")) //! Html
+			fastify.get('/api/time/all', async (req, res) => this.broker.call("time.all")) //! All
+			fastify.get('/api/time/:id', async (req, res) => this.broker.call("time.find",{id: req.params.id})) //! Search	
+
+			fastify.post('/api/time/find_post', async (req, res) => this.broker.call("time.find_post",{...req.body})) //!  Search-Post
+			fastify.post('/api/time/find_token', async (req, res) => this.broker.call("time.find_token", { ...req.body })) //!  Search-Token
+			fastify.post('/api/time/find_user', async (req, res) => this.broker.call("time.find_user", { ...req.body })) //! Search User	
+			fastify.post('/api/time/add', async (req, res) => this.broker.call("time.add",{...req.body})) //! CREATE		
+			fastify.post('/api/time/update', async (req, res) => this.broker.call("time.update",{...req.body})) //! UPDATE
+			fastify.post('/api/time/delete/:id', async (req, res) => this.broker.call("time.delete", { id: req.params.id, ...req.body })) //! DELETE
+			fastify.post('/api/time/delete_update/:id', async (req, res) => this.broker.call("time.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
 			
+			fastify.post('/api/time/loginOut', async (req, res) => this.broker.call("time.loginOut",{...req.body})) //! LoginOut
+			
+			
+		//!---------------- time son ----------------------------------------------------------------------------------------------
+				
 		//!-------------  File --------------------------------------------------------------------------------------------------
 
 			fastify.get('/api/file/info',async (req,res)=> this.broker.call("file.info")) //! İnfo
@@ -449,27 +493,8 @@ module.exports = {
 			fastify.post('/api/message/inbox', async (req, res) => this.broker.call("message.inbox",{...req.body})) //! Inbox			
 		
 		//!---------------- message son ----------------------------------------------------------------------------------------------
-		   		   			
-		//!------------- faq  --------------------------------------------------------------------------------------------------
 
-			fastify.get('/api/faq/info',async (req,res)=> this.broker.call("faq.info")) //! İnfo
-			fastify.post('/api/faq/post', async (req, res) => this.broker.call("faq.post",{...req.body})) //! POST
-			fastify.get('/api/faq/html',async (req,res)=> this.broker.call("faq.html")) //! Html
-			fastify.get('/api/faq/all', async (req, res) => this.broker.call("faq.all")) //! All
-			fastify.get('/api/faq/:id', async (req, res) => this.broker.call("faq.find",{id: req.params.id})) //! Search	
 
-			fastify.post('/api/faq/find_post', async (req, res) => this.broker.call("faq.find_post",{...req.body})) //!  Search-Post
-			fastify.post('/api/faq/find_token', async (req, res) => this.broker.call("faq.find_token", { ...req.body })) //!  Search-Token
-			fastify.post('/api/faq/find_user', async (req, res) => this.broker.call("faq.find_user", { ...req.body })) //! Search User	
-			fastify.post('/api/faq/add', async (req, res) => this.broker.call("faq.add",{...req.body})) //! CREATE		
-			fastify.post('/api/faq/update', async (req, res) => this.broker.call("faq.update",{...req.body})) //! UPDATE
-			fastify.post('/api/faq/delete/:id', async (req, res) => this.broker.call("faq.delete", { id: req.params.id, ...req.body })) //! DELETE
-			fastify.post('/api/faq/delete_update/:id', async (req, res) => this.broker.call("faq.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
-			fastify.post('/api/faq/view/:id', async (req, res) => this.broker.call("faq.view",{id: req.params.id,...req.body})) //!Search - View
-			
-	    //!---------------- faq son ----------------------------------------------------------------------------------------------
-
-		
 		//!------------- note  --------------------------------------------------------------------------------------------------
 
 			fastify.get('/api/note/info',async (req,res)=> this.broker.call("note.info")) //! İnfo
