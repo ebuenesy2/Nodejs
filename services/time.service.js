@@ -203,6 +203,7 @@ module.exports = {
 				ctx.params.table = "time.json"
 				ctx.params.status = 1
 				ctx.params.size=dbFind.length
+				ctx.params.durationMs = 0
 				ctx.params.DB = dbFind
 			
 
@@ -218,6 +219,7 @@ module.exports = {
 				ctx.params.table = "time.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
+				ctx.params.durationMs = 0
 				ctx.params.DB = "Time  Bulunmadı"
 			
 				
@@ -228,6 +230,129 @@ module.exports = {
 
             //! Return
 			delete ctx.params.userToken
+
+			return ctx.params
+		},
+		async find_page(ctx) {
+
+			// ! ****  Arama **** //
+			const dbFind = db.filter(u => u.pageTable == ctx.params.pageTable && u.pageToken == ctx.params.pageToken ); //! Tümünü Gösteriyor
+			const dbFind_Online = db.filter(u => u.pageTable == ctx.params.pageTable && u.pageToken == ctx.params.pageToken && u.loginOutAt == null ); //! Online Olanlar
+			const dbFind_Offline = db.filter(u => u.pageTable == ctx.params.pageTable && u.pageToken == ctx.params.pageToken && u.loginOutAt != null ); //! Offline Olanlar
+            // ! ****  Arama Son **** //
+			
+			// ! ****  Duration **** //
+			let total_duration = 0;
+			for(var i=0;i<dbFind_Offline.length;i++) { total_duration = total_duration + Number(dbFind_Offline[i].durationMs); }
+			// ! ****  Duration Son **** //
+
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "time.service -> Veri Arama"
+				ctx.params.table = "time.json"
+				ctx.params.status = 1
+				ctx.params.size=dbFind.length
+				ctx.params.size_online = dbFind_Online.length
+				ctx.params.DB_online = dbFind_Online
+				ctx.params.size_offline = dbFind_Offline.length
+				ctx.params.DB_offline = dbFind_Offline
+				ctx.params.durationMs = total_duration
+				ctx.params.DB = dbFind			
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[Time] [Find] Veri Arama [ /api/time/find_page ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "time.service -> Veri Arama"
+				ctx.params.table = "time.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.dbFind_Online = 0
+				ctx.params.size_online = 0
+				ctx.params.DB_online = 0
+				ctx.params.size_offline = 0
+				ctx.params.DB_offline =0
+				ctx.params.durationMs = 0
+				ctx.params.DB = "Time  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[Time] [Find] Veri Bulunamadı [ /api/time/find_page ] ' + '\u001b[0m');	
+
+			}
+
+            //! Return
+			delete ctx.params.pageTable
+			delete ctx.params.pageToken
+
+			return ctx.params
+		},
+		async find_user_page(ctx) {
+
+
+			// ! ****  Arama **** //
+			const dbFind = db.filter(u => u.userToken == ctx.params.userToken && u.pageTable == ctx.params.pageTable && u.pageToken == ctx.params.pageToken ); //! Tümünü Gösteriyor
+			const dbFind_Online = db.filter(u => u.userToken == ctx.params.userToken && u.pageTable == ctx.params.pageTable && u.pageToken == ctx.params.pageToken && u.loginOutAt == null ); //! Online Olanlar
+			const dbFind_Offline = db.filter(u => u.userToken == ctx.params.userToken && u.pageTable == ctx.params.pageTable && u.pageToken == ctx.params.pageToken && u.loginOutAt != null ); //! Offline Olanlar
+            // ! ****  Arama Son **** //
+			
+			// ! ****  Duration **** //
+			let total_duration = 0;
+			for(var i=0;i<dbFind_Offline.length;i++) { total_duration = total_duration + Number(dbFind_Offline[i].durationMs); }
+			// ! ****  Duration Son **** //
+
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "time.service -> Veri Arama"
+				ctx.params.table = "time.json"
+				ctx.params.status = 1
+				ctx.params.size=dbFind.length
+				ctx.params.size_online = dbFind_Online.length
+				ctx.params.DB_online = dbFind_Online
+				ctx.params.size_offline = dbFind_Offline.length
+				ctx.params.DB_offline = dbFind_Offline
+				ctx.params.durationMs = total_duration
+				ctx.params.DB = dbFind
+			
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[Time] [Find] Veri Arama [ /api/time/find_user_page ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "time.service -> Veri Arama"
+				ctx.params.table = "time.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.dbFind_Online = 0
+				ctx.params.size_online = 0
+				ctx.params.DB_online = 0
+				ctx.params.size_offline = 0
+				ctx.params.DB_offline =0
+				ctx.params.durationMs = 0
+				ctx.params.DB = "Time  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[Time] [Find] Veri Bulunamadı [ /api/time/find_user_page ] ' + '\u001b[0m');	
+
+			}
+
+            //! Return
+			delete ctx.params.userToken
+			delete ctx.params.pageTable
+			delete ctx.params.pageToken
 
 			return ctx.params
 		},

@@ -412,13 +412,15 @@ module.exports = {
 			fastify.post('/api/time/find_post', async (req, res) => this.broker.call("time.find_post",{...req.body})) //!  Search-Post
 			fastify.post('/api/time/find_token', async (req, res) => this.broker.call("time.find_token", { ...req.body })) //!  Search-Token
 			fastify.post('/api/time/find_user', async (req, res) => this.broker.call("time.find_user", { ...req.body })) //! Search User	
+			fastify.post('/api/time/find_page', async (req, res) => this.broker.call("time.find_page", { ...req.body })) //! Search Page - PageToken
+			fastify.post('/api/time/find_user_page', async (req, res) => this.broker.call("time.find_user_page", { ...req.body })) //! Search User - PageToken
+
 			fastify.post('/api/time/add', async (req, res) => this.broker.call("time.add",{...req.body})) //! CREATE		
 			fastify.post('/api/time/update', async (req, res) => this.broker.call("time.update",{...req.body})) //! UPDATE
 			fastify.post('/api/time/delete/:id', async (req, res) => this.broker.call("time.delete", { id: req.params.id, ...req.body })) //! DELETE
 			fastify.post('/api/time/delete_update/:id', async (req, res) => this.broker.call("time.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
-			
-			fastify.post('/api/time/loginOut', async (req, res) => this.broker.call("time.loginOut",{...req.body})) //! LoginOut
-			
+
+			fastify.post('/api/time/loginOut', async (req, res) => this.broker.call("time.loginOut",{...req.body})) //! LoginOut		
 			
 		//!---------------- time son ----------------------------------------------------------------------------------------------
 				
