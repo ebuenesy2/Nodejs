@@ -39,7 +39,7 @@
            
  ```
  
- ## Service Post - User Update 
+ ## Service Post - Servicelar Arası
  ```
  
                 //! -----------  User UPDATE ----------------------------- 	
@@ -50,5 +50,18 @@
 					onlineLastLogin_At: new Date()					        
 				})		
 				//! ----------- End User UPDATE ----------------------------
+ 
+ ```
+ 
+ 
+ ## Service Post - Api -> Service  Arası
+ ```
+                   //! -----------  Time Add ----------------------------- 	
+                        let time_add = this.broker.call('time.add', {
+                            socketId: 1,
+                            socketToken: "socketToken",                  
+                            pageToken: "pageToken"			        
+                        })		
+					//! ----------- End Time Add ----------------------------
  
  ```
