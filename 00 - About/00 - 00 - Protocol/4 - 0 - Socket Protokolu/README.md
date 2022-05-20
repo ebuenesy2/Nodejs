@@ -19,7 +19,24 @@ ws://localhost:3002/socket/12
      document.getElementById("connectUserId").innerText = userId;
 </script>
 <!--- Socket Son -->
-
+ ```
+ 
+## Socket Durumları
+ ```
+    socket.onopen = function () {
+        alert("Connect");
+        console.log("Opening a connection...");
+    };
+    socket.onclose = function (evt) {
+        alert("bye");
+        console.log("I'm sorry. Bye!");
+    };
+    socket.onmessage = function (evt) {
+        // handle messages here
+    };
+    socket.onerror = function (evt) {
+        console.log("ERR: " + evt.data);
+    };
  ```
  
  ## Html - Bildirim Alma
@@ -68,18 +85,34 @@ ws://localhost:3002/socket/12
 }
  ```
  
+ ## Başlangınc 
+ ```
+    /* Başlangıc */
+    socket.onopen = function () {
+
+        const jsonVeri = JSON.stringify({
+            toAll:true,
+            toUserId:null,
+            dataType: "Time",
+            dataTypeTitle: "time_add_successful",
+            dataTypeDescription: "Zaman Görüntüleme Başladı",
+            dataId: 0,
+            data:null,
+            pageToken: "homeToken"
+        })
+
+        socket.send(jsonVeri);   
+    };
+    /* Başlangıc Son*/
+ ```
+
+ 
  ## Bulunan Bildirim Uyarıları
  
  ```
   * Bağlantı Başarılı : [dataType:"Connect"] [dataTypeDescription: "Connected"] [ dataId: 0 ]
   * Mesaj Gönderme Başarılı : [dataType:"mesaj"] [dataTypeTitle: "mesaj_send_successful"] [dataTypeDescription: "Mesaj Gönderme Başarılı"] [dataId:0] [data: "merhaba"]
   
-
  ```
 
- ## Planlanan Uyarılar
- 
- ```
- Service Kullanımları
- ```
 
