@@ -85,7 +85,7 @@ ws://localhost:3002/socket/12
 }
  ```
  
- ## Başlangınc 
+ ## Başlangıç
  ```
     /* Başlangıc */
     socket.onopen = function () {
