@@ -90,18 +90,19 @@ ws://localhost:3002/socket/12
     /* Başlangıc */
     socket.onopen = function () {
 
-        const jsonVeri = JSON.stringify({
-            toAll:true,
-            toUserId:null,
-            dataType: "Time",
-            dataTypeTitle: "time_add_successful",
-            dataTypeDescription: "Zaman Görüntüleme Başladı",
-            dataId: 0,
-            data:null,
-            pageToken: "homeToken"
+       const jsonVeri = JSON.stringify({
+             toAll:true,
+             toUserId:null,
+             dataType: "Time",
+             dataTypeTitle: "time_add_successful",
+             dataTypeDescription: "Zaman Görüntüleme Başladı",
+             dataId: 0,
+             data:null,
+             pageTable:"home",
+             pageToken: "homeToken"
         })
 
-        socket.send(jsonVeri);   
+         socket.send(jsonVeri);   
     };
     /* Başlangıc Son*/
  ```
@@ -114,5 +115,46 @@ ws://localhost:3002/socket/12
   * Mesaj Gönderme Başarılı : [dataType:"mesaj"] [dataTypeTitle: "mesaj_send_successful"] [dataTypeDescription: "Mesaj Gönderme Başarılı"] [dataId:0] [data: "merhaba"]
   
  ```
+ 
+# React Socket Kullanımı
+  
+## React Bağlantı
+ ```
+           useEffect(() => {
+              const userId= 0;
+              const socket = new WebSocket('ws://localhost:3002/socket/'+userId);  // Url
 
+              socket.onopen = function () {
+                alert("Connect");
+                console.log("Opening a connection...");
+
+                const jsonVeri = JSON.stringify({
+                     toAll:true,
+                     toUserId:null,
+                     dataType: "Time",
+                     dataTypeTitle: "time_add_successful",
+                     dataTypeDescription: "Zaman Görüntüleme Başladı",
+                     dataId: 0,
+                     data:null,
+                     pageTable:"home",
+                     pageToken: "homeToken"
+                 })
+          
+                 socket.send(jsonVeri);   
+
+              };
+              socket.onclose = function (evt) {
+                alert("bye");
+                console.log("I'm sorry. Bye!");
+              };
+              socket.onmessage = function (evt:any) {
+                // handle messages here
+              };
+              socket.onerror = function (evt:any) {
+                 console.log("ERR: " + evt.data);
+              };
+              
+       }, []);
+    
+ ```
 
