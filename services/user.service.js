@@ -44,6 +44,8 @@ module.exports = {
 		},
 		async all(ctx) {
 
+			const dbFind_online = db.filter(u => u.onlineStatus == true);
+
 			try {
 
 				//! Return Api   
@@ -51,7 +53,8 @@ module.exports = {
 				ctx.params.table = "user.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
-				ctx.params.DB = db		
+				ctx.params.onlineCount=dbFind_online.length
+				ctx.params.DB = db.sort().reverse()
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[User] [All] Tüm Veriler Okundu [ /api/user/all ] ' + '\u001b[0m');
@@ -63,6 +66,7 @@ module.exports = {
 				ctx.params.table = "user.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
+				ctx.params.onlineCount=0
 				ctx.params.DB = error
 
 				//Console Yazma
@@ -278,6 +282,9 @@ module.exports = {
 								onlineStatus:0,												
 								onlineLastLogin_At:null,												
 								onlineLastLoginout_At:null,												
+								onlinePage:null,												
+								onlineDurationMs:0,												
+								onlineMod:null,												
 								created_at: DateNow,
 								created_byToken:ctx.params.created_byToken,
 								updated_at: null,

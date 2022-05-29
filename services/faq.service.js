@@ -50,7 +50,7 @@ module.exports = {
 				ctx.params.table = "faq.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
-				ctx.params.DB = db		
+				ctx.params.DB = db.sort().reverse()		
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Faq] [All] Tüm Veriler Okundu [ /api/faq/all ] ' + '\u001b[0m');

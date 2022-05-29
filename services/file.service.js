@@ -116,7 +116,7 @@ module.exports = {
 				ctx.params.table = "file.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
-				ctx.params.DB = db		
+				ctx.params.DB = db.sort().reverse()		
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[File] [All] Tüm Veriler Okundu [ /api/file/all ] ' + '\u001b[0m');
