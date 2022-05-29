@@ -358,7 +358,7 @@ module.exports = {
 		},
 		async add(ctx) {  
 
-			try {
+			try { 
 
 				//! Token
 				let TokenId=new Date().getTime();
@@ -377,6 +377,9 @@ module.exports = {
 				//! End Token
 
                 let user_find = await ctx.call('user.find', { id: Number(ctx.params.socketId) }) //! User        
+				console.log("user_find:",user_find);
+
+				console.log("Gelen:",ctx.params);
          
                 //! Eklenecek veriler
 				const willSaveData = {

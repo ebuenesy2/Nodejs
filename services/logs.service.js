@@ -494,6 +494,12 @@ module.exports = {
 
 			try {
 
+				
+				let user_find = await ctx.call('user.find_token', { token: ctx.params.created_byToken }) //! User        
+				console.log("user_find:",user_find);
+				console.log("userId:",user_find.DB.id);
+
+
 				//! Token
 				let TokenId=new Date().getTime();
 
@@ -519,6 +525,7 @@ module.exports = {
 					token:jwt,				
 					created_at: new Date(),
 					created_byToken: ctx.params.created_byToken,
+					created_byUserId: user_find.DB.id,
 					isUpdated: false,
 					updated_at: null,
 					updated_byToken : null,

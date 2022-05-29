@@ -176,19 +176,22 @@ module.exports = {
 				connection.socket.on('message', message => {
 		
 					const obj = JSON.parse(message); 
-					//console.log("Kimden:",sessionId," - Gelen Mesaj Json:",obj);
+					console.log("Kimden:",sessionId," - Gelen Mesaj Json:",obj);
+					console.log("Gelen FromId:",obj.fromId);
 
 					
-					if(obj.dataType=="Time") {
+					if(obj.dataType=="Time") { console.log("time socket");
 											
 						//! -----------  Time Add ----------------------------- 	
 						let time_add = this.broker.call('time.add', {
-							socketId: Number(req.params.userId),
+							socketId: Number(obj.fromId),
 							socketToken: sessionId,     
 							pageTable: obj.pageTable,           
 							pageToken: obj.pageToken			        
 						})		
 						//! ----------- End Time Add ----------------------------
+
+						
 
 					}
 					
