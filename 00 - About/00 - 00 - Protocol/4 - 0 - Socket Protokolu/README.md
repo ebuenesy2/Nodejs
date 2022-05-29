@@ -120,7 +120,7 @@ ws://localhost:3002/socket/12
   
 ## React Bağlantı
  ```
-           useEffect(() => {
+      useEffect(() => {
               const userId= 0;
               const socket = new WebSocket('ws://localhost:3002/socket/'+userId);  // Url
 
@@ -142,6 +142,34 @@ ws://localhost:3002/socket/12
           
                  socket.send(jsonVeri);   
 
+
+              //! Gelen Bildirim
+              socket.addEventListener('message', function (event) {
+                     console.log('Message from server ', event.data);
+
+                     //! Veri Alma
+                     let geleData = event.data;
+                     const obj = JSON.parse(geleData);
+                     const objDataType = obj.dataType; // "Connect" - 
+                     const objDataTypeDescription = obj.dataTypeDescription; // "Connected"
+                     const objConnectCount = obj.count; // 2
+                     const objToAll = obj.toAll; // 1
+                     const objFromUserID = obj.fromUserID; // 1
+                     const objToUserID = obj.toUserID; // 12
+                     const objData = obj.data; // 12
+                     let objMesajType = "-"; // send | incoming
+
+                     //Return Log
+                     console.log("obj:",obj);
+
+              // Bağlantı Bilgileri
+                     if(obj.dataType == "Connect" && objFromUserID == userId ) { console.log("Bağlantı Durumu:",obj.dataTypeDescription); }
+                     if(obj.dataType == "Connect") { console.log("objConnectCount:",objConnectCount);  }
+                     // Bağlantı Bilgileri Son
+
+              });
+              //! Gelen Bildirim Son
+
               };
               socket.onclose = function (evt) {
                 alert("bye");
@@ -155,6 +183,7 @@ ws://localhost:3002/socket/12
               };
               
        }, []);
+
     
  ```
 
