@@ -176,9 +176,8 @@ module.exports = {
 				connection.socket.on('message', message => {
 		
 					const obj = JSON.parse(message); 
-					console.log("Kimden:",sessionId," - Gelen Mesaj Json:",obj);
-					console.log("Gelen FromId:",obj.fromId);
-
+					//console.log("Kimden:",sessionId," - Gelen Mesaj Json:",obj);
+					//console.log("Gelen FromId:",obj.fromId);
 					
 					if(obj.dataType=="Time") { console.log("time socket");
 											
@@ -187,11 +186,10 @@ module.exports = {
 							socketId: Number(obj.fromId),
 							socketToken: sessionId,     
 							pageTable: obj.pageTable,           
-							pageToken: obj.pageToken			        
+							pageToken: obj.pageToken,
+							workingMod:	obj.workingMod
 						})		
-						//! ----------- End Time Add ----------------------------
-
-						
+						//! ----------- End Time Add ----------------------------						
 
 					}
 					

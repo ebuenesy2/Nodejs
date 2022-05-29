@@ -50,7 +50,7 @@ module.exports = {
 				ctx.params.table = "time.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
-				ctx.params.DB = db.sort().reverse()		
+				ctx.params.DB = db.sort()
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Time] [All] Tüm Veriler Okundu [ /api/time/all ] ' + '\u001b[0m');
@@ -376,10 +376,7 @@ module.exports = {
 				const jwt = sign(data, secret);		
 				//! End Token
 
-                let user_find = await ctx.call('user.find', { id: Number(ctx.params.socketId) }) //! User        
-				console.log("user_find:",user_find);
-
-				console.log("Gelen:",ctx.params);
+                let user_find = await ctx.call('user.find', { id: Number(ctx.params.socketId) }) //! User    			
          
                 //! Eklenecek veriler
 				const willSaveData = {
@@ -389,6 +386,7 @@ module.exports = {
                     userToken: user_find.DB.token,
 					pageTable: ctx.params.pageTable,
                     pageToken: ctx.params.pageToken,
+					workingMod:ctx.params.workingMod,
 					loginAt: new Date(),
                     loginOutAt: null,
                     durationMs: 0,
@@ -446,7 +444,11 @@ module.exports = {
 					token:user_find.DB.token,
 					updated_byToken: user_find.DB.token,
 					onlineStatus: true,                  
-					onlineLastLogin_At: new Date()					        
+					onlineLastLogin_At: new Date(),
+					onlineLastLoginout_At:null,
+					onlinePage: ctx.params.pageTable,
+                    onlinePageToken: ctx.params.pageToken,
+					onlineMod:ctx.params.workingMod
 				})		
 				//! ----------- End User UPDATE ----------------------------
 

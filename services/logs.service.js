@@ -496,8 +496,8 @@ module.exports = {
 
 				
 				let user_find = await ctx.call('user.find_token', { token: ctx.params.created_byToken }) //! User        
-				console.log("user_find:",user_find);
-				console.log("userId:",user_find.DB.id);
+				//console.log("user_find:",user_find);
+				//console.log("userId:",user_find.DB.id);
 
 
 				//! Token
