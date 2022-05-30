@@ -317,7 +317,7 @@ module.exports = {
 								table: "user",
 								title: "user_add_successful",
 								description: "Kullanıcı Ekleme Başarılı",
-								logStatus: "successful",
+								logStatus: "success",
 								fromToken: jwt,
 								created_byToken: ctx.params.created_byToken ? ctx.params.created_byToken : jwt
 							})
@@ -482,7 +482,7 @@ module.exports = {
 					table: "user",
 					title: "user_update_successful",
 					description: "Kullanıcı Güncelleme Başarılı",
-					logStatus: "successful",
+					logStatus: "success",
 					fromToken: ctx.params.token,
 					created_byToken: ctx.params.updated_byToken
 				})
@@ -653,7 +653,7 @@ module.exports = {
 					table: "user",
 					title: "user_update_successful",
 					description: "Kullanıcı Güncelleme Başarılı",
-					logStatus: "successful",
+					logStatus: "success",
 					fromToken: ctx.params.token,
 					created_byToken: ctx.params.updated_byToken
 				})
@@ -764,7 +764,7 @@ module.exports = {
 					table: "user",
 					title: "user_delete_successful",
 					description: "Kullanıcı Silme Başarılı",
-					logStatus: "successful",
+					logStatus: "success",
 					fromToken: dbFind["token"],
 					created_byToken: ctx.params.Deleted_byToken
 				})
@@ -836,7 +836,7 @@ module.exports = {
 					table: "user",
 					title: "user_delete_update_successful",
 					description: "Kullanıcı Geçisi Silme Başarılı",
-					logStatus: "successful",
+					logStatus: "success",
 					fromToken: dbFind["token"],
 					created_byToken: ctx.params.Deleted_byToken
 				})
@@ -908,7 +908,7 @@ module.exports = {
 						table: "user",
 						title: 'user_login_successful',
 						description: "Kullanıcı Login Başarılı",
-						logStatus: "successful",
+						logStatus: "success",
 						fromToken: dbFind[0]["token"],
 						created_byToken: dbFind[0]["token"]
 					})
@@ -1008,7 +1008,7 @@ module.exports = {
 						table: "user",
 						title: 'user_login_successful',
 						description: "Kullanıcı Login Başarılı",
-						logStatus: "successful",
+						logStatus: "success",
 						fromToken: dbFind[0]["token"],
 						created_byToken: dbFind[0]["token"]
 					})
@@ -1110,7 +1110,7 @@ module.exports = {
 						table: "user",
 						title: 'user_loginout_successful',
 						description: "Kullanıcı Çıkış Başarılı",
-						logStatus: "successful",
+						logStatus: "success",
 						fromToken: dbFind[0]["token"],
 						created_byToken: dbFind[0]["token"]
 					})
@@ -1166,7 +1166,7 @@ module.exports = {
 					table: "user",
 					title: "user_view_successful",
 					description: "Kullanıcı  Görüntüleme Başarılı",
-					logStatus: "successful",
+					logStatus: "success",
 					fromToken: dbFind["token"],
 					created_byToken: ctx.params.readed_byToken
 				})

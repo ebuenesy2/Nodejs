@@ -255,7 +255,7 @@ module.exports = {
 					table: "message",
 					title: "message_add_successful",
 					description: "Message Yazma Başarılı",
-					logStatus: "successful",
+					logStatus: "success",
 					fromToken: jwt,
 					created_byToken: ctx.params.Created_byToken ? ctx.params.Created_byToken : ctx.params.FromUserToken
 				})
@@ -300,7 +300,7 @@ module.exports = {
             delete ctx.params.ToNameSurName 
             delete ctx.params.Subject 
             delete ctx.params.Message
-			delete ctx.params.created_byToken            
+			delete ctx.params.Created_byToken            
 
 			return ctx.params
 
@@ -342,7 +342,7 @@ module.exports = {
 					table: "message",
 					title: "message_update_successful",
 					description: "Message Güncelleme Başarılı",
-					logStatus: "successful",
+					logStatus: "success",
 					fromToken: ctx.params.token,
 					created_byToken: ctx.params.updated_byToken
 				})
@@ -425,7 +425,7 @@ module.exports = {
 					table: "message",
 					title: "message_delete_successful",
 					description: "Message Silme Başarılı",
-					logStatus: "successful",
+					logStatus: "success",
 					fromToken: dbFind["token"],
 					created_byToken: ctx.params.Deleted_byToken
 				})
@@ -501,7 +501,7 @@ module.exports = {
 					table: "message",
 					title: "message_deleted_update_successful",
 					description: "Message Geçisi Silme Başarılı",
-					logStatus: "successful",
+					logStatus: "success",
 					fromToken: dbFind["token"],
 					created_byToken: ctx.params.Deleted_byToken
 				})
@@ -594,7 +594,7 @@ module.exports = {
 						table: "message",
 						title: "message_view_successful",
 						description: "Mesaj Görüntüleme Başarılı",
-						logStatus: "successful",
+						logStatus: "success",
 						fromToken: dbFind["token"],
 						created_byToken: ctx.params.readed_byToken
 					})

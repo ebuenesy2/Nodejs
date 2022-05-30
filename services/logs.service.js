@@ -43,14 +43,25 @@ module.exports = {
 		},
 		async all(ctx) {
 
-			try {
+			try {				
+              
+				//! User Bilgileri Alma
+				for (let index = 0; index < db.length; index++) {
+					let userId=Number(db[index]['created_byUserId']);
+					let user_find = await ctx.call('user.find', { id: Number(userId) });
+					db[index]['created_byUserNameSurname']=user_find.DB.name+" "+user_find.DB.surname
+				}
+				//! User Bilgileri Alma Son
+
+				
+				
 
 				//! Return Api   
 				ctx.params.title = "logs.service -> Tüm Veriler"
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
-				ctx.params.DB = db.sort().reverse()	
+				ctx.params.DB = db.sort()
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Logs] [All] Tüm Veriler Okundu [ /api/logs/all ] ' + '\u001b[0m');
@@ -65,7 +76,7 @@ module.exports = {
 				ctx.params.DB = error
 
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[Logs] [All] SSK Tüm Veriler Okunamadı [ /api/logs/all ] ' + '\u001b[0m');
+				console.log('\u001b[' + 31 + 'm' + '[Logs] [All] Tüm Veriler Okunamadı [ /api/logs/all ] ' + '\u001b[0m');
 				console.log('\u001b[' + 31 + 'm' + error + '\u001b[0m');
 			
 			}
@@ -526,6 +537,7 @@ module.exports = {
 					created_at: new Date(),
 					created_byToken: ctx.params.created_byToken,
 					created_byUserId: user_find.DB.id,
+					created_byUserNameSurname: null,
 					isUpdated: false,
 					updated_at: null,
 					updated_byToken : null,

@@ -402,7 +402,7 @@ module.exports = {
 		//!---------------- Logs son --------------------------------------------------------------------------------------------
 
 						   		   			
-		//!------------- time  --------------------------------------------------------------------------------------------------
+		//!------------- Time  --------------------------------------------------------------------------------------------------
 
 			fastify.get('/api/time/info',async (req,res)=> this.broker.call("time.info")) //! İnfo
 			fastify.post('/api/time/post', async (req, res) => this.broker.call("time.post",{...req.body})) //! POST
@@ -423,7 +423,7 @@ module.exports = {
 
 			fastify.post('/api/time/loginOut', async (req, res) => this.broker.call("time.loginOut",{...req.body})) //! LoginOut		
 			
-		//!---------------- time son ----------------------------------------------------------------------------------------------
+		//!---------------- Time son ----------------------------------------------------------------------------------------------
 				
 		//!-------------  File --------------------------------------------------------------------------------------------------
 
@@ -455,7 +455,7 @@ module.exports = {
 		//!-------------  File --------------------------------------------------------------------------------------------------
 
 
-		//!-------------  user --------------------------------------------------------------------------------------------------
+		//!-------------  User --------------------------------------------------------------------------------------------------
 
     		fastify.get('/api/user/info',async (req,res)=> this.broker.call("user.info")) //! İnfo
 			fastify.post('/api/user/post', async (req, res) => this.broker.call("user.post",{...req.body})) //! POST
@@ -476,10 +476,10 @@ module.exports = {
 			fastify.post('/api/user/loginOut', async (req, res) => this.broker.call("user.loginOut",{...req.body})) //! Loginout
 			fastify.post('/api/user/view/:id', async (req, res) => this.broker.call("user.view",{id: req.params.id,...req.body})) //!Search - View
 
-		//!---------------- user son ----------------------------------------------------------------------------------------------
+		//!---------------- User son ----------------------------------------------------------------------------------------------
 
 
-		//!------------- message  --------------------------------------------------------------------------------------------------
+		//!------------- Message  --------------------------------------------------------------------------------------------------
 
 			fastify.get('/api/message/info',async (req,res)=> this.broker.call("message.info")) //! İnfo
 			fastify.post('/api/message/post', async (req, res) => this.broker.call("message.post",{...req.body})) //! POST
@@ -497,10 +497,10 @@ module.exports = {
 			fastify.post('/api/message/view/:id', async (req, res) => this.broker.call("message.view",{id: req.params.id,...req.body})) //!Search - View
 			fastify.post('/api/message/inbox', async (req, res) => this.broker.call("message.inbox",{...req.body})) //! Inbox			
 		
-		//!---------------- message son ----------------------------------------------------------------------------------------------
+		//!---------------- Message son ----------------------------------------------------------------------------------------------
 
 
-		//!------------- note  --------------------------------------------------------------------------------------------------
+		//!------------- Note  --------------------------------------------------------------------------------------------------
 
 			fastify.get('/api/note/info',async (req,res)=> this.broker.call("note.info")) //! İnfo
 			fastify.post('/api/note/post', async (req, res) => this.broker.call("note.post",{...req.body})) //! POST
@@ -518,7 +518,29 @@ module.exports = {
 			fastify.post('/api/note/delete_update/:id', async (req, res) => this.broker.call("note.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
 			fastify.post('/api/note/view/:id', async (req, res) => this.broker.call("note.view",{id: req.params.id,...req.body})) //!Search - View
 		
-	    //!---------------- note son ----------------------------------------------------------------------------------------------
+	    //!---------------- Note son ----------------------------------------------------------------------------------------------
+
+
+		
+		//!------------- Faq  --------------------------------------------------------------------------------------------------
+
+			fastify.get('/api/faq/info',async (req,res)=> this.broker.call("faq.info")) //! İnfo
+			fastify.post('/api/faq/post', async (req, res) => this.broker.call("faq.post",{...req.body})) //! POST
+			fastify.get('/api/faq/html',async (req,res)=> this.broker.call("faq.html")) //! Html
+			fastify.get('/api/faq/all', async (req, res) => this.broker.call("faq.all")) //! All
+			fastify.get('/api/faq/:id', async (req, res) => this.broker.call("faq.find",{id: req.params.id})) //! Search	
+			fastify.post('/api/faq/find_post', async (req, res) => this.broker.call("faq.find_post",{...req.body})) //!  Search-Post
+			fastify.post('/api/faq/find_token', async (req, res) => this.broker.call("faq.find_token",{...req.body})) //!  Search-Token	
+			fastify.post('/api/faq/find_user', async (req, res) => this.broker.call("faq.find_user", { ...req.body })) //!  Search-UserToken	
+			
+			fastify.post('/api/faq/add', async (req, res) => this.broker.call("faq.add",{...req.body})) //! CREATE		
+			fastify.post('/api/faq/update', async (req, res) => this.broker.call("faq.update",{...req.body})) //! UPDATE
+			fastify.post('/api/faq/updated_delete/:id', async (req, res) => this.broker.call("faq.updated_delete",{id:req.params.id,...req.body})) //! UPDATE DELETE
+			fastify.post('/api/faq/delete/:id', async (req, res) => this.broker.call("faq.delete", { id: req.params.id, ...req.body })) //! DELETE
+			fastify.post('/api/faq/delete_update/:id', async (req, res) => this.broker.call("faq.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
+			fastify.post('/api/faq/view/:id', async (req, res) => this.broker.call("faq.view",{id: req.params.id,...req.body})) //!Search - View
+		
+		//!---------------- Faq son ----------------------------------------------------------------------------------------------
 
 
 

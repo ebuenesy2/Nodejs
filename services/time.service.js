@@ -428,7 +428,7 @@ module.exports = {
 					table: "time",
 					title: "time_add_successful",
 					description: "Time Ekleme Başarılı",
-					logStatus: "successful",
+					logStatus: "success",
 					fromToken: jwt,
 					created_byToken: ctx.params.created_byToken ? ctx.params.created_byToken : user_find.DB.token
 				})
@@ -521,7 +521,7 @@ module.exports = {
 					table: "time",
 					title: "time_update_successful",
 					description: "Time Güncelleme Başarılı",
-					logStatus: "successful",
+					logStatus: "success",
 					fromToken: ctx.params.token,
 					created_byToken: ctx.params.updated_byToken
 				})
@@ -596,7 +596,7 @@ module.exports = {
 					table: "time",
 					title: "time_delete_successful",
 					description: "Time Silme Başarılı",
-					logStatus: "successful",
+					logStatus: "success",
 					fromToken: dbFind["token"],
 					created_byToken: ctx.params.Deleted_byToken
 				})
@@ -673,7 +673,7 @@ module.exports = {
 					table: "time",
 					title: "time_delete_successful",
 					description: "Time Geçisi Silme Başarılı",
-					logStatus: "successful",
+					logStatus: "success",
 					fromToken: dbFind["token"],
 					created_byToken: ctx.params.Deleted_byToken
 				})
