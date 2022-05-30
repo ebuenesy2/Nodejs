@@ -26,7 +26,7 @@ Bildirim verilerini tutuyor
 				 	table: "file",
 				 	title: "file_add_successful",
 					description: "Dosya Ekleme Başarılı",
-					logStatus:"successful",
+					logStatus:"success",
 					fromToken: jwt,
 					created_byToken: ctx.params.created_byToken
 				 })				
