@@ -736,7 +736,7 @@ module.exports = {
 				dbFind["isDeleted"] = true
 				dbFind["isActive"] = false
 				dbFind["deleted_at"] = new Date()
-				dbFind["deleted_byToken"] = ctx.params.Deleted_byToken
+				dbFind["deleted_byToken"] = ctx.params.deleted_byToken
 		
 				//Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/logs.json', JSON.stringify(db), err => {

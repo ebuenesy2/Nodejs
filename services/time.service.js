@@ -50,7 +50,7 @@ module.exports = {
 				ctx.params.table = "time.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
-				ctx.params.DB = db.sort()
+				ctx.params.DB = db?.sort((a, b) => (a.id > b.id ? -1 : 1))
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Time] [All] Tüm Veriler Okundu [ /api/time/all ] ' + '\u001b[0m');

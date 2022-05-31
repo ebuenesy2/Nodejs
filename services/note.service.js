@@ -50,7 +50,7 @@ module.exports = {
 				ctx.params.table = "note.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
-				ctx.params.DB = db.sort().reverse()		
+				ctx.params.DB = db?.sort((a, b) => (a.id > b.id ? -1 : 1))		
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Note] [All] Tüm Veriler Okundu [ /api/note/all ] ' + '\u001b[0m');

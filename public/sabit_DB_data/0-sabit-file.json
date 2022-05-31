@@ -3,7 +3,7 @@
         "id":1,    
         "role":"Admin",
         "usedPage":"usedPage",
-        "FileId":"FileId",
+        "fileId":"FileId",
         "uploadDir":"uploadDir",
         "fileUrl":"FileUrl",
         "fileName":"fileName",
@@ -19,14 +19,14 @@
         "updated_byToken" : "updated_byToken",
         "isActive": true,
         "isDeleted":false,
-        "Deleted_at": "2022-03-06T13:14:43.211Z",
-        "Deleted_byToken":"Deleted_byToken"
+        "deleted_at": "2022-03-06T13:14:43.211Z",
+        "deleted_byToken":"Deleted_byToken"
     },
     {
         "id":2,      
         "role":"Admin",
         "usedPage":"usedPage_admin_post_user",     
-        "FileId":"FileId",
+        "fileId":"FileId",
         "uploadDir":"uploadDir",
         "fileUrl":"FileUrl",
         "fileName":"fileName",
@@ -42,7 +42,7 @@
         "updated_byToken" : "updated_byToken",
         "isActive": true,
         "isDeleted":false,
-        "Deleted_at": "2022-03-06T13:14:43.211Z",
-        "Deleted_byToken":"Deleted_byToken"
+        "deleted_at": "2022-03-06T13:14:43.211Z",
+        "deleted_byToken":"Deleted_byToken"
      }
 ]

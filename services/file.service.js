@@ -116,7 +116,7 @@ module.exports = {
 				ctx.params.table = "file.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
-				ctx.params.DB = db.sort().reverse()		
+				ctx.params.DB = db?.sort((a, b) => (a.id > b.id ? -1 : 1))		
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[File] [All] Tüm Veriler Okundu [ /api/file/all ] ' + '\u001b[0m');
@@ -380,7 +380,7 @@ module.exports = {
 					id: TokenId,
 					role: ctx.params.role,				
 					usedPage:ctx.params.usedPage,
-					FileId: ctx.params.FileId
+					fileId: ctx.params.FileId
 				}
 				
 				const secret = 'secret';
@@ -393,7 +393,7 @@ module.exports = {
 					id: TokenId,
 					role: ctx.params.role,
 					usedPage:ctx.params.usedPage,
-					FileId: ctx.params.FileId,
+					fileId: ctx.params.fileId,
 					uploadDir: ctx.params.uploadDir,
 					fileName: ctx.params.fileName,
 					fileType: ctx.params.fileType,
@@ -408,8 +408,8 @@ module.exports = {
 					updated_byToken : null,
 					isActive: true,
 				    isDeleted:false,
-					Deleted_at: null,
-					Deleted_byToken:null
+					deleted_at: null,
+					deleted_byToken:null
 				}
 
 				//Verileri Kaydet
@@ -474,7 +474,7 @@ module.exports = {
 			delete ctx.params.role
 			delete ctx.params.created_byToken
 			delete ctx.params.usedPage
-			delete ctx.params.FileId
+			delete ctx.params.fileId
 			delete ctx.params.uploadDir
 
 			delete ctx.params.fileName
@@ -613,7 +613,7 @@ module.exports = {
 					description: "Dosya Silme Başarılı",
 					logStatus: "success",
 					fromToken: dbFind["token"],
-					created_byToken: ctx.params.updated_byToken
+					created_byToken: ctx.params.deleted_byToken
 				})
 
 				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[File] [Logs] [Delete] Bildirim Eklendi' + '\u001b[0m'); }
@@ -631,6 +631,7 @@ module.exports = {
 				console.log('\u001b[' + 32 + 'm' + '[File] [Delete] Veri Silindi [ /api/file/delete ]' + '\u001b[0m');
 
 			} else {
+
 
 
 				//! ----------- Log ----------------------------- 	
@@ -660,7 +661,7 @@ module.exports = {
 
 			//! Return
 			delete ctx.params.id
-			delete ctx.params.Deleted_byToken
+			delete ctx.params.deleted_byToken
 
 			return ctx.params
 
@@ -676,8 +677,8 @@ module.exports = {
 				//! Güncelleme
 				dbFind["isDeleted"] = true
 				dbFind["isActive"] = false
-				dbFind["Deleted_at"] = new Date()
-				dbFind["Deleted_byToken"] = ctx.params.Deleted_byToken	
+				dbFind["deleted_at"] = new Date()
+				dbFind["deleted_byToken"] = ctx.params.deleted_byToken	
 
 				// Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/file.json', JSON.stringify(db), err => {
@@ -702,7 +703,7 @@ module.exports = {
 					description: "Dosya Geçisi Silme Başarılı",
 					logStatus: "success",
 					fromToken: dbFind["token"],
-					created_byToken: ctx.params.Deleted_byToken
+					created_byToken: ctx.params.deleted_byToken
 				})
 
 				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[File] [Logs] [Deleted_Update] Bildirim Eklendi' + '\u001b[0m'); }
@@ -739,7 +740,7 @@ module.exports = {
 			//! Return
 			delete ctx.params.id
 			delete ctx.params.token
-			delete ctx.params.Deleted_byToken
+			delete ctx.params.deleted_byToken
 			delete ctx.params.isDeleted
 			delete ctx.params.isActive		
 
@@ -926,7 +927,7 @@ module.exports = {
 							id: TokenId,							
 							role: ctx.params.role,
 							usedPage:ctx.params.usedPage,
-							FileId: FileId,
+							fileId: FileId,
 							created_byToken: ctx.params.created_byToken
 						}
 						
@@ -940,7 +941,7 @@ module.exports = {
 							id: TokenId,						
 							role: ctx.params.role,
 							usedPage:ctx.params.usedPage,
-							FileId: FileId,
+							fileId: FileId,
 							uploadDir:filePath,
 							fileUrl:fileUrl,
 							fileName: fileName,
@@ -1373,7 +1374,7 @@ module.exports = {
 							id: TokenId,
 							role: ctx.params.role,
 							usedPage: ctx.params.usedPage,
-							FileId: FileId,
+							fileId: FileId,
 							created_byToken: ctx.params.created_byToken
 						}
 						
@@ -1387,7 +1388,7 @@ module.exports = {
 							id: TokenId,						
 							role: ctx.params.role,							
 							usedPage:ctx.params.usedPage,
-							FileId: FileId,
+							fileId: FileId,
 							uploadDir:filePath,
 							fileUrl:fileUrl_Api,
 							fileName: fileName,
@@ -1406,8 +1407,8 @@ module.exports = {
 							updated_byToken : null,
 							isActive: true,
 							isDeleted:false,
-							Deleted_at: null,
-							Deleted_byToken:null
+							deleted_at: null,
+							deleted_byToken:null
 						}
 
 						//Verileri Kaydet
