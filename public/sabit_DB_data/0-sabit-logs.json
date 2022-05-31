@@ -19,8 +19,8 @@
         "readed_byToken" : "readed_byToken",
         "isActive": true,
         "isDeleted":false,
-        "Deleted_at": "2022-03-06T13:14:43.211Z",
-        "Deleted_byToken":"isDeleted_byToken"
+        "deleted_at": "2022-03-06T13:14:43.211Z",
+        "deleted_byToken":"isDeleted_byToken"
     },
     {   
         "id": 2,
@@ -42,8 +42,8 @@
         "readed_byToken" : "readed_byToken",
         "isActive": true,
         "isDeleted":false,
-        "Deleted_at": "2022-03-06T13:14:43.211Z",
-        "Deleted_byToken":"isDeleted_byToken"
+        "deleted_at": "2022-03-06T13:14:43.211Z",
+        "deleted_byToken":"isDeleted_byToken"
     },
     {
         "id": 3,      
@@ -65,7 +65,7 @@
         "readed_byToken" : "readed_byToken",
         "isActive": true,
         "isDeleted":false,
-        "Deleted_at": "2022-03-06T13:14:43.211Z",
-        "Deleted_byToken":"isDeleted_byToken"
+        "deleted_at": "2022-03-06T13:14:43.211Z",
+        "deleted_byToken":"isDeleted_byToken"
     }
 ]

@@ -54,7 +54,7 @@ module.exports = {
 				ctx.params.status = 1
 				ctx.params.size=db.length
 				ctx.params.onlineCount=dbFind_online.length
-				ctx.params.DB = db
+				ctx.params.DB = db?.sort((a, b) => (a.id > b.id ? -1 : 1))
 				
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[User] [All] Tüm Veriler Okundu [ /api/user/all ] ' + '\u001b[0m');

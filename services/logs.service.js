@@ -51,9 +51,7 @@ module.exports = {
 					let user_find = await ctx.call('user.find', { id: Number(userId) });
 					db[index]['created_byUserNameSurname']=user_find.DB.name+" "+user_find.DB.surname
 				}
-				//! User Bilgileri Alma Son
-
-				
+				//! User Bilgileri Alma Son			
 				
 
 				//! Return Api   
@@ -61,7 +59,7 @@ module.exports = {
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
-				ctx.params.DB = db.sort()
+				ctx.params.DB = db?.sort((a, b) => (a.id > b.id ? -1 : 1))
 
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Logs] [All] Tüm Veriler Okundu [ /api/logs/all ] ' + '\u001b[0m');
@@ -546,8 +544,8 @@ module.exports = {
                     readed_byToken: null,	
 					isActive: true,
 					isDeleted: false,
-					Deleted_at: null,
-					Deleted_byToken: null
+					deleted_at: null,
+					deleted_byToken: null
 				}
 
 				//Verileri Kaydet
@@ -721,7 +719,7 @@ module.exports = {
 			
 			//! Return Delete			
 			delete ctx.params.id
-			delete ctx.params.Deleted_byToken
+			delete ctx.params.deleted_byToken
 
 			return ctx.params	
 
@@ -737,8 +735,8 @@ module.exports = {
 				//! Güncelleme
 				dbFind["isDeleted"] = true
 				dbFind["isActive"] = false
-				dbFind["Deleted_at"] = new Date()
-				dbFind["Deleted_byToken"] = ctx.params.Deleted_byToken
+				dbFind["deleted_at"] = new Date()
+				dbFind["deleted_byToken"] = ctx.params.Deleted_byToken
 		
 				//Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/logs.json', JSON.stringify(db), err => {

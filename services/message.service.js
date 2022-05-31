@@ -51,6 +51,7 @@ module.exports = {
 				ctx.params.status = 1
 				ctx.params.size=db.length
 				ctx.params.DB = db?.sort((a, b) => (a.id > b.id ? -1 : 1))
+				
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Message] [All] Tüm Veriler Okundu [ /api/message/all ] ' + '\u001b[0m');
 
@@ -188,7 +189,46 @@ module.exports = {
 			delete ctx.params.token
 
 			return ctx.params
-		},   
+		}, 
+		async find_chat(ctx) {
+
+			// ! Arama
+			const dbFind = db.filter(u => u.messageTypeId == ctx.params.messageTypeId);	
+
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "message.service -> Veri Arama"
+				ctx.params.table = "message.json"
+				ctx.params.status = 1
+				ctx.params.size = dbFind.length
+				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[Message] [Find] Veri Arama [ /api/message/find_chat ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "message.service -> Veri Arama"
+				ctx.params.table = "message.json"
+				ctx.params.status = 0
+				ctx.params.DB = "Message  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[Message] [Find] Veri Bulunamadı [ /api/message/find_chat ] ' + '\u001b[0m');	
+
+			}
+
+            //! Return
+			delete ctx.params.messageTypeId
+
+			return ctx.params
+		}, 
 		async add(ctx) {
                     
 			try {
@@ -196,11 +236,23 @@ module.exports = {
 				//! Token
 				let TokenId=new Date().getTime();
 
+				// ! Arama ve Birleştirme
+			    const dbFind_from = db.filter(u => u.messageType == "chat" && u.fromUserToken == ctx.params.fromUserToken && u.toUserToken == ctx.params.toUserToken)	// Gönderilen	
+			    const dbFind_to = db.filter(u => u.messageType == "chat" && u.fromUserToken == ctx.params.toUserToken && u.toUserToken == ctx.params.fromUserToken) // Gelen
+				
+				const dbFind = [...dbFind_from, ...dbFind_to] //! Birleştirme yapıyor
+
+				//! MessageTypeId
+				let messageTypeId = dbFind?.length > 0 ? dbFind[0].messageTypeId : TokenId
+			
+				
+                //! Token Bilgileri
 				let TokenInfo={				
-					id: TokenId,	
-					FromUserToken: ctx.params.FromUserToken,
-					ToUserToken: ctx.params.ToUserToken,
-					Subject: ctx.params.Subject
+					id: TokenId,
+					messageType:ctx.params.messageType,
+					fromUserToken: ctx.params.fromUserToken,
+					toUserToken: ctx.params.toUserToken,
+					subject: ctx.params.subject
 				}
 				
 				const secret = 'secret';
@@ -210,15 +262,19 @@ module.exports = {
 	
 				//! Eklenecek veriler
 				const willSaveData = {
-					id:TokenId,		
-					FromUserToken: ctx.params.FromUserToken,
-					ToUserToken: ctx.params.ToUserToken,
-					Subject: ctx.params.Subject,
-					Message: ctx.params.Message,
-                    MessageFileControl: false,
+					id:TokenId,
+					messageType:ctx.params.messageType,
+					messageTypeId:messageTypeId,
+					fromUserToken: ctx.params.fromUserToken,
+					fromUserNameSurname:null,
+					toUserToken: ctx.params.toUserToken,
+					toUserNameSurname:null,
+					subject: ctx.params.subject,
+					message: ctx.params.message,
+                    messageFileControl: false,
 					token:jwt,				
 					created_at: new Date(),
-					created_byToken: ctx.params.Created_byToken,
+					created_byToken: ctx.params.created_byToken,
 					isUpdated: false,
 					updated_at: null,
 					updated_byToken : null,
@@ -227,10 +283,11 @@ module.exports = {
                     readed_byToken: null,	
 					isActive: true,
 					isDeleted: false,
-					Deleted_at: null,
-					Deleted_byToken: null
+					deleted_at: null,
+					deleted_byToken: null
 				}
 
+			  
 				//Verileri Kaydet
 				db.push(willSaveData)
                 
@@ -264,6 +321,9 @@ module.exports = {
 
 				//! ----------- Log Son -----------------------------
 
+				//! Delete
+				delete ctx.params.message
+
 				//! Return Api   
 				ctx.params.title = "message.service -> Veri Ekleme"
 				ctx.params.table = "message.json"
@@ -272,9 +332,12 @@ module.exports = {
 				
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Message] [Add] Veri Eklendi [ /api/message/add ] ' + '\u001b[0m');	
-				
+
 
 			} catch (error) {
+
+				//! Delete
+				delete ctx.params.message
 
 				//! Return Api   
 				ctx.params.title = "message.service -> Veri Ekleme"
@@ -289,17 +352,18 @@ module.exports = {
 
             //! Delete
             delete ctx.params.token 
-            delete ctx.params.FromRole 
-            delete ctx.params.FromUserToken 
-            delete ctx.params.FromUserName 
-            delete ctx.params.FromNameSurName 
-            delete ctx.params.ToRole 
-            delete ctx.params.ToUserToken 
-            delete ctx.params.ToUserName 
-            delete ctx.params.ToNameSurName 
-            delete ctx.params.Subject 
-            delete ctx.params.Message
-			delete ctx.params.Created_byToken            
+            delete ctx.params.messageType 
+            delete ctx.params.fromRole 
+            delete ctx.params.fromUserToken 
+            delete ctx.params.fromUserName 
+            delete ctx.params.fromNameSurName 
+            delete ctx.params.toRole 
+            delete ctx.params.toUserToken 
+            delete ctx.params.toUserName 
+            delete ctx.params.toNameSurName 
+            delete ctx.params.subject 
+           
+			delete ctx.params.created_byToken            
 
 			return ctx.params
 
@@ -351,6 +415,8 @@ module.exports = {
 
 				//! ----------- Log Son -----------------------------
 				
+				//! Delete
+				delete ctx.params.message
               
                 //! Return Api	
 				ctx.params.title = "message.service -> Veri Güncelleme"
@@ -367,6 +433,9 @@ module.exports = {
 			else {
 				
 				
+				//! Delete
+				delete ctx.params.message
+
                //! Return Api	
 			   ctx.params.title = "message.service -> Veri Güncelleme"
 			   ctx.params.table = "message.json"        
@@ -380,16 +449,15 @@ module.exports = {
 			
             //! Delete
             delete ctx.params.token 
-            delete ctx.params.FromRole 
-            delete ctx.params.FromUserToken 
-            delete ctx.params.FromUserName 
-            delete ctx.params.FromNameSurName 
-            delete ctx.params.ToRole 
-            delete ctx.params.ToUserToken 
-            delete ctx.params.ToUserName 
-            delete ctx.params.ToNameSurName 
-            delete ctx.params.Subject 
-            delete ctx.params.Message
+            delete ctx.params.fromRole 
+            delete ctx.params.fromUserToken 
+            delete ctx.params.fromUserName 
+            delete ctx.params.fromNameSurName 
+            delete ctx.params.toRole 
+            delete ctx.params.toUserToken 
+            delete ctx.params.toUserName 
+            delete ctx.params.toNameSurName 
+            delete ctx.params.subject 
 			delete ctx.params.updated_byToken            
 
 			return ctx.params
@@ -426,7 +494,7 @@ module.exports = {
 					description: "Message Silme Başarılı",
 					logStatus: "success",
 					fromToken: dbFind["token"],
-					created_byToken: ctx.params.Deleted_byToken
+					created_byToken: ctx.params.deleted_byToken
 				})
 
 				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Message] [Logs] [Delete] Bildirim Eklendi' + '\u001b[0m'); }
@@ -460,7 +528,7 @@ module.exports = {
 			
 			//! Return Delete			
 			delete ctx.params.id
-			delete ctx.params.Deleted_byToken
+			delete ctx.params.deleted_byToken
 
 			return ctx.params	
 
@@ -473,11 +541,11 @@ module.exports = {
 			//! Veri Varsa 
 			if (dbFind) {     
 							
-			//! Güncelleme
-			dbFind["isDeleted"] = true
-			dbFind["isActive"] = false
-			dbFind["Deleted_at"] = new Date()
-			dbFind["Deleted_byToken"] = ctx.params.Deleted_byToken
+				//! Güncelleme
+				dbFind["isDeleted"] = true
+				dbFind["isActive"] = false
+				dbFind["deleted_at"] = new Date()
+				dbFind["deleted_byToken"] = ctx.params.deleted_byToken
 
 			//Json içine Verileri Yazıyor -> db
 			fs.writeFile('./public/DB/message.json', JSON.stringify(db), err => {
@@ -502,7 +570,7 @@ module.exports = {
 					description: "Message Geçisi Silme Başarılı",
 					logStatus: "success",
 					fromToken: dbFind["token"],
-					created_byToken: ctx.params.Deleted_byToken
+					created_byToken: ctx.params.deleted_byToken
 				})
 
 				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Message] [Logs] [Delete_Updated] Bildirim Eklendi' + '\u001b[0m'); }
@@ -538,19 +606,8 @@ module.exports = {
 			}
 			
             //! Delete
-            delete ctx.params.id 
-            delete ctx.params.token 
-            delete ctx.params.FromRole 
-            delete ctx.params.FromUserToken 
-            delete ctx.params.FromUserName 
-            delete ctx.params.FromNameSurName 
-            delete ctx.params.ToRole 
-            delete ctx.params.ToUserToken 
-            delete ctx.params.ToUserName 
-            delete ctx.params.ToNameSurName 
-            delete ctx.params.Subject 
-            delete ctx.params.Message
-			delete ctx.params.Deleted_byToken            
+            delete ctx.params.id
+			delete ctx.params.deleted_byToken            
 
 			return ctx.params
       
@@ -564,7 +621,7 @@ module.exports = {
 			if (dbFind) {     
 
 				//! Aynı Kişi ise
-				if (dbFind["ToUserToken"] == ctx.params.readed_byToken) {
+				if (dbFind["toUserToken"] == ctx.params.readed_byToken) {
 									
 					//! Güncelleme
 					dbFind["isReaded"] = true
@@ -658,13 +715,13 @@ module.exports = {
 		},
         async inbox(ctx) {
 
-			const message_inbox  = db.filter(u => u.ToUserToken == ctx.params.userToken && u.isReaded == false); //! Gelen Mesaj
-			const message_unreaded = db.filter(u => u.ToUserToken == ctx.params.userToken && u.isReaded == false && u.isDeleted == false); //! Okunmamış Mesajlar
-			const message_readed = db.filter(u => u.ToUserToken == ctx.params.userToken && u.isReaded == true && u.isDeleted == false ); //! Okunmuş Mesajlar
-			const message_deleted_message  = db.filter(u => u.ToUserToken == ctx.params.userToken && u.isDeleted == true ); //! Silinen Mesaj
+			const message_inbox  = db.filter(u => u.toUserToken == ctx.params.userToken && u.isReaded == false); //! Gelen Mesaj
+			const message_unreaded = db.filter(u => u.toUserToken == ctx.params.userToken && u.isReaded == false && u.isDeleted == false); //! Okunmamış Mesajlar
+			const message_readed = db.filter(u => u.toUserToken == ctx.params.userToken && u.isReaded == true && u.isDeleted == false ); //! Okunmuş Mesajlar
+			const message_deleted_message  = db.filter(u => u.toUserToken == ctx.params.userToken && u.isDeleted == true ); //! Silinen Mesaj
 
-            const message_sent = db.filter(u => u.FromUserToken == ctx.params.userToken); //! Gönderilmiş Mesajlar
-            const message_unreaded_sent = db.filter(u => u.FromUserToken == ctx.params.userToken && u.isReaded == false ); //! Okunmamış Gönderilmiş Mesajlar            
+            const message_sent = db.filter(u => u.fromUserToken == ctx.params.userToken); //! Gönderilmiş Mesajlar
+            const message_unreaded_sent = db.filter(u => u.fromUserToken == ctx.params.userToken && u.isReaded == false ); //! Okunmamış Gönderilmiş Mesajlar            
 
             //! Return
             ctx.params.title = "Mesaj Kutusu"
@@ -691,55 +748,6 @@ module.exports = {
 			delete ctx.params.userToken 
 
 			return ctx.params
-		},
-		async inboxView(ctx) {
-
-			// ! Arama
-			const dbFind = db.filter(u => u.FromUserToken == ctx.params.UserToken);
-
-		    //! Sil
-
-
-			
-			
-
-			//! Sil Son
-        
-
-			//! Veri Varsa
-			if (dbFind) {	               
-                
-				//! Return Api   
-				ctx.params.title = "message.service -> Veri Arama"
-				ctx.params.table = "message.json"
-				ctx.params.status = 1
-				ctx.params.size = dbFind.length
-				ctx.params.DB = dbFind
-			
-
-				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[Message] [Find] Veri Arama [ /api/message/find_post ] ' + '\u001b[0m');
-			}
-
-			//! Veri Yoksa
-			else {
-				
-				//! Return Api   
-				ctx.params.title = "message.service -> Veri Arama"
-				ctx.params.table = "message.json"
-				ctx.params.status = 0
-				ctx.params.DB = "Message  Bulunmadı"
-			
-				
-				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[Message] [Find] Veri Bulunamadı [ /api/message/find_post ] ' + '\u001b[0m');	
-
-			}
-
-            //! Return
-			delete ctx.params.id
-
-			return ctx.params
-		} 
+		}		
 	}
 }
