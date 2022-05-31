@@ -495,7 +495,9 @@ module.exports = {
 			fastify.post('/api/message/delete_update/:id', async (req, res) => this.broker.call("message.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
 		    
 			fastify.post('/api/message/view/:id', async (req, res) => this.broker.call("message.view",{id: req.params.id,...req.body})) //!Search - View
-			fastify.post('/api/message/inbox', async (req, res) => this.broker.call("message.inbox",{...req.body})) //! Inbox			
+			fastify.post('/api/message/inbox', async (req, res) => this.broker.call("message.inbox",{...req.body})) //! Inbox
+			fastify.post('/api/message/inboxView', async (req, res) => this.broker.call("message.inboxView",{...req.body})) //! InboxView
+
 		
 		//!---------------- Message son ----------------------------------------------------------------------------------------------
 

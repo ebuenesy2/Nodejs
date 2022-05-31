@@ -50,8 +50,7 @@ module.exports = {
 				ctx.params.table = "message.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
-				ctx.params.DB = db.sort().reverse()	
-
+				ctx.params.DB = db?.sort((a, b) => (a.id > b.id ? -1 : 1))
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[Message] [All] Tüm Veriler Okundu [ /api/message/all ] ' + '\u001b[0m');
 
@@ -692,6 +691,55 @@ module.exports = {
 			delete ctx.params.userToken 
 
 			return ctx.params
-		}       
+		},
+		async inboxView(ctx) {
+
+			// ! Arama
+			const dbFind = db.filter(u => u.FromUserToken == ctx.params.UserToken);
+
+		    //! Sil
+
+
+			
+			
+
+			//! Sil Son
+        
+
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "message.service -> Veri Arama"
+				ctx.params.table = "message.json"
+				ctx.params.status = 1
+				ctx.params.size = dbFind.length
+				ctx.params.DB = dbFind
+			
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[Message] [Find] Veri Arama [ /api/message/find_post ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "message.service -> Veri Arama"
+				ctx.params.table = "message.json"
+				ctx.params.status = 0
+				ctx.params.DB = "Message  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[Message] [Find] Veri Bulunamadı [ /api/message/find_post ] ' + '\u001b[0m');	
+
+			}
+
+            //! Return
+			delete ctx.params.id
+
+			return ctx.params
+		} 
 	}
 }
