@@ -1,1 +1,32 @@
-[{"id":2,"soru":"soru 2","cevap":"cevap 2","token":"token2","created_at":"2022-03-06T13:14:43.211Z","created_byToken":"created_byToken","isUpdated":false,"updated_at":"2022-03-06T13:14:43.211Z","updated_byToken":"updated_byToken","isActive":false,"isDeleted":true,"deleted_at":"2022-03-06T13:14:43.211Z","deleted_byToken":"isDeleted_byToken","Deleted_at":"2022-05-31T14:32:33.747Z"},{"id":1,"soru":"soru güncelleme","cevap":"cevap  guncelle","token":"token","created_at":"2022-03-06T13:14:43.211Z","created_byToken":"created_byToken","isUpdated":true,"updated_at":"2022-05-31T14:30:56.984Z","updated_byToken":"updated_byToken_post","isActive":false,"isDeleted":true,"deleted_at":"2022-05-31T14:33:28.042Z","deleted_byToken":"deleted_byToken_post "}]
+[
+    {
+        "id":1,    
+        "soru":"soru 1",
+        "cevap":"cevap 1",
+        "token":"token",
+        "created_at": "2022-03-06T13:14:43.211Z",
+        "created_byToken":"created_byToken",
+        "isUpdated":false,
+        "updated_at": "2022-03-06T13:14:43.211Z",
+        "updated_byToken" : "updated_byToken",
+        "isActive": true,
+        "isDeleted":false,
+        "deleted_at": "2022-03-06T13:14:43.211Z",
+        "deleted_byToken":"isDeleted_byToken"
+    },
+    {
+        "id":2,      
+        "soru":"soru 2",
+        "cevap":"cevap 2",
+        "token":"token2",
+        "created_at": "2022-03-06T13:14:43.211Z",
+        "created_byToken":"created_byToken",
+        "isUpdated":false,
+        "updated_at": "2022-03-06T13:14:43.211Z",
+        "updated_byToken" : "updated_byToken",
+        "isActive": true,
+        "isDeleted":false,
+        "deleted_at": "2022-03-06T13:14:43.211Z",
+        "deleted_byToken":"isDeleted_byToken"
+    }
+]
