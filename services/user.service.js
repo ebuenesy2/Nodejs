@@ -277,6 +277,10 @@ module.exports = {
 								username: ctx.params.username,
 								email: ctx.params.email,
 								tel: ctx.params.tel,
+								age: ctx.params.age,
+								country: ctx.params.country,
+								city: ctx.params.city,
+								gender: ctx.params.gender,
 								password: ctx.params.password,								
 								token:jwt,
 								onlineStatus:0,												
@@ -291,8 +295,8 @@ module.exports = {
 								updated_byToken:null,
 								isActive:true,
 								isDeleted:false,
-								Deleted_at:null,
-								Deleted_byToken:null
+								deleted_at:null,
+								deleted_byToken:null
 							}				
 
 							//Verileri Kaydet
@@ -366,8 +370,13 @@ module.exports = {
 				delete ctx.params.surname
 				delete ctx.params.email
 				delete ctx.params.username
-
 				delete ctx.params.tel
+
+				delete ctx.params.age
+				delete ctx.params.country
+				delete ctx.params.city
+				delete ctx.params.gender
+
 				delete ctx.params.password
 			    delete ctx.params.created_byToken
 
@@ -532,6 +541,11 @@ module.exports = {
 			delete ctx.params.username
 			delete ctx.params.tel
 			delete ctx.params.password
+
+			delete ctx.params.age
+			delete ctx.params.country
+			delete ctx.params.city
+			delete ctx.params.gender
 
 			return ctx.params
 
@@ -706,7 +720,11 @@ module.exports = {
 			delete ctx.params.onlineStatus
 			delete ctx.params.onlineLastLogin_At
 			delete ctx.params.onlineLastLoginout_At
-			
+
+			delete ctx.params.age
+			delete ctx.params.country
+			delete ctx.params.city
+			delete ctx.params.gender			
 
 			return ctx.params		
 		},	
@@ -766,7 +784,7 @@ module.exports = {
 					description: "Kullanıcı Silme Başarılı",
 					logStatus: "success",
 					fromToken: dbFind["token"],
-					created_byToken: ctx.params.Deleted_byToken
+					created_byToken: ctx.params.deleted_byToken
 				})
 
 				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[User] [Logs] [Delete] Bildirim Eklendi' + '\u001b[0m'); }
@@ -797,7 +815,7 @@ module.exports = {
 
 			//! Return Delete			
             delete ctx.params.id
-			delete ctx.params.Deleted_byToken
+			delete ctx.params.deleted_byToken
 
 			return ctx.params	
 		},
@@ -812,8 +830,8 @@ module.exports = {
 				//! Güncelleme
 				dbFind["isDeleted"] = true
 				dbFind["isActive"] = false
-				dbFind["Deleted_at"] = new Date()
-				dbFind["Deleted_byToken"] = ctx.params.Deleted_byToken
+				dbFind["deleted_at"] = new Date()
+				dbFind["deleted_byToken"] = ctx.params.deleted_byToken
 	
 				//Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/user.json', JSON.stringify(db), err => {
@@ -838,7 +856,7 @@ module.exports = {
 					description: "Kullanıcı Geçisi Silme Başarılı",
 					logStatus: "success",
 					fromToken: dbFind["token"],
-					created_byToken: ctx.params.Deleted_byToken
+					created_byToken: ctx.params.deleted_byToken
 				})
 
 				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[User] [Logs] [Delete_Updated] Bildirim Eklendi' + '\u001b[0m'); }
@@ -874,7 +892,7 @@ module.exports = {
 			
 			//! Return
 			delete ctx.params.id
-			delete ctx.params.Deleted_byToken 
+			delete ctx.params.deleted_byToken 
 			
 			return ctx.params
 
@@ -894,7 +912,9 @@ module.exports = {
 					updated_byToken: dbFind[0]["token"],
 					role: dbFind[0]["role"],
 					onlineStatus: true,
-					onlineLastLogin_At: new Date()
+					onlineLastLogin_At: new Date(),
+					onlineLastLoginout_At:null,
+					lastDurationMs:0
 				})
 				//! ----------- End User UPDATE -----------------------------
 
@@ -994,7 +1014,9 @@ module.exports = {
 					updated_byToken: dbFind[0]["token"],
 					role: dbFind[0]["role"],
 					onlineStatus: true,
-					onlineLastLogin_At: new Date()
+					onlineLastLogin_At: new Date(),
+					onlineLastLoginout_At:null,
+					lastDurationMs:0
 				})
 				//! ----------- End User UPDATE -----------------------------
 
@@ -1086,7 +1108,13 @@ module.exports = {
 			const dbFind = db.filter(u => u.token == ctx.params.token);		
 		
 			//! Kullanıcı Varsa
-			if (dbFind) {  
+			if (dbFind) {  			
+
+				let onlineLastLogin_At = dbFind[0].onlineLastLogin_At //! Login Olduğu Zaman
+				let _totalDurationMs = dbFind[0].totalDurationMs //! Toplam Zaman
+                let _durationMs = new Date() - new Date(onlineLastLogin_At) //! Zaman Farkı
+				_totalDurationMs =Number(_totalDurationMs) + Number(_durationMs);  //! Toplam Zaman Son
+
 		
 				//! -----------  User UPDATE ----------------------------- 	
 				let user_updateUrl = await ctx.call('user.updateUrl', {
@@ -1094,7 +1122,9 @@ module.exports = {
 					updated_byToken:dbFind[0].token,
 					role: dbFind[0].role,					               
 					onlineStatus: false,                  
-					onlineLastLoginout_At: new Date()					        
+					onlineLastLoginout_At: new Date(),
+					lastDurationMs:_durationMs,
+					totalDurationMs : _totalDurationMs   
 				})		
 				//! ----------- End User UPDATE ----------------------------
 				

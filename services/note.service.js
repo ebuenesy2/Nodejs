@@ -260,8 +260,8 @@ module.exports = {
 					updated_byToken : null,
 					isActive: true,
 					isDeleted: false,
-					Deleted_at: null,
-					Deleted_byToken: null
+					deleted_at: null,
+					deleted_byToken: null
 				}
 
 				//Verileri Kaydet
@@ -440,7 +440,7 @@ module.exports = {
 					description: "Not Silme Başarılı",
 					logStatus: "success",
 					fromToken: dbFind["token"],
-					created_byToken: ctx.params.Deleted_byToken
+					created_byToken: ctx.params.deleted_byToken
 				})
 
 				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Note] [Logs] [Delete] Bildirim Eklendi' + '\u001b[0m'); }
@@ -474,7 +474,7 @@ module.exports = {
 			
 			//! Return Delete			
 			delete ctx.params.id
-			delete ctx.params.Deleted_byToken
+			delete ctx.params.deleted_byToken
 
 			return ctx.params	
 
@@ -490,8 +490,8 @@ module.exports = {
 				//! Güncelleme
 				dbFind["isDeleted"] = true
 				dbFind["isActive"] = false
-				dbFind["Deleted_at"] = new Date()
-				dbFind["Deleted_byToken"] = ctx.params.Deleted_byToken
+				dbFind["deleted_at"] = new Date()
+				dbFind["deleted_byToken"] = ctx.params.deleted_byToken
 	
 				//Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/note.json', JSON.stringify(db), err => {
@@ -516,7 +516,7 @@ module.exports = {
 					description: "Not Geçisi Silme Başarılı",
 					logStatus: "success",
 					fromToken: dbFind["token"],
-					created_byToken: ctx.params.Deleted_byToken
+					created_byToken: ctx.params.deleted_byToken
 				})
 
 				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Note] [Logs] [Delete_Updated] Bildirim Eklendi' + '\u001b[0m'); }
@@ -553,70 +553,10 @@ module.exports = {
 			
 			//! Return
 			delete ctx.params.id
-			delete ctx.params.Deleted_byToken 
+			delete ctx.params.deleted_byToken 
 			
 			return ctx.params
 
-		},
-		async view (ctx) {
-			
-			//! Arama
-			const dbFind = db.find(u => u.id == ctx.params.id);	
-
-			//! Veri Varsa 
-			if (dbFind) {     
-
-							
-				//! ----------- Log ----------------------------- 	
-				let logs_add = await ctx.call('logs.add', {
-					table: "note",
-					title: "note_view_successful",
-					description: "Not Görüntüleme Başarılı",
-					logStatus: "success",
-					fromToken: dbFind["token"],
-					created_byToken: ctx.params.readed_byToken
-				})
-
-				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Note] [Logs] [View] Bildirim Eklendi' + '\u001b[0m'); }
-				if (logs_add.status == "0") { console.log('\u001b[' + 31 + 'm' + '[Note] [Logs] [View] Bildirim Eklenemedi' + '\u001b[0m'); }
-
-				//! ----------- Log Son -----------------------------
-
-                
-				
-				//! Return Api	
-				ctx.params.title = "note.service -> Veri Görüntüleme"
-				ctx.params.table = "note.json"
-				ctx.params.status = 1
-				ctx.params.DB = dbFind
-				ctx.params.message = "Veri Görüntülendi"
-			
-
-				//Console Yazma	
-				console.log('\u001b[' + 32 + 'm' + '[Note] [View] Veri Görüntülendi [ /api/note/view/:id ]' + '\u001b[0m');
-
-			}
-
-			//! Veri Yoksa
-			else {
-
-				//! Return Api	
-				ctx.params.title = "note.service -> Veri Görüntüleme"
-				ctx.params.table = "note.json"        
-				ctx.params.status = 0		
-				ctx.params.DB = "Veri  Bulunmadı"	
-				ctx.params.message="Veri Görüntülenemedi"
-
-				//Console Yazma	
-				console.log('\u001b[' + 31 + 'm' + '[Note] [View] Veri Görüntülenemedi [ /api/note/view/:id ] ' + '\u001b[0m');
-
-			}
-						
-			//! Return
-			delete ctx.params.id
-			delete ctx.params.readed_byToken 
-
-			return ctx.params
-		}
+		}		
 	}
 }

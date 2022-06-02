@@ -413,8 +413,7 @@ module.exports = {
 			fastify.post('/api/time/find_post', async (req, res) => this.broker.call("time.find_post",{...req.body})) //!  Search-Post
 			fastify.post('/api/time/find_token', async (req, res) => this.broker.call("time.find_token", { ...req.body })) //!  Search-Token
 			fastify.post('/api/time/find_user', async (req, res) => this.broker.call("time.find_user", { ...req.body })) //! Search User	
-			fastify.post('/api/time/find_page', async (req, res) => this.broker.call("time.find_page", { ...req.body })) //! Search Page - PageToken
-			fastify.post('/api/time/find_user_page', async (req, res) => this.broker.call("time.find_user_page", { ...req.body })) //! Search User - PageToken
+			fastify.post('/api/time/find_user_page', async (req, res) => this.broker.call("time.find_user_page", { ...req.body })) //! Search User - PageUrl
 
 			fastify.post('/api/time/add', async (req, res) => this.broker.call("time.add",{...req.body})) //! CREATE		
 			fastify.post('/api/time/update', async (req, res) => this.broker.call("time.update",{...req.body})) //! UPDATE
@@ -498,8 +497,6 @@ module.exports = {
 		    
 			fastify.post('/api/message/view/:id', async (req, res) => this.broker.call("message.view",{id: req.params.id,...req.body})) //!Search - View
 			fastify.post('/api/message/inbox', async (req, res) => this.broker.call("message.inbox",{...req.body})) //! Inbox
-			
-
 		
 		//!---------------- Message son ----------------------------------------------------------------------------------------------
 
@@ -520,8 +517,7 @@ module.exports = {
 			fastify.post('/api/note/updated_delete/:id', async (req, res) => this.broker.call("note.updated_delete",{id:req.params.id,...req.body})) //! UPDATE DELETE
 			fastify.post('/api/note/delete/:id', async (req, res) => this.broker.call("note.delete", { id: req.params.id, ...req.body })) //! DELETE
 			fastify.post('/api/note/delete_update/:id', async (req, res) => this.broker.call("note.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
-			fastify.post('/api/note/view/:id', async (req, res) => this.broker.call("note.view",{id: req.params.id,...req.body})) //!Search - View
-		
+				
 	    //!---------------- Note son ----------------------------------------------------------------------------------------------
 
 

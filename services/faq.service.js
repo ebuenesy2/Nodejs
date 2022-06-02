@@ -262,8 +262,8 @@ module.exports = {
 					updated_byToken : null,
 					isActive: true,
 					isDeleted: false,
-					Deleted_at: null,
-					Deleted_byToken: null
+					deleted_at: null,
+					deleted_byToken: null
 				}
 
 				//Verileri Kaydet
@@ -443,7 +443,7 @@ module.exports = {
 					description: "SSK Silme Başarılı",
 					logStatus: "success",
 					fromToken: dbFind["token"],
-					created_byToken: ctx.params.Deleted_byToken
+					created_byToken: ctx.params.deleted_byToken
 				})
 
 				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Faq] [Logs] [Delete] Bildirim Eklendi' + '\u001b[0m'); }
@@ -478,7 +478,7 @@ module.exports = {
 			
 			//! Return Delete			
 			delete ctx.params.id
-			delete ctx.params.Deleted_byToken
+			delete ctx.params.deleted_byToken
 
 			return ctx.params	
 
@@ -494,8 +494,8 @@ module.exports = {
 				//! Güncelleme
 				dbFind["isDeleted"] = true
 				dbFind["isActive"] = false
-				dbFind["Deleted_at"] = new Date()
-				dbFind["Deleted_byToken"] = ctx.params.Deleted_byToken
+				dbFind["deleted_at"] = new Date()
+				dbFind["deleted_byToken"] = ctx.params.deleted_byToken
 	
 				//Json içine Verileri Yazıyor -> db
 				fs.writeFile('./public/DB/faq.json', JSON.stringify(db), err => {
@@ -520,7 +520,7 @@ module.exports = {
 					description: "SSK Geçisi Silme Başarılı",
 					logStatus: "success",
 					fromToken: dbFind["token"],
-					created_byToken: ctx.params.Deleted_byToken
+					created_byToken: ctx.params.deleted_byToken
 				})
 
 				if (logs_add.status == "1") { console.log('\u001b[' + 32 + 'm' + '[Faq] [Logs] [Delete_Updated] Bildirim Eklendi' + '\u001b[0m'); }
@@ -557,7 +557,7 @@ module.exports = {
 			
 			//! Return
 			delete ctx.params.id
-			delete ctx.params.Deleted_byToken 
+			delete ctx.params.deleted_byToken 
 
 			return ctx.params
 
