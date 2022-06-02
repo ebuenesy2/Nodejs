@@ -53,8 +53,9 @@ module.exports = {
 				ctx.params.table = "user.json"
 				ctx.params.status = 1
 				ctx.params.size=db.length
-				ctx.params.onlineCount=dbFind_online.length
 				ctx.params.DB = db?.sort((a, b) => (a.id > b.id ? -1 : 1))
+				ctx.params.onlineCount=dbFind_online.length
+				ctx.params.DB_online=dbFind_online?.sort((a, b) => (a.id > b.id ? -1 : 1))
 				
 				//Console Yazma
 				console.log('\u001b[' + 32 + 'm' + '[User] [All] Tüm Veriler Okundu [ /api/user/all ] ' + '\u001b[0m');
@@ -66,8 +67,9 @@ module.exports = {
 				ctx.params.table = "user.json"
 				ctx.params.status = 0
 				ctx.params.size= 0
+				ctx.params.DB = []
 				ctx.params.onlineCount=0
-				ctx.params.DB = error
+				ctx.params.DB_online = []
 
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[User] [All] Tüm Veriler Okunamadı [ /api/user/all ] ' + '\u001b[0m');
@@ -82,6 +84,45 @@ module.exports = {
 
 			//! Arama
 			const dbFind = db.find(u => u.id == ctx.params.id);
+
+			//! Yaş
+			let _dateofBirth = dbFind.dateofBirth
+
+			ctx.params.dateofBirth = _dateofBirth
+			//! Yaş Son
+
+
+			//! DayJs
+			let format = dayjs().format() //! 2022-06-02T07:57:09+03:00
+			let date_year = dayjs().year() // => Yıl =  2022
+			let date_month = dayjs().add(1, 'month').month() // => Ay = 6
+			let date_day = dayjs().date() // => Gün = 2
+
+			let date_daysInMonth = dayjs().daysInMonth() // => Bir ay içinde kaç gün var = 30
+
+		    let date_hour = dayjs().hour() //! -> saat = 7
+		    let date_minute = dayjs().minute() //! -> dak =57
+		    let date_second = dayjs().second() //! -> sn = 9
+		
+		  
+		    console.log("format:",format)
+			console.log("date_year:",date_year)
+			console.log("date_month:",date_month)
+			console.log("date_day:",date_day)
+
+			console.log("date_daysInMonth:",date_daysInMonth)
+		  
+		    console.log("date_hour:",date_hour)
+			console.log("date_minute:",date_minute)
+			console.log("date_second:",date_second)
+			//! DayJs Son
+
+
+			//! DayJs - Math İşlemler
+
+ 
+			//! DayJs - Math İşlemler Son
+
 
 			//! Veri Varsa
 			if (dbFind) {
@@ -186,6 +227,135 @@ module.exports = {
 
 			return ctx.params
 		},
+		async find_country(ctx) {
+
+			//! Arama
+			const dbFind = db.filter(u => u.country == ctx.params.country);	
+			const dbFind_online = db.filter(u => u.country == ctx.params.country && u.onlineStatus == true );	
+
+			//! Veri Varsa
+			if (dbFind) {
+
+				//! Return Api   
+				ctx.params.title = "user.service -> Veri Arama"
+				ctx.params.table = "user.json"
+				ctx.params.status = 1
+				ctx.params.size=dbFind.length
+				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
+				ctx.params.onlineCount=dbFind_online.length
+				ctx.params.DB_online=dbFind_online?.sort((a, b) => (a.id > b.id ? -1 : 1))
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[User] [Find] Kullanıcı Veri Arama [ /api/user/find_country ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "user.service -> Veri Arama"
+				ctx.params.table = "user.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.DB = []
+				ctx.params.onlineCount=0
+				ctx.params.DB_online = []
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[User] [Find] Kullanıcı Veri Bulunamadı [ /api/user/find_country ] ' + '\u001b[0m');		
+			}
+
+			//! Return
+			delete ctx.params.country
+
+			return ctx.params
+		},
+		async find_gender(ctx) {
+
+			//! Arama
+			const dbFind = db.filter(u => u.gender == ctx.params.gender);	
+			const dbFind_online = db.filter(u => u.gender == ctx.params.gender && u.onlineStatus == true );	
+
+			//! Veri Varsa
+			if (dbFind) {
+
+				//! Return Api   
+				ctx.params.title = "user.service -> Veri Arama"
+				ctx.params.table = "user.json"
+				ctx.params.status = 1
+				ctx.params.size=dbFind.length
+				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
+				ctx.params.onlineCount=dbFind_online.length
+				ctx.params.DB_online=dbFind_online?.sort((a, b) => (a.id > b.id ? -1 : 1))
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[User] [Find] Kullanıcı Veri Arama [ /api/user/find_gender ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "user.service -> Veri Arama"
+				ctx.params.table = "user.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.DB = []
+				ctx.params.onlineCount=0
+				ctx.params.DB_online = []
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[User] [Find] Kullanıcı Veri Bulunamadı [ /api/user/find_gender ] ' + '\u001b[0m');		
+			}
+
+			//! Return
+			delete ctx.params.gender
+
+			return ctx.params
+		},
+		async find_dateofBirth(ctx) {
+
+			//! Arama
+			const dbFind = db.filter(u => u.dateofBirth == ctx.params.dateofBirth);	
+			const dbFind_online = db.filter(u => u.dateofBirth == ctx.params.dateofBirth && u.onlineStatus == true );	
+
+			//! Veri Varsa
+			if (dbFind) {
+
+				//! Return Api   
+				ctx.params.title = "user.service -> Veri Arama"
+				ctx.params.table = "user.json"
+				ctx.params.status = 1
+				ctx.params.size=dbFind.length
+				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
+				ctx.params.onlineCount=dbFind_online.length
+				ctx.params.DB_online=dbFind_online?.sort((a, b) => (a.id > b.id ? -1 : 1))
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[User] [Find] Kullanıcı Veri Arama [ /api/user/find_dateofBirth ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "user.service -> Veri Arama"
+				ctx.params.table = "user.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.DB = []
+				ctx.params.onlineCount=0
+				ctx.params.DB_online = []
+
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[User] [Find] Kullanıcı Veri Bulunamadı [ /api/user/find_dateofBirth ] ' + '\u001b[0m');		
+			}
+
+			//! Return
+			delete ctx.params.gender
+
+			return ctx.params
+		},
 		async add(ctx) {
 	
 			try {
@@ -277,7 +447,8 @@ module.exports = {
 								username: ctx.params.username,
 								email: ctx.params.email,
 								tel: ctx.params.tel,
-								age: ctx.params.age,
+								dateofBirth: ctx.params.dateofBirth,
+								age: null,
 								country: ctx.params.country,
 								city: ctx.params.city,
 								gender: ctx.params.gender,
@@ -372,7 +543,7 @@ module.exports = {
 				delete ctx.params.username
 				delete ctx.params.tel
 
-				delete ctx.params.age
+				delete ctx.params.dateofBirth
 				delete ctx.params.country
 				delete ctx.params.city
 				delete ctx.params.gender

@@ -459,11 +459,15 @@ module.exports = {
     		fastify.get('/api/user/info',async (req,res)=> this.broker.call("user.info")) //! İnfo
 			fastify.post('/api/user/post', async (req, res) => this.broker.call("user.post",{...req.body})) //! POST
 			fastify.get('/api/user/html',async (req,res)=> this.broker.call("user.html")) //! Html
-			fastify.get('/api/user/all', async (req, res) => this.broker.call("user.all")) //! All			
-			fastify.get('/api/user/:id', async (req, res) => this.broker.call("user.find",{id: req.params.id})) //! Search
+			fastify.get('/api/user/all', async (req, res) => this.broker.call("user.all")) //! All		
 
+			fastify.get('/api/user/:id', async (req, res) => this.broker.call("user.find",{id: req.params.id})) //! Search
 			fastify.post('/api/user/find_post', async	 (req, res) => this.broker.call("user.find_post",{...req.body})) //!  Search-Post
 			fastify.post('/api/user/find_token', async (req, res) => this.broker.call("user.find_token",{...req.body})) //!  Search-Token
+			fastify.post('/api/user/find_country', async (req, res) => this.broker.call("user.find_country",{...req.body})) //!  Search-Country
+			fastify.post('/api/user/find_gender', async (req, res) => this.broker.call("user.find_gender",{...req.body})) //!  Search-Gender
+			fastify.post('/api/user/find_dateofBirth', async (req, res) => this.broker.call("user.find_dateofBirth",{...req.body})) //!  Search-DateofBirth
+
 			fastify.post('/api/user/add', async (req, res) => this.broker.call("user.add",{...req.body})) //! CREATE
 			fastify.post('/api/user/update', async (req, res) => this.broker.call("user.update",{...req.body})) //! UPDATE
 			fastify.post('/api/user/updateUrl', async (req, res) => this.broker.call("user.updateUrl",{...req.body})) //! UPDATE - URL
