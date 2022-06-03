@@ -424,7 +424,7 @@ module.exports = {
 
 							//! Ortak
 							let TokenId=new Date().getTime();
-							let DateNow=new Date();
+							let DateNow=dayjs().format();
 
 							let TokenInfo={				
 								id: TokenId,
@@ -644,7 +644,7 @@ module.exports = {
 					if(key!="profil_ImageUrl_File" || key!="cover_ImageUrl_File"  ) { dbFind[key] = ctx.params[key] }  //! Only Text 				
 				})
 				dbFind["isUpdated"] = true
-				dbFind["updated_at"] = new Date()
+				dbFind["updated_at"] = dayjs().format()
 			
 				// End  Referans Veriler Güncelleme Yapıyor				
 
@@ -820,7 +820,7 @@ module.exports = {
 					if(key!="profil_ImageUrl_File" || key!="cover_ImageUrl_File"  ) { dbFind[key] = ctx.params[key] }  //! Only Text 				
 				})
 				dbFind["isUpdated"] = true
-				dbFind["updated_at"] = new Date()
+				dbFind["updated_at"] = dayjs().format()
 				// End  Referans Veriler Güncelleme Yapıyor
 				
 
@@ -1007,7 +1007,7 @@ module.exports = {
 				//! Güncelleme
 				dbFind["isDeleted"] = true
 				dbFind["isActive"] = false
-				dbFind["deleted_at"] = new Date()
+				dbFind["deleted_at"] = dayjs().format()
 				dbFind["deleted_byToken"] = ctx.params.deleted_byToken
 	
 				//Json içine Verileri Yazıyor -> db
@@ -1089,7 +1089,7 @@ module.exports = {
 					updated_byToken: dbFind[0]["token"],
 					role: dbFind[0]["role"],
 					onlineStatus: true,
-					onlineLastLogin_At: new Date(),
+					onlineLastLogin_At: dayjs().format(),
 					onlineLastLoginout_At:null,
 					lastDurationMs:0
 				})
@@ -1191,7 +1191,7 @@ module.exports = {
 					updated_byToken: dbFind[0]["token"],
 					role: dbFind[0]["role"],
 					onlineStatus: true,
-					onlineLastLogin_At: new Date(),
+					onlineLastLogin_At: dayjs().format(),
 					onlineLastLoginout_At:null,
 					lastDurationMs:0
 				})
@@ -1299,7 +1299,7 @@ module.exports = {
 					updated_byToken:dbFind[0].token,
 					role: dbFind[0].role,					               
 					onlineStatus: false,                  
-					onlineLastLoginout_At: new Date(),
+					onlineLastLoginout_At: dayjs().format(),
 					lastDurationMs:_durationMs,
 					totalDurationMs : _totalDurationMs   
 				})		

@@ -273,7 +273,7 @@ module.exports = {
 					message: ctx.params.message,
                     messageFileControl: false,
 					token:jwt,				
-					created_at: new Date(),
+					created_at: dayjs().format(),
 					created_byToken: ctx.params.created_byToken,
 					isUpdated: false,
 					updated_at: null,
@@ -381,7 +381,7 @@ module.exports = {
 					if(key!="userToken"  ) { dbFind[key] = ctx.params[key] }  //! Only Text 				
 				})
 				dbFind["isUpdated"] = true
-				dbFind["updated_at"] = new Date()
+				dbFind["updated_at"] = dayjs().format()
 				// End  Referans Veriler Güncelleme Yapıyor
 	
 				//Json içine Verileri Yazıyor -> db
@@ -544,7 +544,7 @@ module.exports = {
 				//! Güncelleme
 				dbFind["isDeleted"] = true
 				dbFind["isActive"] = false
-				dbFind["deleted_at"] = new Date()
+				dbFind["deleted_at"] = dayjs().format()
 				dbFind["deleted_byToken"] = ctx.params.deleted_byToken
 
 			//Json içine Verileri Yazıyor -> db
@@ -625,7 +625,7 @@ module.exports = {
 									
 					//! Güncelleme
 					dbFind["isReaded"] = true
-					dbFind["readed_at"] = new Date()
+					dbFind["readed_at"] = dayjs().format()
 					dbFind["readed_byToken"] = ctx.params.readed_byToken
 				
 

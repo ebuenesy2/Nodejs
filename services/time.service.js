@@ -331,11 +331,11 @@ module.exports = {
 					pageTable: ctx.params.pageTable,
                     pageToken: ctx.params.pageToken,
 					workingMod:ctx.params.workingMod,
-					loginAt: new Date(),
+					loginAt: dayjs().format(),
                     loginOutAt: null,
                     durationMs: 0,
 					token:jwt,				
-					created_at: new Date(),
+					created_at: dayjs().format(),
 					created_byToken: user_find.DB.token,
 					isUpdated: false,
 					updated_at: null,
@@ -388,7 +388,7 @@ module.exports = {
 					token:user_find.DB.token,
 					updated_byToken: user_find.DB.token,
 					onlineStatus: true,                  
-					onlineLastLogin_At: new Date(),
+					onlineLastLogin_At: dayjs().format(),
 					onlineLastLoginout_At:null,
 					onlinePage: ctx.params.pageTable,
                     onlinePageToken: ctx.params.pageToken,
@@ -443,7 +443,7 @@ module.exports = {
 					if(key!="userToken"  ) { dbFind[key] = ctx.params[key] }  //! Only Text 				
 				})
 				dbFind["isUpdated"] = true
-				dbFind["updated_at"] = new Date()
+				dbFind["updated_at"] = dayjs().format()
 				// End  Referans Veriler Güncelleme Yapıyor
 	
 				//Json içine Verileri Yazıyor -> db
@@ -594,7 +594,7 @@ module.exports = {
 				//! Güncelleme
 				dbFind["isDeleted"] = true
 				dbFind["isActive"] = false
-				dbFind["deleted_at"] = new Date()
+				dbFind["deleted_at"] = dayjs().format()
 				dbFind["deleted_byToken"] = ctx.params.deleted_byToken
 	
 				//Json içine Verileri Yazıyor -> db
@@ -684,7 +684,7 @@ module.exports = {
 					token:user_find.DB.token,
 					updated_byToken: user_find.DB.token,
 					onlineStatus: false,                  
-					onlineLastLoginout_At: new Date(),
+					onlineLastLoginout_At: dayjs().format(),
 					lastDurationMs:_durationMs,
 					totalDurationMs : _totalDurationMs 			        
 				})		
@@ -695,7 +695,7 @@ module.exports = {
                     updated_byToken: user_find.DB.token,
                     socketToken: ctx.params.socketToken,                  
                     socketId: Number(ctx.params.socekId),
-                    loginOutAt: new Date(),
+                    loginOutAt: dayjs().format(),
 					durationMs: _durationMs
                 })		
                 //! ----------- End Time UPDATE ----------------------------		
