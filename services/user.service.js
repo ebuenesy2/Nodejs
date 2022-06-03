@@ -88,6 +88,9 @@ module.exports = {
 			//! Yaş
 			let _dateofBirth = dbFind.dateofBirth
 
+			let date_format = dayjs(_dateofBirth).format()
+			console.log("date_format:",date_format)
+
 			ctx.params.dateofBirth = _dateofBirth
 			//! Yaş Son
 
@@ -119,7 +122,10 @@ module.exports = {
 
 
 			//! DayJs - Math İşlemler
+            //let dt_day = dayjs().add(30,'day') //! 30 gün sonra
+			//console.log("dt_day2:",dt_day)
 
+			
  
 			//! DayJs - Math İşlemler Son
 
