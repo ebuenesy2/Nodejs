@@ -85,53 +85,12 @@ module.exports = {
 			//! Arama
 			const dbFind = db.find(u => u.id == ctx.params.id);
 
-			//! Yaş
-			let _dateofBirth = dbFind.dateofBirth
-
-			let date_format = dayjs(_dateofBirth).format()
-			console.log("date_format:",date_format)
-
-			ctx.params.dateofBirth = _dateofBirth
-			//! Yaş Son
-
-
-			//! DayJs
-			let format = dayjs().format() //! 2022-06-02T07:57:09+03:00
-			let date_year = dayjs().year() // => Yıl =  2022
-			let date_month = dayjs().add(1, 'month').month() // => Ay = 6
-			let date_day = dayjs().date() // => Gün = 2
-
-			let date_daysInMonth = dayjs().daysInMonth() // => Bir ay içinde kaç gün var = 30
-
-		    let date_hour = dayjs().hour() //! -> saat = 7
-		    let date_minute = dayjs().minute() //! -> dak =57
-		    let date_second = dayjs().second() //! -> sn = 9
-		
-		  
-		    console.log("format:",format)
-			console.log("date_year:",date_year)
-			console.log("date_month:",date_month)
-			console.log("date_day:",date_day)
-
-			console.log("date_daysInMonth:",date_daysInMonth)
-		  
-		    console.log("date_hour:",date_hour)
-			console.log("date_minute:",date_minute)
-			console.log("date_second:",date_second)
-			//! DayJs Son
-
-
-			//! DayJs - Math İşlemler
-            //let dt_day = dayjs().add(30,'day') //! 30 gün sonra
-			//console.log("dt_day2:",dt_day)
-
-			
- 
-			//! DayJs - Math İşlemler Son
-
-
 			//! Veri Varsa
 			if (dbFind) {
+
+				//! Doğum günü Hesaplama
+				dbFind["age"] = dayjs().year() - dayjs(dbFind.dateofBirth).year()  // Yaşını Hesaplıyoruz
+		
 
 				//! Return Api   
 				ctx.params.title = "user.service -> Veri Arama"
@@ -236,9 +195,9 @@ module.exports = {
 		async find_country(ctx) {
 
 			//! Arama
-			const dbFind = db.filter(u => u.country == ctx.params.country);	
-			const dbFind_online = db.filter(u => u.country == ctx.params.country && u.onlineStatus == true );	
-
+			const dbFind = ctx.params.city == null ? db.filter(u => u.country == ctx.params.country) : db.filter(u => u.country == ctx.params.country && u.city == ctx.params.city);	
+			const dbFind_online = ctx.params.city == null ? db.filter(u => u.onlineStatus == true && u.country == ctx.params.country) : db.filter(u => u.onlineStatus == true && u.country == ctx.params.country && u.city == ctx.params.city);
+		
 			//! Veri Varsa
 			if (dbFind) {
 
@@ -246,7 +205,7 @@ module.exports = {
 				ctx.params.title = "user.service -> Veri Arama"
 				ctx.params.table = "user.json"
 				ctx.params.status = 1
-				ctx.params.size=dbFind.length
+				ctx.params.size= dbFind.length
 				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
 				ctx.params.onlineCount=dbFind_online.length
 				ctx.params.DB_online=dbFind_online?.sort((a, b) => (a.id > b.id ? -1 : 1))
@@ -273,6 +232,7 @@ module.exports = {
 
 			//! Return
 			delete ctx.params.country
+			delete ctx.params.city
 
 			return ctx.params
 		},
@@ -320,6 +280,22 @@ module.exports = {
 			return ctx.params
 		},
 		async find_dateofBirth(ctx) {
+
+			//! DayJs
+			let format = dayjs(ctx.params.timeNow).year();
+			console.log("format:",format);
+
+		    
+			const dateofBirth = dayjs(ctx.params.dateofBirth).date();
+
+			console.log("dateofBirth:",dateofBirth);			
+		
+			//! DayJs Son
+
+
+			
+			
+
 
 			//! Arama
 			const dbFind = db.filter(u => u.dateofBirth == ctx.params.dateofBirth);	
@@ -454,6 +430,9 @@ module.exports = {
 								email: ctx.params.email,
 								tel: ctx.params.tel,
 								dateofBirth: ctx.params.dateofBirth,
+								dayOfBirth: dayjs(ctx.params.dateofBirth).date(),
+								monthOfBirth: dayjs(ctx.params.dateofBirth).month(),
+								yearOfBirth: dayjs(ctx.params.dateofBirth).year(),
 								age: null,
 								country: ctx.params.country,
 								city: ctx.params.city,
