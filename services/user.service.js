@@ -1206,7 +1206,7 @@ module.exports = {
 
 				if (dbFind_username.length <= 0) { console.log('\u001b[' + 31 + 'm' + '[User] [Login] UserName Yok' + '\u001b[0m'); }
 				if (dbFind_username.length > 0) {
-					console.log('\u001b[' + 32 + 'm' + '[User] [Login] Email Var' + '\u001b[0m');
+					console.log('\u001b[' + 32 + 'm' + '[User] [Login] UserName Var' + '\u001b[0m');
 
 					//! ----------- Log ----------------------------- 	
 					let logs_add = await ctx.call('logs.add', {
