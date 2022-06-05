@@ -281,26 +281,14 @@ module.exports = {
 		},
 		async find_dateofBirth(ctx) {
 
-			//! DayJs
-			let format = dayjs(ctx.params.timeNow).year();
-			console.log("format:",format);
-
-		    
-			const dateofBirth = dayjs(ctx.params.dateofBirth).date();
-
-			console.log("dateofBirth:",dateofBirth);			
-		
-			//! DayJs Son
-
-
-			
-			
-
+			//! Day
+			let searchTime = ctx.params.searchTime;
 
 			//! Arama
-			const dbFind = db.filter(u => u.dateofBirth == ctx.params.dateofBirth);	
-			const dbFind_online = db.filter(u => u.dateofBirth == ctx.params.dateofBirth && u.onlineStatus == true );	
-
+			const dbFind = ctx.params.day == true ? db.filter(u => u.monthOfBirth == dayjs(searchTime).add(1, 'month').month() && u.dayOfBirth == dayjs(searchTime).date() ) : db.filter(u => u.monthOfBirth == dayjs(searchTime).add(1, 'month').month());	
+			const dbFind_online = ctx.params.day == true ? db.filter(u => u.monthOfBirth == dayjs(searchTime).add(1, 'month').month() && u.dayOfBirth == dayjs(searchTime).date()  && u.onlineStatus == true ) : db.filter(u => u.monthOfBirth == dayjs(searchTime).add(1, 'month').month()  && u.onlineStatus == true );	
+			
+			
 			//! Veri Varsa
 			if (dbFind) {
 
@@ -334,7 +322,9 @@ module.exports = {
 			}
 
 			//! Return
-			delete ctx.params.gender
+			delete ctx.params.searchTime
+			delete ctx.params.month
+			delete ctx.params.day
 
 			return ctx.params
 		},
