@@ -732,6 +732,84 @@ module.exports = {
 			delete ctx.params.socketToken
 
 			return ctx.params
+		},
+		async time_difference(ctx) {
+
+			const dat1 = dayjs(ctx.params.date1);
+			const dat2 = dayjs(ctx.params.date2);
+			
+			const diffTime = Math.abs(dat1 - dat2);
+
+			//! -----------  Time Add ----------------------------- 	
+			let time_convert = await ctx.call('time.convert_time', {
+				fromValue: diffTime,
+				formType: "ms",       
+			})		
+			//! ----------- End Time Add ----------------------------
+
+			ctx.params.diffTime = diffTime
+			ctx.params.difftimeString = time_convert.difftimeString
+		    
+			return ctx.params
+		},
+		async convert_time(ctx) {
+
+			let fromValue =  Number(ctx.params.fromValue);
+			
+			let answer = ctx.params.formType=="sn" && ctx.params.toType =="ms" ? 1000*fromValue : 
+			             ctx.params.formType=="dk" && ctx.params.toType =="ms" ? 60*1000*fromValue :
+			             ctx.params.formType=="saat" && ctx.params.toType =="ms" ? 60*60*1000*fromValue :
+			             ctx.params.formType=="gün" && ctx.params.toType =="ms" ? 24*60*60*1000*fromValue : 
+			             ctx.params.formType=="hafta" && ctx.params.toType =="ms" ? 7*24*60*60*1000*fromValue : 
+			             ctx.params.formType=="ay" && ctx.params.toType =="ms" ? 30*24*60*60*1000*fromValue : 
+			             ctx.params.formType=="yıl" && ctx.params.toType =="ms" ? 12*30*24*60*60*1000*fromValue : 0 ;	
+		
+
+			let yıl=0, ay=0, gün=0, saat=0, dakika=0, saniye=0, milisaniye=0;
+			let answer_last = fromValue;
+			let difftimeString ="";
+            
+			if(ctx.params.formType=="ms" ) {
+				if(answer_last >= 31104000000) { yıl = Math.floor(answer_last / 31104000000); 	answer_last = fromValue % 31104000000;  difftimeString= yıl+" Yıl";  }
+				if(answer_last >= 2592000000) { ay = Math.floor(answer_last / 2592000000); 	answer_last = fromValue % 2592000000;  difftimeString = difftimeString + " "+ ay +" Ay";  }
+				if(answer_last >= 86400000) { gün = Math.floor(answer_last / 86400000); 	answer_last = fromValue % 86400000; difftimeString = difftimeString + " "+ gün +" Gün";  }
+
+				if(answer_last >= 3600000) { saat = Math.floor(answer_last / 3600000); 	answer_last = fromValue % 3600000;  difftimeString = difftimeString + " "+ saat +" Saat";  }
+				if(answer_last >= 60000) { dakika = Math.floor(answer_last / 60000); 	answer_last = fromValue % 60000;  difftimeString = difftimeString + " "+ dakika +" Dakika";  }
+				if(answer_last >= 1000) { saniye = Math.floor(answer_last / 1000); 	answer_last = fromValue % 1000;  difftimeString = difftimeString + " "+ saniye +" Saniye";  }
+
+				if(answer_last <= 1000) { milisaniye = answer_last; 	answer_last = fromValue % 1000;  difftimeString = difftimeString + " "+ milisaniye +" Milisaniye";  }
+			}
+		
+            
+			
+	        
+
+			// Answer
+			// 1 sn == 1000 ms
+			// 1 dk == 60000 ms
+			// 1 saat == 3600000 ms
+			// 1 gün == 86400000 ms
+			// 1 hafta == 604800000 ms
+			// 1 ay == 2592000000 ms
+			// 1 yıl == 31104000000 ms
+            
+			//! Return
+			ctx.params.year = yıl
+			ctx.params.month =ay
+			ctx.params.day = gün
+
+			ctx.params.hour = saat
+			ctx.params.minute = dakika
+			ctx.params.second = saniye
+
+			ctx.params.millisecond = milisaniye
+
+			ctx.params.answer = answer
+			ctx.params.difftimeString = difftimeString
+			ctx.params.note = "1 ay = 30 gün"
+
+			return ctx.params
 		}
 	}
 }
