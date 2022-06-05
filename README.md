@@ -59,6 +59,9 @@
   ```
   http://localhost:3002/
  ```
+```
+npm i
+```
 
 ```
 yarn start
