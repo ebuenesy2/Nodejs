@@ -767,22 +767,20 @@ module.exports = {
 
 			let yıl=0, ay=0, gün=0, saat=0, dakika=0, saniye=0, milisaniye=0;
 			let answer_last = fromValue;
-			let difftimeString ="";
             
 			if(ctx.params.formType=="ms" ) {
-				if(answer_last >= 31104000000) { yıl = Math.floor(answer_last / 31104000000); 	answer_last = fromValue % 31104000000;  difftimeString= yıl+" Yıl";  }
-				if(answer_last >= 2592000000) { ay = Math.floor(answer_last / 2592000000); 	answer_last = fromValue % 2592000000;  difftimeString = difftimeString + " "+ ay +" Ay";  }
-				if(answer_last >= 86400000) { gün = Math.floor(answer_last / 86400000); 	answer_last = fromValue % 86400000; difftimeString = difftimeString + " "+ gün +" Gün";  }
+				if(answer_last >= 31104000000) { yıl = Math.floor(answer_last / 31104000000); 	answer_last = fromValue % 31104000000;    }
+				if(answer_last >= 2592000000) { ay = Math.floor(answer_last / 2592000000); 	answer_last = fromValue % 2592000000;   }
+				if(answer_last >= 86400000) { gün = Math.floor(answer_last / 86400000); 	answer_last = fromValue % 86400000;   }
 
-				if(answer_last >= 3600000) { saat = Math.floor(answer_last / 3600000); 	answer_last = fromValue % 3600000;  difftimeString = difftimeString + " "+ saat +" Saat";  }
-				if(answer_last >= 60000) { dakika = Math.floor(answer_last / 60000); 	answer_last = fromValue % 60000;  difftimeString = difftimeString + " "+ dakika +" Dakika";  }
-				if(answer_last >= 1000) { saniye = Math.floor(answer_last / 1000); 	answer_last = fromValue % 1000;  difftimeString = difftimeString + " "+ saniye +" Saniye";  }
+				if(answer_last >= 3600000) { saat = Math.floor(answer_last / 3600000); 	answer_last = fromValue % 3600000;    }
+				if(answer_last >= 60000) { dakika = Math.floor(answer_last / 60000); 	answer_last = fromValue % 60000;    }
+				if(answer_last >= 1000) { saniye = Math.floor(answer_last / 1000); 	answer_last = fromValue % 1000;   }
 
-				if(answer_last <= 1000) { milisaniye = answer_last; 	answer_last = fromValue % 1000;  difftimeString = difftimeString + " "+ milisaniye +" Milisaniye";  }
+				if(answer_last <= 1000) { milisaniye = answer_last; 	answer_last = fromValue % 1000;  }
 			}
-		
-            
-			
+		     
+			let difftimeString =gün+"gun/"+ay+"ay/"+yıl+"yıl "+saat+"sa:"+dakika+"dak:"+saniye+"sn:"+milisaniye+"ms";
 	        
 
 			// Answer

@@ -433,7 +433,8 @@ module.exports = {
 								onlineLastLogin_At:null,												
 								onlineLastLoginout_At:null,												
 								onlinePage:null,												
-								onlineDurationMs:0,												
+								onlineDurationMs:0,
+								totalDurationTime:"0gun/0ay/0yıl 0sa:0dk:0sn:0ms",										
 								onlineMod:null,												
 								created_at: DateNow,
 								created_byToken:ctx.params.created_byToken,
@@ -1261,6 +1262,14 @@ module.exports = {
                 let _durationMs = new Date() - new Date(onlineLastLogin_At) //! Zaman Farkı
 				_totalDurationMs =Number(_totalDurationMs) + Number(_durationMs);  //! Toplam Zaman Son
 
+				//! -----------  User UPDATE ----------------------------- 	
+				let convert_time = await ctx.call('time.convert_time', {
+					fromValue:_totalDurationMs,
+					formType:"ms",
+					toType:"ms"
+				})		
+				//! ----------- End User UPDATE ----------------------------		
+
 		
 				//! -----------  User UPDATE ----------------------------- 	
 				let user_updateUrl = await ctx.call('user.updateUrl', {
@@ -1270,7 +1279,8 @@ module.exports = {
 					onlineStatus: false,                  
 					onlineLastLoginout_At: dayjs().format(),
 					lastDurationMs:_durationMs,
-					totalDurationMs : _totalDurationMs   
+					totalDurationMs : _totalDurationMs,
+					totalDurationTime: convert_time.difftimeString
 				})		
 				//! ----------- End User UPDATE ----------------------------
 				
