@@ -94,7 +94,7 @@ module.exports = {
 				ctx.params.title = "logs.service -> Veri Arama"
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1
-				ctx.params.DB = dbFind
+				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
 			
 
 				//Console Yazma
@@ -133,7 +133,7 @@ module.exports = {
 				ctx.params.title = "logs.service -> Veri Arama"
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1
-				ctx.params.DB = dbFind
+				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
 			
 
 				//Console Yazma
@@ -172,7 +172,7 @@ module.exports = {
 				ctx.params.title = "logs.service -> Veri Arama"
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1
-				ctx.params.DB = dbFind
+				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
 			
 
 				//Console Yazma
@@ -212,7 +212,7 @@ module.exports = {
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=dbFind.length
-				ctx.params.DB = dbFind
+				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
 			
 
 				//Console Yazma
@@ -255,7 +255,7 @@ module.exports = {
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=dbFind.length
-				ctx.params.DB = dbFind
+				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
 			
 
 				//Console Yazma
@@ -298,7 +298,7 @@ module.exports = {
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=dbFind.length
-				ctx.params.DB = dbFind
+				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
 			
 
 				//Console Yazma
@@ -340,7 +340,7 @@ module.exports = {
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=dbFind.length
-				ctx.params.DB = dbFind
+				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
 			
 
 				//Console Yazma
@@ -383,7 +383,7 @@ module.exports = {
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=dbFind.length
-				ctx.params.DB = dbFind
+				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
 			
 
 				//Console Yazma
@@ -426,7 +426,7 @@ module.exports = {
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=dbFind.length
-				ctx.params.DB = dbFind
+				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
 			
 
 				//Console Yazma
@@ -469,7 +469,7 @@ module.exports = {
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1
 				ctx.params.size=dbFind.length
-				ctx.params.DB = dbFind
+				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
 			
 
 				//Console Yazma
@@ -496,6 +496,53 @@ module.exports = {
 			delete ctx.params.token
 			delete ctx.params.created_byToken
 			delete ctx.params.fromToken
+
+			return ctx.params
+		},
+		async find_date_diff(ctx) {
+
+			// ! Arama
+			const dbFind = db.filter(u =>  u.created_at  >= ctx.params.startTime && u.created_at <= ctx.params.finishTime);
+
+			//! Veri Varsa
+			if (dbFind) {	               
+                
+				//! Return Api   
+				ctx.params.title = "logs.service -> Veri Arama Zaman Farkı"
+				ctx.params.table = "logs.json"
+				ctx.params.status = 1
+				ctx.params.size=dbFind.length
+				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
+			
+
+				//Console Yazma
+				console.log('\u001b[' + 32 + 'm' + '[Logs] [Find] Veri Arama [ /api/logs/find_title_fromToken ] ' + '\u001b[0m');
+			}
+
+			//! Veri Yoksa
+			else {
+				
+				//! Return Api   
+				ctx.params.title = "logs.service -> Veri Arama"
+				ctx.params.table = "logs.json"
+				ctx.params.status = 0
+				ctx.params.size= 0
+				ctx.params.DB = "Logs  Bulunmadı"
+			
+				
+				//Console Yazma
+				console.log('\u001b[' + 31 + 'm' + '[Logs] [Find] Veri Bulunamadı [ /api/logs/find_title_fromToken ] ' + '\u001b[0m');	
+
+			}
+
+            //! Return
+			delete ctx.params.token
+			delete ctx.params.created_byToken
+			delete ctx.params.fromToken
+
+			// zaman farkını bul ve bundan öncesi göre sayısını al
+			//delete ctx.params.startTime
+			//delete ctx.params.finishTime
 
 			return ctx.params
 		},

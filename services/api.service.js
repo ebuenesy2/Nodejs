@@ -393,6 +393,8 @@ module.exports = {
 			fastify.post('/api/logs/find_user_fromToken', async (req, res) => this.broker.call("logs.find_user_fromToken",{...req.body})) //! Search  FromToken	
 			fastify.post('/api/logs/find_title_fromToken', async (req, res) => this.broker.call("logs.find_title_fromToken",{...req.body})) //! Search  FromToken	
 			fastify.post('/api/logs/find_user_title_fromToken', async (req, res) => this.broker.call("logs.find_user_title_fromToken",{...req.body})) //! Search  FromToken	
+		
+			fastify.post('/api/logs/find_date_diff', async (req, res) => this.broker.call("logs.find_date_diff",{...req.body})) //! Search  Date_Diff	
 
 			fastify.post('/api/logs/add', async (req, res) => this.broker.call("logs.add",{...req.body})) //! CREATE
 			fastify.post('/api/logs/update', async (req, res) => this.broker.call("logs.update",{...req.body})) //! UPDATE
