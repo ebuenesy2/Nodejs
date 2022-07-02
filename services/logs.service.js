@@ -45,16 +45,7 @@ module.exports = {
 
 			try {				
               
-				//! User Bilgileri Alma
-				for (let index = 0; index < db.length; index++) {
-					let userId=Number(db[index]['created_byUserId']);
-					let user_find = await ctx.call('user.find', { id: Number(userId) });
-					db[index]['created_byUserNameSurname']=user_find.DB.name+" "+user_find.DB.surname
-				}
-				//! User Bilgileri Alma Son			
-				
-
-				//! Return Api   
+                //! Return Api   
 				ctx.params.title = "logs.service -> Tüm Veriler"
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1

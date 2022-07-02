@@ -423,8 +423,9 @@ module.exports = {
 			fastify.post('/api/time/delete_update/:id', async (req, res) => this.broker.call("time.delete_update",{id: req.params.id,...req.body})) //! DELETED Update
 
 			fastify.post('/api/time/loginOut', async (req, res) => this.broker.call("time.loginOut",{...req.body})) //! LoginOut		
-			fastify.post('/api/time/time_difference', async (req, res) => this.broker.call("time.time_difference",{...req.body})) //! LoginOut		
-			fastify.post('/api/time/convert_time', async (req, res) => this.broker.call("time.convert_time",{...req.body})) //! LoginOut		
+			fastify.post('/api/time/convert_time', async (req, res) => this.broker.call("time.convert_time", { ...req.body })) //! LoginOut
+			fastify.post('/api/time/time_difference', async (req, res) => this.broker.call("time.time_difference",{...req.body})) //! LoginOut
+			fastify.post('/api/time/before_after_time', async (req, res) => this.broker.call("time.before_after_time",{...req.body})) //! LoginOut
 			
 		//!---------------- Time son ----------------------------------------------------------------------------------------------
 				

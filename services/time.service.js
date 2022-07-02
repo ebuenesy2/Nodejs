@@ -733,25 +733,6 @@ module.exports = {
 
 			return ctx.params
 		},
-		async time_difference(ctx) {
-
-			const dat1 = dayjs(ctx.params.date1);
-			const dat2 = dayjs(ctx.params.date2);
-			
-			const diffTime = Math.abs(dat1 - dat2);
-
-			//! -----------  Time Add ----------------------------- 	
-			let time_convert = await ctx.call('time.convert_time', {
-				fromValue: diffTime,
-				formType: "ms",       
-			})		
-			//! ----------- End Time Add ----------------------------
-
-			ctx.params.diffTime = diffTime
-			ctx.params.difftimeString = time_convert.difftimeString
-		    
-			return ctx.params
-		},
 		async convert_time(ctx) {
 
 			let fromValue =  Number(ctx.params.fromValue);
@@ -780,7 +761,7 @@ module.exports = {
 				if(answer_last <= 1000) { milisaniye = answer_last; 	answer_last = fromValue % 1000;  }
 			}
 		     
-			let difftimeString =gün+"gun/"+ay+"ay/"+yıl+"yıl "+saat+"sa:"+dakika+"dak:"+saniye+"sn:"+milisaniye+"ms";
+			let difftimeString =yıl+"yıl/"+ay+"ay/"+gün+"gun " +saat+"sa:"+dakika+"dak:"+saniye+"sn:"+milisaniye+"ms";
 	        
 
 			// Answer
@@ -807,6 +788,34 @@ module.exports = {
 			ctx.params.difftimeString = difftimeString
 			ctx.params.note = "1 ay = 30 gün"
 
+			return ctx.params
+		},
+		async time_difference(ctx) {
+
+			const dat1 = dayjs(ctx.params.date1);
+			const dat2 = dayjs(ctx.params.date2);
+			
+			const diffTime = Math.abs(dat1 - dat2);
+
+			//! -----------  Time Add ----------------------------- 	
+			let time_convert = await ctx.call('time.convert_time', {
+				fromValue: diffTime,
+				formType: "ms",       
+			})		
+			//! ----------- End Time Add ----------------------------
+
+			ctx.params.diffTime = diffTime
+			ctx.params.difftimeString = time_convert.difftimeString
+		    
+			return ctx.params
+		},
+		async before_after_time(ctx) {
+            
+
+			//! Return Api   
+			ctx.params.title = "time.service -> before_after_time"
+			ctx.params.table = "time.json"
+			
 			return ctx.params
 		}
 	}

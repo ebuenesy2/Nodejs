@@ -9,7 +9,7 @@ services:
     env_file: docker-compose.env
     environment:
       SERVICES: api
-      PORT: 3000
+      PORT: 3002
     depends_on:
       - nats
     labels:
