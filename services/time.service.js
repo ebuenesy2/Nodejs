@@ -810,11 +810,18 @@ module.exports = {
 			return ctx.params
 		},
 		async before_after_time(ctx) {
-            
 
-			//! Return Api   
-			ctx.params.title = "time.service -> before_after_time"
-			ctx.params.table = "time.json"
+			let refDate = ctx.params.refDate
+			let ref = ctx.params.ref
+			let refCount = ctx.params.refCount
+			let beforeAfter = ctx.params.beforeAfter
+
+			const date1 = beforeAfter === "before" ? dayjs(refDate).subtract(refCount, ref).format() : dayjs(refDate).add(refCount, ref).format();
+
+			ctx.params.date1 = date1
+			ctx.params.ref = ref
+			ctx.params.refCount = refCount
+			ctx.params.beforeAfter = beforeAfter
 			
 			return ctx.params
 		}

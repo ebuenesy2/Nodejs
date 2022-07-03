@@ -492,22 +492,63 @@ module.exports = {
 		},
 		async find_date_diff(ctx) {
 
-			// ! Arama
-			const dbFind = db.filter(u =>  u.created_at  >= ctx.params.startTime && u.created_at <= ctx.params.finishTime);
+			//! Zamanı Buluyor
+			let refDate = ctx.params.refDate
+			let ref = ctx.params.ref
+			let refCount = ctx.params.refCount
+			let beforeAfter = ctx.params.beforeAfter
+			let refNow = ctx.params.refNow
+
+            let dateLater = beforeAfter === "before" ? dayjs(refDate).subtract(refCount, ref).format() : dayjs(refDate).add(refCount, ref).format();
+			let dateLaterBefore = beforeAfter === "before" ? dayjs(dateLater).subtract(refCount, ref).format() : dayjs(dateLater).add(refCount, ref).format();
+			
+
+			// ! Veri Tabanı Arıyor
+			let dbFind = beforeAfter === "after" ? db.filter(u => u.created_at >= refDate && u.created_at <= dateLater) :
+				db.filter(u => u.created_at >= dateLater && u.created_at <= refDate);
+			
+			let dbFindBefore = beforeAfter === "after" ? db.filter(u => u.created_at >= dateLater && u.created_at <= dateLaterBefore) :
+				db.filter(u => u.created_at >= dateLaterBefore && u.created_at <= dateLater);
+			
+			
+			//! Hesaplama
+			let difference = dbFind.length - dbFindBefore.length
+			let differencePercent =(difference / dbFind.length)*100
+			let positiveNegative = difference > 0 ? "positive" : difference < 0 ? "negative" : "normal";	
+			
+			
+			
+			//! Delete
+			delete ctx.params.refDate
+			delete ctx.params.ref
+			delete ctx.params.refCount
+			delete ctx.params.beforeAfter
+			delete ctx.params.refNow
 
 			//! Veri Varsa
-			if (dbFind) {	               
+			if (dbFind) {	                
                 
 				//! Return Api   
 				ctx.params.title = "logs.service -> Veri Arama Zaman Farkı"
 				ctx.params.table = "logs.json"
 				ctx.params.status = 1
+				ctx.params.refDate = refDate
+				ctx.params.dateLater = dateLater
+				ctx.params.ref = ref
+		    	ctx.params.refCount = refCount
+				ctx.params.beforeAfter = beforeAfter
+				ctx.params.refNow = refNow
 				ctx.params.size=dbFind.length
 				ctx.params.DB = dbFind?.sort((a, b) => (a.id > b.id ? -1 : 1))
-			
+				ctx.params.dateLaterBefore = dateLaterBefore
+				ctx.params.sizeBefore=dbFindBefore.length
+				ctx.params.DbBefore = dbFindBefore?.sort((a, b) => (a.id > b.id ? -1 : 1))
+				ctx.params.difference = difference
+				ctx.params.differencePercent = differencePercent
+				ctx.params.positiveNegative = positiveNegative
 
 				//Console Yazma
-				console.log('\u001b[' + 32 + 'm' + '[Logs] [Find] Veri Arama [ /api/logs/find_title_fromToken ] ' + '\u001b[0m');
+				console.log('\u001b[' + 32 + 'm' + '[Logs] [Find] Veri Arama [ /api/logs/find_date_diff ] ' + '\u001b[0m');
 			}
 
 			//! Veri Yoksa
@@ -522,7 +563,7 @@ module.exports = {
 			
 				
 				//Console Yazma
-				console.log('\u001b[' + 31 + 'm' + '[Logs] [Find] Veri Bulunamadı [ /api/logs/find_title_fromToken ] ' + '\u001b[0m');	
+				console.log('\u001b[' + 31 + 'm' + '[Logs] [Find] Veri Bulunamadı [ /api/logs/find_date_diff ] ' + '\u001b[0m');	
 
 			}
 
@@ -530,10 +571,6 @@ module.exports = {
 			delete ctx.params.token
 			delete ctx.params.created_byToken
 			delete ctx.params.fromToken
-
-			// zaman farkını bul ve bundan öncesi göre sayısını al
-			//delete ctx.params.startTime
-			//delete ctx.params.finishTime
 
 			return ctx.params
 		},
