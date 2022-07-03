@@ -558,8 +558,20 @@ module.exports = {
 				ctx.params.title = "logs.service -> Veri Arama"
 				ctx.params.table = "logs.json"
 				ctx.params.status = 0
+	            ctx.params.refDate = ""
+				ctx.params.dateLater = ""
+				ctx.params.ref = ""
+		    	ctx.params.refCount = 0
+				ctx.params.beforeAfter = ""
+				ctx.params.refNow = ""
 				ctx.params.size= 0
-				ctx.params.DB = "Logs  Bulunmadı"
+				ctx.params.DB = []
+				ctx.params.dateLaterBefore = ""
+				ctx.params.sizeBefore= 0
+				ctx.params.DbBefore = []
+				ctx.params.difference = 0
+				ctx.params.differencePercent = 0
+				ctx.params.positiveNegative = ""
 			
 				
 				//Console Yazma
