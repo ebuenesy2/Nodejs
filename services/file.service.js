@@ -800,7 +800,13 @@ module.exports = {
 
 				ctx.params.fizeWidth=fizeWidth
 				ctx.params.fizeHeight=fizeHeight
-				ctx.params.fileSize=fileSize
+				ctx.params.fileSize = fileSize
+				
+				ctx.params.fileSizeConvert = (fileSize / 1024 / 1024 / 1024 / 1024) >= 1 ? (fileSize / 1024 / 1024 / 1024 / 1024).toFixed(2) + " TB"
+										   : (fileSize / 1024 / 1024 / 1024) >= 1 ? (fileSize / 1024 / 1024 / 1024).toFixed(2) + " GB"
+										   : (fileSize / 1024 / 1024 ) >= 1 ? (fileSize / 1024 / 1024).toFixed(2) + " MB"
+										   : (fileSize / 1024 ) >= 1 ? (fileSize / 1024).toFixed(2) + " KB"
+										   : fileSize + " byte";
 
 				//Console Yazma
 				if(fileName!="") { console.log('\u001b[' + 32 + 'm' + '[File] [GetFile] Dosya Bilgileri Alındı [ /api/file/getFile ]' + '\u001b[0m'); }
@@ -823,7 +829,8 @@ module.exports = {
 
 				ctx.params.fizeWidth=0
 				ctx.params.fizeHeight=0
-				ctx.params.fileSize=0
+				ctx.params.fileSize = 0
+				ctx.params.fileSizeConvert = ""
 				
 				//Console Yazma
 				console.log('\u001b[' + 31 + 'm' + '[File] [GetFile] Dosya Bilgileri Bulunamadı [ /api/file/getFile ]' + '\u001b[0m');
@@ -863,7 +870,8 @@ module.exports = {
 				//! Dosya Boyutları
 				let fizeWidth = 0;
 				let fizeHeight = 0;
-				let fileSize=0;		
+				let fileSize = 0;
+				let fileSizeConvert = "";
 					      	
 			
 				//! Dosya Varsa
@@ -916,6 +924,13 @@ module.exports = {
 			
 					} //! doc
 
+				   //! Convert byte to tb			
+				   fileSizeConvert = (fileSize / 1024 / 1024 / 1024 / 1024) >= 1 ? (fileSize / 1024 / 1024 / 1024 / 1024).toFixed(2) + " TB"
+									: (fileSize / 1024 / 1024 / 1024) >= 1 ? (fileSize / 1024 / 1024 / 1024).toFixed(2) + " GB"
+									: (fileSize / 1024 / 1024 ) >= 1 ? (fileSize / 1024 / 1024).toFixed(2) + " MB"
+									: (fileSize / 1024 ) >= 1 ? (fileSize / 1024).toFixed(2) + " KB"
+									: fileSize + " byte";
+
 					//! Json				
 					try {
 
@@ -951,7 +966,8 @@ module.exports = {
 							fileExt: extName,				
 							fizeWidth:fizeWidth,
 							fizeHeight:fizeHeight,
-							fileSize:fileSize,
+							fileSize: fileSize,
+							fileSizeConvert: fileSizeConvert,
 							token:jwt,							
 							created_at: CreateDate,
 							created_byToken:ctx.params.created_byToken,
@@ -1260,7 +1276,7 @@ module.exports = {
 								
 				ctx.params.fizeWidth=fizeWidth
 				ctx.params.fizeHeight=fizeHeight
-				ctx.params.fileSize=fileSize
+				ctx.params.fileSize = fileSize
 
 				//Console Yazma
 				if(fileName!="") { console.log('\u001b[' + 32 + 'm' + '[File] [GetFile] Dosya Bilgileri Alıyor [ /api/file/getFileUrl ]' + '\u001b[0m'); }
@@ -1575,6 +1591,35 @@ module.exports = {
 			delete ctx.params.created_byToken		
 			
 			return ctx.params				
-		}	
+		},
+		async convertFile(ctx) {
+
+			let byte = ctx.params.byte;
+			let kb = byte / 1024;
+			let mb = byte / 1024 / 1024;
+			let gb = byte / 1024 / 1024 / 1024;
+			let tb = byte / 1024 / 1024 / 1024 / 1024;			
+
+			ctx.params.kb = kb.toFixed(2);
+			ctx.params.mb = mb.toFixed(2);
+			ctx.params.gb = gb.toFixed(2);
+			ctx.params.tb = tb.toFixed(2);
+
+
+			ctx.params.result = (byte / 1024 / 1024 / 1024 / 1024) >= 1 ? (byte / 1024 / 1024 / 1024 / 1024).toFixed(2) + " TB"
+			                  : (byte / 1024 / 1024 / 1024) >= 1 ? (byte / 1024 / 1024 / 1024).toFixed(2) + " GB"
+			                  : (byte / 1024 / 1024 ) >= 1 ? (byte / 1024 / 1024).toFixed(2) + " MB"
+			                  : (byte / 1024 ) >= 1 ? (byte / 1024).toFixed(2) + " KB"
+				                : byte + " byte";
+
+			ctx.params.val = 1024 * 1024;
+			
+			// tb : 1099511627776
+			// gb : 1073741824
+			// mb : 1048576
+			// kb : 1024		
+
+			return ctx.params
+		}
 	}
 }

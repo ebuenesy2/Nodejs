@@ -454,7 +454,9 @@ module.exports = {
 			fastify.post('/api/file/fileDeleteUrl',async (req,res)=> this.broker.call("file.fileDeleteUrl",{...req.body})) //! URLFile DELETE
 			fastify.post('/api/file/getFileUrl',async (req,res)=> this.broker.call("file.getFileUrl",{...req.body})) //! URLFile Info 
 			fastify.post('/api/file/uploadUrl',async (req,res)=> this.broker.call("file.uploadUrl",{...req.body})) //! URLFile Upload 
-			fastify.post('/api/file/updateFileUrl',async (req,res)=> this.broker.call("file.updateFileUrl",{...req.body})) //! URLFile Upload 
+			fastify.post('/api/file/updateFileUrl', async (req, res) => this.broker.call("file.updateFileUrl", { ...req.body })) //! URLFile Upload 
+			
+			fastify.post('/api/file/convertFile',async (req,res)=> this.broker.call("file.convertFile",{...req.body})) //! File Covert
 		
 		//!-------------  File --------------------------------------------------------------------------------------------------
 
