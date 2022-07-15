@@ -925,11 +925,11 @@ module.exports = {
 					} //! doc
 
 				   //! Convert byte to tb			
-				   fileSizeConvert = (fileSize / 1024 / 1024 / 1024 / 1024) >= 1 ? (fileSize / 1024 / 1024 / 1024 / 1024).toFixed(2) + " TB"
-									: (fileSize / 1024 / 1024 / 1024) >= 1 ? (fileSize / 1024 / 1024 / 1024).toFixed(2) + " GB"
-									: (fileSize / 1024 / 1024 ) >= 1 ? (fileSize / 1024 / 1024).toFixed(2) + " MB"
-									: (fileSize / 1024 ) >= 1 ? (fileSize / 1024).toFixed(2) + " KB"
-									: fileSize + " byte";
+				   fileSizeConvert = (fileSize / 1024 / 1024 / 1024 / 1024) >= 1 ? (fileSize / 1024 / 1024 / 1024 / 1024).toFixed(2) + "TB"
+									: (fileSize / 1024 / 1024 / 1024) >= 1 ? (fileSize / 1024 / 1024 / 1024).toFixed(2) + "GB"
+									: (fileSize / 1024 / 1024 ) >= 1 ? (fileSize / 1024 / 1024).toFixed(2) + "MB"
+									: (fileSize / 1024 ) >= 1 ? (fileSize / 1024).toFixed(2) + "KB"
+									: fileSize + "byte";
 
 					//! Json				
 					try {
